@@ -323,9 +323,9 @@
 
               <img 
                 id="hero-profile-img"
-                src="Gemini_Generated_Image_38hy3b38hy3b38hy.jpeg" 
+                src="Gemini_Generated_Image_ovdegaovdegaovde.jpeg" 
                 alt="David Lorimer - Senior UX/UI Designer"
-                class="w-full max-w-[500] sm:max-w-[440px] h-auto object-cover object-bottom transition-transform duration-700 hover:scale-105 block relative z-10 drop-shadow-2xl"
+                class="w-full max-w-[380px] sm:max-w-[440px] h-auto object-cover object-bottom transition-transform duration-700 hover:scale-105 block relative z-10 drop-shadow-2xl"
                 style="mix-blend-mode: multiply;"
                 onerror="
                   if (!this.dataset.step) {
@@ -1027,14 +1027,14 @@
     <!-- CASE STUDY HERO HEADER -->
     <section class="pt-24 sm:pt-32 pb-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center flex flex-col items-center">
       
-      <!-- Dynamic Case Study Headline -->
-      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#112E27] tracking-tight leading-[1.12] max-w-4xl mx-auto">
-        <span id="cs-hero-title">The Weir Group</span>
-        <span class="block text-2xl sm:text-3xl md:text-4xl font-bold text-slate-700 mt-2">
-          <span class="relative inline-block text-[#0C231D]">
-            <span id="cs-hero-subtitle">Industrial Digital Ecosystem & Weir Design System</span>
-            <span class="absolute bottom-1 sm:bottom-1.5 left-0 w-full h-[4px] sm:h-[6px] bg-mint-400 rounded-full"></span>
-          </span>
+      <!-- Dynamic Case Study Headline with Animated Underline directly beneath Client Name -->
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#112E27] tracking-tight leading-[1.18] max-w-4xl mx-auto">
+        <span class="relative inline-block text-[#112E27]">
+          <span id="cs-hero-title">The Weir Group</span>
+          <span id="cs-underline-bar" class="hero-underline-anim absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[4px] sm:h-[6px] bg-brand-emerald rounded-full"></span>
+        </span>
+        <span class="block text-2xl sm:text-3xl md:text-4xl font-bold text-slate-700 mt-3 sm:mt-4">
+          <span id="cs-hero-subtitle">Industrial Digital Ecosystem & Weir Design System</span>
         </span>
       </h1>
 
@@ -1916,6 +1916,14 @@ export const PensionDashboardTokens = {
       document.getElementById('cs-hero-desc').textContent = data.description;
       document.getElementById('cs-badge-company').textContent = data.company;
       document.getElementById('cs-badge-role').textContent = "Role: " + data.role;
+
+      // Re-trigger the on-appear underline animation cleanly on open
+      const csUnderline = document.getElementById('cs-underline-bar');
+      if (csUnderline) {
+        csUnderline.classList.remove('hero-underline-anim');
+        void csUnderline.offsetWidth;
+        csUnderline.classList.add('hero-underline-anim');
+      }
 
       document.getElementById('cs-hero-cover-img').src = data.coverImage;
       document.getElementById('cs-cover-tag').textContent = data.coverTag;
