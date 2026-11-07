@@ -292,7 +292,7 @@
         <div class="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
           
           <!-- LEFT: Open Cutout Portrait with Layered Moving Green Graphics Behind -->
-          <div class="w-full max-w-[340px] sm:max-w-[390px] lg:max-w-[420px] shrink-0 relative flex items-center justify-center">
+          <div class="w-full max-w-[380px] sm:max-w-[430px] lg:max-w-[460px] shrink-0 relative flex items-center justify-center overflow-visible">
             
             <!-- FLOATING GREEN GRAPHICS (LAYERED DIRECTLY BEHIND THE IMAGE) -->
             <div class="absolute inset-0 pointer-events-none -z-0 overflow-visible flex items-center justify-center">
@@ -318,14 +318,14 @@
             </div>
 
             <!-- PORTRAIT CUTOUT CONTAINER -->
-            <div class="relative z-10 w-full flex flex-col items-center">
-              <canvas id="hero-cutout-canvas" class="w-full max-w-[340px] sm:max-w-[380px] h-auto object-cover object-bottom relative z-10 hidden drop-shadow-2xl"></canvas>
+            <div class="relative z-10 w-full flex flex-col items-center overflow-visible">
+              <canvas id="hero-cutout-canvas" class="w-full max-w-[380px] sm:max-w-[440px] h-auto object-cover object-bottom relative z-10 hidden drop-shadow-2xl"></canvas>
 
               <img 
                 id="hero-profile-img"
                 src="Gemini_Generated_Image_ovdegaovdegaovde.jpeg" 
                 alt="David Lorimer - Senior UX/UI Designer"
-                class="w-full max-w-[340px] sm:max-w-[380px] h-auto object-cover object-bottom transition-transform duration-700 hover:scale-105 block relative z-10 drop-shadow-2xl"
+                class="w-full max-w-[380px] sm:max-w-[440px] h-auto object-cover object-bottom transition-transform duration-700 hover:scale-105 block relative z-10 drop-shadow-2xl"
                 style="mix-blend-mode: multiply;"
                 onerror="
                   if (!this.dataset.step) {
