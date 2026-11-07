@@ -86,7 +86,6 @@
       color: #102922;
     }
 
-    /* Subtle custom scrollbar */
     ::-webkit-scrollbar {
       width: 9px;
     }
@@ -102,7 +101,6 @@
       background: #34D399;
     }
 
-    /* Seamless endless horizontal marquee */
     @keyframes marquee {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -135,7 +133,6 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Cinematic gentle view transition animations */
     .view-container {
       transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), 
                   transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
@@ -162,7 +159,6 @@
       pointer-events: none;
     }
 
-    /* Ambient curtain overlay for silky seamless transitions */
     #transition-curtain {
       pointer-events: none;
       opacity: 0;
@@ -234,7 +230,7 @@
         </span>
       </nav>
 
-      <!-- Return Button & Keyboard Shortcut Indicator -->
+      <!-- Return Button -->
       <div class="flex items-center gap-2">
         <button onclick="showHomepage('portfolio')" class="btn-mint-pill px-3.5 sm:px-4 py-1.5 rounded-full text-xs flex items-center gap-1.5 active:scale-95 focus:outline-none" title="Press ESC to return">
           <i class="fa-solid fa-arrow-left text-[11px]"></i>
@@ -255,7 +251,7 @@
     <section id="hero" class="relative pt-28 sm:pt-36 pb-12 sm:pb-16 overflow-hidden">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
-        <!-- Text Header & Narrative -->
+        <!-- Text Header -->
         <div class="text-center max-w-3xl mx-auto relative mb-8 sm:mb-10">
           <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-brand-dark tracking-tight leading-[1.15]">
             I'm <span class="relative inline-block text-brand-forest">
@@ -291,19 +287,15 @@
             
             <div class="absolute inset-0 bg-gradient-to-b from-brand-emerald/15 via-transparent to-black/30 pointer-events-none rounded-t-[170px] sm:rounded-t-[190px]"></div>
 
-            <!-- Arched container with isolated background-free subject -->
             <div class="w-full aspect-[4/5] rounded-t-[150px] sm:rounded-t-[170px] overflow-hidden bg-gradient-to-b from-[#1E4D41] to-[#122A23] relative shadow-inner flex items-end justify-center">
               
-              <!-- Ambient halo behind portrait cutout -->
               <div class="absolute w-56 h-56 rounded-full bg-brand-mint/20 blur-2xl top-12 pointer-events-none"></div>
 
-              <!-- Cutout Canvas / Image Render -->
               <canvas id="hero-cutout-canvas" class="w-full h-full object-cover object-bottom relative z-10 hidden"></canvas>
 
-              <!-- Main Portrait Layer with Fallback & Seamless Blend -->
               <img 
                 id="hero-profile-img"
-                src="Gemini_Generated_Image_ovdegaovdegaovde.jpeg" 
+                src="image_2d1c06.jpg" 
                 alt="David Lorimer - Senior UX/UI Designer"
                 class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105 block relative z-10"
                 style="mask-image: radial-gradient(ellipse 95% 95% at 50% 48%, black 68%, transparent 100%), linear-gradient(to bottom, black 85%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 48%, black 68%, transparent 100%), linear-gradient(to bottom, black 85%, transparent 100%);"
@@ -320,8 +312,9 @@
               <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-brand-forest via-brand-forest/70 to-transparent pointer-events-none z-20"></div>
             </div>
 
-            <!-- Floating Pill CTA overlapping bottom -->
+            <!-- Floating Pill CTA -->
             <div class="relative -mt-6 mb-5 z-30 flex items-center gap-2 bg-white/95 backdrop-blur-md p-1.5 rounded-full shadow-2xl border border-emerald-100">
+              <a href="#portfolio" class="btn-mint-pill px-5 py-2 rounded-full text-xs flex items-center gap-2 shadow-sm">
                 <span>View Work</span>
                 <i class="fa-solid fa-arrow-down text-[10px] text-brand-emerald"></i>
               </a>
@@ -412,7 +405,7 @@
       </div>
     </section>
 
-    <!-- 3. WORK EXPERIENCE (CLEAN SINGLE-SIDED TIMELINE) -->
+    <!-- 3. WORK EXPERIENCE -->
     <section id="experience" class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
       
       <div class="text-left mb-10 sm:mb-14">
@@ -428,7 +421,6 @@
         </p>
       </div>
 
-      <!-- Single-Sided Left-Rail Timeline Wrapper -->
       <div class="relative pl-6 sm:pl-10">
         
         <div class="absolute left-2.5 sm:left-4 top-3 bottom-8 w-0.5 bg-gradient-to-b from-brand-emerald via-emerald-300 to-emerald-100 rounded-full"></div>
@@ -573,7 +565,7 @@
 
     </section>
 
-    <!-- 4. PORTFOLIO CASE STUDIES (4 CORE ENTERPRISE PROJECTS) -->
+    <!-- 4. PORTFOLIO CASE STUDIES -->
     <section id="portfolio" class="py-14 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
@@ -646,23 +638,20 @@
         <!-- Case 2: TotalEnergies -->
         <div onclick="openCaseStudy('totalenergies')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="industrial systems">
           
-          <div class="relative h-60 sm:h-64 overflow-hidden bg-[#0C1B17] p-6 flex flex-col justify-between">
-            <div class="flex gap-2 relative z-10">
-              <span class="px-3 py-1 rounded-full bg-brand-dark/90 text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">TotalEnergies (via AND Digital)</span>
-              <span class="px-3 py-1 rounded-full bg-black/60 text-[10px] font-semibold text-white">2023</span>
+          <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
+            <img 
+              src="Resultats_troisieme_trimestre_2023_TotalEnergies_1305x713px.png" 
+              alt="TotalEnergies Offshore Telemetry" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
+
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">TotalEnergies (via AND Digital)</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-semibold text-white">2023</span>
             </div>
 
-            <div class="bg-brand-forest/60 border border-emerald-400/20 rounded-xl p-4 shadow-lg">
-              <div class="flex items-center justify-between text-xs text-brand-mint font-mono mb-2">
-                <span>OFFSHORE_RIG_TELEMETRY</span>
-                <span class="flex items-center gap-1.5 text-emerald-400"><i class="fa-solid fa-circle text-[7px] animate-pulse"></i> LIVE SATELLITE SYNC</span>
-              </div>
-              <div class="h-2 bg-emerald-950 rounded-full overflow-hidden">
-                <div class="w-3/4 h-full bg-gradient-to-r from-emerald-500 to-teal-300"></div>
-              </div>
-            </div>
-
-            <div class="text-white relative z-10">
+            <div class="absolute bottom-4 left-4 right-4 text-white">
               <h3 class="text-xl font-bold leading-snug">Offshore Rig Field Operations & Low-Bandwidth Telemetry</h3>
             </div>
           </div>
@@ -691,25 +680,20 @@
         <!-- Case 3: Diageo -->
         <div onclick="openCaseStudy('diageo')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems">
           
-          <div class="relative h-60 sm:h-64 overflow-hidden bg-[#14231E] p-6 flex flex-col justify-between">
-            <div class="flex gap-2 relative z-10">
-              <span class="px-3 py-1 rounded-full bg-brand-dark/90 text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Diageo (via AND Digital)</span>
-              <span class="px-3 py-1 rounded-full bg-black/60 text-[10px] font-semibold text-white">2022 — 2023</span>
+          <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
+            <img 
+              src="Category_Spirits_Header-Bottles_TWS.jpg" 
+              alt="Diageo Global Brand Asset Platform" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
+
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Diageo (via AND Digital)</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-semibold text-white">2022 — 2023</span>
             </div>
 
-            <div class="bg-brand-forest/70 border border-emerald-400/20 rounded-xl p-4 shadow-lg">
-              <div class="flex items-center justify-between text-xs text-slate-300 mb-2 font-semibold">
-                <span>Brand Asset Vault (180+ Markets)</span>
-                <span class="text-xs text-brand-mint"><i class="fa-solid fa-layer-group"></i> 24,000+ Assets</span>
-              </div>
-              <div class="grid grid-cols-3 gap-2">
-                <div class="h-8 rounded bg-brand-dark/80 border border-emerald-500/10 flex items-center justify-center text-[10px] text-emerald-200">Guinness</div>
-                <div class="h-8 rounded bg-brand-dark/80 border border-emerald-500/10 flex items-center justify-center text-[10px] text-emerald-200">Johnnie Walker</div>
-                <div class="h-8 rounded bg-brand-dark/80 border border-emerald-500/10 flex items-center justify-center text-[10px] text-emerald-200">Tanqueray</div>
-              </div>
-            </div>
-
-            <div class="text-white relative z-10">
+            <div class="absolute bottom-4 left-4 right-4 text-white">
               <h3 class="text-xl font-bold leading-snug">Global Brand Asset Portal & Commercial Experience</h3>
             </div>
           </div>
@@ -738,24 +722,20 @@
         <!-- Case 4: Royal London -->
         <div onclick="openCaseStudy('royallondon')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="accessibility systems">
           
-          <div class="relative h-60 sm:h-64 overflow-hidden bg-[#0A1F19] p-6 flex flex-col justify-between">
-            <div class="flex gap-2 relative z-10">
-              <span class="px-3 py-1 rounded-full bg-brand-dark/90 text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Royal London</span>
-              <span class="px-3 py-1 rounded-full bg-black/60 text-[10px] font-semibold text-white">Wealth & Pensions</span>
+          <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
+            <img 
+              src="desktop-1400x700-ladies-eating-ice-cream.webp" 
+              alt="Royal London Pension & Wealth Platform" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
+
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Royal London</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-semibold text-white">Wealth & Pensions</span>
             </div>
 
-            <div class="bg-brand-forest/80 border border-emerald-400/20 rounded-xl p-4 shadow-lg">
-              <div class="flex items-center justify-between text-xs text-brand-mint font-semibold mb-2">
-                <span>Customer Pension Rebalancing</span>
-                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-900/60 text-emerald-300 font-mono">WCAG 2.2 AAA</span>
-              </div>
-              <div class="flex items-center justify-between text-white text-xs">
-                <span>Total Projected Pot:</span>
-                <span class="font-extrabold text-emerald-300">£184,290.00</span>
-              </div>
-            </div>
-
-            <div class="text-white relative z-10">
+            <div class="absolute bottom-4 left-4 right-4 text-white">
               <h3 class="text-xl font-bold leading-snug">Accessible Customer Pension & Wealth Dashboard</h3>
             </div>
           </div>
@@ -1019,13 +999,13 @@
         </span>
       </div>
 
-      <!-- Hero Visual Card (Dynamically Injected for Weir, TotalEnergies, etc.) -->
-      <div id="cs-hero-cover-container" class="w-full mt-8 max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/20 max-h-[420px] relative">
-        <img id="cs-hero-cover-img" src="warman-mcr-400-opt.webp" alt="Case Study Cover Preview" class="w-full h-full object-cover max-h-[420px]">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0C231D]/80 via-transparent to-transparent flex items-end p-6">
+      <!-- Hero Visual Card (Case Study Cover Image) -->
+      <div id="cs-hero-cover-container" class="w-full mt-8 max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/20 max-h-[460px] relative">
+        <img id="cs-hero-cover-img" src="warman-mcr-400-opt.webp" alt="Case Study Cover Preview" class="w-full h-full object-cover max-h-[460px]">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0C231D]/85 via-transparent to-transparent flex items-end p-6 sm:p-8">
           <div class="text-left text-white">
             <span id="cs-cover-tag" class="text-[11px] font-mono uppercase tracking-widest text-mint-400">MISSION CRITICAL OPERATIONAL SUITE</span>
-            <h3 id="cs-cover-heading" class="text-xl sm:text-2xl font-bold">Customer Asset Intelligence & Industrial IoT</h3>
+            <h3 id="cs-cover-heading" class="text-xl sm:text-2xl md:text-3xl font-bold">Customer Asset Intelligence & Industrial IoT</h3>
           </div>
         </div>
       </div>
@@ -1049,14 +1029,10 @@
         </div>
 
         <!-- 3 Dimension Cards -->
-        <div id="cs-challenge-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-          <!-- Dynamically populated via JS -->
-        </div>
+        <div id="cs-challenge-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10"></div>
 
         <!-- Baseline Failure Metrics Bar -->
-        <div id="cs-challenge-metrics" class="bg-[#0C231D] rounded-3xl p-6 sm:p-8 text-white border-spruce-subtle grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          <!-- Dynamically populated via JS -->
-        </div>
+        <div id="cs-challenge-metrics" class="bg-[#0C231D] rounded-3xl p-6 sm:p-8 text-white border-spruce-subtle grid grid-cols-1 sm:grid-cols-3 gap-6 text-center"></div>
 
       </div>
     </section>
@@ -1160,7 +1136,6 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <!-- Implementation Steps -->
           <div class="lg:col-span-6 space-y-4">
             <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
               <div class="flex items-center gap-3 mb-2">
@@ -1193,7 +1168,6 @@
             </div>
           </div>
 
-          <!-- Code / Token Box -->
           <div class="lg:col-span-6 bg-[#0C231D] text-white rounded-3xl p-6 sm:p-7 border-spruce-subtle shadow-card-dark font-mono text-xs">
             <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
               <div class="flex items-center gap-2">
@@ -1258,15 +1232,8 @@
           </div>
         </div>
 
-        <!-- Carousel Container -->
-        <div id="cs-deliverables-container" class="relative min-h-[440px]">
-          <!-- Dynamically Injected Slides -->
-        </div>
-
-        <!-- Dot Indicators -->
-        <div id="cs-carousel-dots" class="flex items-center justify-center gap-2 mt-8">
-          <!-- Dynamically Updated -->
-        </div>
+        <div id="cs-deliverables-container" class="relative min-h-[440px]"></div>
+        <div id="cs-carousel-dots" class="flex items-center justify-center gap-2 mt-8"></div>
 
       </div>
     </section>
@@ -1287,9 +1254,7 @@
           </p>
         </div>
 
-        <div id="cs-value-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Dynamically Injected Metrics -->
-        </div>
+        <div id="cs-value-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
 
         <div class="mt-10 sm:mt-12 bg-[#102E27] rounded-3xl p-6 sm:p-8 border-spruce-inner flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto">
           <div class="w-14 h-14 rounded-full bg-mint-400 text-[#061310] font-black text-lg flex items-center justify-center shrink-0">
@@ -1326,14 +1291,12 @@
           </p>
         </div>
 
-        <div id="cs-other-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Dynamically Injected 3 other studies -->
-        </div>
+        <div id="cs-other-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
 
       </div>
     </section>
 
-    <!-- CASE STUDY SPECIFIC FOOTER -->
+    <!-- CASE STUDY FOOTER -->
     <footer class="bg-[#061310] text-white pt-16 pb-12 border-t border-[#123129]">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-center gap-6 pb-10 border-b border-white/10">
@@ -1369,12 +1332,9 @@
   </article>
 
   <!-- ================================================================= -->
-  <!-- JAVASCRIPT STATE CONTROLLER & DYNAMIC DATA INJECTION             -->
+  <!-- JAVASCRIPT STATE CONTROLLER & DYNAMIC DATA INJECTION              -->
   <!-- ================================================================= -->
   <script>
-    // -------------------------------------------------------------
-    // Comprehensive Data Model for the 4 Core Enterprise Case Studies
-    // -------------------------------------------------------------
     const caseStudies = {
       weir: {
         id: "weir",
@@ -1687,7 +1647,7 @@ export const DiageoBrandTokens = {
         description: "Redesigned end-to-end customer pension management under FCA Consumer Duty regulations, meeting WCAG 2.2 AAA standards for high legibility, screen reader flow, and mental model clarity.",
         role: "UX Architecture & Accessibility Lead",
         standard: "WCAG 2.2 AAA & FCA Consumer Duty",
-        coverImage: "warman-mcr-400-opt_2.webp",
+        coverImage: "desktop-1400x700-ladies-eating-ice-cream.webp",
         coverTag: "WEALTH & REGULATED FINTECH",
         coverHeading: "Accessible Personal Pension & Investment Management",
         tokenFile: "RoyalLondonPensions.tokens.ts",
@@ -1781,14 +1741,10 @@ export const PensionDashboardTokens = {
       }
     };
 
-    // State Variables
     let currentStudyKey = 'weir';
     let currentDeliverableSlide = 0;
     let isTransitioning = false;
 
-    // -------------------------------------------------------------
-    // Gentle Cinematic View Switcher: Homepage <-> Case Study
-    // -------------------------------------------------------------
     function openCaseStudy(studyKey) {
       if (isTransitioning) return;
       if (!caseStudies[studyKey]) studyKey = 'weir';
@@ -1802,18 +1758,15 @@ export const PensionDashboardTokens = {
       const csBreadcrumb = document.getElementById('casestudy-breadcrumb-bar');
       const curtain = document.getElementById('transition-curtain');
 
-      // 1. Soft exit animation for homepage & curtain pulse
       curtain.classList.add('active');
       homeView.classList.remove('view-enter-active');
       homeView.classList.add('view-exit');
       homeNav.style.transition = 'opacity 0.22s ease';
       homeNav.style.opacity = '0';
 
-      // 2. Pre-render the selected case study while faded
       setTimeout(() => {
         renderCaseStudyView(caseStudies[studyKey]);
 
-        // Hide homepage view, unhide case study view in initial enter state
         homeView.classList.add('hidden');
         homeView.classList.remove('view-exit');
         homeNav.classList.add('hidden');
@@ -1827,10 +1780,8 @@ export const PensionDashboardTokens = {
         csBreadcrumb.style.opacity = '0';
         csBreadcrumb.style.transition = 'opacity 0.3s ease';
 
-        // Scroll to top instantly while obscured
         window.scrollTo({ top: 0, behavior: 'instant' });
 
-        // Trigger gentle enter transition
         requestAnimationFrame(() => {
           setTimeout(() => {
             csView.classList.remove('view-enter');
@@ -1840,7 +1791,6 @@ export const PensionDashboardTokens = {
             try {
               history.pushState(null, '', `#case-study-${studyKey}`);
             } catch (err) {
-              // Gracefully handle iframe/blob security restrictions
               try { location.hash = `case-study-${studyKey}`; } catch (e) {}
             }
             isTransitioning = false;
@@ -1859,7 +1809,6 @@ export const PensionDashboardTokens = {
       const csBreadcrumb = document.getElementById('casestudy-breadcrumb-bar');
       const curtain = document.getElementById('transition-curtain');
 
-      // 1. Soft exit animation for case study view
       curtain.classList.add('active');
       csView.classList.remove('view-enter-active');
       csView.classList.add('view-exit');
@@ -1883,7 +1832,6 @@ export const PensionDashboardTokens = {
           try { location.hash = ''; } catch (e) {}
         }
 
-        // Position window before revealing
         if (targetSection) {
           const el = document.getElementById(targetSection);
           if (el) {
@@ -1893,7 +1841,6 @@ export const PensionDashboardTokens = {
           window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
-        // Trigger gentle enter transition for homepage
         requestAnimationFrame(() => {
           setTimeout(() => {
             homeView.classList.remove('view-enter');
@@ -1906,26 +1853,19 @@ export const PensionDashboardTokens = {
       }, 260);
     }
 
-    // -------------------------------------------------------------
-    // Data Injection for Case Study Landing Page
-    // -------------------------------------------------------------
     function renderCaseStudyView(data) {
-      // Breadcrumb label
       document.getElementById('breadcrumb-current-study').textContent = data.company;
 
-      // Hero Elements
       document.getElementById('cs-hero-title').textContent = data.title;
       document.getElementById('cs-hero-subtitle').textContent = data.subtitle;
       document.getElementById('cs-hero-desc').textContent = data.description;
       document.getElementById('cs-badge-company').textContent = data.company;
       document.getElementById('cs-badge-role').textContent = "Role: " + data.role;
 
-      // Cover & visuals
       document.getElementById('cs-hero-cover-img').src = data.coverImage;
       document.getElementById('cs-cover-tag').textContent = data.coverTag;
       document.getElementById('cs-cover-heading').textContent = data.coverHeading;
 
-      // Challenge Section
       document.getElementById('cs-challenge-title').textContent = data.challengeTitle;
       document.getElementById('cs-challenge-p').textContent = data.challengeDesc;
 
@@ -1949,14 +1889,11 @@ export const PensionDashboardTokens = {
         </div>
       `).join('');
 
-      // Token Code
       document.getElementById('cs-token-filename').textContent = data.tokenFile;
       document.getElementById('cs-token-snippet').textContent = data.tokenCode;
 
-      // Deliverables Carousel Slides
       renderDeliverablesSlides(data.deliverables);
 
-      // Value metrics
       const valueCards = document.getElementById('cs-value-cards');
       valueCards.innerHTML = data.values.map(v => `
         <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner text-center">
@@ -1966,11 +1903,9 @@ export const PensionDashboardTokens = {
         </div>
       `).join('');
 
-      // Quote
       document.getElementById('cs-quote-text').textContent = `"${data.quoteText}"`;
       document.getElementById('cs-quote-author').textContent = data.quoteAuthor;
 
-      // Other studies selector (all except current)
       const otherGrid = document.getElementById('cs-other-grid');
       const otherKeys = Object.keys(caseStudies).filter(k => k !== data.id);
       otherGrid.innerHTML = otherKeys.map(k => {
@@ -1995,9 +1930,6 @@ export const PensionDashboardTokens = {
       }).join('');
     }
 
-    // -------------------------------------------------------------
-    // Deliverables Carousel Logic
-    // -------------------------------------------------------------
     function renderDeliverablesSlides(deliverables) {
       const container = document.getElementById('cs-deliverables-container');
       const dotsContainer = document.getElementById('cs-carousel-dots');
@@ -2007,7 +1939,6 @@ export const PensionDashboardTokens = {
         <div class="cs-slide-item ${idx === 0 ? 'block' : 'hidden'} transition-opacity duration-300" data-index="${idx}">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#102E27] p-6 sm:p-8 md:p-10 rounded-3xl border-spruce-inner">
             
-            <!-- Left Mockup Visual -->
             <div class="lg:col-span-7 bg-[#061612] p-5 sm:p-6 rounded-2xl border border-mint-400/20 font-mono text-xs">
               <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 text-[#86A89C]">
                 <span>${d.mockupBadge}</span>
@@ -2035,7 +1966,6 @@ export const PensionDashboardTokens = {
               </div>
             </div>
 
-            <!-- Right Descriptive Copy -->
             <div class="lg:col-span-5 space-y-4">
               <div class="inline-block px-3 py-1 rounded-full bg-mint-400/20 text-mint-300 text-xs font-bold uppercase tracking-wider">
                 Deliverable ${d.num}
@@ -2100,7 +2030,6 @@ export const PensionDashboardTokens = {
       document.getElementById('cs-carousel-curr').textContent = index + 1;
     }
 
-    // Keyboard ESC key returns to homepage
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         const csView = document.getElementById('view-casestudy');
@@ -2110,8 +2039,6 @@ export const PensionDashboardTokens = {
       }
     });
 
-    // -------------------------------------------------------------
-    // Homepage Project Filtering
     function filterProjects(category) {
       const cards = document.querySelectorAll('.project-card');
       const buttons = document.querySelectorAll('.filter-btn');
@@ -2134,7 +2061,6 @@ export const PensionDashboardTokens = {
       });
     }
 
-    // Dynamic foreground extraction to cleanly remove office background behind portrait
     window.addEventListener('load', () => {
       const img = document.getElementById('hero-profile-img');
       const canvas = document.getElementById('hero-cutout-canvas');
@@ -2151,13 +2077,11 @@ export const PensionDashboardTokens = {
           const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
           const data = imgData.data;
 
-          // Detect and isolate the muted pale grey/blue window background
           for (let i = 0; i < data.length; i += 4) {
             const r = data[i];
             const g = data[i + 1];
             const b = data[i + 2];
             
-            // Check for window background color range (cool desaturated light grays)
             const brightness = (r + g + b) / 3;
             const diffRG = Math.abs(r - g);
             const diffGB = Math.abs(g - b);
@@ -2174,7 +2098,6 @@ export const PensionDashboardTokens = {
           canvas.classList.remove('hidden');
           img.classList.add('hidden');
         } catch (e) {
-          // If canvas read is restricted by security sandbox, standard masked element continues smoothly
           console.warn("Using CSS masked cutout fallback:", e);
         }
       };
@@ -2186,7 +2109,6 @@ export const PensionDashboardTokens = {
       }
     });
 
-    // Homepage Contact Form
     function handleContactSubmit(e) {
       e.preventDefault();
       const successMsg = document.getElementById('contact-success');
