@@ -1260,7 +1260,7 @@
       </div>
     </section>
 
-    <!-- 4. DELIVERABLES (INTERACTIVE 4-SLIDE CAROUSEL) -->
+    <!-- 4. DELIVERABLES (INTERACTIVE CAROUSEL) -->
     <section id="cs-deliverables-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative">
         
@@ -1533,54 +1533,44 @@ export const OffshoreTelemetrySpec = {
         deliverables: [
           {
             num: "01",
-            title: "Offline-First Local Sync Architecture",
-            desc: "Architected an optimistic client data queue using IndexedDB that allows offshore inspectors to complete comprehensive safety logs without network connection.",
-            points: ["Instant local conflict resolution upon satellite link restore", "Zero data loss across 180 consecutive operating shifts"],
-            mockupBadge: "Offline Service Worker Engine",
-            status: "Satellite Sync: STANDBY",
+            title: "Early warning notification system",
+            image: "Gemini_Generated_Image_nxcgonxcgonxcgon.jpeg",
+            desc: "Designed an offshore hazard detection and early warning alert system that cuts through high-stress operational noise with instant, clear priority visual cues and audio cues.",
+            points: ["Multi-stage alert escalation with zero false-alarm fatigue", "Sunlight-readable high-contrast telemetry indicators tailored for ATEX-certified tablets"],
+            mockupBadge: "Telemetry Alerts • Early Warning System",
+            status: "Monitoring: ONLINE",
             items: [
-              { label: "QUEUED ACTIONS", val: "14 Records", tag: "ENCRYPTED" },
-              { label: "LATENCY TOLERANCE", val: "Infinite Offline", tag: "OPTIMISTIC UI" },
-              { label: "CONFLICT RESOLUTION", val: "Automatic CRDT", tag: "ZERO DATA LOSS" }
+              { label: "LATENCY THRESHOLD", val: "Under 150ms", tag: "INSTANT" },
+              { label: "ALERT RESOLUTION SPEED", val: "38s (Down from 4.2m)", tag: "RAPID" },
+              { label: "FALSE POSITIVE REDUCTION", val: "-68% Nuisance Alerts", tag: "OPTIMIZED" }
             ]
           },
           {
             num: "02",
-            title: "Alarm Prioritization Matrix & Triage UI",
-            desc: "Re-engineered the alarm hierarchy using dark-mode high-salience color coding that suppresses nuisance noise and highlights root-cause valves.",
-            points: ["Reduced alarm acknowledgment friction by 35%", "Dual sensory alerts (auditory chime + haptic buzz) for emergency events"],
-            mockupBadge: "Emergency Escalation Matrix",
-            status: "Sensors: MONITORED",
+            title: "Plant heat map tool",
+            image: "Gemini_Generated_Image_9r280d9r280d9r28.jpeg",
+            desc: "Architected a live 2D/3D platform telemetry heat map visualizing thermal loads, piping stress, and equipment operating temperatures across multi-deck rig modules.",
+            points: ["Real-time sensor overlays mapping thermal hot-spots directly onto deck schematics", "Low-bandwidth vector rendering guaranteeing instant responsiveness over satellite connections"],
+            mockupBadge: "Thermal Telemetry • Plant Heat Map",
+            status: "Satellite Feed: SYNCHRONIZED",
             items: [
-              { label: "PRIMARY ALARM ISOLATION", val: "38s (Down from 4.2m)", tag: "RAPID" },
-              { label: "FALSE POSITIVE REDUCTION", val: "-68% Nuisance Alerts", tag: "VERIFIED" },
-              { label: "HIGH-CONTRAST DARK THEME", val: "16.2:1 Contrast Ratio", tag: "WCAG AAA" }
+              { label: "DECK MODULES MONITORED", val: "14 Rig Sections", tag: "FULL COVERAGE" },
+              { label: "THERMAL REFRESH RATE", val: "1.2s Real-Time Sync", tag: "LIVE" },
+              { label: "DATA OVERHEAD", val: "Under 25KB/sec", tag: "LOW-BANDWIDTH" }
             ]
           },
           {
             num: "03",
-            title: "Rig Field Tablet Design System",
-            desc: "Created a dedicated field component library tailored specifically for ruggedized Panasonic Toughbook and Android tablets.",
-            points: ["Minimum 60px touch targets for gloved fingers", "High-contrast sunlight reflection mode toggleable in 1 tap"],
-            mockupBadge: "Field UI Component Tokens",
-            status: "Design System: ACTIVE",
+            title: "MUI Hybrid Design System",
+            image: null,
+            desc: "Created a hardened enterprise component system bridging Material UI (MUI) React foundations with customized high-contrast industrial tokens for touchscreens, gloves, and harsh weather.",
+            points: ["Custom 56px+ touch target primitives complying with gloved operational standards", "Dark and ultra-high-lux contrast modes tested for full WCAG 2.2 AAA accessibility"],
+            mockupBadge: "Design Tokens • MUI Industrial Hybrid",
+            status: "Design Tokens: SYNCED",
             items: [
-              { label: "GLOVED TOUCH ACCURACY", val: "99.4%", tag: "FIELD TESTED" },
-              { label: "SUNLIGHT HIGH-LUX MODE", val: "100,000 Lux Legible", tag: "TESTED" },
-              { label: "REUSABLE PATTERNS", val: "48 Components", tag: "PRODUCTION READY" }
-            ]
-          },
-          {
-            num: "04",
-            title: "Safety Drill & Evacuation Dashboard",
-            desc: "Designed an automated platform muster dashboard showing crew member locations and safety status in real time during emergency drills.",
-            points: ["RFID beacon pairing with graphical deck blueprint", "Clear visual count of missing personnel for offshore safety officers"],
-            mockupBadge: "Muster & Crew Safety Deck",
-            status: "Deck Safety: LIVE",
-            items: [
-              { label: "MUSTER TIMING", val: "3m 45s Total Drill", tag: "RECORD TIME" },
-              { label: "CREW ACCOUNTABILITY", val: "100% Verified", tag: "AUTOMATED" },
-              { label: "OFFSHORE SQUAD SIGN-OFF", val: "14 Rig Crews", tag: "ACCEPTED" }
+              { label: "CORE REACT COMPONENTS", val: "48 Hardened Units", tag: "MUI BASED" },
+              { label: "GLOVED TOUCH ACCURACY", val: "99.4% Pass Rate", tag: "FIELD TESTED" },
+              { label: "ACCESSIBILITY GATES", val: "100% WCAG AAA Compliant", tag: "CERTIFIED" }
             ]
           }
         ],
@@ -2002,33 +1992,50 @@ export const PensionDashboardTokens = {
         <div class="cs-slide-item ${idx === 0 ? 'block' : 'hidden'} transition-opacity duration-300" data-index="${idx}">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#102E27] p-6 sm:p-8 md:p-10 rounded-3xl border-spruce-inner">
             
-            <div class="lg:col-span-7 bg-[#061612] p-5 sm:p-6 rounded-2xl border border-mint-400/20 font-mono text-xs">
-              <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 text-[#86A89C]">
-                <span>${d.mockupBadge}</span>
-                <span class="text-mint-400 font-bold">${d.status}</span>
-              </div>
-
-              <div class="space-y-3">
-                ${d.items.map(it => `
-                  <div class="flex items-center justify-between p-3 rounded-xl bg-[#0C231D] border border-white/5">
-                    <div class="flex items-center gap-3">
-                      <div class="w-2.5 h-2.5 rounded-full bg-mint-400"></div>
-                      <div>
-                        <div class="text-white font-bold text-xs">${it.label}</div>
-                        <div class="text-[10px] text-[#86A89C]">${it.val}</div>
-                      </div>
-                    </div>
-                    <span class="px-2 py-0.5 rounded bg-mint-400/20 text-mint-400 text-[10px] font-bold">${it.tag}</span>
+            <!-- Left Side: Renders Image if present, else fallback interactive data card -->
+            <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-mint-400/20 bg-[#061612]">
+              ${d.image ? `
+                <div class="relative w-full h-72 sm:h-80 md:h-96 bg-[#061612] overflow-hidden group">
+                  <img 
+                    src="${d.image}" 
+                    alt="${d.title}" 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div class="absolute top-3 left-3 bg-[#0C231D]/90 backdrop-blur-md px-3 py-1 rounded-full border border-mint-400/20 text-[10px] font-mono text-mint-400">
+                    ${d.mockupBadge}
                   </div>
-                `).join('')}
-              </div>
+                </div>
+              ` : `
+                <div class="p-5 sm:p-6 font-mono text-xs">
+                  <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 text-[#86A89C]">
+                    <span>${d.mockupBadge}</span>
+                    <span class="text-mint-400 font-bold">${d.status}</span>
+                  </div>
 
-              <div class="mt-4 pt-3 border-t border-white/10 flex justify-between text-[11px] text-[#86A89C]">
-                <span>Automated Accessibility Linting</span>
-                <span class="text-white">&check; Zero Contrast Violations</span>
-              </div>
+                  <div class="space-y-3">
+                    ${d.items.map(it => `
+                      <div class="flex items-center justify-between p-3 rounded-xl bg-[#0C231D] border border-white/5">
+                        <div class="flex items-center gap-3">
+                          <div class="w-2.5 h-2.5 rounded-full bg-mint-400"></div>
+                          <div>
+                            <div class="text-white font-bold text-xs">${it.label}</div>
+                            <div class="text-[10px] text-[#86A89C]">${it.val}</div>
+                          </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-mint-400/20 text-mint-400 text-[10px] font-bold">${it.tag}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+
+                  <div class="mt-4 pt-3 border-t border-white/10 flex justify-between text-[11px] text-[#86A89C]">
+                    <span>Automated Accessibility Linting</span>
+                    <span class="text-white">&check; Zero Contrast Violations</span>
+                  </div>
+                </div>
+              `}
             </div>
 
+            <!-- Right Side: Descriptive Copy & Bullets -->
             <div class="lg:col-span-5 space-y-4">
               <div class="inline-block px-3 py-1 rounded-full bg-mint-400/20 text-mint-300 text-xs font-bold uppercase tracking-wider">
                 Deliverable ${d.num}
