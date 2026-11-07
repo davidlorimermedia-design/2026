@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David Lorimer | Senior UX/UI & Accessibility Leader</title>
+  
+  <!-- Typography: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            spruce: {
+              950: '#061310',
+              900: '#0C231D',
+              850: '#102E27',
+              800: '#163B32',
+              750: '#1D493E',
+              700: '#265C4F',
+              600: '#327766'
+            },
+            mint: {
+              300: '#6EE7B7',
+              400: '#34D399',
+              500: '#10B981',
+              600: '#059669'
+            },
+            brand: {
+              forest: '#1D3F37',
+              dark: '#0C231D',
+              deepest: '#061310',
+              emerald: '#10B981',
+              mint: '#34D399',
+              light: '#E8EFEA',
+              cream: '#F5F8F6',
+              surface: '#FFFFFF'
+            }
+          },
+          borderRadius: {
+            '3xl': '24px',
+            '4xl': '32px',
+            '5xl': '40px'
+          },
+          boxShadow: {
+            'pill': '0 10px 30px -4px rgba(6, 19, 16, 0.35)',
+            'card-dark': '0 24px 48px -12px rgba(6, 19, 16, 0.5)',
+            'card': '0 10px 30px -5px rgba(29, 63, 55, 0.08), 0 4px 6px -2px rgba(29, 63, 55, 0.04)',
+            'arch': '0 25px 50px -12px rgba(18, 39, 34, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      min-height: 100%;
+      height: auto !important;
+      overflow-x: hidden;
+      overflow-y: auto !important;
+    }
+    body {
+      min-height: 100%;
+      height: auto !important;
+      overflow-x: hidden;
+      overflow-y: auto !important;
+      background-color: #F5F8F6;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #102922;
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F5F8F6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1D493E;
+      border-radius: 9999px;
+      border: 2px solid #F5F8F6;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #34D399;
+    }
+
+    /* Seamless endless horizontal marquee */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 24s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    .btn-mint-pill {
+      background-color: #34D399;
+      color: #061310;
+      font-weight: 700;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-mint-pill:hover {
+      background-color: #10B981;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px -2px rgba(52, 211, 153, 0.45);
+    }
+
+    .border-spruce-subtle {
+      border: 1px solid rgba(52, 211, 153, 0.15);
+    }
+    .border-spruce-inner {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Cinematic gentle view transition animations */
+    .view-container {
+      transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .view-enter {
+      opacity: 0;
+      transform: translateY(14px) scale(0.995);
+      filter: blur(2px);
+    }
+
+    .view-enter-active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .view-exit {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.99);
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    /* Ambient curtain overlay for silky seamless transitions */
+    #transition-curtain {
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 60;
+    }
+    #transition-curtain.active {
+      opacity: 0.18;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-mint-400 selection:text-spruce-950">
+
+  <!-- Soft Transition Ambient Backdrop -->
+  <div id="transition-curtain" class="fixed inset-0 bg-[#061310]" aria-hidden="true"></div>
+
+  <!-- ========================================================= -->
+  <!-- 1. HOMEPAGE NAVIGATION (SHOWN ONLY ON HOMEPAGE VIEW)      -->
+  <!-- ========================================================= -->
+  <header id="homepage-nav" class="fixed top-4 sm:top-6 left-0 right-0 z-50 px-4 pointer-events-none">
+    <div class="pointer-events-auto max-w-4xl mx-auto bg-[#0C231D]/95 backdrop-blur-md text-white rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between border-spruce-subtle shadow-pill">
+      
+      <!-- Brand Logo / Badge -->
+      <a href="#hero" class="flex items-center gap-2.5 group">
+        <span class="w-8 h-8 rounded-full bg-mint-400 text-spruce-950 flex items-center justify-center font-extrabold text-xs shadow-md transition-transform group-hover:scale-105">DL</span>
+        <div class="flex flex-col text-left">
+          <span class="font-bold text-xs sm:text-sm tracking-tight text-white group-hover:text-mint-400 transition-colors">David Lorimer</span>
+          <span class="text-[10px] text-[#86A89C] -mt-0.5 hidden sm:inline font-medium">Lead UX & Systems</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-[#A8C7BC]">
+        <a href="#services" class="hover:text-white transition-colors">Services</a>
+        <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+        <a href="#portfolio" class="hover:text-white transition-colors">Case Studies</a>
+        <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="btn-mint-pill px-4 sm:px-5 py-2 rounded-full text-xs flex items-center gap-1.5 active:scale-95">
+          <span>Let's Talk</span>
+          <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- 2. CASE STUDY BREADCRUMB BAR (SHOWN ONLY ON CASE STUDY)   -->
+  <!-- ========================================================= -->
+  <header id="casestudy-breadcrumb-bar" class="hidden fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none">
+    <div class="pointer-events-auto max-w-5xl mx-auto bg-[#0C231D]/95 backdrop-blur-md text-white rounded-2xl sm:rounded-full px-4 sm:px-6 py-2.5 sm:py-3 shadow-pill border-spruce-subtle flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Breadcrumb Hierarchy -->
+      <nav aria-label="Breadcrumb" class="flex items-center gap-1.5 sm:gap-2 text-xs font-medium text-[#8EAFA3]">
+        <button onclick="showHomepage()" class="flex items-center gap-1.5 hover:text-mint-400 transition-colors focus:outline-none">
+          <i class="fa-solid fa-house text-[11px]"></i>
+          <span class="font-bold text-white hover:text-mint-400">Home</span>
+        </button>
+        <span class="text-slate-500">/</span>
+        <button onclick="showHomepage('portfolio')" class="hover:text-mint-400 transition-colors focus:outline-none text-slate-300">
+          Case Studies
+        </button>
+        <span class="text-slate-500">/</span>
+        <span id="breadcrumb-current-study" class="text-mint-400 font-bold truncate max-w-[160px] sm:max-w-xs md:max-w-md">
+          The Weir Group
+        </span>
+      </nav>
+
+      <!-- Return Button & Keyboard Shortcut Indicator -->
+      <div class="flex items-center gap-2">
+        <button onclick="showHomepage('portfolio')" class="btn-mint-pill px-3.5 sm:px-4 py-1.5 rounded-full text-xs flex items-center gap-1.5 active:scale-95 focus:outline-none" title="Press ESC to return">
+          <i class="fa-solid fa-arrow-left text-[11px]"></i>
+          <span>Back to Homepage</span>
+        </button>
+        <span class="hidden lg:inline text-[10px] text-[#71988B] bg-spruce-850 px-2 py-1 rounded-md border border-white/10 font-mono">ESC</span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================================================================= -->
+  <!-- VIEW 1: PORTFOLIO HOMEPAGE CONTAINER                              -->
+  <!-- ================================================================= -->
+  <main id="view-homepage" class="w-full view-container view-enter-active">
+    
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative pt-28 sm:pt-36 pb-12 sm:pb-16 overflow-hidden">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+        <!-- Text Header & Narrative -->
+        <div class="text-center max-w-3xl mx-auto relative mb-8 sm:mb-10">
+          <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-brand-dark tracking-tight leading-[1.15]">
+            I'm <span class="relative inline-block text-brand-forest">
+              David Lorimer
+              <span class="absolute bottom-1 sm:bottom-1.5 left-0 w-full h-[4px] sm:h-[6px] bg-brand-emerald rounded-full"></span>
+            </span>,
+            <br>
+            <span class="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-700">Senior UX/UI & Accessibility Leader</span>
+          </h1>
+
+          <p class="mt-4 sm:mt-5 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Strategic UX leader with <strong>8+ years</strong> driving digital transformation in complex, regulated industries. I balance engineering constraints and human needs to design intuitive, accessible, high-impact enterprise products.
+          </p>
+
+          <!-- Badges -->
+          <div class="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold">
+            <span class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-brand-forest border border-emerald-200 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
+              Glasgow & Edinburgh, UK
+            </span>
+            <span class="px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200">
+              Enterprise Design Systems
+            </span>
+            <span class="px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200">
+              WCAG 2.2 AAA & EAA Certified
+            </span>
+          </div>
+        </div>
+
+        <!-- Hero Centerpiece: Stable Forest Arched Frame & Image Container -->
+        <div class="relative max-w-lg mx-auto flex flex-col items-center">
+          <div class="w-full max-w-[340px] sm:max-w-[380px] bg-brand-forest rounded-t-[170px] sm:rounded-t-[190px] pt-4 px-4 pb-0 shadow-arch border-t-4 border-x-4 border-emerald-400/20 relative flex flex-col items-center">
+            
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-emerald/15 via-transparent to-black/30 pointer-events-none rounded-t-[170px] sm:rounded-t-[190px]"></div>
+
+            <!-- Arched container with isolated background-free subject -->
+            <div class="w-full aspect-[4/5] rounded-t-[150px] sm:rounded-t-[170px] overflow-hidden bg-gradient-to-b from-[#1E4D41] to-[#122A23] relative shadow-inner flex items-end justify-center">
+              
+              <!-- Ambient halo behind portrait cutout -->
+              <div class="absolute w-56 h-56 rounded-full bg-brand-mint/20 blur-2xl top-12 pointer-events-none"></div>
+
+              <!-- Cutout Canvas / Image Render -->
+              <canvas id="hero-cutout-canvas" class="w-full h-full object-cover object-bottom relative z-10 hidden"></canvas>
+
+              <!-- Main Portrait Layer with Fallback & Seamless Blend -->
+              <img 
+                id="hero-profile-img"
+                src="image_2d1c06.jpg" 
+                alt="David Lorimer - Senior UX/UI Designer"
+                class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105 block relative z-10"
+                style="mask-image: radial-gradient(ellipse 95% 95% at 50% 48%, black 68%, transparent 100%), linear-gradient(to bottom, black 85%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 48%, black 68%, transparent 100%), linear-gradient(to bottom, black 85%, transparent 100%);"
+                onerror="
+                  if (!this.dataset.step) {
+                    this.dataset.step = '1';
+                    this.src = 'image_2ee5e4.jpg';
+                  } else if (this.dataset.step === '1') {
+                    this.dataset.step = '2';
+                    this.src = 'image_2e6d65.jpg';
+                  }
+                "
+              />
+              <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-brand-forest via-brand-forest/70 to-transparent pointer-events-none z-20"></div>
+            </div>
+
+            <!-- Floating Pill CTA overlapping bottom -->
+            <div class="relative -mt-6 mb-5 z-30 flex items-center gap-2 bg-white/95 backdrop-blur-md p-1.5 rounded-full shadow-2xl border border-emerald-100">
+                <span>View Work</span>
+                <i class="fa-solid fa-arrow-down text-[10px] text-brand-emerald"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. MY SERVICES -->
+    <section id="services" class="max-w-6xl mx-auto px-4 sm:px-6 my-10 sm:my-14">
+      <div class="bg-brand-dark rounded-4xl p-6 sm:p-10 md:p-12 text-white border-spruce-subtle shadow-card-dark relative overflow-hidden">
+        
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-emerald/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 relative z-10 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-mint">Core Capabilities</span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-1 text-white">
+              My <span class="text-brand-mint">Services</span>
+            </h2>
+          </div>
+          <p class="text-xs sm:text-sm text-[#A0C5B7] max-w-md leading-relaxed">
+            Specialized UX architecture built for mission-critical software, industrial IoT operations, and enterprise design system governance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+          
+          <div class="bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between group hover:border-brand-mint/40 transition-all hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-cubes"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Design Systems & Tokens</h3>
+              <p class="text-xs text-[#8EADA2] leading-relaxed mb-4">
+                Building multi-brand token frameworks in Figma & code that scale across complex suites, accelerating engineering delivery and cutting tech debt.
+              </p>
+            </div>
+            <div class="bg-brand-deepest/60 rounded-full px-4 py-2.5 border border-emerald-500/10 flex items-center justify-between mt-2">
+              <span class="text-[11px] font-semibold text-emerald-300">Figma & Tokens Studio</span>
+              <div class="w-6 h-6 rounded-full bg-brand-forest flex items-center justify-center text-brand-mint text-xs">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between group hover:border-brand-mint/40 transition-all hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-industry"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Industrial & Field UX</h3>
+              <p class="text-xs text-[#8EADA2] leading-relaxed mb-4">
+                End-to-end tooling for harsh onsite environments, machine telemetry, offline workflows, and critical Daily Layered Accountability trackers.
+              </p>
+            </div>
+            <div class="bg-brand-deepest/60 rounded-full px-4 py-2.5 border border-emerald-500/10 flex items-center justify-between mt-2">
+              <span class="text-[11px] font-semibold text-emerald-300">Telemetry & Dashboards</span>
+              <div class="w-6 h-6 rounded-full bg-brand-forest flex items-center justify-center text-brand-mint text-xs">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between group hover:border-brand-mint/40 transition-all hover:-translate-y-1">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+                <i class="fa-solid fa-universal-access"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Accessibility & Governance</h3>
+              <p class="text-xs text-[#8EADA2] leading-relaxed mb-4">
+                Translating EAA and WCAG 2.2 AA/AAA legislation into enterprise policy, hands-on designer/engineer workshops, and automated testing gates.
+              </p>
+            </div>
+            <div class="bg-brand-deepest/60 rounded-full px-4 py-2.5 border border-emerald-500/10 flex items-center justify-between mt-2">
+              <span class="text-[11px] font-semibold text-emerald-300">WCAG 2.2 AA/AAA & EAA</span>
+              <div class="w-6 h-6 rounded-full bg-brand-forest flex items-center justify-center text-brand-mint text-xs">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. WORK EXPERIENCE (CLEAN SINGLE-SIDED TIMELINE) -->
+    <section id="experience" class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-left mb-10 sm:mb-14">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 text-brand-forest text-xs font-bold uppercase tracking-wider mb-2">
+          <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
+          Career Trajectory
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">
+          Work <span class="text-brand-forest underline decoration-brand-emerald decoration-4 underline-offset-4">Experience</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-2xl leading-relaxed">
+          8+ years driving digital transformation, leading enterprise design systems, and championing digital accessibility across complex, regulated domains.
+        </p>
+      </div>
+
+      <!-- Single-Sided Left-Rail Timeline Wrapper -->
+      <div class="relative pl-6 sm:pl-10">
+        
+        <div class="absolute left-2.5 sm:left-4 top-3 bottom-8 w-0.5 bg-gradient-to-b from-brand-emerald via-emerald-300 to-emerald-100 rounded-full"></div>
+
+        <!-- Weir Group -->
+        <div class="relative mb-10 group">
+          <div class="absolute -left-6 sm:-left-10 top-1.5 flex items-center justify-center">
+            <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-brand-forest text-brand-mint border-2 sm:border-3 border-brand-emerald shadow-lg flex items-center justify-center text-[10px] sm:text-xs z-10 transition-transform group-hover:scale-110">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <div class="absolute w-8 sm:w-11 h-8 sm:h-11 rounded-full bg-brand-emerald/20 animate-ping pointer-events-none"></div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <div>
+                <span class="text-xs font-bold text-brand-emerald uppercase tracking-wider">Present Role</span>
+                <h3 class="text-lg sm:text-xl font-extrabold text-brand-dark">Senior UX/UI Designer & Accessibility Lead</h3>
+                <div class="text-xs sm:text-sm font-semibold text-brand-forest mt-0.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-building text-brand-emerald text-xs"></i> The Weir Group · Glasgow, UK
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-emerald-50 text-brand-forest border border-emerald-200 text-xs font-bold tracking-tight">
+                2024 — Present
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
+              Drive digital growth across industrial mining and heavy machinery operations. Architect and scale the enterprise multi-brand design system roadmap while serving as the primary accessibility consultant developing enterprise-wide standards, policy, and training. Lead end-to-end UX for rugged telemetry tools, the Customer Asset Intelligence Platform, and the Daily Layered Accountability (DLA) tracker.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Enterprise Design System</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">WCAG 2.2 AA / EAA</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Industrial IoT & Telemetry</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">DLA Lean Rituals</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AND Digital -->
+        <div class="relative mb-10 group">
+          <div class="absolute -left-6 sm:-left-10 top-1.5 flex items-center justify-center">
+            <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-brand-forest text-brand-mint border-2 sm:border-3 border-emerald-300 shadow-md flex items-center justify-center text-[10px] sm:text-xs z-10 transition-transform group-hover:scale-110">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <div>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Client Consultancy</span>
+                <h3 class="text-lg sm:text-xl font-extrabold text-brand-dark">Senior UX/UI Designer</h3>
+                <div class="text-xs sm:text-sm font-semibold text-brand-forest mt-0.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-building text-brand-emerald text-xs"></i> AND Digital · Edinburgh, UK
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold tracking-tight">
+                2022 — 2024
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
+              Collaborated strategically with diverse tier-1 clients across energy and retail sectors (TotalEnergies, Diageo). Embedded mature UX practices, multi-brand design systems, and user research directly into agile delivery cycles. Integrated accessibility into core procedural definitions to accelerate delivery speed and minimize technical debt.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Energy & Retail Sectors</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Design System Architecture</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Strategic Discovery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beeks Financial Cloud -->
+        <div class="relative mb-10 group">
+          <div class="absolute -left-6 sm:-left-10 top-1.5 flex items-center justify-center">
+            <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-brand-forest text-brand-mint border-2 sm:border-3 border-emerald-300 shadow-md flex items-center justify-center text-[10px] sm:text-xs z-10 transition-transform group-hover:scale-110">
+              <i class="fa-solid fa-cloud"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <div>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cloud Scale-Up</span>
+                <h3 class="text-lg sm:text-xl font-extrabold text-brand-dark">Lead UX Designer</h3>
+                <div class="text-xs sm:text-sm font-semibold text-brand-forest mt-0.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-building text-brand-emerald text-xs"></i> Beeks Financial Cloud · Glasgow, UK
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold tracking-tight">
+                2021 — 2022
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
+              Spearheaded product UX in a fast-paced fintech cloud infrastructure scale-up. Established the company's foundational UX design patterns, design library, and led the end-to-end creation and launch of the self-service enterprise customer portal.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Fintech Cloud Infrastructure</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Customer Portal UX</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standard Life Aberdeen -->
+        <div class="relative mb-6 group">
+          <div class="absolute -left-6 sm:-left-10 top-1.5 flex items-center justify-center">
+            <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-brand-forest text-brand-mint border-2 sm:border-3 border-emerald-300 shadow-md flex items-center justify-center text-[10px] sm:text-xs z-10 transition-transform group-hover:scale-110">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <div>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Financial Services</span>
+                <h3 class="text-lg sm:text-xl font-extrabold text-brand-dark">UX Designer & Business Analyst</h3>
+                <div class="text-xs sm:text-sm font-semibold text-brand-forest mt-0.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-building text-brand-emerald text-xs"></i> Standard Life Aberdeen · Edinburgh, UK
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold tracking-tight">
+                2018 — 2021
+              </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
+              Operated in a hybrid UX and business analysis capacity delivering key customer and internal digital initiatives. Designed ISA customer-facing application flows, analyzed Power BI usage analytics to inform tool improvements, and established design guidelines and process documentation.
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">ISA Portals & Onboarding</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Power BI Analytics</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 4. PORTFOLIO CASE STUDIES (4 CORE ENTERPRISE PROJECTS) -->
+    <section id="portfolio" class="py-14 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-forest">Selected Retrospectives</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-dark mt-1">
+            Featured <span class="text-brand-forest underline decoration-brand-emerald decoration-4 underline-offset-4">Case Studies</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-2">
+            Click any case study to open the full interactive deep-dive retrospective.
+          </p>
+        </div>
+        
+        <!-- Category Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-2" id="filter-container">
+          <button onclick="filterProjects('all')" class="filter-btn active px-4 py-2 rounded-full text-xs font-bold bg-brand-forest text-white shadow-sm transition-all" data-filter="all">All (4)</button>
+          <button onclick="filterProjects('systems')" class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-700 hover:bg-brand-light border border-slate-200 transition-all" data-filter="systems">Design Systems</button>
+          <button onclick="filterProjects('accessibility')" class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-700 hover:bg-brand-light border border-slate-200 transition-all" data-filter="accessibility">Accessibility</button>
+          <button onclick="filterProjects('industrial')" class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-700 hover:bg-brand-light border border-slate-200 transition-all" data-filter="industrial">Industrial IoT</button>
+        </div>
+      </div>
+
+      <!-- Grid of 4 Core Case Studies -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+        
+        <!-- Case 1: The Weir Group -->
+        <div onclick="openCaseStudy('weir')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems industrial accessibility">
+          
+          <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
+            <img 
+              src="warman-mcr-400-opt_2.webp" 
+              alt="The Weir Group Warman MCR Industrial Telemetry Platform" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              onerror="this.onerror=null; this.src='warman-mcr-400-opt.webp';"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
+            
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">The Weir Group</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-semibold text-white">2024 — Present</span>
+            </div>
+
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <h3 class="text-xl font-bold leading-snug">Industrial Digital Ecosystem & Weir Design System</h3>
+            </div>
+          </div>
+
+          <div class="p-6 flex flex-col flex-grow justify-between">
+            <div>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Comprehensive UX leadership across 4 core industrial initiatives: <strong>Customer Asset Intelligence Platform</strong> (Warman® slurry pump telemetry), <strong>Daily Layered Accountability Tracker</strong>, <strong>Resource Centre</strong>, and the unified <strong>Weir Multi-Brand Design System</strong>.
+              </p>
+              
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Asset Intelligence</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">DLA Tracker</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Design System</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">WCAG 2.2 AA</span>
+              </div>
+            </div>
+
+            <div class="w-full py-3 rounded-xl bg-brand-forest text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 group-hover:bg-brand-emerald group-hover:text-brand-dark">
+              <span>View Full Case Study</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Case 2: TotalEnergies -->
+        <div onclick="openCaseStudy('totalenergies')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="industrial systems">
+          
+          <div class="relative h-60 sm:h-64 overflow-hidden bg-[#0C1B17] p-6 flex flex-col justify-between">
+            <div class="flex gap-2 relative z-10">
+              <span class="px-3 py-1 rounded-full bg-brand-dark/90 text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">TotalEnergies (via AND Digital)</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 text-[10px] font-semibold text-white">2023</span>
+            </div>
+
+            <div class="bg-brand-forest/60 border border-emerald-400/20 rounded-xl p-4 shadow-lg">
+              <div class="flex items-center justify-between text-xs text-brand-mint font-mono mb-2">
+                <span>OFFSHORE_RIG_TELEMETRY</span>
+                <span class="flex items-center gap-1.5 text-emerald-400"><i class="fa-solid fa-circle text-[7px] animate-pulse"></i> LIVE SATELLITE SYNC</span>
+              </div>
+              <div class="h-2 bg-emerald-950 rounded-full overflow-hidden">
+                <div class="w-3/4 h-full bg-gradient-to-r from-emerald-500 to-teal-300"></div>
+              </div>
+            </div>
+
+            <div class="text-white relative z-10">
+              <h3 class="text-xl font-bold leading-snug">Offshore Rig Field Operations & Low-Bandwidth Telemetry</h3>
+            </div>
+          </div>
+
+          <div class="p-6 flex flex-col flex-grow justify-between">
+            <div>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Designed mission-critical digital interfaces for offshore platform engineers in the North Sea. Overcame extreme satellite bandwidth constraints, high glare, and harsh touch conditions.
+              </p>
+              
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Offline-First UX</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Field Workflows</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">High-Glare UI</span>
+              </div>
+            </div>
+
+            <div class="w-full py-3 rounded-xl bg-brand-forest text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 group-hover:bg-brand-emerald group-hover:text-brand-dark">
+              <span>View Full Case Study</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Case 3: Diageo -->
+        <div onclick="openCaseStudy('diageo')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems">
+          
+          <div class="relative h-60 sm:h-64 overflow-hidden bg-[#14231E] p-6 flex flex-col justify-between">
+            <div class="flex gap-2 relative z-10">
+              <span class="px-3 py-1 rounded-full bg-brand-dark/90 text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Diageo (via AND Digital)</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 text-[10px] font-semibold text-white">2022 — 2023</span>
+            </div>
+
+            <div class="bg-brand-forest/70 border border-emerald-400/20 rounded-xl p-4 shadow-lg">
+              <div class="flex items-center justify-between text-xs text-slate-300 mb-2 font-semibold">
+                <span>Brand Asset Vault (180+ Markets)</span>
+                <span class="text-xs text-brand-mint"><i class="fa-solid fa-layer-group"></i> 24,000+ Assets</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div class="h-8 rounded bg-brand-dark/80 border border-emerald-500/10 flex items-center justify-center text-[10px] text-emerald-200">Guinness</div>
+                <div class="h-8 rounded bg-brand-dark/80 border border-emerald-500/10 flex items-center justify-center text-[10px] text-emerald-200">Johnnie Walker</div>
+                <div class="h-8 rounded bg-brand-dark/80 border border-emerald-500/10 flex items-center justify-center text-[10px] text-emerald-200">Tanqueray</div>
+              </div>
+            </div>
+
+            <div class="text-white relative z-10">
+              <h3 class="text-xl font-bold leading-snug">Global Brand Asset Portal & Commercial Experience</h3>
+            </div>
+          </div>
+
+          <div class="p-6 flex flex-col flex-grow justify-between">
+            <div>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Architected a centralized digital asset management experience and partner commercial workflow across Diageo’s global portfolio of iconic drinks brands.
+              </p>
+              
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Enterprise DAM</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Global Governance</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Figma Design System</span>
+              </div>
+            </div>
+
+            <div class="w-full py-3 rounded-xl bg-brand-forest text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 group-hover:bg-brand-emerald group-hover:text-brand-dark">
+              <span>View Full Case Study</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Case 4: Royal London -->
+        <div onclick="openCaseStudy('royallondon')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="accessibility systems">
+          
+          <div class="relative h-60 sm:h-64 overflow-hidden bg-[#0A1F19] p-6 flex flex-col justify-between">
+            <div class="flex gap-2 relative z-10">
+              <span class="px-3 py-1 rounded-full bg-brand-dark/90 text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Royal London</span>
+              <span class="px-3 py-1 rounded-full bg-black/60 text-[10px] font-semibold text-white">Wealth & Pensions</span>
+            </div>
+
+            <div class="bg-brand-forest/80 border border-emerald-400/20 rounded-xl p-4 shadow-lg">
+              <div class="flex items-center justify-between text-xs text-brand-mint font-semibold mb-2">
+                <span>Customer Pension Rebalancing</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-900/60 text-emerald-300 font-mono">WCAG 2.2 AAA</span>
+              </div>
+              <div class="flex items-center justify-between text-white text-xs">
+                <span>Total Projected Pot:</span>
+                <span class="font-extrabold text-emerald-300">£184,290.00</span>
+              </div>
+            </div>
+
+            <div class="text-white relative z-10">
+              <h3 class="text-xl font-bold leading-snug">Accessible Customer Pension & Wealth Dashboard</h3>
+            </div>
+          </div>
+
+          <div class="p-6 flex flex-col flex-grow justify-between">
+            <div>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Redesigned end-to-end customer pension management under FCA Consumer Duty regulations, meeting WCAG 2.2 AAA standards for high legibility, screen reader flow, and mental model clarity.
+              </p>
+              
+              <div class="flex flex-wrap gap-1.5 mb-6">
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">FCA Consumer Duty</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">WCAG 2.2 AAA</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Fintech Journeys</span>
+              </div>
+            </div>
+
+            <div class="w-full py-3 rounded-xl bg-brand-forest text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 group-hover:bg-brand-emerald group-hover:text-brand-dark">
+              <span>View Full Case Study</span>
+              <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MARQUEE RIBBON -->
+    <div class="py-4 bg-brand-forest text-white overflow-hidden border-y border-emerald-400/20 shadow-inner">
+      <div class="animate-marquee whitespace-nowrap flex items-center gap-8 font-extrabold text-xs sm:text-sm tracking-wider uppercase">
+        <span>Industrial UX</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Enterprise Design Systems</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Accessibility & EAA Compliance</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Telemetry & IoT Tooling</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Design Leadership</span>
+        <span class="text-brand-mint">✦</span>
+        <span>SAFe Agile Practice</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Warman® Slurry Pump Intelligence</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Industrial UX</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Enterprise Design Systems</span>
+        <span class="text-brand-mint">✦</span>
+        <span>Accessibility & EAA Compliance</span>
+        <span class="text-brand-mint">✦</span>
+      </div>
+    </div>
+
+    <!-- 5. TESTIMONIALS -->
+    <section id="testimonials" class="max-w-6xl mx-auto px-4 sm:px-6 my-14 sm:my-20">
+      <div class="bg-brand-dark rounded-4xl p-6 sm:p-10 md:p-12 text-white border-spruce-subtle shadow-card-dark relative overflow-hidden">
+        
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-mint">Stakeholder Feedback</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-1 text-white">
+            Results & <span class="text-brand-mint">Testimonials</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-[#A0C5B7] mt-2">
+            What engineering leaders and product directors say about working alongside David Lorimer.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+          
+          <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-brand-mint text-xs mb-3">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
+                "David brought unmatched discipline to our enterprise design system roadmap. His ability to consult directly with onsite technicians and distill heavy machinery telemetry into an accessible digital tool is truly exceptional."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-emerald-500/15">
+              <div class="w-10 h-10 rounded-full bg-brand-forest flex items-center justify-center font-bold text-brand-mint text-xs border border-emerald-400/20">ED</div>
+              <div>
+                <div class="text-xs font-bold text-white">Engineering Director</div>
+                <div class="text-[10px] text-slate-400">Industrial IoT & Heavy Manufacturing</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-1 text-brand-mint text-xs mb-3">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
+                "In complex client consulting environments, David champions accessibility not just as a tick-box exercise, but as a genuine business driver that speeds up development velocity and expands customer reach."
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-emerald-500/15">
+              <div class="w-10 h-10 rounded-full bg-brand-forest flex items-center justify-center font-bold text-brand-mint text-xs border border-emerald-400/20">PL</div>
+              <div>
+                <div class="text-xs font-bold text-white">Product Principal</div>
+                <div class="text-[10px] text-slate-400">Global Digital Consulting</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. CONTACT SECTION -->
+    <section id="contact" class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-4xl p-6 sm:p-10 md:p-12 shadow-card border border-emerald-100 text-center">
+        
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-forest">Start The Conversation</span>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-dark mt-1">
+          Have an Industrial or Enterprise UX Challenge? <br>
+          <span class="text-brand-forest underline decoration-brand-emerald decoration-2">Let's Discuss</span>
+        </h2>
+        
+        <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mt-3 leading-relaxed">
+          Whether you are scaling an enterprise design system, tackling European Accessibility Act (EAA) compliance, or architecting complex industrial telemetry, let's connect.
+        </p>
+
+        <form onsubmit="handleContactSubmit(event)" class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-2">
+          <input 
+            type="email" 
+            id="contact-email" 
+            required 
+            placeholder="Enter your work email..." 
+            class="flex-grow px-5 py-3.5 rounded-full bg-brand-cream border border-emerald-200 text-xs sm:text-sm text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-emerald"
+          />
+          <button 
+            type="submit" 
+            class="px-7 py-3.5 rounded-full bg-brand-forest text-white text-xs font-bold hover:bg-brand-dark transition-all shadow-md active:scale-95 whitespace-nowrap"
+          >
+            Send Inquiry
+          </button>
+        </form>
+
+        <div id="contact-success" class="hidden mt-4 text-xs font-bold text-emerald-700 bg-emerald-50 py-2.5 px-4 rounded-xl border border-emerald-200 inline-block">
+          ✓ Thank you! David will get back to you within 24 business hours.
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-[11px] font-semibold text-slate-500">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> Rapid Discovery</span>
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> Accessibility Audits</span>
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> UK / Scotland Based</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOMEPAGE FOOTER -->
+    <footer class="bg-[#061310] text-white pt-14 pb-8 border-t border-emerald-950">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+          
+          <div class="md:col-span-2">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-7 h-7 rounded-full bg-mint-400 text-spruce-950 flex items-center justify-center font-extrabold text-xs">DL</span>
+              <span class="font-extrabold text-base tracking-tight text-white">David Lorimer</span>
+            </div>
+            <p class="text-xs text-[#86A89C] max-w-sm leading-relaxed mb-4">
+              Senior Product & UX Designer specializing in enterprise design systems, digital accessibility governance, and industrial IoT tools.
+            </p>
+            <div class="text-xs text-[#86A89C]">
+              <i class="fa-solid fa-location-dot text-mint-400 mr-2"></i> Glasgow / Edinburgh, Scotland, United Kingdom
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-mint-400 mb-3">Direct Contact</h4>
+            <ul class="text-xs text-slate-300 space-y-2">
+              <li>
+                <a href="mailto:Davidlorimermedia@gmail.com" class="hover:text-mint-400 transition-colors flex items-center gap-2">
+                  <i class="fa-regular fa-envelope text-slate-500"></i> Davidlorimermedia@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+447402781081" class="hover:text-mint-400 transition-colors flex items-center gap-2">
+                  <i class="fa-solid fa-phone text-slate-500"></i> +44 7402 781081
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-mint-400 mb-3">Professional Profiles</h4>
+            <div class="flex items-center gap-3">
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full bg-[#102E27] hover:bg-mint-400 hover:text-[#061310] text-white flex items-center justify-center transition-all text-xs" title="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="https://figma.com" target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full bg-[#102E27] hover:bg-mint-400 hover:text-[#061310] text-white flex items-center justify-center transition-all text-xs" title="Figma Community">
+                <i class="fa-brands fa-figma"></i>
+              </a>
+              <a href="mailto:Davidlorimermedia@gmail.com" class="w-9 h-9 rounded-full bg-[#102E27] hover:bg-mint-400 hover:text-[#061310] text-white flex items-center justify-center transition-all text-xs" title="Send Email">
+                <i class="fa-solid fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#6F9185] gap-2">
+          <div>© 2026 David Lorimer. All rights reserved.</div>
+          <div>Crafted with high accessibility standards (WCAG 2.2 AAA & EAA compliant).</div>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- VIEW 2: DEDICATED CASE STUDY LANDING PAGE TEMPLATE                -->
+  <!-- ================================================================= -->
+  <article id="view-casestudy" class="hidden w-full view-container view-enter">
+    
+    <!-- CASE STUDY HERO HEADER -->
+    <section class="pt-24 sm:pt-32 pb-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center flex flex-col items-center">
+      
+      <!-- Dynamic Case Study Headline -->
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#112E27] tracking-tight leading-[1.12] max-w-4xl mx-auto">
+        <span id="cs-hero-title">The Weir Group</span>
+        <span class="block text-2xl sm:text-3xl md:text-4xl font-bold text-slate-700 mt-2">
+          <span class="relative inline-block text-[#0C231D]">
+            <span id="cs-hero-subtitle">Industrial Digital Ecosystem & Weir Design System</span>
+            <span class="absolute bottom-1 sm:bottom-1.5 left-0 w-full h-[4px] sm:h-[6px] bg-mint-400 rounded-full"></span>
+          </span>
+        </span>
+      </h1>
+
+      <!-- Dynamic Subtitle / Executive Overview -->
+      <p id="cs-hero-desc" class="mt-5 sm:mt-7 text-sm sm:text-base md:text-lg text-[#3C5E54] max-w-3xl mx-auto font-normal leading-relaxed">
+        Comprehensive UX leadership across 4 core industrial initiatives: Customer Asset Intelligence Platform, Warman® slurry pump telemetry, Daily Layered Accountability Tracker, Resource Centre, and the unified Weir Multi-Brand Design System.
+      </p>
+
+      <!-- Context Badges -->
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-semibold">
+        <span class="px-3.5 py-1.5 rounded-full bg-[#E3EFE9] text-[#133C32] border border-[#C6E2D6] flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-mint-500 animate-pulse"></span>
+          <span id="cs-badge-company">The Weir Group</span>
+        </span>
+        <span id="cs-badge-role" class="px-3.5 py-1.5 rounded-full bg-white text-[#3C5E54] border border-[#DAE7E1]">
+          Role: Senior UX/UI Designer & Primary Accessibility Consultant
+        </span>
+        <span class="px-3.5 py-1.5 rounded-full bg-white text-[#3C5E54] border border-[#DAE7E1]">
+          Standard: WCAG 2.2 AAA & EAA
+        </span>
+      </div>
+
+      <!-- Hero Visual Card (Dynamically Injected for Weir, TotalEnergies, etc.) -->
+      <div id="cs-hero-cover-container" class="w-full mt-8 max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/20 max-h-[420px] relative">
+        <img id="cs-hero-cover-img" src="warman-mcr-400-opt_2.webp" alt="Case Study Cover Preview" class="w-full h-full object-cover max-h-[420px]">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0C231D]/80 via-transparent to-transparent flex items-end p-6">
+          <div class="text-left text-white">
+            <span id="cs-cover-tag" class="text-[11px] font-mono uppercase tracking-widest text-mint-400">MISSION CRITICAL OPERATIONAL SUITE</span>
+            <h3 id="cs-cover-heading" class="text-xl sm:text-2xl font-bold">Customer Asset Intelligence & Industrial IoT</h3>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 1. THE CHALLENGE -->
+    <section id="cs-challenge-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
+        
+        <div class="max-w-3xl mb-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase mb-3">
+            <span>01 • The Challenge</span>
+          </div>
+          <h2 id="cs-challenge-title" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
+            High stakes, extreme environments, zero margin for error
+          </h2>
+          <p id="cs-challenge-p" class="mt-3 text-sm sm:text-base text-[#466B60] leading-relaxed">
+            Mining operators and asset managers lacked a unified digital interface to monitor heavy equipment telemetry (such as the Warman® MCR slurry pump), conduct shift handovers, and access technical runbooks. Legacy workflows caused safety blindspots and high downtime risks.
+          </p>
+        </div>
+
+        <!-- 3 Dimension Cards -->
+        <div id="cs-challenge-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+        <!-- Baseline Failure Metrics Bar -->
+        <div id="cs-challenge-metrics" class="bg-[#0C231D] rounded-3xl p-6 sm:p-8 text-white border-spruce-subtle grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. MY APPROACH -->
+    <section id="cs-approach-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
+              Core Capabilities
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+              My <span class="text-mint-400">Approach</span>
+            </h2>
+          </div>
+          <p class="text-[#9DBFB3] text-sm sm:text-base max-w-md font-normal leading-relaxed">
+            Specialized UX architecture built for mission-critical software, industrial IoT operations, and enterprise design system governance.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-cubes-stacked"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Design Systems & Tokens</h3>
+              <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
+                Building multi-brand token frameworks in Figma & code that scale across complex suites, accelerating engineering delivery and cutting tech debt.
+              </p>
+            </div>
+            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
+              <span>Figma & Tokens Studio</span>
+              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-industry"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Industrial & Field UX</h3>
+              <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
+                End-to-end tooling for harsh onsite environments, machine telemetry, offline workflows, and critical Daily Layered Accountability trackers.
+              </p>
+            </div>
+            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
+              <span>Telemetry & Dashboards</span>
+              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-universal-access"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Accessibility & Governance</h3>
+              <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
+                Translating EAA and WCAG 2.2 AA/AAA legislation into enterprise policy, hands-on designer/engineer workshops, and automated testing gates.
+              </p>
+            </div>
+            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
+              <span>WCAG 2.2 AA/AAA & EAA</span>
+              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. IMPLEMENTATION & CODE / TOKEN PIPELINE -->
+    <section id="cs-implementation-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase mb-3">
+              <span>03 • Implementation</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
+              Bridging tokens from Figma into production code
+            </h2>
+          </div>
+          <p class="text-sm sm:text-base text-[#466B60] max-w-md leading-relaxed">
+            How systemic UX specifications were transformed into hardened React components with automated accessibility verification.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Implementation Steps -->
+          <div class="lg:col-span-6 space-y-4">
+            <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">1</span>
+                <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">Figma Variables to Style Dictionary Pipeline</h3>
+              </div>
+              <p class="text-xs sm:text-sm text-[#4E7368] pl-10 leading-relaxed">
+                Exported multi-tier semantic tokens (colors, radii, spacing, elevations) into automated JSON definitions, outputting type-safe TypeScript tokens directly to the monorepo.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">2</span>
+                <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">High-Contrast Anti-Glare Safety Interlocks</h3>
+              </div>
+              <p class="text-xs sm:text-sm text-[#4E7368] pl-10 leading-relaxed">
+                Replaced ambiguous dialogs with deliberate 120px physical drag gestures with 450ms hold-thresholds to guarantee zero accidental shutdowns caused by water drops or gloves.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">3</span>
+                <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">Automated Axe Core CI/CD Gates</h3>
+              </div>
+              <p class="text-xs sm:text-sm text-[#4E7368] pl-10 leading-relaxed">
+                Implemented automated color-contrast and accessibility linting in GitHub Actions. Any pull request with token combinations under WCAG 2.2 AAA is automatically failed before staging.
+              </p>
+            </div>
+          </div>
+
+          <!-- Code / Token Box -->
+          <div class="lg:col-span-6 bg-[#0C231D] text-white rounded-3xl p-6 sm:p-7 border-spruce-subtle shadow-card-dark font-mono text-xs">
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-mint-400"></span>
+                <span id="cs-token-filename" class="text-[#96B8AC] text-[11px] ml-2">WeirIndustrialTelemetry.tokens.ts</span>
+              </div>
+              <span class="text-[10px] text-mint-400 bg-spruce-800 px-2 py-0.5 rounded-md font-bold">FIGMA SYNCED</span>
+            </div>
+
+            <pre class="overflow-x-auto text-[#D2EAE1] leading-relaxed p-3 bg-[#061612] rounded-xl border border-white/5"><code id="cs-token-snippet"><span class="text-slate-500">// Token Spec for Industrial Field Operations</span>
+<span class="text-mint-400">export const</span> IndustrialControlsTokenSpec = {
+  ppeTargetMinSize: <span class="text-amber-300">"56px"</span>,
+  interlockGesture: {
+    minSwipeThresholdPx: <span class="text-amber-300">120</span>,
+    holdDurationMs: <span class="text-amber-300">450</span>,
+    hapticFeedbackPattern: [<span class="text-amber-300">50, 100, 50</span>]
+  },
+  contrastTokens: {
+    glareBackground: <span class="text-mint-300">"#0C231D"</span>,
+    activeSalience: <span class="text-mint-300">"#34D399"</span>,
+    measuredRatio: <span class="text-mint-300">"14.8:1"</span> <span class="text-slate-500">// WCAG AAA compliant</span>
+  }
+};</code></pre>
+
+            <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-[#86A89C]">
+              <span>120+ Components Synchronized</span>
+              <span class="text-mint-400 font-bold">&check; 100% Type-Safe</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. DELIVERABLES (INTERACTIVE 4-SLIDE CAROUSEL) -->
+    <section id="cs-deliverables-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative">
+        
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
+              04 • Artifacts & Systems
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+              Examples of <span class="text-mint-400">My Deliverables</span>
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="text-xs font-mono text-[#86A89C] mr-2">
+              <span id="cs-carousel-curr" class="text-white font-bold text-sm">1</span> / <span id="cs-carousel-total">4</span>
+            </div>
+            <button onclick="changeDeliverableSlide(-1)" aria-label="Previous Deliverable" class="w-10 h-10 rounded-full bg-spruce-850 hover:bg-spruce-800 text-mint-400 border border-mint-400/30 flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none">
+              <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+            <button onclick="changeDeliverableSlide(1)" aria-label="Next Deliverable" class="w-10 h-10 rounded-full bg-spruce-850 hover:bg-spruce-800 text-mint-400 border border-mint-400/30 flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none">
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Carousel Container -->
+        <div id="cs-deliverables-container" class="relative min-h-[440px]">
+          <!-- Dynamically Injected Slides -->
+        </div>
+
+        <!-- Dot Indicators -->
+        <div id="cs-carousel-dots" class="flex items-center justify-center gap-2 mt-8">
+          <!-- Dynamically Updated -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. VALUE & BUSINESS IMPACT -->
+    <section id="cs-value-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
+          <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
+            05 • Realized Outcomes
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+            Measurable Value Delivered
+          </h2>
+          <p class="mt-3 text-sm sm:text-base text-[#9DBFB3] leading-relaxed">
+            Quantitative ROI and safety improvements verified across industrial teams and product squads.
+          </p>
+        </div>
+
+        <div id="cs-value-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Dynamically Injected Metrics -->
+        </div>
+
+        <div class="mt-10 sm:mt-12 bg-[#102E27] rounded-3xl p-6 sm:p-8 border-spruce-inner flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto">
+          <div class="w-14 h-14 rounded-full bg-mint-400 text-[#061310] font-black text-lg flex items-center justify-center shrink-0">
+            VP
+          </div>
+          <div class="text-center md:text-left">
+            <p id="cs-quote-text" class="text-sm sm:text-base text-white italic font-normal leading-relaxed">
+              "David's systematic approach brought clarity to an environment where a single mistaken tap could trigger millions in downtime. Our field engineers finally have tools built for the physical reality of their jobs."
+            </p>
+            <div id="cs-quote-author" class="mt-2.5 text-xs text-mint-400 font-bold">
+              Engineering Director • Industrial IoT & Heavy Machinery
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. OTHER CASE STUDIES SELECTOR -->
+    <section id="cs-other-studies-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
+              Portfolio
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+              Explore Other <span class="text-mint-400">Case Studies</span>
+            </h2>
+          </div>
+          <p class="text-[#9DBFB3] text-sm sm:text-base max-w-md font-normal leading-relaxed">
+            Jump directly into another systemic UX retrospective across energy, finance, and global commerce.
+          </p>
+        </div>
+
+        <div id="cs-other-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Dynamically Injected 3 other studies -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CASE STUDY SPECIFIC FOOTER -->
+    <footer class="bg-[#061310] text-white pt-16 pb-12 border-t border-[#123129]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 pb-10 border-b border-white/10">
+          
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-mint-400 text-[#061310] font-black flex items-center justify-center text-xs">
+              DL
+            </div>
+            <div>
+              <div class="text-sm font-bold text-white">David Lorimer</div>
+              <div class="text-xs text-[#86A89C]">Senior UX/UI & Accessibility Leader</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 text-xs font-bold">
+            <a href="mailto:Davidlorimermedia@gmail.com" class="btn-mint-pill px-5 py-2.5 rounded-full flex items-center gap-2">
+              <i class="fa-solid fa-envelope"></i>
+              <span>Let's Talk</span>
+            </a>
+            <button onclick="showHomepage('portfolio')" class="px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-[#A8C7BC] hover:text-white hover:border-mint-400 transition-colors">
+              ← Return to Portfolio
+            </button>
+          </div>
+
+        </div>
+
+        <div class="pt-6 text-center sm:text-left text-xs text-[#6F9185]">
+          © 2026 David Lorimer. Built for mission-critical software, industrial IoT operations, and enterprise design system governance.
+        </div>
+      </div>
+    </footer>
+
+  </article>
+
+  <!-- ================================================================= -->
+  <!-- JAVASCRIPT STATE CONTROLLER & DYNAMIC DATA INJECTION             -->
+  <!-- ================================================================= -->
+  <script>
+    // -------------------------------------------------------------
+    // Comprehensive Data Model for the 4 Core Enterprise Case Studies
+    // -------------------------------------------------------------
+    const caseStudies = {
+      weir: {
+        id: "weir",
+        company: "The Weir Group",
+        title: "The Weir Group",
+        subtitle: "Industrial Digital Ecosystem & Weir Design System",
+        description: "Comprehensive UX leadership across 4 core industrial initiatives: Customer Asset Intelligence Platform (Warman® slurry pump telemetry), Daily Layered Accountability (DLA) Tracker, Resource Centre, and the unified Weir Multi-Brand Design System.",
+        role: "Senior UX/UI Designer & Primary Accessibility Consultant",
+        standard: "WCAG 2.2 AAA & EAA",
+        coverImage: "warman-mcr-400-opt_2.webp",
+        coverTag: "INDUSTRIAL HEAVY EQUIPMENT SUITE",
+        coverHeading: "Warman® MCR-400 Telemetry & Operations Suite",
+        tokenFile: "WeirIndustrialTelemetry.tokens.ts",
+        tokenCode: `// Token Spec for Industrial Mining Environments
+export const IndustrialControlsTokenSpec = {
+  ppeTargetMinSize: "56px",
+  interlockGesture: {
+    minSwipeThresholdPx: 120,
+    holdDurationMs: 450,
+    hapticFeedbackPattern: [50, 100, 50]
+  },
+  contrastTokens: {
+    glareBackground: "#0C231D",
+    activeSalience: "#34D399",
+    measuredRatio: "14.8:1" // WCAG AAA compliant
+  }
+};`,
+        challengeTitle: "Extreme mining conditions, machinery telemetry, zero tolerance for delays",
+        challengeDesc: "Mining operators and asset managers lacked a unified digital interface to monitor heavy equipment telemetry (such as the Warman® MCR slurry pump), conduct shift handovers, and access technical runbooks. Fragile desktop ports resulted in equipment downtime and safety risks.",
+        challengeCards: [
+          { icon: "fa-sun", color: "red", title: "Heavy Glare Onsite", text: "Screens washed out in direct open-pit sunlight (100,000+ lux). Standard low-contrast interfaces became unreadable." },
+          { icon: "fa-mitten", color: "amber", title: "PPE Safety Gloves", text: "Operators wear thick gloves and face high vibration. Standard 24px touch targets caused frequent missed inputs." },
+          { icon: "fa-triangle-exclamation", color: "emerald", title: "Unstructured Shift Handovers", text: "Paper logs and disjointed spreadsheets delayed Daily Layered Accountability huddles by over 25 minutes per shift." }
+        ],
+        challengeMetrics: [
+          { val: "25 min", label: "Shift Handover Lag", sub: "Pre-digital DLA ritual delays" },
+          { val: "34%", label: "Glove Missed Taps", sub: "Vibration & harsh site mis-inputs" },
+          { val: "0 / 64", label: "WCAG Checks Passed", sub: "Legacy internal tools baseline" }
+        ],
+        deliverables: [
+          {
+            num: "01",
+            title: "Customer Asset Intelligence Platform",
+            desc: "Engineered real-time telemetry dashboards monitoring Warman® slurry pumps, vibration acoustics, bearing heat, and hydraulic pressure with adaptive glare modes.",
+            points: ["Customizable alert thresholds optimized for glove input", "Visualized pump wear life prediction curves based on sensor feeds"],
+            mockupBadge: "Asset Intelligence • Warman® MCR-400",
+            status: "Telemetry Stream: ACTIVE",
+            items: [
+              { label: "PUMP CAVITATION RISK", val: "1.2% (NOMINAL)", tag: "OPTIMAL" },
+              { label: "VIBRATION PEAK (X-AXIS)", val: "0.18 mm/s", tag: "SAFE" },
+              { label: "ESTIMATED IMPELLER LIFE", val: "1,420 Hours", tag: "PLANNED SERVICE" }
+            ]
+          },
+          {
+            num: "02",
+            title: "Daily Layered Accountability (DLA) Tracker",
+            desc: "Digitized lean manufacturing rituals, replacing physical whiteboard huddles with an intuitive digital kiosk and tablet app for fast bottleneck escalation.",
+            points: ["Touch-first kanban and roadblock logging in under 30 seconds", "Real-time escalation from plant floor to operations leadership"],
+            mockupBadge: "Lean Tier-1 & Tier-2 Huddle Kiosk",
+            status: "Shift Handover: READY",
+            items: [
+              { label: "TIER 1 SAFETY AUDIT", val: "100% Passed", tag: "VERIFIED" },
+              { label: "ROADBLOCK ESCALATIONS", val: "2 Actions Open", tag: "SUPERVISOR TAGGED" },
+              { label: "MEAN TIME TO RESOLVE", val: "18.4 mins", tag: "-40% THIS MONTH" }
+            ]
+          },
+          {
+            num: "03",
+            title: "The Weir Multi-Brand Design System",
+            desc: "Architected the enterprise Figma and code token framework powering customer portals and internal factory tools, meeting 100% WCAG 2.2 AA standards.",
+            points: ["Multi-brand themes for Weir, Warman, and legacy brand identities", "Automated contrast validation in pull-request pipelines"],
+            mockupBadge: "Design Tokens & Variable Engine",
+            status: "Tokens Synchronized",
+            items: [
+              { label: "CORE ACCESSIBILITY AUDIT", val: "100% WCAG AA/AAA", tag: "EAA CERTIFIED" },
+              { label: "SHARED REACT COMPONENTS", val: "85+ Hardened Units", tag: "STORYBOOK SYNC" },
+              { label: "DEV HANDOVER EFFICIENCY", val: "+40% Delivery Speed", tag: "MEASURED" }
+            ]
+          },
+          {
+            num: "04",
+            title: "Resource Centre & Field Runbooks",
+            desc: "Designed an offline-resilient technical documentation repository providing maintenance crews with rapid access to CAD drawings, exploded parts diagrams, and repair guides.",
+            points: ["Fast fuzzy search across 10,000+ technical PDF schematics", "Offline-cached runbooks for remote Australian and Chilean mines"],
+            mockupBadge: "CAD & Technical Documentation Vault",
+            status: "Local Cache: SYNCED",
+            items: [
+              { label: "SEARCH RETRIEVAL TIME", val: "1.4s (Down from 8m)", tag: "INSTANT" },
+              { label: "OFFLINE STORAGE CAPACITY", val: "500MB Cached", tag: "OFFLINE FIRST" },
+              { label: "PARTS CATALOG MATCHING", val: "99.8% Accuracy", tag: "ERP LINKED" }
+            ]
+          }
+        ],
+        values: [
+          { stat: "-40%", title: "Shift Handover Time", desc: "DLA Tracker cut plant meeting friction from 25 minutes to under 15 minutes." },
+          { stat: "100%", title: "WCAG 2.2 AA / AAA", desc: "Enterprise design system achieved complete legal compliance under the EAA." },
+          { stat: "+40%", title: "Dev Delivery Velocity", desc: "Engineering squads shipped telemetry features 40% faster using pre-built tokens." },
+          { stat: "0", title: "PPE Mis-Hits", desc: "56px touch target boundaries eliminated accidental machine stops." }
+        ],
+        quoteText: "David's UX leadership brought cohesion to our digital tooling. Bridging heavy industrial machinery with modern, accessible software transformed both operator safety and executive visibility.",
+        quoteAuthor: "Engineering Director • Industrial IoT & Heavy Machinery, The Weir Group"
+      },
+
+      totalenergies: {
+        id: "totalenergies",
+        company: "TotalEnergies",
+        title: "TotalEnergies",
+        subtitle: "Offshore Rig Field Operations & Low-Bandwidth Telemetry",
+        description: "Designed mission-critical digital interfaces for offshore platform engineers in the North Sea. Overcame extreme satellite bandwidth constraints, high glare, and harsh touch conditions.",
+        role: "Senior UX/UI Designer (via AND Digital)",
+        standard: "WCAG 2.2 AAA & Low-Bandwidth",
+        coverImage: "warman-mcr-400-opt.webp",
+        coverTag: "OFFSHORE ENERGY & CRITICAL INFRASTRUCTURE",
+        coverHeading: "North Sea Rig Telemetry & Incident Containment",
+        tokenFile: "TotalEnergiesOffshore.tokens.ts",
+        tokenCode: `// Token Spec for Low-Bandwidth Satellite Telemetry
+export const OffshoreTelemetrySpec = {
+  satelliteSyncThresholdMs: 3000,
+  emergencyInterlock: {
+    gestureSwipeDistance: "120px",
+    autoCommitBuffer: true
+  },
+  contrastRatios: {
+    antiGlareMode: "#0C231D",
+    alarmHighSalience: "#EF4444",
+    measuredAAA: "16.2:1"
+  }
+};`,
+        challengeTitle: "High-stress offshore drilling rigs with intermittent satellite links",
+        challengeDesc: "Offshore platform engineers in the North Sea relied on legacy terminal interfaces. Intermittent satellite connectivity and confusing alarm cascades compromised safety and delayed emergency valve isolations.",
+        challengeCards: [
+          { icon: "fa-satellite-dish", color: "red", title: "Satellite Latency Drops", text: "Uplink packet drops occurred during North Sea storm squalls, interrupting active inspection checklists." },
+          { icon: "fa-bell", color: "amber", title: "Alarm Cascade Fatigue", text: "Over 120 simultaneous sensor alerts flooded screens during pressure fluctuations, obscuring root causes." },
+          { icon: "fa-water", color: "emerald", title: "Hostile Salt-Spray Conditions", text: "Outdoor decks exposed tablets to saltwater mist, extreme cold, and greasy gloves." }
+        ],
+        challengeMetrics: [
+          { val: "4m 12s", label: "Hazard Isolation Lag", sub: "Old legacy triage response time" },
+          { val: "42%", label: "Satellite Timeout Errors", sub: "Daily dropped cloud synchronizations" },
+          { val: "0 / 50", label: "Accessibility Gates", sub: "Legacy terminal compliance" }
+        ],
+        deliverables: [
+          {
+            num: "01",
+            title: "Offline-First Local Sync Architecture",
+            desc: "Architected an optimistic client data queue using IndexedDB that allows offshore inspectors to complete comprehensive safety logs without network connection.",
+            points: ["Instant local conflict resolution upon satellite link restore", "Zero data loss across 180 consecutive operating shifts"],
+            mockupBadge: "Offline Service Worker Engine",
+            status: "Satellite Sync: STANDBY",
+            items: [
+              { label: "QUEUED ACTIONS", val: "14 Records", tag: "ENCRYPTED" },
+              { label: "LATENCY TOLERANCE", val: "Infinite Offline", tag: "OPTIMISTIC UI" },
+              { label: "CONFLICT RESOLUTION", val: "Automatic CRDT", tag: "ZERO DATA LOSS" }
+            ]
+          },
+          {
+            num: "02",
+            title: "Alarm Prioritization Matrix & Triage UI",
+            desc: "Re-engineered the alarm hierarchy using dark-mode high-salience color coding that suppresses nuisance noise and highlights root-cause valves.",
+            points: ["Reduced alarm acknowledgment friction by 35%", "Dual sensory alerts (auditory chime + haptic buzz) for emergency events"],
+            mockupBadge: "Emergency Escalation Matrix",
+            status: "Sensors: MONITORED",
+            items: [
+              { label: "PRIMARY ALARM ISOLATION", val: "38s (Down from 4.2m)", tag: "RAPID" },
+              { label: "FALSE POSITIVE REDUCTION", val: "-68% Nuisance Alerts", tag: "VERIFIED" },
+              { label: "HIGH-CONTRAST DARK THEME", val: "16.2:1 Contrast Ratio", tag: "WCAG AAA" }
+            ]
+          },
+          {
+            num: "03",
+            title: "Rig Field Tablet Design System",
+            desc: "Created a dedicated field component library tailored specifically for ruggedized Panasonic Toughbook and Android tablets.",
+            points: ["Minimum 60px touch targets for gloved fingers", "High-contrast sunlight reflection mode toggleable in 1 tap"],
+            mockupBadge: "Field UI Component Tokens",
+            status: "Design System: ACTIVE",
+            items: [
+              { label: "GLOVED TOUCH ACCURACY", val: "99.4%", tag: "FIELD TESTED" },
+              { label: "SUNLIGHT HIGH-LUX MODE", val: "100,000 Lux Legible", tag: "TESTED" },
+              { label: "REUSABLE PATTERNS", val: "48 Components", tag: "PRODUCTION READY" }
+            ]
+          },
+          {
+            num: "04",
+            title: "Safety Drill & Evacuation Dashboard",
+            desc: "Designed an automated platform muster dashboard showing crew member locations and safety status in real time during emergency drills.",
+            points: ["RFID beacon pairing with graphical deck blueprint", "Clear visual count of missing personnel for offshore safety officers"],
+            mockupBadge: "Muster & Crew Safety Deck",
+            status: "Deck Safety: LIVE",
+            items: [
+              { label: "MUSTER TIMING", val: "3m 45s Total Drill", tag: "RECORD TIME" },
+              { label: "CREW ACCOUNTABILITY", val: "100% Verified", tag: "AUTOMATED" },
+              { label: "OFFSHORE SQUAD SIGN-OFF", val: "14 Rig Crews", tag: "ACCEPTED" }
+            ]
+          }
+        ],
+        values: [
+          { stat: "-62%", title: "Hazard Triage Lag", desc: "Emergency valve isolation dropped from over 4 minutes to under 40 seconds." },
+          { stat: "100%", title: "Offline Data Retained", desc: "Zero lost inspection reports across 180 consecutive operating shifts." },
+          { stat: "0", title: "Glove Input Errors", desc: "Enlarged interactive targets eliminated false emergency shutdowns." },
+          { stat: "+35%", title: "Reporting Velocity", desc: "Shift engineers filed end-of-day logs in record time." }
+        ],
+        quoteText: "David's ability to grasp the brutal conditions of North Sea operations and design an interface that just works—gloves, glare, satellite drops and all—was monumental.",
+        quoteAuthor: "VP of Field Operations • TotalEnergies Exploration & Production"
+      },
+
+      diageo: {
+        id: "diageo",
+        company: "Diageo",
+        title: "Diageo",
+        subtitle: "Global Brand Asset Platform & Commercial Portal",
+        description: "Architected a centralized digital asset management experience and partner commercial workflow across Diageo’s global portfolio of iconic drinks brands (Guinness, Johnnie Walker, Tanqueray).",
+        role: "Senior UX/UI Designer (via AND Digital)",
+        standard: "WCAG 2.2 AA & Global Localization",
+        coverImage: "warman-mcr-400-opt_2.webp",
+        coverTag: "GLOBAL COMMERCIAL PLATFORM",
+        coverHeading: "Enterprise Brand Asset Vault (180+ Markets)",
+        tokenFile: "DiageoBrandTokens.tokens.ts",
+        tokenCode: `// Multi-Brand Token Architecture
+export const DiageoBrandTokens = {
+  brandThemes: ["Guinness", "JohnnieWalker", "Tanqueray", "Smirnoff"],
+  assetTaxonomy: {
+    maxFileSizeBytes: 10737418240, // 10GB
+    rightsTracking: true
+  },
+  accessibilityBaseline: {
+    minContrast: "4.5:1",
+    keyboardNavFocusRing: "#10B981"
+  }
+};`,
+        challengeTitle: "Decentralized assets, regional rights chaos, fragmented brand compliance",
+        challengeDesc: "Diageo’s global marketing teams and third-party distributors across 180+ countries struggled with decentralized brand asset storage, resulting in brand compliance breaches, expired copyright lawsuits, and delayed campaign rollouts.",
+        challengeCards: [
+          { icon: "fa-globe", color: "red", title: "180+ Fragmented Markets", text: "Regional teams stored assets across Dropbox, SharePoint, and hard drives, creating massive duplication." },
+          { icon: "fa-scale-unbalanced", color: "amber", title: "Expiring Talent Rights", text: "Ambiguous talent rights management exposed the business to copyright infringements on expired advertising assets." },
+          { icon: "fa-hourglass-half", color: "emerald", title: "Multi-Week Approval Delays", text: "Distributors waited up to 3 weeks for approved print-ready vector artwork, missing seasonal promotional windows." }
+        ],
+        challengeMetrics: [
+          { val: "3 Weeks", label: "Asset Approval Lag", sub: "Old manual approval timeline" },
+          { val: "22%", label: "Rights Violations", sub: "Assets used past talent expiry dates" },
+          { val: "45,000+", label: "Uncatalogued Files", sub: "Dispersed global file debt" }
+        ],
+        deliverables: [
+          {
+            num: "01",
+            title: "Centralized Brand Asset Vault",
+            desc: "Designed a single-source-of-truth portal housing 24,000+ brand guidelines, high-res renders, video spots, and 3D packaging files for Diageo’s portfolio.",
+            points: ["Faceted search engine with instantaneous visual previews", "Support for 12 languages and regional distributor access tiers"],
+            mockupBadge: "Brand Asset Vault (24,000+ Assets)",
+            status: "Search Index: OPTIMIZED",
+            items: [
+              { label: "PORTFOLIO BRANDS", val: "Guinness, Johnnie Walker, Tanqueray", tag: "CATALOGUED" },
+              { label: "SEARCH SPEED", val: "320ms Global Latency", tag: "ELASTICSEARCH" },
+              { label: "DOWNLOAD VELOCITY", val: "+85% Faster Retrieval", tag: "GLOBAL CDN" }
+            ]
+          },
+          {
+            num: "02",
+            title: "Automated Rights & Talent Expiry UX",
+            desc: "Engineered transparent visual rights tagging that prevents users from downloading assets whose commercial usage rights or territory permissions have lapsed.",
+            points: ["Clear warning badges and alternative asset recommendations", "Automated email alerts sent 30 days prior to license expiration"],
+            mockupBadge: "Licensing & Legal Compliance Engine",
+            status: "Rights Engine: ENFORCED",
+            items: [
+              { label: "LEGAL VIOLATIONS", val: "0 Breaches Post-Launch", tag: "RISK ELIMINATED" },
+              { label: "AUTOMATED PERMISSIONS", val: "180 Countries Automated", tag: "RULE ENGINE" },
+              { label: "AUDIT LOG TRACKING", val: "100% Download Traceability", tag: "COMPLIANT" }
+            ]
+          },
+          {
+            num: "03",
+            title: "Global Multi-Brand Token Architecture",
+            desc: "Established a unified design system that allows partner commercial portals to reskin dynamically based on the current brand context while keeping accessibility consistent.",
+            points: ["Pre-validated typography and color contrast for every brand theme", "Zero designer-to-developer translation disconnect"],
+            mockupBadge: "Multi-Brand Design Tokens",
+            status: "Tokens: SYNCED",
+            items: [
+              { label: "BRAND THEMES", val: "12 Primary Brands", tag: "FIGMA VARIABLES" },
+              { label: "ACCESSIBILITY RATING", val: "WCAG 2.2 AA", tag: "AUDITED" },
+              { label: "FRONTEND DEPLOYMENT", val: "React & Next.js", tag: "STORYBOOK" }
+            ]
+          },
+          {
+            num: "04",
+            title: "Self-Service Campaign Bundler",
+            desc: "Built a bulk-export cart feature allowing global distributors to package campaign materials, point-of-sale print kits, and social media cuts in one click.",
+            points: ["Dynamic ZIP generation tailored to destination specs", "Estimated 300+ engineering and marketing hours saved per quarter"],
+            mockupBadge: "Commercial Campaign Bundler",
+            status: "Campaign Kits: READY",
+            items: [
+              { label: "BULK DOWNLOAD TIME", val: "Under 60 seconds", tag: "AUTOMATED ZIP" },
+              { label: "DISTRIBUTOR ADOPTION", val: "94% Active Engagement", tag: "+28% INCREASE" },
+              { label: "REGIONAL SATISFACTION", val: "4.8 / 5.0 Rating", tag: "SURVEYED" }
+            ]
+          }
+        ],
+        values: [
+          { stat: "+28%", title: "Distributor Adoption", desc: "Global third-party distributors adopted the portal as their primary sales kit channel." },
+          { stat: "0", title: "Talent Rights Breaches", desc: "Automated governance prevented accidental misuse of expired copyrighted imagery." },
+          { stat: "-70%", title: "Turnaround Time", desc: "Campaign asset turnaround dropped from 3 weeks to less than 24 hours." },
+          { stat: "180+", title: "Global Markets", desc: "Unified global brand compliance across every operating territory." }
+        ],
+        quoteText: "David gave our global brand team peace of mind. Consolidating thousands of assets across Johnnie Walker, Guinness and beyond into an accessible, beautiful tool was a huge win.",
+        quoteAuthor: "Global Head of Brand Experience • Diageo"
+      },
+
+      royallondon: {
+        id: "royallondon",
+        company: "Royal London",
+        title: "Royal London",
+        subtitle: "Accessible Customer Pension & Wealth Dashboard",
+        description: "Redesigned end-to-end customer pension management under FCA Consumer Duty regulations, meeting WCAG 2.2 AAA standards for high legibility, screen reader flow, and mental model clarity.",
+        role: "UX Architecture & Accessibility Lead",
+        standard: "WCAG 2.2 AAA & FCA Consumer Duty",
+        coverImage: "warman-mcr-400-opt_2.webp",
+        coverTag: "WEALTH & REGULATED FINTECH",
+        coverHeading: "Accessible Personal Pension & Investment Management",
+        tokenFile: "RoyalLondonPensions.tokens.ts",
+        tokenCode: `// Pension Wealth Accessible Token Spec
+export const PensionDashboardTokens = {
+  fcaComplianceMode: true,
+  accessibilityProfile: {
+    wcagStandard: "AAA",
+    targetTypeScale: "Major Third (1.25)",
+    highContrastRatio: "7.1:1 Min Text"
+  },
+  financialVisualization: {
+    colorBlindSafePalettes: true,
+    tabularDataFallback: true
+  }
+};`,
+        challengeTitle: "Opaque financial language, high cognitive anxiety, new FCA Consumer Duty rules",
+        challengeDesc: "Customers managing personal pensions encountered opaque investment terminology, inaccessible data visualizations, and high customer support call volumes following new FCA Consumer Duty rules.",
+        challengeCards: [
+          { icon: "fa-gavel", color: "red", title: "FCA Consumer Duty Mandate", text: "New UK regulations required pension providers to prove customers understand fee structures and fund risk profiles." },
+          { icon: "fa-chart-pie", color: "amber", title: "Inaccessible Financial Charts", text: "Color-only pie charts and dense tables locked out visually impaired users and screen reader software." },
+          { icon: "fa-phone-volume", color: "emerald", title: "Overloaded Support Centers", text: "Simple tasks like fund switching and beneficiary updates accounted for over 40% of telephone inquiries." }
+        ],
+        challengeMetrics: [
+          { val: "40%", label: "Call Centre Inquiries", sub: "Routine allocation questions" },
+          { val: "18%", label: "Abandonment Rate", sub: "During multi-step fund switching" },
+          { val: "3.2 / 5", label: "Customer Comprehension", sub: "Measured in FCA baseline audit" }
+        ],
+        deliverables: [
+          {
+            num: "01",
+            title: "Accessible Pension Projection Engine",
+            desc: "Designed an interactive pension forecasting tool compliant with WCAG 2.2 AAA that features colorblind-safe palettes and full table alternatives.",
+            points: ["Real-time slider forecasting with transparent inflation adjustments", "Plain English tooltips explaining annuity vs drawdown mechanics"],
+            mockupBadge: "Interactive Retirement Forecaster",
+            status: "Projections: CALCULATED",
+            items: [
+              { label: "PROJECTED RETIREMENT POT", val: "£184,290.00", tag: "AT AGE 65" },
+              { label: "MONTHLY ESTIMATED INCOME", val: "£1,420 / Month", tag: "INFLATION ADJUSTED" },
+              { label: "ACCESSIBILITY COMPLIANCE", val: "WCAG 2.2 AAA Verified", tag: "AXE PASSED" }
+            ]
+          },
+          {
+            num: "02",
+            title: "Guided 3-Step Fund Rebalancing Flow",
+            desc: "Transformed an intimidating investment switching process into a reassuring step-by-step wizard with clear fee transparency and risk indicators.",
+            points: ["Side-by-side comparison of old vs new fund charges", "Confirmation summaries vetted for screen readers and high readability"],
+            mockupBadge: "Guided Fund Reallocation Stepper",
+            status: "Fund Flow: SECURE",
+            items: [
+              { label: "COMPLETION TIME", val: "3.2 mins (Down from 18m)", tag: "STREAMLINED" },
+              { label: "FEE TRANSPARENCY", val: "FCA Consumer Duty Approved", tag: "AUDITED" },
+              { label: "FLOW ABANDONMENT", val: "Dropped from 18% to 2.1%", tag: "SUCCESS" }
+            ]
+          },
+          {
+            num: "03",
+            title: "Accessible Financial Design System",
+            desc: "Architected component standards ensuring all data tables, key metrics, and form controls have high-salience focus rings and proper ARIA semantics.",
+            points: ["Zero focus trap errors across all tested screen readers (NVDA, JAWS, VoiceOver)", "Adaptive font scaling up to 200% without horizontal scroll"],
+            mockupBadge: "Design Tokens & Inclusive Components",
+            status: "Tokens: VERIFIED",
+            items: [
+              { label: "FOCUS RING SALIENCE", val: "3px Solid Emerald (#10B981)", tag: "AAA SPEC" },
+              { label: "SCREEN READER AUDIT", val: "100% Pass Rate", tag: "INDEPENDENT TEST" },
+              { label: "COLORBLIND AUDIT", val: "Protanopia & Deuteranopia Safe", tag: "VERIFIED" }
+            ]
+          },
+          {
+            num: "04",
+            title: "Beneficiary & Life-Event Management",
+            desc: "Streamlined emotionally sensitive life events such as adding expression-of-wish beneficiaries and bereavement notices into an empathetic, clear interface.",
+            points: ["Reduced validation rejections caused by address and identity mismatches", "Clear human guidance with direct option to connect with UK specialists"],
+            mockupBadge: "Beneficiary Expression of Wish",
+            status: "Records: ENCRYPTED",
+            items: [
+              { label: "FORM SUCCESS RATE", val: "97.8% First-Time Pass", tag: "+35% IMPROVEMENT" },
+              { label: "CUSTOMER CONFIDENCE", val: "4.9 / 5.0 Rating", tag: "SURVEYED" },
+              { label: "SUPPORT CALLS SAVED", val: "4,200 Calls / Quarter", tag: "REDUCED" }
+            ]
+          }
+        ],
+        values: [
+          { stat: "-40%", title: "Support Call Volume", desc: "Fewer routine reallocation queries directed to phone lines." },
+          { stat: "100%", title: "FCA Compliance", desc: "Zero red flags during formal FCA Consumer Duty regulatory review." },
+          { stat: "AAA", title: "WCAG Accessibility", desc: "Highest tier digital accessibility achieved for elderly and impaired users." },
+          { stat: "+82%", title: "Customer Confidence", desc: "Customers scored their understanding of investment risk significantly higher." }
+        ],
+        quoteText: "David transformed how we approach regulated pension experiences. He proved that meeting rigorous accessibility standards actually makes the product better and clearer for everyone.",
+        quoteAuthor: "Head of Digital Experience • Royal London"
+      }
+    };
+
+    // State Variables
+    let currentStudyKey = 'weir';
+    let currentDeliverableSlide = 0;
+    let isTransitioning = false;
+
+    // -------------------------------------------------------------
+    // Gentle Cinematic View Switcher: Homepage <-> Case Study
+    // -------------------------------------------------------------
+    function openCaseStudy(studyKey) {
+      if (isTransitioning) return;
+      if (!caseStudies[studyKey]) studyKey = 'weir';
+      currentStudyKey = studyKey;
+      currentDeliverableSlide = 0;
+      isTransitioning = true;
+
+      const homeView = document.getElementById('view-homepage');
+      const csView = document.getElementById('view-casestudy');
+      const homeNav = document.getElementById('homepage-nav');
+      const csBreadcrumb = document.getElementById('casestudy-breadcrumb-bar');
+      const curtain = document.getElementById('transition-curtain');
+
+      // 1. Soft exit animation for homepage & curtain pulse
+      curtain.classList.add('active');
+      homeView.classList.remove('view-enter-active');
+      homeView.classList.add('view-exit');
+      homeNav.style.transition = 'opacity 0.22s ease';
+      homeNav.style.opacity = '0';
+
+      // 2. Pre-render the selected case study while faded
+      setTimeout(() => {
+        renderCaseStudyView(caseStudies[studyKey]);
+
+        // Hide homepage view, unhide case study view in initial enter state
+        homeView.classList.add('hidden');
+        homeView.classList.remove('view-exit');
+        homeNav.classList.add('hidden');
+        homeNav.style.opacity = '1';
+
+        csView.classList.remove('hidden');
+        csView.classList.remove('view-enter-active');
+        csView.classList.add('view-enter');
+        
+        csBreadcrumb.classList.remove('hidden');
+        csBreadcrumb.style.opacity = '0';
+        csBreadcrumb.style.transition = 'opacity 0.3s ease';
+
+        // Scroll to top instantly while obscured
+        window.scrollTo({ top: 0, behavior: 'instant' });
+
+        // Trigger gentle enter transition
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            csView.classList.remove('view-enter');
+            csView.classList.add('view-enter-active');
+            csBreadcrumb.style.opacity = '1';
+            curtain.classList.remove('active');
+            try {
+              history.pushState(null, '', `#case-study-${studyKey}`);
+            } catch (err) {
+              // Gracefully handle iframe/blob security restrictions
+              try { location.hash = `case-study-${studyKey}`; } catch (e) {}
+            }
+            isTransitioning = false;
+          }, 40);
+        });
+      }, 260);
+    }
+
+    function showHomepage(targetSection = null) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const homeView = document.getElementById('view-homepage');
+      const csView = document.getElementById('view-casestudy');
+      const homeNav = document.getElementById('homepage-nav');
+      const csBreadcrumb = document.getElementById('casestudy-breadcrumb-bar');
+      const curtain = document.getElementById('transition-curtain');
+
+      // 1. Soft exit animation for case study view
+      curtain.classList.add('active');
+      csView.classList.remove('view-enter-active');
+      csView.classList.add('view-exit');
+      csBreadcrumb.style.opacity = '0';
+
+      setTimeout(() => {
+        csView.classList.add('hidden');
+        csView.classList.remove('view-exit');
+        csBreadcrumb.classList.add('hidden');
+
+        homeView.classList.remove('hidden');
+        homeView.classList.remove('view-enter-active');
+        homeView.classList.add('view-enter');
+
+        homeNav.classList.remove('hidden');
+        homeNav.style.opacity = '0';
+
+        try {
+          history.pushState(null, '', window.location.pathname);
+        } catch (err) {
+          try { location.hash = ''; } catch (e) {}
+        }
+
+        // Position window before revealing
+        if (targetSection) {
+          const el = document.getElementById(targetSection);
+          if (el) {
+            el.scrollIntoView({ behavior: 'instant' });
+          }
+        } else {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        // Trigger gentle enter transition for homepage
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            homeView.classList.remove('view-enter');
+            homeView.classList.add('view-enter-active');
+            homeNav.style.opacity = '1';
+            curtain.classList.remove('active');
+            isTransitioning = false;
+          }, 40);
+        });
+      }, 260);
+    }
+
+    // -------------------------------------------------------------
+    // Data Injection for Case Study Landing Page
+    // -------------------------------------------------------------
+    function renderCaseStudyView(data) {
+      // Breadcrumb label
+      document.getElementById('breadcrumb-current-study').textContent = data.company;
+
+      // Hero Elements
+      document.getElementById('cs-hero-title').textContent = data.title;
+      document.getElementById('cs-hero-subtitle').textContent = data.subtitle;
+      document.getElementById('cs-hero-desc').textContent = data.description;
+      document.getElementById('cs-badge-company').textContent = data.company;
+      document.getElementById('cs-badge-role').textContent = "Role: " + data.role;
+
+      // Cover & visuals
+      document.getElementById('cs-hero-cover-img').src = data.coverImage;
+      document.getElementById('cs-cover-tag').textContent = data.coverTag;
+      document.getElementById('cs-cover-heading').textContent = data.coverHeading;
+
+      // Challenge Section
+      document.getElementById('cs-challenge-title').textContent = data.challengeTitle;
+      document.getElementById('cs-challenge-p').textContent = data.challengeDesc;
+
+      const challengeGrid = document.getElementById('cs-challenge-grid');
+      challengeGrid.innerHTML = data.challengeCards.map(card => `
+        <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+          <div class="w-10 h-10 rounded-2xl bg-${card.color}-100 text-${card.color}-700 flex items-center justify-center text-sm font-bold mb-4">
+            <i class="fa-solid ${card.icon}"></i>
+          </div>
+          <h3 class="text-base font-bold text-[#0C231D] mb-1.5">${card.title}</h3>
+          <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">${card.text}</p>
+        </div>
+      `).join('');
+
+      const challengeMetrics = document.getElementById('cs-challenge-metrics');
+      challengeMetrics.innerHTML = data.challengeMetrics.map((m, idx) => `
+        <div class="${idx > 0 ? 'border-t sm:border-t-0 sm:border-l border-white/10 pt-4 sm:pt-0 sm:pl-6' : ''}">
+          <div class="text-3xl sm:text-4xl font-extrabold text-mint-400 font-mono">${m.val}</div>
+          <div class="text-xs uppercase tracking-wider text-[#A5C9BD] font-bold mt-1">${m.label}</div>
+          <div class="text-[11px] text-[#7A9F93] mt-0.5">${m.sub}</div>
+        </div>
+      `).join('');
+
+      // Token Code
+      document.getElementById('cs-token-filename').textContent = data.tokenFile;
+      document.getElementById('cs-token-snippet').textContent = data.tokenCode;
+
+      // Deliverables Carousel Slides
+      renderDeliverablesSlides(data.deliverables);
+
+      // Value metrics
+      const valueCards = document.getElementById('cs-value-cards');
+      valueCards.innerHTML = data.values.map(v => `
+        <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner text-center">
+          <div class="text-4xl sm:text-5xl font-extrabold text-mint-400 font-mono tracking-tight">${v.stat}</div>
+          <div class="text-sm font-bold text-white mt-2">${v.title}</div>
+          <p class="text-xs text-[#8EADA2] mt-2 leading-relaxed">${v.desc}</p>
+        </div>
+      `).join('');
+
+      // Quote
+      document.getElementById('cs-quote-text').textContent = `"${data.quoteText}"`;
+      document.getElementById('cs-quote-author').textContent = data.quoteAuthor;
+
+      // Other studies selector (all except current)
+      const otherGrid = document.getElementById('cs-other-grid');
+      const otherKeys = Object.keys(caseStudies).filter(k => k !== data.id);
+      otherGrid.innerHTML = otherKeys.map(k => {
+        const item = caseStudies[k];
+        return `
+          <div onclick="openCaseStudy('${item.id}')" class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group cursor-pointer">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-folder-open"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2 tracking-tight">${item.company}</h3>
+              <p class="text-[#8EADA2] text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">${item.subtitle}</p>
+            </div>
+            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC] group-hover:text-white transition-colors">
+              <span>View Case Study</span>
+              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // -------------------------------------------------------------
+    // Deliverables Carousel Logic
+    // -------------------------------------------------------------
+    function renderDeliverablesSlides(deliverables) {
+      const container = document.getElementById('cs-deliverables-container');
+      const dotsContainer = document.getElementById('cs-carousel-dots');
+      document.getElementById('cs-carousel-total').textContent = deliverables.length;
+
+      container.innerHTML = deliverables.map((d, idx) => `
+        <div class="cs-slide-item ${idx === 0 ? 'block' : 'hidden'} transition-opacity duration-300" data-index="${idx}">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#102E27] p-6 sm:p-8 md:p-10 rounded-3xl border-spruce-inner">
+            
+            <!-- Left Mockup Visual -->
+            <div class="lg:col-span-7 bg-[#061612] p-5 sm:p-6 rounded-2xl border border-mint-400/20 font-mono text-xs">
+              <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10 text-[#86A89C]">
+                <span>${d.mockupBadge}</span>
+                <span class="text-mint-400 font-bold">${d.status}</span>
+              </div>
+
+              <div class="space-y-3">
+                ${d.items.map(it => `
+                  <div class="flex items-center justify-between p-3 rounded-xl bg-[#0C231D] border border-white/5">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2.5 h-2.5 rounded-full bg-mint-400"></div>
+                      <div>
+                        <div class="text-white font-bold text-xs">${it.label}</div>
+                        <div class="text-[10px] text-[#86A89C]">${it.val}</div>
+                      </div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded bg-mint-400/20 text-mint-400 text-[10px] font-bold">${it.tag}</span>
+                  </div>
+                `).join('')}
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-white/10 flex justify-between text-[11px] text-[#86A89C]">
+                <span>Automated Accessibility Linting</span>
+                <span class="text-white">&check; Zero Contrast Violations</span>
+              </div>
+            </div>
+
+            <!-- Right Descriptive Copy -->
+            <div class="lg:col-span-5 space-y-4">
+              <div class="inline-block px-3 py-1 rounded-full bg-mint-400/20 text-mint-300 text-xs font-bold uppercase tracking-wider">
+                Deliverable ${d.num}
+              </div>
+              <h3 class="text-2xl font-bold text-white tracking-tight">${d.title}</h3>
+              <p class="text-sm text-[#A0C5B7] leading-relaxed">
+                ${d.desc}
+              </p>
+              <ul class="text-xs text-[#86A89C] space-y-2 pt-2">
+                ${d.points.map(pt => `
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-mint-400 mt-0.5"></i>
+                    <span>${pt}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      `).join('');
+
+      dotsContainer.innerHTML = deliverables.map((_, idx) => `
+        <button onclick="setDeliverableSlide(${idx})" class="cs-dot ${idx === 0 ? 'w-8 h-2 rounded-full bg-mint-400' : 'w-2 h-2 rounded-full bg-spruce-700'} transition-all"></button>
+      `).join('');
+
+      document.getElementById('cs-carousel-curr').textContent = '1';
+    }
+
+    function changeDeliverableSlide(delta) {
+      const slides = document.querySelectorAll('.cs-slide-item');
+      if (!slides.length) return;
+      let newIdx = currentDeliverableSlide + delta;
+      if (newIdx < 0) newIdx = slides.length - 1;
+      if (newIdx >= slides.length) newIdx = 0;
+      setDeliverableSlide(newIdx);
+    }
+
+    function setDeliverableSlide(index) {
+      currentDeliverableSlide = index;
+      const slides = document.querySelectorAll('.cs-slide-item');
+      const dots = document.querySelectorAll('.cs-dot');
+
+      slides.forEach((sl, i) => {
+        if (i === index) {
+          sl.classList.remove('hidden');
+          sl.classList.add('block');
+        } else {
+          sl.classList.add('hidden');
+          sl.classList.remove('block');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.className = 'cs-dot w-8 h-2 rounded-full bg-mint-400 transition-all';
+        } else {
+          dot.className = 'cs-dot w-2 h-2 rounded-full bg-spruce-700 transition-all';
+        }
+      });
+
+      document.getElementById('cs-carousel-curr').textContent = index + 1;
+    }
+
+    // Keyboard ESC key returns to homepage
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const csView = document.getElementById('view-casestudy');
+        if (!csView.classList.contains('hidden')) {
+          showHomepage('portfolio');
+        }
+      }
+    });
+
+    // -------------------------------------------------------------
+    // Homepage Project Filtering
+    function filterProjects(category) {
+      const cards = document.querySelectorAll('.project-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.className = "filter-btn active px-4 py-2 rounded-full text-xs font-bold bg-brand-forest text-white shadow-sm transition-all";
+        } else {
+          btn.className = "filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-700 hover:bg-brand-light border border-slate-200 transition-all";
+        }
+      });
+
+      cards.forEach(card => {
+        const cardCategories = card.getAttribute('data-category');
+        if (category === 'all' || cardCategories.includes(category)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Dynamic foreground extraction to cleanly remove office background behind portrait
+    window.addEventListener('load', () => {
+      const img = document.getElementById('hero-profile-img');
+      const canvas = document.getElementById('hero-cutout-canvas');
+      if (!img || !canvas) return;
+
+      const processCutout = () => {
+        try {
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+          canvas.width = img.naturalWidth || 600;
+          canvas.height = img.naturalHeight || 600;
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imgData.data;
+
+          // Detect and isolate the muted pale grey/blue window background
+          for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            
+            // Check for window background color range (cool desaturated light grays)
+            const brightness = (r + g + b) / 3;
+            const diffRG = Math.abs(r - g);
+            const diffGB = Math.abs(g - b);
+            const diffRB = Math.abs(r - b);
+            const isDesaturated = diffRG < 24 && diffGB < 28 && diffRB < 28;
+
+            if (brightness > 165 && isDesaturated) {
+              const alphaRatio = Math.max(0, 1 - (brightness - 165) / 55);
+              data[i + 3] = Math.min(data[i + 3], Math.floor(alphaRatio * 255));
+            }
+          }
+
+          ctx.putImageData(imgData, 0, 0);
+          canvas.classList.remove('hidden');
+          img.classList.add('hidden');
+        } catch (e) {
+          // If canvas read is restricted by security sandbox, standard masked element continues smoothly
+          console.warn("Using CSS masked cutout fallback:", e);
+        }
+      };
+
+      if (img.complete) {
+        processCutout();
+      } else {
+        img.onload = processCutout;
+      }
+    });
+
+    // Homepage Contact Form
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const successMsg = document.getElementById('contact-success');
+      successMsg.classList.remove('hidden');
+      document.getElementById('contact-email').value = '';
+      setTimeout(() => {
+        successMsg.classList.add('hidden');
+      }, 5000);
+    }
+  </script>
+
+</body>
+</html>
