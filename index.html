@@ -138,6 +138,22 @@
     .anim-blob-3 { animation: floatBlob3 10s ease-in-out infinite; }
     .anim-blob-4 { animation: floatBlob4 14s ease-in-out infinite; }
 
+    /* Underline on-appear animation */
+    @keyframes drawUnderline {
+      0% {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+    .hero-underline-anim {
+      transform-origin: left center;
+      animation: drawUnderline 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+    }
+
     .btn-mint-pill {
       background-color: #34D399;
       color: #061310;
@@ -335,10 +351,10 @@
 
           <!-- RIGHT: Headline, Bio & Credentials -->
           <div class="text-center lg:text-left flex-1 max-w-2xl">
-            <h1 class="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark tracking-tight leading-[1.15]">
+            <h1 class="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark tracking-tight leading-[1.18]">
               I'm <span class="relative inline-block text-brand-forest">
                 David Lorimer
-                <span class="absolute bottom-1 sm:bottom-1.5 left-0 w-full h-[4px] sm:h-[6px] bg-brand-emerald rounded-full"></span>
+                <span class="hero-underline-anim absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[4px] sm:h-[6px] bg-brand-emerald rounded-full"></span>
               </span>,
               <br>
               <span class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-700">Senior UX/UI & Accessibility Leader</span>
