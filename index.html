@@ -113,7 +113,6 @@
       animation-play-state: paused;
     }
 
-    /* Gentle Floating Keyframe Animations */
     @keyframes floatBlob1 {
       0%, 100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
       33% { transform: translate(-14px, -18px) rotate(4deg) scale(1.05); }
@@ -138,7 +137,6 @@
     .anim-blob-3 { animation: floatBlob3 10s ease-in-out infinite; }
     .anim-blob-4 { animation: floatBlob4 14s ease-in-out infinite; }
 
-    /* Underline on-appear animation */
     @keyframes drawUnderline {
       0% {
         transform: scaleX(0);
@@ -285,39 +283,25 @@
   <!-- ================================================================= -->
   <main id="view-homepage" class="w-full view-container view-enter-active">
     
-    <!-- HERO SECTION (IMAGE LEFT WITH FLOATING SHAPES, TEXT RIGHT) -->
+    <!-- HERO SECTION -->
     <section id="hero" class="relative pt-28 sm:pt-36 pb-12 sm:pb-20 overflow-hidden">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
 
         <div class="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
           
-          <!-- LEFT: Open Cutout Portrait with Layered Moving Green Graphics Behind -->
+          <!-- LEFT: Cutout Portrait with Organic Behind-Shapes -->
           <div class="w-full max-w-[380px] sm:max-w-[430px] lg:max-w-[460px] shrink-0 relative flex items-center justify-center overflow-visible">
             
-            <!-- FLOATING GREEN GRAPHICS (LAYERED DIRECTLY BEHIND THE IMAGE) -->
             <div class="absolute inset-0 pointer-events-none -z-0 overflow-visible flex items-center justify-center">
-              
-              <!-- Shape 1: Large Organic Forest Green Blob (Top-Left) -->
               <div class="anim-blob-1 absolute -top-4 -left-6 w-52 h-52 sm:w-60 sm:h-60 rounded-[48%_52%_68%_32%/42%_58%_42%_58%] bg-[#1D3F37] opacity-95"></div>
-
-              <!-- Shape 2: Vibrant Deep Emerald Blob (Right Shoulder) -->
               <div class="anim-blob-2 absolute top-10 -right-8 w-48 h-56 sm:w-56 sm:h-64 rounded-[62%_38%_45%_55%/52%_45%_55%_48%] bg-[#10B981] opacity-90"></div>
-
-              <!-- Shape 3: Bright Mint Pill Graphic (Top-Right High Accent) -->
               <div class="anim-blob-3 absolute -top-8 right-8 w-24 h-28 sm:w-28 sm:h-32 rounded-[40%_60%_70%_30%/50%_30%_70%_50%] bg-[#34D399] opacity-85"></div>
-
-              <!-- Shape 4: Soft Pale Sage / Light Mint Blob (Bottom-Left) -->
               <div class="anim-blob-4 absolute bottom-6 -left-8 w-40 h-40 sm:w-44 sm:h-44 rounded-[55%_45%_35%_65%/60%_40%_60%_40%] bg-[#265C4F] opacity-90"></div>
-
-              <!-- Shape 5: Deep Spruce Anchor (Center-Back Shadow) -->
               <div class="absolute w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-[#0C231D] opacity-40 blur-xl"></div>
-
-              <!-- Graphic Dot Accents -->
               <div class="anim-blob-1 absolute -top-2 left-6 w-4 h-4 rounded-full bg-[#6EE7B7] shadow-sm"></div>
               <div class="anim-blob-2 absolute top-28 -right-4 w-3 h-3 rounded-full bg-[#34D399]"></div>
             </div>
 
-            <!-- PORTRAIT CUTOUT CONTAINER -->
             <div class="relative z-10 w-full flex flex-col items-center overflow-visible">
               <canvas id="hero-cutout-canvas" class="w-full max-w-[380px] sm:max-w-[440px] h-auto object-cover object-bottom relative z-10 hidden drop-shadow-2xl"></canvas>
 
@@ -364,7 +348,6 @@
               Strategic UX leader with <strong>8+ years</strong> driving digital transformation in complex, regulated industries. I balance engineering constraints and human needs to design intuitive, accessible, high-impact enterprise products.
             </p>
 
-            <!-- Badges -->
             <div class="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs font-semibold">
               <span class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-brand-forest border border-emerald-200 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
@@ -1075,7 +1058,7 @@
     <!-- CASE STUDY HERO HEADER -->
     <section class="pt-24 sm:pt-32 pb-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center flex flex-col items-center">
       
-      <!-- Dynamic Case Study Headline with Animated Underline directly beneath Client Name -->
+      <!-- Dynamic Headline with Underline -->
       <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#112E27] tracking-tight leading-[1.18] max-w-4xl mx-auto">
         <span class="relative inline-block text-[#112E27]">
           <span id="cs-hero-title">The Weir Group</span>
@@ -1118,7 +1101,10 @@
 
     </section>
 
-    <!-- 1. THE CHALLENGE -->
+    <!-- DYNAMIC TOTALENERGIES NARRATIVE (Injected conditionally only for TotalEnergies) -->
+    <div id="cs-totalenergies-narrative" class="hidden"></div>
+
+    <!-- 1. THE CHALLENGE (Used for Weir, Diageo, Royal London) -->
     <section id="cs-challenge-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
         
@@ -1140,7 +1126,7 @@
       </div>
     </section>
 
-    <!-- 2. MY APPROACH -->
+    <!-- 2. MY APPROACH (Used for Weir, Diageo, Royal London) -->
     <section id="cs-approach-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
         
@@ -1219,7 +1205,7 @@
       </div>
     </section>
 
-    <!-- 3. IMPLEMENTATION & CODE / TOKEN PIPELINE -->
+    <!-- 3. IMPLEMENTATION & CODE / TOKEN PIPELINE (Used for Weir, Diageo, Royal London) -->
     <section id="cs-implementation-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
         
@@ -1308,14 +1294,14 @@
       </div>
     </section>
 
-    <!-- 4. DELIVERABLES (INTERACTIVE CAROUSEL) -->
+    <!-- 4. DELIVERABLES (INTERACTIVE CAROUSEL - Shared by all case studies) -->
     <section id="cs-deliverables-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative">
         
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div>
             <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
-              04 • Artifacts & Systems
+              Artifacts & Systems
             </div>
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
               Examples of <span class="text-mint-400">My Deliverables</span>
@@ -1341,34 +1327,34 @@
       </div>
     </section>
 
-    <!-- 5. VALUE & BUSINESS IMPACT -->
+    <!-- 5. VALUE & BUSINESS IMPACT (Shared by all case studies) -->
     <section id="cs-value-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
         
         <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
           <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
-            05 • Realized Outcomes
+            Realized Outcomes
           </div>
           <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
             Measurable Value Delivered
           </h2>
           <p class="mt-3 text-sm sm:text-base text-[#9DBFB3] leading-relaxed">
-            Quantitative ROI and safety improvements verified across industrial teams and product squads.
+            Quantitative ROI, speed gains, and system improvements verified across digital squads and leadership.
           </p>
         </div>
 
         <div id="cs-value-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
 
-        <div class="mt-10 sm:mt-12 bg-[#102E27] rounded-3xl p-6 sm:p-8 border-spruce-inner flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto">
+        <div id="cs-quote-container" class="mt-10 sm:mt-12 bg-[#102E27] rounded-3xl p-6 sm:p-8 border-spruce-inner flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto">
           <div class="w-14 h-14 rounded-full bg-mint-400 text-[#061310] font-black text-lg flex items-center justify-center shrink-0">
             VP
           </div>
           <div class="text-center md:text-left">
             <p id="cs-quote-text" class="text-sm sm:text-base text-white italic font-normal leading-relaxed">
-              "David's systematic approach brought clarity to an environment where a single mistaken tap could trigger millions in downtime. Our field engineers finally have tools built for the physical reality of their jobs."
+              "David's systematic approach brought clarity to an environment where a single mistaken tap could trigger millions in downtime."
             </p>
             <div id="cs-quote-author" class="mt-2.5 text-xs text-mint-400 font-bold">
-              Engineering Director • Industrial IoT & Heavy Machinery
+              Engineering Director
             </div>
           </div>
         </div>
@@ -1545,43 +1531,17 @@ export const IndustrialControlsTokenSpec = {
         id: "totalenergies",
         company: "TotalEnergies",
         title: "TotalEnergies",
-        subtitle: "Offshore Rig Field Operations & Low-Bandwidth Telemetry",
-        description: "Designed mission-critical digital interfaces for offshore platform engineers in the North Sea. Overcame extreme satellite bandwidth constraints, high glare, and harsh touch conditions.",
-        role: "Senior UX/UI Designer (via AND Digital)",
+        subtitle: "Hybrid Design System & Multi-Tool Acceleration",
+        description: "Embedded UX consulting across fast-paced quarterly super-sprints: auditing fragmented tooling, establishing a robust hybrid component architecture, and scaling field-tested interfaces for North Sea operations.",
+        role: "Lead UX Consultant (via AND Digital)",
         standard: "WCAG 2.2 AAA & Low-Bandwidth",
         coverImage: "Resultats_troisieme_trimestre_2023_TotalEnergies_1305x713px.png",
-        coverTag: "OFFSHORE ENERGY & CRITICAL INFRASTRUCTURE",
-        coverHeading: "North Sea Rig Telemetry & Incident Containment",
-        tokenFile: "TotalEnergiesOffshore.tokens.ts",
-        tokenCode: `// Token Spec for Low-Bandwidth Satellite Telemetry
-export const OffshoreTelemetrySpec = {
-  satelliteSyncThresholdMs: 3000,
-  emergencyInterlock: {
-    gestureSwipeDistance: "120px",
-    autoCommitBuffer: true
-  },
-  contrastRatios: {
-    antiGlareMode: "#0C231D",
-    alarmHighSalience: "#EF4444",
-    measuredAAA: "16.2:1"
-  }
-};`,
-        challengeTitle: "High-stress offshore drilling rigs with intermittent satellite links",
-        challengeDesc: "Offshore platform engineers in the North Sea relied on legacy terminal interfaces. Intermittent satellite connectivity and confusing alarm cascades compromised safety and delayed emergency valve isolations.",
-        challengeCards: [
-          { icon: "fa-satellite-dish", color: "red", title: "Satellite Latency Drops", text: "Uplink packet drops occurred during North Sea storm squalls, interrupting active inspection checklists." },
-          { icon: "fa-bell", color: "amber", title: "Alarm Cascade Fatigue", text: "Over 120 simultaneous sensor alerts flooded screens during pressure fluctuations, obscuring root causes." },
-          { icon: "fa-water", color: "emerald", title: "Hostile Salt-Spray Conditions", text: "Outdoor decks exposed tablets to saltwater mist, extreme cold, and greasy gloves." }
-        ],
-        challengeMetrics: [
-          { val: "4m 12s", label: "Hazard Isolation Lag", sub: "Old legacy triage response time" },
-          { val: "42%", label: "Satellite Timeout Errors", sub: "Daily dropped cloud synchronizations" },
-          { val: "0 / 50", label: "Accessibility Gates", sub: "Legacy terminal compliance" }
-        ],
+        coverTag: "ENTERPRISE DESIGN SYSTEM & OFFSHORE TOOLING",
+        coverHeading: "Hybrid Component Architecture & Field Telemetry",
         deliverables: [
           {
             num: "01",
-            title: "Early warning notification system",
+            title: "Early Warning Notification System",
             image: "Gemini_Generated_Image_nxcgonxcgonxcgon.jpeg",
             desc: "Designed an offshore hazard detection and early warning alert system that cuts through high-stress operational noise with instant, clear priority visual cues and audio cues.",
             points: ["Multi-stage alert escalation with zero false-alarm fatigue", "Sunlight-readable high-contrast telemetry indicators tailored for ATEX-certified tablets"],
@@ -1595,7 +1555,7 @@ export const OffshoreTelemetrySpec = {
           },
           {
             num: "02",
-            title: "Plant heat map tool",
+            title: "Plant Heat Map Tool",
             image: "Gemini_Generated_Image_9r280d9r280d9r28.jpeg",
             desc: "Architected a live 2D/3D platform telemetry heat map visualizing thermal loads, piping stress, and equipment operating temperatures across multi-deck rig modules.",
             points: ["Real-time sensor overlays mapping thermal hot-spots directly onto deck schematics", "Low-bandwidth vector rendering guaranteeing instant responsiveness over satellite connections"],
@@ -1627,9 +1587,7 @@ export const OffshoreTelemetrySpec = {
           { stat: "-30%", title: "Coding & Build Time", desc: "Championed design system adoption across squads, slashing production time through modular, reusable patterns." },
           { stat: "100%", title: "Field-Tested Rigor", desc: "Conducted contextual user research with frontline engineers and staff across demanding environments, including offshore rigs." },
           { stat: "4+", title: "Squads Upskilled", desc: "Embedded UX practices and systematic design governance across multi-disciplinary teams to eliminate design debt." }
-        ],
-        quoteText: "David's ability to grasp the brutal conditions of North Sea operations and design an interface that just works—gloves, glare, satellite drops and all—was monumental.",
-        quoteAuthor: "VP of Field Operations • TotalEnergies Exploration & Production"
+        ]
       },
 
       diageo: {
@@ -1838,6 +1796,308 @@ export const PensionDashboardTokens = {
     let currentDeliverableSlide = 0;
     let isTransitioning = false;
 
+    function buildTotalEnergiesHTML() {
+      return `
+        <!-- PROJECT SUMMARY & CONTEXT (2-Column with Left Image Placeholder matching Height) -->
+        <section class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+              
+              <!-- Left: Image Placeholder stretching to match content height -->
+              <div class="lg:col-span-5 flex">
+                <div class="w-full h-full min-h-[300px] rounded-3xl bg-[#0C231D] border border-white/10 flex flex-col items-center justify-center p-6 text-center shadow-inner relative overflow-hidden group">
+                  <div class="absolute inset-0 bg-gradient-to-br from-mint-500/10 via-transparent to-transparent pointer-events-none"></div>
+                  <div class="w-14 h-14 rounded-2xl bg-[#102E27] border border-mint-400/20 flex items-center justify-center text-mint-400 text-xl mb-4 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-image"></i>
+                  </div>
+                  <span class="text-xs font-bold text-white tracking-wide">SPRINT DISCOVERY CONTEXT</span>
+                  <span class="text-[11px] text-[#86A89C] mt-1 max-w-[220px]">Offshore Super-Sprint Workflows & Design Team Co-Location</span>
+                </div>
+              </div>
+
+              <!-- Right: Narrative Text -->
+              <div class="lg:col-span-7 flex flex-col justify-center space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase w-fit">
+                  <span>Engagement Context & Strategic Mandate</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
+                  Accelerating digital products while establishing a systemic practice
+                </h2>
+                <div class="text-sm sm:text-base text-[#466B60] leading-relaxed space-y-3">
+                  <p>
+                    I was brought in as a Senior UX Consultant embedded into 3-month fast-paced "Super Sprints" at TotalEnergies, tasked with driving delivery velocity across multiple concurrent web applications.
+                  </p>
+                  <p>
+                    Rather than limiting my scope to executing day-to-day UI tasks in isolation, I proactively looked across the organization to explore how we could optimize the broader design and engineering tooling. 
+                  </p>
+                  <p>
+                    By looking beyond immediate sprint tickets, I identified that autonomous product squads were repeatedly building duplicate UI components and creating fragmented hex-code variations—generating massive technical and design debt.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 4-STEP UX & SYSTEMS METHODOLOGY TRACKER -->
+        <section class="py-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="p-5 rounded-3xl bg-white border border-[#E1ECE6] shadow-sm">
+              <span class="text-xs font-bold text-mint-500 font-mono">PHASE 01</span>
+              <h3 class="text-base font-bold text-[#0C231D] mt-1">Discover & Audit</h3>
+              <p class="text-xs text-[#4E7368] mt-1">Uncovering component duplication, token fragmentation & sprint friction.</p>
+            </div>
+            <div class="p-5 rounded-3xl bg-white border border-[#E1ECE6] shadow-sm">
+              <span class="text-xs font-bold text-mint-500 font-mono">PHASE 02</span>
+              <h3 class="text-base font-bold text-[#0C231D] mt-1">Grounded Research</h3>
+              <p class="text-xs text-[#4E7368] mt-1">Investigating offshore lighting conditions, high-glare decks & night shifts.</p>
+            </div>
+            <div class="p-5 rounded-3xl bg-white border border-[#E1ECE6] shadow-sm">
+              <span class="text-xs font-bold text-mint-500 font-mono">PHASE 03</span>
+              <h3 class="text-base font-bold text-[#0C231D] mt-1">Hybrid Architecture</h3>
+              <p class="text-xs text-[#4E7368] mt-1">Cataloging custom components & bridging gaps with base MUI.</p>
+            </div>
+            <div class="p-5 rounded-3xl bg-white border border-[#E1ECE6] shadow-sm">
+              <span class="text-xs font-bold text-mint-500 font-mono">PHASE 04</span>
+              <h3 class="text-base font-bold text-[#0C231D] mt-1">Tooling & Storybook</h3>
+              <p class="text-xs text-[#4E7368] mt-1">Connecting Figma, GitHub monorepo and Storybook for UAT verification.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- PHASE 01: DISCOVER & AUDIT (3 PROBLEM CARDS) -->
+        <section class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
+            <div class="max-w-3xl mb-10">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase mb-3">
+                <span>Phase 01 • Discover & Audit</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
+                Auditing systemic friction across parallel super-sprints
+              </h2>
+              <p class="mt-3 text-sm sm:text-base text-[#466B60] leading-relaxed">
+                With squads running parallel 3-month deliverable sprints, lack of shared governance forced teams into building duplicate components from scratch, ballooning front-end complexity.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+                <div class="w-10 h-10 rounded-2xl bg-red-100 text-red-700 flex items-center justify-center text-sm font-bold mb-4">
+                  <i class="fa-solid fa-code-fork"></i>
+                </div>
+                <h3 class="text-base font-bold text-[#0C231D] mb-1.5">Duplication & Waste</h3>
+                <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+                  Multiple squads independently engineered custom date pickers, dropdowns, and table filters, causing unnecessary rework and inconsistent UX behaviors.
+                </p>
+              </div>
+
+              <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+                <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-sm font-bold mb-4">
+                  <i class="fa-solid fa-swatchbook"></i>
+                </div>
+                <h3 class="text-base font-bold text-[#0C231D] mb-1.5">Brand & Token Drift</h3>
+                <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+                  More than 5 distinct blue hex codes were active across apps. Radii and spacing had no common scale, breaking brand consistency across suite products.
+                </p>
+              </div>
+
+              <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+                <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-sm font-bold mb-4">
+                  <i class="fa-solid fa-universal-access"></i>
+                </div>
+                <h3 class="text-base font-bold text-[#0C231D] mb-1.5">Accessibility Gaps</h3>
+                <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+                  Ad-hoc custom UI elements lacked proper keyboard focus indicators, aria labels, and color-contrast thresholds required under WCAG 2.2 AAA guidelines.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PHASE 02: GROUNDED FIELD RESEARCH (Lighting & Contrast Comparison - NO QUOTES) -->
+        <section class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
+            <div class="max-w-3xl mb-10">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase mb-3">
+                <span>Phase 02 • Grounded Field Research</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
+                Offshore lighting extremes: Daylight glare to low-light night shifts
+              </h2>
+              <p class="mt-3 text-sm sm:text-base text-[#466B60] leading-relaxed">
+                Interviews and contextual inquiry revealed that offshore North Sea control rooms and rig decks require specialized visual ergonomic modes to maintain situational awareness.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Daylight Card -->
+              <div class="p-6 sm:p-8 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1 rounded-full flex items-center gap-1.5">
+                      <i class="fa-solid fa-sun"></i> High-Lux Open Deck
+                    </span>
+                    <span class="text-xs font-mono text-slate-500">100,000+ Lux</span>
+                  </div>
+                  <h3 class="text-lg font-bold text-[#0C231D] mb-2">Anti-Glare Daylight Mode</h3>
+                  <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+                    Designed bold typographic weights and pure black borders on crisp cream backgrounds. Eliminated faint grey boundaries so critical telemetry remains legible in direct sunlight.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-[#E1ECE6] flex items-center justify-between text-xs font-semibold text-[#0C231D]">
+                  <span>Contrast Ratio: 14.5:1</span>
+                  <span class="text-emerald-700 font-bold">✓ WCAG AAA</span>
+                </div>
+              </div>
+
+              <!-- Night-Shift Card -->
+              <div class="p-6 sm:p-8 rounded-3xl bg-[#0C231D] text-white border-spruce-subtle flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-mint-400 bg-spruce-850 px-3 py-1 rounded-full flex items-center gap-1.5">
+                      <i class="fa-solid fa-moon"></i> Control Room Night Shift
+                    </span>
+                    <span class="text-xs font-mono text-mint-300">Under 15 Lux</span>
+                  </div>
+                  <h3 class="text-lg font-bold text-white mb-2">Low-Blue-Light Slate Mode</h3>
+                  <p class="text-xs sm:text-sm text-[#9DBFB3] leading-relaxed">
+                    Created an ergonomic dark slate palette that prevents operator eye strain and night-blindness during 12-hour shifts, while retaining high salience on safety alarm triggers.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-white">
+                  <span>Contrast Ratio: 16.2:1</span>
+                  <span class="text-mint-400 font-bold">✓ Zero Pupil Shock</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- PHASE 03: SYSTEMS ARCHITECTURE (Simplified 2-Step Hybrid & Tooling Pipeline) -->
+        <section class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
+            <div class="max-w-3xl mb-10">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase mb-3">
+                <span>Phase 03 • Systems Architecture</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
+                Hybrid Composition: Custom IP first, MUI primitives for the rest
+              </h2>
+              <p class="mt-3 text-sm sm:text-base text-[#466B60] leading-relaxed">
+                Rather than reinventing basic forms or maintaining thousands of lines of low-level CSS, I established a pragmatic two-tier hybrid model: cataloging bespoke TotalEnergies components first, then plugging all remaining gaps with themed MUI foundations.
+              </p>
+            </div>
+
+            <!-- Two-Step Strategy Graphic -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+              
+              <!-- Step 01 -->
+              <div class="p-6 sm:p-8 rounded-3xl bg-[#F7FAF8] border-2 border-emerald-500/30 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center gap-2.5 mb-3">
+                    <span class="w-8 h-8 rounded-full bg-brand-forest text-mint-400 font-black text-xs flex items-center justify-center">1</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-forest">Step 01 • Bespoke Brand IP</span>
+                  </div>
+                  <h3 class="text-lg font-bold text-[#0C231D] mb-2">Catalog & Create Custom Components</h3>
+                  <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed mb-4">
+                    Audited existing tools to isolate domain-specific requirements. Designed proprietary components tailored to high-stress energy operations:
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-lg bg-emerald-100 text-brand-forest text-xs font-semibold">2D/3D Rig Heatmaps</span>
+                    <span class="px-3 py-1 rounded-lg bg-emerald-100 text-brand-forest text-xs font-semibold">Incident Early Warnings</span>
+                    <span class="px-3 py-1 rounded-lg bg-emerald-100 text-brand-forest text-xs font-semibold">Hazard Alert Banners</span>
+                  </div>
+                </div>
+                <div class="mt-6 pt-4 border-t border-[#E1ECE6] text-[11px] text-[#4E7368] font-mono">
+                  Focus: High-impact domain functionality
+                </div>
+              </div>
+
+              <!-- Step 02 -->
+              <div class="p-6 sm:p-8 rounded-3xl bg-[#0C231D] text-white border-spruce-subtle flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center gap-2.5 mb-3">
+                    <span class="w-8 h-8 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">2</span>
+                    <span class="text-xs font-bold uppercase tracking-wider text-mint-400">Step 02 • Open-Source Primitives</span>
+                  </div>
+                  <h3 class="text-lg font-bold text-white mb-2">Fill Remaining Gaps with Base MUI</h3>
+                  <p class="text-xs sm:text-sm text-[#9DBFB3] leading-relaxed mb-4">
+                    Leveraged battle-tested Material UI (MUI) React primitives with token overrides for all common interface patterns, eliminating redundant maintenance:
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 rounded-lg bg-spruce-850 text-mint-300 text-xs font-semibold border border-white/5">Date & Time Pickers</span>
+                    <span class="px-3 py-1 rounded-lg bg-spruce-850 text-mint-300 text-xs font-semibold border border-white/5">Modal Dialogs</span>
+                    <span class="px-3 py-1 rounded-lg bg-spruce-850 text-mint-300 text-xs font-semibold border border-white/5">Form Inputs & Selects</span>
+                    <span class="px-3 py-1 rounded-lg bg-spruce-850 text-mint-300 text-xs font-semibold border border-white/5">Responsive Grids</span>
+                  </div>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10 text-[11px] text-[#86A89C] font-mono">
+                  Focus: Zero boilerplate rework & rapid velocity
+                </div>
+              </div>
+
+            </div>
+
+            <!-- SUBSECTION: TOOLING PIPELINE (Figma, GitHub, Storybook) -->
+            <div class="pt-8 border-t border-[#E1ECE6]">
+              <div class="text-center max-w-2xl mx-auto mb-8">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-forest">Design-To-Code Synchronization</span>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-[#0C231D] mt-1">Figma, GitHub & Storybook in Harmony</h3>
+                <p class="text-xs sm:text-sm text-[#466B60] mt-1">Ensuring 100% parity between UX specifications, code repository, and stakeholder sign-offs.</p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-between">
+                  <div>
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-xl text-slate-800 mb-4 shadow-sm">
+                      <i class="fa-brands fa-figma text-[#F24E1E]"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-[#0C231D] mb-1.5">Figma Design System</h4>
+                    <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+                      Maintained component master variants, auto-layout constraints, and tokenized variables aligned 1:1 with MUI props.
+                    </p>
+                  </div>
+                  <span class="mt-4 text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 w-fit">Single Source of Truth</span>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-between">
+                  <div>
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-xl text-slate-800 mb-4 shadow-sm">
+                      <i class="fa-brands fa-github text-[#181717]"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-[#0C231D] mb-1.5">GitHub Central Monorepo</h4>
+                    <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+                      Stored version-controlled design tokens and shared React component libraries for clean, automated distribution across squads.
+                    </p>
+                  </div>
+                  <span class="mt-4 text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 w-fit">CI/CD Automated Versioning</span>
+                </div>
+
+                <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-between">
+                  <div>
+                    <div class="w-12 h-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-xl text-pink-600 mb-4 shadow-sm">
+                      <i class="fa-solid fa-book-open text-[#FF4785]"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-[#0C231D] mb-1.5">Storybook Testing & UAT</h4>
+                    <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+                      Interactive component sandboxing for accessibility audits, responsive stress-testing, and client stakeholder UAT approval.
+                    </p>
+                  </div>
+                  <span class="mt-4 text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200 w-fit">Live Isolated Testing</span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+      `;
+    }
+
     function openCaseStudy(studyKey) {
       if (isTransitioning) return;
       if (!caseStudies[studyKey]) studyKey = 'weir';
@@ -1955,7 +2215,6 @@ export const PensionDashboardTokens = {
       document.getElementById('cs-badge-company').textContent = data.company;
       document.getElementById('cs-badge-role').textContent = "Role: " + data.role;
 
-      // Re-trigger the on-appear underline animation cleanly on open
       const csUnderline = document.getElementById('cs-underline-bar');
       if (csUnderline) {
         csUnderline.classList.remove('hero-underline-anim');
@@ -1967,31 +2226,55 @@ export const PensionDashboardTokens = {
       document.getElementById('cs-cover-tag').textContent = data.coverTag;
       document.getElementById('cs-cover-heading').textContent = data.coverHeading;
 
-      document.getElementById('cs-challenge-title').textContent = data.challengeTitle;
-      document.getElementById('cs-challenge-p').textContent = data.challengeDesc;
+      const teContainer = document.getElementById('cs-totalenergies-narrative');
+      const challengeSec = document.getElementById('cs-challenge-section');
+      const approachSec = document.getElementById('cs-approach-section');
+      const implSec = document.getElementById('cs-implementation-section');
+      const quoteBox = document.getElementById('cs-quote-container');
 
-      const challengeGrid = document.getElementById('cs-challenge-grid');
-      challengeGrid.innerHTML = data.challengeCards.map(card => `
-        <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
-          <div class="w-10 h-10 rounded-2xl bg-${card.color}-100 text-${card.color}-700 flex items-center justify-center text-sm font-bold mb-4">
-            <i class="fa-solid ${card.icon}"></i>
+      if (data.id === 'totalenergies') {
+        teContainer.innerHTML = buildTotalEnergiesHTML();
+        teContainer.classList.remove('hidden');
+        challengeSec.classList.add('hidden');
+        approachSec.classList.add('hidden');
+        implSec.classList.add('hidden');
+        if (quoteBox) quoteBox.classList.add('hidden');
+      } else {
+        teContainer.classList.add('hidden');
+        teContainer.innerHTML = '';
+        challengeSec.classList.remove('hidden');
+        approachSec.classList.remove('hidden');
+        implSec.classList.remove('hidden');
+        if (quoteBox) quoteBox.classList.remove('hidden');
+
+        document.getElementById('cs-challenge-title').textContent = data.challengeTitle;
+        document.getElementById('cs-challenge-p').textContent = data.challengeDesc;
+
+        const challengeGrid = document.getElementById('cs-challenge-grid');
+        challengeGrid.innerHTML = data.challengeCards.map(card => `
+          <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+            <div class="w-10 h-10 rounded-2xl bg-${card.color}-100 text-${card.color}-700 flex items-center justify-center text-sm font-bold mb-4">
+              <i class="fa-solid ${card.icon}"></i>
+            </div>
+            <h3 class="text-base font-bold text-[#0C231D] mb-1.5">${card.title}</h3>
+            <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">${card.text}</p>
           </div>
-          <h3 class="text-base font-bold text-[#0C231D] mb-1.5">${card.title}</h3>
-          <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">${card.text}</p>
-        </div>
-      `).join('');
+        `).join('');
 
-      const challengeMetrics = document.getElementById('cs-challenge-metrics');
-      challengeMetrics.innerHTML = data.challengeMetrics.map((m, idx) => `
-        <div class="${idx > 0 ? 'border-t sm:border-t-0 sm:border-l border-white/10 pt-4 sm:pt-0 sm:pl-6' : ''}">
-          <div class="text-3xl sm:text-4xl font-extrabold text-mint-400 font-mono">${m.val}</div>
-          <div class="text-xs uppercase tracking-wider text-[#A5C9BD] font-bold mt-1">${m.label}</div>
-          <div class="text-[11px] text-[#7A9F93] mt-0.5">${m.sub}</div>
-        </div>
-      `).join('');
+        const challengeMetrics = document.getElementById('cs-challenge-metrics');
+        challengeMetrics.innerHTML = data.challengeMetrics.map((m, idx) => `
+          <div class="${idx > 0 ? 'border-t sm:border-t-0 sm:border-l border-white/10 pt-4 sm:pt-0 sm:pl-6' : ''}">
+            <div class="text-3xl sm:text-4xl font-extrabold text-mint-400 font-mono">${m.val}</div>
+            <div class="text-xs uppercase tracking-wider text-[#A5C9BD] font-bold mt-1">${m.label}</div>
+            <div class="text-[11px] text-[#7A9F93] mt-0.5">${m.sub}</div>
+          </div>
+        `).join('');
 
-      document.getElementById('cs-token-filename').textContent = data.tokenFile;
-      document.getElementById('cs-token-snippet').textContent = data.tokenCode;
+        document.getElementById('cs-token-filename').textContent = data.tokenFile;
+        document.getElementById('cs-token-snippet').textContent = data.tokenCode;
+        document.getElementById('cs-quote-text').textContent = `"${data.quoteText}"`;
+        document.getElementById('cs-quote-author').textContent = data.quoteAuthor;
+      }
 
       renderDeliverablesSlides(data.deliverables);
 
@@ -2003,9 +2286,6 @@ export const PensionDashboardTokens = {
           <p class="text-xs text-[#8EADA2] mt-2 leading-relaxed">${v.desc}</p>
         </div>
       `).join('');
-
-      document.getElementById('cs-quote-text').textContent = `"${data.quoteText}"`;
-      document.getElementById('cs-quote-author').textContent = data.quoteAuthor;
 
       const otherGrid = document.getElementById('cs-other-grid');
       const otherKeys = Object.keys(caseStudies).filter(k => k !== data.id);
@@ -2040,7 +2320,6 @@ export const PensionDashboardTokens = {
         <div class="cs-slide-item ${idx === 0 ? 'block' : 'hidden'} transition-opacity duration-300" data-index="${idx}">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#102E27] p-6 sm:p-8 md:p-10 rounded-3xl border-spruce-inner">
             
-            <!-- Left Side: Renders Image if present, else fallback interactive data card -->
             <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-mint-400/20 bg-[#061612]">
               ${d.image ? `
                 <div class="relative w-full h-72 sm:h-80 md:h-96 bg-[#061612] overflow-hidden group">
@@ -2083,7 +2362,6 @@ export const PensionDashboardTokens = {
               `}
             </div>
 
-            <!-- Right Side: Descriptive Copy & Bullets -->
             <div class="lg:col-span-5 space-y-4">
               <div class="inline-block px-3 py-1 rounded-full bg-mint-400/20 text-mint-300 text-xs font-bold uppercase tracking-wider">
                 Deliverable ${d.num}
