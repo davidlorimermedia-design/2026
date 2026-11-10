@@ -126,6 +126,18 @@
       background-color: #D2E4DA !important;
     }
 
+    /* ESC key badge adaptive styling */
+    html:not(.dark) .esc-badge {
+      background-color: #E8EFEA !important;
+      color: #144237 !important;
+      border-color: rgba(16, 185, 129, 0.3) !important;
+    }
+    html.dark .esc-badge {
+      background-color: #102E27 !important;
+      color: #A0C5B7 !important;
+      border-color: rgba(52, 211, 153, 0.25) !important;
+    }
+
     /* Dark mode navigation styling */
     html.dark .theme-nav-bar {
       background-color: rgba(12, 35, 29, 0.95) !important;
@@ -414,7 +426,7 @@
       color: #061310 !important; /* Pitch Dark Spruce (passes >14:1 contrast) */
     }
     html:not(.dark) .theme-adaptive-inner-card .testimonial-role {
-      color: #1B4D40 !important; /* High-contrast Forest Slate (passes >5.5:1 contrast) */
+      color: #144237 !important; /* High-contrast Forest Slate (passes >6:1 contrast) */
     }
     html:not(.dark) .theme-adaptive-inner-card .testimonial-stars {
       color: #059669 !important; /* Vibrant Emerald star icons */
@@ -426,6 +438,13 @@
     }
     html:not(.dark) .theme-adaptive-inner-card .testimonial-divider {
       border-color: rgba(29, 73, 62, 0.15) !important;
+    }
+
+    html.dark .theme-adaptive-inner-card .testimonial-author {
+      color: #FFFFFF !important;
+    }
+    html.dark .theme-adaptive-inner-card .testimonial-role {
+      color: #A0C5B7 !important;
     }
 
     html:not(.dark) .theme-adaptive-tag {
@@ -667,7 +686,7 @@
           <i class="fa-solid fa-arrow-left text-[11px]"></i>
           <span>Back to Homepage</span>
         </button>
-        <span class="hidden lg:inline text-[10px] text-[#71988B] bg-spruce-850 px-2 py-1 rounded-md border border-white/10 font-mono">ESC</span>
+        <span class="esc-badge hidden lg:inline text-[10px] px-2 py-1 rounded-md border font-mono font-semibold transition-colors duration-300">ESC</span>
       </div>
 
     </div>
@@ -750,7 +769,7 @@
       <div class="theme-adaptive-dark-card bg-brand-dark rounded-4xl p-6 sm:p-10 md:p-12 text-white border-spruce-subtle shadow-card-dark relative overflow-hidden">
         <div class="absolute top-0 right-0 w-96 h-96 bg-brand-emerald/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 relative z-10 gap-4">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 relative z-10 gap-4">
           <div>
             <span class="badge-core-capabilities inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-mint dark:text-brand-mint dark:bg-mint-400/15 dark:border-mint-400/25 border">Core Capabilities</span>
             <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-1 text-white">
@@ -762,10 +781,11 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-          <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between group hover:border-brand-mint/40 transition-all hover:-translate-y-1">
+        <!-- Stylized Static Services Display (No interactive hover lifts or action buttons) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 select-none">
+          <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between">
             <div>
-              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20">
                 <i class="fa-solid fa-cubes"></i>
               </div>
               <h3 class="text-lg font-bold text-white mb-2">Design Systems & Tokens</h3>
@@ -773,17 +793,15 @@
                 Building multi-brand token frameworks in Figma & code that scale across complex suites, accelerating engineering delivery and cutting tech debt.
               </p>
             </div>
-            <div class="theme-adaptive-tag bg-brand-deepest/60 rounded-full px-4 py-2.5 border border-emerald-500/10 flex items-center justify-between mt-2">
+            <div class="theme-adaptive-tag bg-brand-deepest/60 rounded-xl px-3.5 py-2 border border-emerald-500/10 flex items-center gap-2 mt-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
               <span class="text-[11px] font-semibold text-emerald-300">Figma & Tokens Studio</span>
-              <div class="w-6 h-6 rounded-full bg-brand-forest flex items-center justify-center text-brand-mint text-xs">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
             </div>
           </div>
 
-          <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between group hover:border-brand-mint/40 transition-all hover:-translate-y-1">
+          <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between">
             <div>
-              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20">
                 <i class="fa-solid fa-industry"></i>
               </div>
               <h3 class="text-lg font-bold text-white mb-2">Industrial & Field UX</h3>
@@ -791,17 +809,15 @@
                 End-to-end tooling for harsh onsite environments, machine telemetry, offline workflows, and critical Daily Layered Accountability trackers.
               </p>
             </div>
-            <div class="theme-adaptive-tag bg-brand-deepest/60 rounded-full px-4 py-2.5 border border-emerald-500/10 flex items-center justify-between mt-2">
+            <div class="theme-adaptive-tag bg-brand-deepest/60 rounded-xl px-3.5 py-2 border border-emerald-500/10 flex items-center gap-2 mt-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
               <span class="text-[11px] font-semibold text-emerald-300">Telemetry & Dashboards</span>
-              <div class="w-6 h-6 rounded-full bg-brand-forest flex items-center justify-center text-brand-mint text-xs">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
             </div>
           </div>
 
-          <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between group hover:border-brand-mint/40 transition-all hover:-translate-y-1">
+          <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between">
             <div>
-              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform">
+              <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20">
                 <i class="fa-solid fa-universal-access"></i>
               </div>
               <h3 class="text-lg font-bold text-white mb-2">Accessibility & Governance</h3>
@@ -809,11 +825,9 @@
                 Translating EAA and WCAG 2.2 AA/AAA legislation into enterprise policy, hands-on designer/engineer workshops, and automated testing gates.
               </p>
             </div>
-            <div class="theme-adaptive-tag bg-brand-deepest/60 rounded-full px-4 py-2.5 border border-emerald-500/10 flex items-center justify-between mt-2">
+            <div class="theme-adaptive-tag bg-brand-deepest/60 rounded-xl px-3.5 py-2 border border-emerald-500/10 flex items-center gap-2 mt-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
               <span class="text-[11px] font-semibold text-emerald-300">WCAG 2.2 AA/AAA & EAA</span>
-              <div class="w-6 h-6 rounded-full bg-brand-forest flex items-center justify-center text-brand-mint text-xs">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
             </div>
           </div>
         </div>
@@ -971,12 +985,13 @@
         <!-- Case 1: The Weir Group -->
         <div onclick="openCaseStudy('weir')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems industrial accessibility">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <div class="w-full h-full bg-gradient-to-tr from-[#061310] via-[#0C231D] to-[#1D493E] flex items-center justify-center p-6 text-center">
-              <div class="space-y-2">
-                <span class="inline-block px-3 py-1 rounded-full bg-mint-400/20 border border-mint-400/40 text-mint-300 text-xs font-mono font-bold tracking-wider">WEIR ENTERPRISE UX</span>
-                <h4 class="text-xl font-black text-white">Complex Industrial Environments</h4>
-              </div>
-            </div>
+            <img 
+              src="warman-mcr-400-opt.webp" 
+              alt="The Weir Group Warman MCR Industrial Telemetry Platform" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              onerror="this.onerror=null; this.src='warman-mcr-400-opt.webp';"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
             
             <div class="absolute top-4 left-4 flex gap-2">
               <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">The Weir Group</span>
@@ -1012,12 +1027,12 @@
         <!-- Case 2: TotalEnergies -->
         <div onclick="openCaseStudy('totalenergies')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="industrial systems">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <div class="w-full h-full bg-gradient-to-tr from-[#061310] via-[#102E27] to-[#1D493E] flex items-center justify-center p-6 text-center">
-              <div class="space-y-2">
-                <span class="inline-block px-3 py-1 rounded-full bg-mint-400/20 border border-mint-400/40 text-mint-300 text-xs font-mono font-bold tracking-wider">OFFSHORE TELEMETRY</span>
-                <h4 class="text-xl font-black text-white">North Sea Rig Operations</h4>
-              </div>
-            </div>
+            <img 
+              src="Resultats_troisieme_trimestre_2023_TotalEnergies_1305x713px.png" 
+              alt="TotalEnergies Offshore Telemetry" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
 
             <div class="absolute top-4 left-4 flex gap-2">
               <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">TotalEnergies (via AND Digital)</span>
@@ -1053,9 +1068,12 @@
         <!-- Case 3: Diageo -->
         <div onclick="openCaseStudy('diageo')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <div class="w-full h-full bg-gradient-to-tr from-[#163B32] via-[#102E27] to-[#0C231D] flex items-center justify-center p-6 text-center">
-              <span class="text-lg font-bold text-slate-300">Global Commercial Brand Portal</span>
-            </div>
+            <img 
+              src="Category_Spirits_Header-Bottles_TWS.jpg" 
+              alt="Diageo Global Brand Asset Platform" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
 
             <div class="absolute top-4 left-4 flex gap-2">
               <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Diageo (via AND Digital)</span>
@@ -1090,9 +1108,12 @@
         <!-- Case 4: Royal London -->
         <div onclick="openCaseStudy('royallondon')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="accessibility systems">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <div class="w-full h-full bg-gradient-to-tr from-[#061310] via-[#102E27] to-[#1D493E] flex items-center justify-center p-6 text-center">
-              <span class="text-lg font-bold text-slate-300">FCA Wealth & Pension Management</span>
-            </div>
+            <img 
+              src="desktop-1400x700-ladies-eating-ice-cream.webp" 
+              alt="Royal London Pension & Wealth Platform" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
 
             <div class="absolute top-4 left-4 flex gap-2">
               <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Royal London</span>
@@ -1167,7 +1188,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <div class="theme-adaptive-inner-card bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
             <div>
-              <div class="testimonial-stars flex items-center gap-1 text-[#059669] dark:text-mint-400 text-xs mb-3">
+              <div class="testimonial-stars flex items-center gap-1.5 text-[#059669] dark:text-mint-400 text-xs mb-3">
                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
               <p class="testimonial-quote text-xs sm:text-sm text-[#163B32] dark:text-slate-200 leading-relaxed italic mb-6">
@@ -1177,15 +1198,15 @@
             <div class="testimonial-divider flex items-center gap-3 pt-4 border-t border-emerald-950/10 dark:border-emerald-500/15">
               <div class="testimonial-avatar w-10 h-10 rounded-full bg-[#E2EFE8] dark:bg-brand-forest flex items-center justify-center font-bold text-[#0C231D] dark:text-brand-mint text-xs border border-emerald-400/20">AK</div>
               <div>
-                <div class="testimonial-author text-xs font-bold text-[#061310] dark:text-white">Andrew Kendal</div>
-                <div class="testimonial-role text-[10px] text-[#1B4D40] dark:text-slate-400 font-semibold">Squad Lead at AND Digital</div>
+                <div class="testimonial-author text-xs font-extrabold text-[#061310] dark:text-white">Andrew Kendal</div>
+                <div class="testimonial-role text-[11px] text-[#144237] dark:text-slate-400 font-semibold mt-0.5">Squad Lead at AND Digital</div>
               </div>
             </div>
           </div>
 
           <div class="theme-adaptive-inner-card bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
             <div>
-              <div class="testimonial-stars flex items-center gap-1 text-[#059669] dark:text-mint-400 text-xs mb-3">
+              <div class="testimonial-stars flex items-center gap-1.5 text-[#059669] dark:text-mint-400 text-xs mb-3">
                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
               <p class="testimonial-quote text-xs sm:text-sm text-[#163B32] dark:text-slate-200 leading-relaxed italic mb-6">
@@ -1195,8 +1216,8 @@
             <div class="testimonial-divider flex items-center gap-3 pt-4 border-t border-emerald-950/10 dark:border-emerald-500/15">
               <div class="testimonial-avatar w-10 h-10 rounded-full bg-[#E2EFE8] dark:bg-brand-forest flex items-center justify-center font-bold text-[#0C231D] dark:text-brand-mint text-xs border border-emerald-400/20">CR</div>
               <div>
-                <div class="testimonial-author text-xs font-bold text-[#061310] dark:text-white">Christian Richards</div>
-                <div class="testimonial-role text-[10px] text-[#1B4D40] dark:text-slate-400 font-semibold">Global AI Change Lead with Weir</div>
+                <div class="testimonial-author text-xs font-extrabold text-[#061310] dark:text-white">Christian Richards</div>
+                <div class="testimonial-role text-[11px] text-[#144237] dark:text-slate-400 font-semibold mt-0.5">Global AI Change Lead with Weir</div>
               </div>
             </div>
           </div>
@@ -1204,7 +1225,7 @@
       </div>
     </section>
 
-    <!-- 6. CONTACT SECTION -->
+    <!-- 6. CONTACT SECTION (Complete Form Restored) -->
     <section id="contact" class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
       <div class="bg-white rounded-4xl p-6 sm:p-10 md:p-12 shadow-card border border-emerald-100 text-center">
         <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 dark:bg-mint-400/15 text-brand-forest dark:text-mint-300 text-xs font-bold uppercase tracking-wider mb-2 border border-emerald-200 dark:border-mint-400/25">
@@ -1225,11 +1246,11 @@
             id="contact-email" 
             required 
             placeholder="Enter your work email..." 
-            class="flex-grow px-5 py-3.5 rounded-full bg-brand-cream border border-emerald-200 text-xs sm:text-sm text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-emerald"
+            class="flex-grow px-5 py-3.5 rounded-full bg-brand-cream border border-emerald-200 text-xs sm:text-sm text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-emerald shadow-inner"
           />
           <button 
             type="submit" 
-            class="btn-contact-submit px-7 py-3.5 rounded-full text-xs font-bold transition-all shadow-md active:scale-95 whitespace-nowrap"
+            class="btn-contact-submit px-7 py-3.5 rounded-full text-xs font-bold transition-all shadow-md active:scale-95 whitespace-nowrap cursor-pointer"
           >
             Send Inquiry
           </button>
@@ -1237,6 +1258,12 @@
 
         <div id="contact-success" class="hidden mt-4 text-xs font-bold text-emerald-700 bg-emerald-50 py-2.5 px-4 rounded-xl border border-emerald-200 inline-block">
           ✓ Thank you! David will get back to you within 24 business hours.
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> Rapid Discovery</span>
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> Accessibility Audits</span>
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> UK / Scotland Based</span>
         </div>
       </div>
     </section>
@@ -2413,6 +2440,8 @@ export const PensionDashboardTokens = {
       const totalEl = document.getElementById('cs-carousel-total');
       if (totalEl) totalEl.textContent = deliverables.length;
       showcaseRotationAngle = 0;
+      const disc = document.getElementById('showcase-rotating-disc');
+      if (disc) disc.style.transform = 'rotate(0deg) scale(1)';
       setDeliverableSlide(0, 0);
     }
 
@@ -2433,13 +2462,19 @@ export const PensionDashboardTokens = {
       currentDeliverableSlide = index;
       const d = deliverables[index];
 
+      // Perform a full 360-degree forward/backward rotation spin transition so the item always settles at 0deg (upright)
       const disc = document.getElementById('showcase-rotating-disc');
       if (disc) {
-        showcaseRotationAngle += spinDirection * 180;
-        disc.style.transform = `rotate(${showcaseRotationAngle}deg) scale(0.92)`;
-        setTimeout(() => {
-          disc.style.transform = `rotate(${showcaseRotationAngle}deg) scale(1)`;
-        }, 300);
+        if (spinDirection !== 0) {
+          showcaseRotationAngle += spinDirection * 360;
+          disc.style.transform = `rotate(${showcaseRotationAngle}deg) scale(0.94)`;
+          setTimeout(() => {
+            disc.style.transform = `rotate(${showcaseRotationAngle}deg) scale(1)`;
+          }, 320);
+        } else {
+          showcaseRotationAngle = 0;
+          disc.style.transform = 'rotate(0deg) scale(1)';
+        }
       }
 
       const imgEl = document.getElementById('showcase-image');
@@ -2450,7 +2485,6 @@ export const PensionDashboardTokens = {
           imgEl.src = d.image;
           imgEl.alt = d.title;
           imgEl.classList.remove('hidden');
-          // Ensure image scale and fit within the rotating disc
           imgEl.style.objectFit = 'cover';
         }
         if (fallbackCard) fallbackCard.classList.add('hidden');
