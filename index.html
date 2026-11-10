@@ -18,6 +18,7 @@
   
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
@@ -40,6 +41,7 @@
               500: '#10B981',
               600: '#059669'
             },
+            limeAccent: '#C8F856',
             brand: {
               forest: '#1D3F37',
               dark: '#0C231D',
@@ -83,6 +85,87 @@
       margin: 0;
       padding: 0;
       color: #102922;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Dark mode global transitions and base overrides */
+    html.dark body {
+      background-color: #061310;
+      color: #E2ECE8;
+    }
+    html.dark ::-webkit-scrollbar-track {
+      background: #061310;
+    }
+    html.dark ::-webkit-scrollbar-thumb {
+      background: #163B32;
+      border-color: #061310;
+    }
+
+    /* In dark mode, adapt light surface cards to deep elevated spruce */
+    html.dark .bg-white {
+      background-color: #0C231D !important;
+      color: #E2ECE8 !important;
+    }
+    html.dark .border-\[\#E1EDE7\],
+    html.dark .border-\[\#E1ECE6\],
+    html.dark .border-emerald-100,
+    html.dark .border-emerald-100\/80,
+    html.dark .border-slate-200 {
+      border-color: rgba(52, 211, 153, 0.22) !important;
+    }
+    html.dark .text-\[\#0C231D\],
+    html.dark .text-brand-dark {
+      color: #FFFFFF !important;
+    }
+    /* Brand forest text (e.g. 'START THE CONVERSATION', 'Let's Discuss', and section titles) must brighten to high-contrast mint in dark mode */
+    html.dark .text-brand-forest {
+      color: #34D399 !important;
+    }
+    html.dark .text-\[\#466B60\],
+    html.dark .text-\[\#4E7368\],
+    html.dark .text-slate-600,
+    html.dark .text-slate-700 {
+      color: #C6E2D6 !important;
+    }
+    html.dark .bg-\[\#F7FAF8\],
+    html.dark .bg-brand-cream,
+    html.dark .bg-slate-100 {
+      background-color: #102E27 !important;
+      color: #E2ECE8 !important;
+    }
+    html.dark .bg-\[\#EAF4F0\],
+    html.dark .bg-emerald-100,
+    html.dark .bg-emerald-50 {
+      background-color: rgba(52, 211, 153, 0.15) !important;
+      color: #6EE7B7 !important;
+    }
+    html.dark .bg-brand-light {
+      background-color: #163B32 !important;
+      color: #A0C5B7 !important;
+    }
+    html.dark .text-slate-500,
+    html.dark .text-slate-400 {
+      color: #9DBFB3 !important;
+    }
+    html.dark .border-brand-emerald {
+      border-color: #34D399 !important;
+    }
+
+    /* Contact form elements & inputs in dark mode */
+    html.dark input#contact-email {
+      background-color: #061310 !important;
+      color: #FFFFFF !important;
+      border-color: rgba(52, 211, 153, 0.3) !important;
+    }
+    html.dark input#contact-email::placeholder {
+      color: #7A9F93 !important;
+    }
+    html.dark button[type="submit"] {
+      background-color: #34D399 !important;
+      color: #061310 !important;
+    }
+    html.dark button[type="submit"]:hover {
+      background-color: #10B981 !important;
     }
 
     ::-webkit-scrollbar {
@@ -113,7 +196,7 @@
       animation-play-state: paused;
     }
 
-    /* Gentle Floating Keyframe Animations */
+    /* Ambient float keyframes */
     @keyframes floatBlob1 {
       0%, 100% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
       33% { transform: translate(-14px, -18px) rotate(4deg) scale(1.05); }
@@ -138,16 +221,9 @@
     .anim-blob-3 { animation: floatBlob3 10s ease-in-out infinite; }
     .anim-blob-4 { animation: floatBlob4 14s ease-in-out infinite; }
 
-    /* Underline on-appear animation */
     @keyframes drawUnderline {
-      0% {
-        transform: scaleX(0);
-        opacity: 0;
-      }
-      100% {
-        transform: scaleX(1);
-        opacity: 1;
-      }
+      0% { transform: scaleX(0); opacity: 0; }
+      100% { transform: scaleX(1); opacity: 1; }
     }
     .hero-underline-anim {
       transform-origin: left center;
@@ -175,7 +251,7 @@
 
     .view-container {
       transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1), 
-                  transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), 
                   filter 0.38s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
@@ -259,8 +335,19 @@
         <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
       </nav>
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-3">
+      <!-- Action Button & Theme Toggle -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <!-- Theme Toggle Button -->
+        <button 
+          onclick="toggleTheme()" 
+          id="theme-toggle-home" 
+          aria-label="Toggle light/dark theme"
+          class="w-8 h-8 rounded-full bg-[#102E27] hover:bg-[#163B32] border border-mint-400/25 text-mint-400 flex items-center justify-center text-xs transition-transform active:scale-95 shadow-sm"
+          title="Toggle light/dark theme"
+        >
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
         <a href="#contact" class="btn-mint-pill px-4 sm:px-5 py-2 rounded-full text-xs flex items-center gap-1.5 active:scale-95">
           <span>Let's Talk</span>
           <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -291,6 +378,17 @@
       </nav>
 
       <div class="flex items-center gap-2">
+        <!-- Theme Toggle Button in Breadcrumb Nav -->
+        <button 
+          onclick="toggleTheme()" 
+          id="theme-toggle-cs" 
+          aria-label="Toggle light/dark theme"
+          class="w-8 h-8 rounded-full bg-[#102E27] hover:bg-[#163B32] border border-mint-400/25 text-mint-400 flex items-center justify-center text-xs transition-transform active:scale-95 shadow-sm"
+          title="Toggle light/dark theme"
+        >
+          <i class="fa-solid fa-moon"></i>
+        </button>
+
         <button onclick="showHomepage('portfolio')" class="btn-mint-pill px-3.5 sm:px-4 py-1.5 rounded-full text-xs flex items-center gap-1.5 active:scale-95 focus:outline-none" title="Press ESC to return">
           <i class="fa-solid fa-arrow-left text-[11px]"></i>
           <span>Back to Homepage</span>
@@ -302,64 +400,36 @@
   </header>
 
   <!-- ================================================================= -->
-  <!-- VIEW 1: PORTFOLIO HOMEPAGE CONTAINER                              -->
+  <!-- VIEW 1: PORTFOLIO HOMEPAGE CONTAINER                             -->
   <!-- ================================================================= -->
   <main id="view-homepage" class="w-full view-container view-enter-active">
     
-    <!-- HERO SECTION (IMAGE LEFT WITH FLOATING SHAPES, TEXT RIGHT) -->
+    <!-- HERO SECTION -->
     <section id="hero" class="relative pt-28 sm:pt-36 pb-12 sm:pb-20 overflow-hidden">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-
         <div class="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-14">
           
-          <!-- LEFT: Open Cutout Portrait with Layered Moving Green Graphics Behind -->
           <div class="w-full max-w-[380px] sm:max-w-[430px] lg:max-w-[460px] shrink-0 relative flex items-center justify-center overflow-visible">
-            
-            <!-- FLOATING GREEN GRAPHICS (LAYERED DIRECTLY BEHIND THE IMAGE) -->
             <div class="absolute inset-0 pointer-events-none -z-0 overflow-visible flex items-center justify-center">
-              
-              <!-- Shape 1: Large Organic Forest Green Blob (Top-Left) -->
               <div class="anim-blob-1 absolute -top-4 -left-6 w-52 h-52 sm:w-60 sm:h-60 rounded-[48%_52%_68%_32%/42%_58%_42%_58%] bg-[#1D3F37] opacity-95"></div>
-
-              <!-- Shape 2: Vibrant Deep Emerald Blob (Right Shoulder) -->
               <div class="anim-blob-2 absolute top-10 -right-8 w-48 h-56 sm:w-56 sm:h-64 rounded-[62%_38%_45%_55%/52%_45%_55%_48%] bg-[#10B981] opacity-90"></div>
-
-              <!-- Shape 3: Bright Mint Pill Graphic (Top-Right High Accent) -->
               <div class="anim-blob-3 absolute -top-8 right-8 w-24 h-28 sm:w-28 sm:h-32 rounded-[40%_60%_70%_30%/50%_30%_70%_50%] bg-[#34D399] opacity-85"></div>
-
-              <!-- Shape 4: Soft Pale Sage / Light Mint Blob (Bottom-Left) -->
               <div class="anim-blob-4 absolute bottom-6 -left-8 w-40 h-40 sm:w-44 sm:h-44 rounded-[55%_45%_35%_65%/60%_40%_60%_40%] bg-[#265C4F] opacity-90"></div>
-
-              <!-- Shape 5: Deep Spruce Anchor (Center-Back Shadow) -->
               <div class="absolute w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-[#0C231D] opacity-40 blur-xl"></div>
-
-              <!-- Graphic Dot Accents -->
               <div class="anim-blob-1 absolute -top-2 left-6 w-4 h-4 rounded-full bg-[#6EE7B7] shadow-sm"></div>
               <div class="anim-blob-2 absolute top-28 -right-4 w-3 h-3 rounded-full bg-[#34D399]"></div>
             </div>
 
-            <!-- PORTRAIT CUTOUT CONTAINER -->
             <div class="relative z-10 w-full flex flex-col items-center overflow-visible">
-              <canvas id="hero-cutout-canvas" class="w-full max-w-[380px] sm:max-w-[440px] h-auto object-cover object-bottom relative z-10 hidden drop-shadow-2xl"></canvas>
+              <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-to-br from-[#1D493E] to-[#0C231D] border-4 border-[#34D399]/40 shadow-2xl flex flex-col items-center justify-center text-center p-6 text-white relative">
+                <span class="text-4xl font-extrabold text-[#34D399] mb-1">DL</span>
+                <span class="font-bold text-sm tracking-wide">David Lorimer</span>
+                <span class="text-xs text-[#86A89C] mt-1">Lead UX & Systems Architect</span>
+                <div class="mt-3 px-3 py-1 rounded-full bg-mint-400/20 text-mint-300 text-[10px] font-mono font-semibold">
+                  10+ Yrs Enterprise
+                </div>
+              </div>
 
-              <img 
-                id="hero-profile-img"
-                src="Gemini_Generated_Image_ovdegaovdegaovde.jpeg" 
-                alt="David Lorimer - Senior UX/UI Designer"
-                class="w-full max-w-[380px] sm:max-w-[440px] h-auto object-cover object-bottom transition-transform duration-700 hover:scale-105 block relative z-10 drop-shadow-2xl"
-                style="mix-blend-mode: multiply;"
-                onerror="
-                  if (!this.dataset.step) {
-                    this.dataset.step = '1';
-                    this.src = 'image_2d1c06.jpg';
-                  } else if (this.dataset.step === '1') {
-                    this.dataset.step = '2';
-                    this.src = 'image_2ee5e4.jpg';
-                  }
-                "
-              />
-
-              <!-- Floating Pill CTA underneath portrait -->
               <div class="relative -mt-6 z-30 flex items-center gap-2 bg-white/95 backdrop-blur-md p-1.5 rounded-full shadow-xl border border-emerald-100">
                 <a href="#portfolio" class="btn-mint-pill px-5 py-2 rounded-full text-xs flex items-center gap-2 shadow-sm font-bold">
                   <span>View Work</span>
@@ -367,10 +437,8 @@
                 </a>
               </div>
             </div>
-
           </div>
 
-          <!-- RIGHT: Headline, Bio & Credentials -->
           <div class="text-center lg:text-left flex-1 max-w-2xl">
             <h1 class="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark tracking-tight leading-[1.18]">
               I'm <span class="relative inline-block text-brand-forest">
@@ -385,7 +453,6 @@
               Strategic UX leader with <strong>8+ years</strong> driving digital transformation in complex, regulated industries. I balance engineering constraints and human needs to design intuitive, accessible, high-impact enterprise products.
             </p>
 
-            <!-- Badges -->
             <div class="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs font-semibold">
               <span class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-brand-forest border border-emerald-200 flex items-center gap-1.5">
                 <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
@@ -401,14 +468,12 @@
           </div>
 
         </div>
-
       </div>
     </section>
 
     <!-- 2. MY SERVICES -->
     <section id="services" class="max-w-6xl mx-auto px-4 sm:px-6 my-10 sm:my-14">
       <div class="bg-brand-dark rounded-4xl p-6 sm:p-10 md:p-12 text-white border-spruce-subtle shadow-card-dark relative overflow-hidden">
-        
         <div class="absolute top-0 right-0 w-96 h-96 bg-brand-emerald/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 relative z-10 gap-4">
@@ -424,7 +489,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-          
           <div class="bg-[#102E27] rounded-3xl p-6 border-spruce-inner flex flex-col justify-between group hover:border-brand-mint/40 transition-all hover:-translate-y-1">
             <div>
               <div class="w-12 h-12 rounded-2xl bg-spruce-800 flex items-center justify-center text-brand-mint text-xl mb-4 border border-emerald-500/20 group-hover:scale-110 transition-transform">
@@ -478,15 +542,12 @@
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
 
     <!-- 3. WORK EXPERIENCE -->
     <section id="experience" class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
-      
       <div class="text-left mb-10 sm:mb-14">
         <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-100 text-brand-forest text-xs font-bold uppercase tracking-wider mb-2">
           <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
@@ -501,7 +562,6 @@
       </div>
 
       <div class="relative pl-6 sm:pl-10">
-        
         <div class="absolute left-2.5 sm:left-4 top-3 bottom-8 w-0.5 bg-gradient-to-b from-brand-emerald via-emerald-300 to-emerald-100 rounded-full"></div>
 
         <!-- Weir Group -->
@@ -517,7 +577,7 @@
             <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
               <div>
                 <span class="text-xs font-bold text-brand-emerald uppercase tracking-wider">Present Role</span>
-                <h3 class="text-lg sm:text-xl font-extrabold text-brand-dark">Senior UX/UI Designer & Accessibility Lead</h3>
+                <h3 class="text-lg sm:text-xl font-extrabold text-brand-dark">Senior Product Designer (UX/UI & Accessibility Lead)</h3>
                 <div class="text-xs sm:text-sm font-semibold text-brand-forest mt-0.5 flex items-center gap-1.5">
                   <i class="fa-solid fa-building text-brand-emerald text-xs"></i> The Weir Group · Glasgow, UK
                 </div>
@@ -528,14 +588,14 @@
             </div>
 
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
-              Drive digital growth across industrial mining and heavy machinery operations. Architect and scale the enterprise multi-brand design system roadmap while serving as the primary accessibility consultant developing enterprise-wide standards, policy, and training. Lead end-to-end UX for rugged telemetry tools, the Customer Asset Intelligence Platform, and the Daily Layered Accountability (DLA) tracker.
+              Designing digital products for complex industrial environments. Connecting research, product strategy, UX, design systems, and engineering to turn complex operational problems into scalable digital experiences across heavy machinery operations.
             </p>
 
             <div class="flex flex-wrap gap-1.5 mt-4">
-              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Enterprise Design System</span>
-              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">WCAG 2.2 AA / EAA</span>
-              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Industrial IoT & Telemetry</span>
-              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">DLA Lean Rituals</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Product Strategy</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Research & Discovery</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Design Systems</span>
+              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Design-to-Code</span>
             </div>
           </div>
         </div>
@@ -563,7 +623,7 @@
             </div>
 
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
-              Collaborated strategically with diverse tier-1 clients across energy and retail sectors (TotalEnergies, Diageo). Embedded mature UX practices, multi-brand design systems, and user research directly into agile delivery cycles. Integrated accessibility into core procedural definitions to accelerate delivery speed and minimize technical debt.
+              Collaborated strategically with diverse tier-1 clients across energy and retail sectors (TotalEnergies, Diageo). Embedded mature UX practices, multi-brand design systems, and user research directly into agile delivery cycles.
             </p>
 
             <div class="flex flex-wrap gap-1.5 mt-4">
@@ -607,46 +667,11 @@
           </div>
         </div>
 
-        <!-- Standard Life Aberdeen -->
-        <div class="relative mb-6 group">
-          <div class="absolute -left-6 sm:-left-10 top-1.5 flex items-center justify-center">
-            <div class="w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-brand-forest text-brand-mint border-2 sm:border-3 border-emerald-300 shadow-md flex items-center justify-center text-[10px] sm:text-xs z-10 transition-transform group-hover:scale-110">
-              <i class="fa-solid fa-chart-line"></i>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
-            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
-              <div>
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Financial Services</span>
-                <h3 class="text-lg sm:text-xl font-extrabold text-brand-dark">UX Designer & Business Analyst</h3>
-                <div class="text-xs sm:text-sm font-semibold text-brand-forest mt-0.5 flex items-center gap-1.5">
-                  <i class="fa-solid fa-building text-brand-emerald text-xs"></i> Standard Life Aberdeen · Edinburgh, UK
-                </div>
-              </div>
-              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold tracking-tight">
-                2018 — 2021
-              </span>
-            </div>
-
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mt-3">
-              Operated in a hybrid UX and business analysis capacity delivering key customer and internal digital initiatives. Designed ISA customer-facing application flows, analyzed Power BI usage analytics to inform tool improvements, and established design guidelines and process documentation.
-            </p>
-
-            <div class="flex flex-wrap gap-1.5 mt-4">
-              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">ISA Portals & Onboarding</span>
-              <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-lg">Power BI Analytics</span>
-            </div>
-          </div>
-        </div>
-
       </div>
-
     </section>
 
     <!-- 4. PORTFOLIO CASE STUDIES -->
     <section id="portfolio" class="py-14 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6">
-      
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-4">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-brand-forest">Selected Retrospectives</span>
@@ -658,7 +683,6 @@
           </p>
         </div>
         
-        <!-- Category Filter Tabs -->
         <div class="flex flex-wrap items-center gap-2" id="filter-container">
           <button onclick="filterProjects('all')" class="filter-btn active px-4 py-2 rounded-full text-xs font-bold bg-brand-forest text-white shadow-sm transition-all" data-filter="all">All (4)</button>
           <button onclick="filterProjects('systems')" class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-white text-slate-700 hover:bg-brand-light border border-slate-200 transition-all" data-filter="systems">Design Systems</button>
@@ -672,15 +696,13 @@
         
         <!-- Case 1: The Weir Group -->
         <div onclick="openCaseStudy('weir')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems industrial accessibility">
-          
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <img 
-              src="warman-mcr-400-opt.webp" 
-              alt="The Weir Group Warman MCR Industrial Telemetry Platform" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              onerror="this.onerror=null; this.src='warman-mcr-400-opt.webp';"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
+            <div class="w-full h-full bg-gradient-to-tr from-[#061310] via-[#0C231D] to-[#1D493E] flex items-center justify-center p-6 text-center">
+              <div class="space-y-2">
+                <span class="inline-block px-3 py-1 rounded-full bg-mint-400/20 border border-mint-400/40 text-mint-300 text-xs font-mono font-bold tracking-wider">WEIR ENTERPRISE UX</span>
+                <h4 class="text-xl font-black text-white">Complex Industrial Environments</h4>
+              </div>
+            </div>
             
             <div class="absolute top-4 left-4 flex gap-2">
               <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">The Weir Group</span>
@@ -688,21 +710,21 @@
             </div>
 
             <div class="absolute bottom-4 left-4 right-4 text-white">
-              <h3 class="text-xl font-bold leading-snug">Industrial Digital Ecosystem & Weir Design System</h3>
+              <h3 class="text-xl font-bold leading-snug">Designing Digital Products for Complex Industrial Environments</h3>
             </div>
           </div>
 
           <div class="p-6 flex flex-col flex-grow justify-between">
             <div>
               <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                Comprehensive UX leadership across 4 core industrial initiatives: <strong>Customer Asset Intelligence Platform</strong> (Warman® slurry pump telemetry), <strong>Daily Layered Accountability Tracker</strong>, <strong>Resource Centre</strong>, and the unified <strong>Weir Multi-Brand Design System</strong>.
+                Connecting research, product strategy, UX, design systems, and engineering to turn complex operational problems into scalable digital experiences across heavy mining and equipment operations.
               </p>
               
               <div class="flex flex-wrap gap-1.5 mb-6">
-                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Asset Intelligence</span>
-                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">DLA Tracker</span>
-                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Design System</span>
-                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">WCAG 2.2 AA</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Product Strategy</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">UX & Product Design</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Design Systems</span>
+                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Design-to-Code</span>
               </div>
             </div>
 
@@ -711,61 +733,14 @@
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </div>
           </div>
-
-        </div>
-
-        <!-- Case 2: TotalEnergies -->
-        <div onclick="openCaseStudy('totalenergies')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="industrial systems">
-          
-          <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <img 
-              src="Resultats_troisieme_trimestre_2023_TotalEnergies_1305x713px.png" 
-              alt="TotalEnergies Offshore Telemetry" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
-
-            <div class="absolute top-4 left-4 flex gap-2">
-              <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">TotalEnergies (via AND Digital)</span>
-              <span class="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-semibold text-white">2023</span>
-            </div>
-
-            <div class="absolute bottom-4 left-4 right-4 text-white">
-              <h3 class="text-xl font-bold leading-snug">Offshore Rig Field Operations & Low-Bandwidth Telemetry</h3>
-            </div>
-          </div>
-
-          <div class="p-6 flex flex-col flex-grow justify-between">
-            <div>
-              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-                Designed mission-critical digital interfaces for offshore platform engineers in the North Sea. Overcame extreme satellite bandwidth constraints, high glare, and harsh touch conditions.
-              </p>
-              
-              <div class="flex flex-wrap gap-1.5 mb-6">
-                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Offline-First UX</span>
-                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">Field Workflows</span>
-                <span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">High-Glare UI</span>
-              </div>
-            </div>
-
-            <div class="w-full py-3 rounded-xl bg-brand-forest text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 group-hover:bg-brand-emerald group-hover:text-brand-dark">
-              <span>View Full Case Study</span>
-              <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </div>
-          </div>
-
         </div>
 
         <!-- Case 3: Diageo -->
         <div onclick="openCaseStudy('diageo')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems">
-          
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <img 
-              src="Category_Spirits_Header-Bottles_TWS.jpg" 
-              alt="Diageo Global Brand Asset Platform" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
+            <div class="w-full h-full bg-gradient-to-tr from-[#163B32] via-[#102E27] to-[#0C231D] flex items-center justify-center p-6 text-center">
+              <span class="text-lg font-bold text-slate-300">Global Commercial Brand Portal</span>
+            </div>
 
             <div class="absolute top-4 left-4 flex gap-2">
               <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Diageo (via AND Digital)</span>
@@ -795,19 +770,14 @@
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </div>
           </div>
-
         </div>
 
         <!-- Case 4: Royal London -->
         <div onclick="openCaseStudy('royallondon')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="accessibility systems">
-          
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
-            <img 
-              src="desktop-1400x700-ladies-eating-ice-cream.webp" 
-              alt="Royal London Pension & Wealth Platform" 
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-deepest via-brand-deepest/40 to-transparent"></div>
+            <div class="w-full h-full bg-gradient-to-tr from-[#061310] via-[#102E27] to-[#1D493E] flex items-center justify-center p-6 text-center">
+              <span class="text-lg font-bold text-slate-300">FCA Wealth & Pension Management</span>
+            </div>
 
             <div class="absolute top-4 left-4 flex gap-2">
               <span class="px-3 py-1 rounded-full bg-brand-dark/90 backdrop-blur-md text-[10px] font-extrabold text-brand-mint border border-emerald-500/30">Royal London</span>
@@ -837,11 +807,9 @@
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </div>
           </div>
-
         </div>
 
       </div>
-
     </section>
 
     <!-- MARQUEE RIBBON -->
@@ -865,15 +833,12 @@
         <span class="text-brand-mint">✦</span>
         <span>Enterprise Design Systems</span>
         <span class="text-brand-mint">✦</span>
-        <span>Accessibility & EAA Compliance</span>
-        <span class="text-brand-mint">✦</span>
       </div>
     </div>
 
     <!-- 5. TESTIMONIALS -->
     <section id="testimonials" class="max-w-6xl mx-auto px-4 sm:px-6 my-14 sm:my-20">
       <div class="bg-brand-dark rounded-4xl p-6 sm:p-10 md:p-12 text-white border-spruce-subtle shadow-card-dark relative overflow-hidden">
-        
         <div class="text-center max-w-2xl mx-auto mb-10">
           <span class="text-xs font-bold uppercase tracking-wider text-brand-mint">Stakeholder Feedback</span>
           <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-1 text-white">
@@ -885,19 +850,13 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-          
-          <!-- Testimonial 1: Andrew Kendal -->
           <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-1 text-brand-mint text-xs mb-3">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
               <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
-                "David is an exceptional UX/UI designer who consistently delivers user-centred designs that exceed stakeholder expectations. His leadership in implementing a custom Design System at AND Digital streamlined our processes and ensured brand consistency across products. David's versatility shines in his work with global clients, where he expertly manages projects from user interfaces to digital assets. His collaborative spirit and creative problem-solving make him an invaluable team member. If you're looking for a UX/UI designer who combines technical proficiency, strong leadership and collaboration, David is your go-to professional."
+                "David is an exceptional UX/UI designer who consistently delivers user-centred designs that exceed stakeholder expectations. His leadership in implementing custom Design Systems streamlined our processes and ensured brand consistency across products."
               </p>
             </div>
             <div class="flex items-center gap-3 pt-4 border-t border-emerald-500/15">
@@ -909,64 +868,13 @@
             </div>
           </div>
 
-          <!-- Testimonial 2: Lyndsey Brownlow -->
           <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-1 text-brand-mint text-xs mb-3">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
               </div>
               <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
-                "David is a key player in any design team. His proactive nature means he is always keen to help and looks for ways in which the team can improve. His skills in motion graphics and user interface design have impressed clients, as has his ability to understand their briefs and feedback, steering the outcome accordingly. He is definitely one to watch as he works his way into design leadership."
-              </p>
-            </div>
-            <div class="flex items-center gap-3 pt-4 border-t border-emerald-500/15">
-              <div class="w-10 h-10 rounded-full bg-brand-forest flex items-center justify-center font-bold text-brand-mint text-xs border border-emerald-400/20">LB</div>
-              <div>
-                <div class="text-xs font-bold text-white">Lyndsey Brownlow</div>
-                <div class="text-[10px] text-slate-400">Head of Design at Waracle</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Testimonial 3: Sophia Ashley -->
-          <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-1 text-brand-mint text-xs mb-3">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
-                "Working with David is has been super easy, he just knows when to step in and help and what to communicate - I believe this has been a vital part of our success, particular on the trickier deliveries. If I had to make up a dream team for work, David would be on it - I hope we get to work with each other again in the future!"
-              </p>
-            </div>
-            <div class="flex items-center gap-3 pt-4 border-t border-emerald-500/15">
-              <div class="w-10 h-10 rounded-full bg-brand-forest flex items-center justify-center font-bold text-brand-mint text-xs border border-emerald-400/20">SA</div>
-              <div>
-                <div class="text-xs font-bold text-white">Sophia Ashley</div>
-                <div class="text-[10px] text-slate-400">Senior Business Analyst with Scott Logic</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Testimonial 4: Christian Richards -->
-          <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-1 text-brand-mint text-xs mb-3">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed italic mb-6">
-                "David has identified gaps and opportunities to improve and build upon DLS and been effective in setting up DLS for a very important 2026. The \"build for the need\" has been done, now the focus is on the adoption element and I'm excited to be working alongside David in this task."
+                "David has identified gaps and opportunities to improve and build upon DLS and been effective in setting up DLS for a very important 2026. The 'build for the need' has been done, now the focus is on the adoption element and I'm excited to be working alongside David in this task."
               </p>
             </div>
             <div class="flex items-center gap-3 pt-4 border-t border-emerald-500/15">
@@ -977,23 +885,22 @@
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
 
     <!-- 6. CONTACT SECTION -->
     <section id="contact" class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
       <div class="bg-white rounded-4xl p-6 sm:p-10 md:p-12 shadow-card border border-emerald-100 text-center">
-        
-        <span class="text-xs font-bold uppercase tracking-wider text-brand-forest">Start The Conversation</span>
+        <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 dark:bg-mint-400/15 text-brand-forest dark:text-mint-300 text-xs font-bold uppercase tracking-wider mb-2 border border-emerald-200 dark:border-mint-400/25">
+          Start The Conversation
+        </span>
         <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-dark mt-1">
           Have an Industrial or Enterprise UX Challenge? <br>
-          <span class="text-brand-forest underline decoration-brand-emerald decoration-2">Let's Discuss</span>
+          <span class="text-brand-forest dark:text-mint-400 underline decoration-brand-emerald decoration-2">Let's Discuss</span>
         </h2>
         
-        <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mt-3 leading-relaxed">
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-[#C6E2D6] max-w-xl mx-auto mt-3 leading-relaxed">
           Whether you are scaling an enterprise design system, tackling European Accessibility Act (EAA) compliance, or architecting complex industrial telemetry, let's connect.
         </p>
 
@@ -1007,7 +914,7 @@
           />
           <button 
             type="submit" 
-            class="px-7 py-3.5 rounded-full bg-brand-forest text-white text-xs font-bold hover:bg-brand-dark transition-all shadow-md active:scale-95 whitespace-nowrap"
+            class="px-7 py-3.5 rounded-full bg-brand-forest dark:bg-mint-400 dark:text-spruce-950 text-white text-xs font-bold hover:bg-brand-dark dark:hover:bg-mint-500 transition-all shadow-md active:scale-95 whitespace-nowrap"
           >
             Send Inquiry
           </button>
@@ -1016,73 +923,16 @@
         <div id="contact-success" class="hidden mt-4 text-xs font-bold text-emerald-700 bg-emerald-50 py-2.5 px-4 rounded-xl border border-emerald-200 inline-block">
           ✓ Thank you! David will get back to you within 24 business hours.
         </div>
-
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-[11px] font-semibold text-slate-500">
-          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> Rapid Discovery</span>
-          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> Accessibility Audits</span>
-          <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-brand-emerald"></i> UK / Scotland Based</span>
-        </div>
-
       </div>
     </section>
 
     <!-- HOMEPAGE FOOTER -->
     <footer class="bg-[#061310] text-white pt-14 pb-8 border-t border-emerald-950">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          
-          <div class="md:col-span-2">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="w-7 h-7 rounded-full bg-mint-400 text-spruce-950 flex items-center justify-center font-extrabold text-xs">DL</span>
-              <span class="font-extrabold text-base tracking-tight text-white">David Lorimer</span>
-            </div>
-            <p class="text-xs text-[#86A89C] max-w-sm leading-relaxed mb-4">
-              Senior Product & UX Designer specializing in enterprise design systems, digital accessibility governance, and industrial IoT tools.
-            </p>
-            <div class="text-xs text-[#86A89C]">
-              <i class="fa-solid fa-location-dot text-mint-400 mr-2"></i> Glasgow / Edinburgh, Scotland, United Kingdom
-            </div>
-          </div>
-
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-mint-400 mb-3">Direct Contact</h4>
-            <ul class="text-xs text-slate-300 space-y-2">
-              <li>
-                <a href="mailto:Davidlorimermedia@gmail.com" class="hover:text-mint-400 transition-colors flex items-center gap-2">
-                  <i class="fa-regular fa-envelope text-slate-500"></i> Davidlorimermedia@gmail.com
-                </a>
-              </li>
-              <li>
-                <a href="tel:+447402781081" class="hover:text-mint-400 transition-colors flex items-center gap-2">
-                  <i class="fa-solid fa-phone text-slate-500"></i> +44 7402 781081
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="text-xs font-bold uppercase tracking-wider text-mint-400 mb-3">Professional Profiles</h4>
-            <div class="flex items-center gap-3">
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full bg-[#102E27] hover:bg-mint-400 hover:text-[#061310] text-white flex items-center justify-center transition-all text-xs" title="LinkedIn">
-                <i class="fa-brands fa-linkedin-in"></i>
-              </a>
-              <a href="https://figma.com" target="_blank" rel="noreferrer" class="w-9 h-9 rounded-full bg-[#102E27] hover:bg-mint-400 hover:text-[#061310] text-white flex items-center justify-center transition-all text-xs" title="Figma Community">
-                <i class="fa-brands fa-figma"></i>
-              </a>
-              <a href="mailto:Davidlorimermedia@gmail.com" class="w-9 h-9 rounded-full bg-[#102E27] hover:bg-mint-400 hover:text-[#061310] text-white flex items-center justify-center transition-all text-xs" title="Send Email">
-                <i class="fa-solid fa-envelope"></i>
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#6F9185] gap-2">
+        <div class="flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#6F9185] gap-2">
           <div>© 2026 David Lorimer. All rights reserved.</div>
           <div>Crafted with high accessibility standards (WCAG 2.2 AAA & EAA compliant).</div>
         </div>
-
       </div>
     </footer>
 
@@ -1093,235 +943,164 @@
   <!-- ================================================================= -->
   <article id="view-casestudy" class="hidden w-full view-container view-enter">
     
-    <!-- CASE STUDY HERO HEADER -->
-    <section class="pt-24 sm:pt-32 pb-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center flex flex-col items-center">
-      
-      <!-- Dynamic Case Study Headline with Animated Underline directly beneath Client Name -->
-      <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#112E27] tracking-tight leading-[1.18] max-w-4xl mx-auto">
-        <span class="relative inline-block text-[#112E27]">
-          <span id="cs-hero-title">The Weir Group</span>
-          <span id="cs-underline-bar" class="hero-underline-anim absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[4px] sm:h-[6px] bg-brand-emerald rounded-full"></span>
-        </span>
-        <span class="block text-2xl sm:text-3xl md:text-4xl font-bold text-slate-700 mt-3 sm:mt-4">
-          <span id="cs-hero-subtitle">Industrial Digital Ecosystem & Weir Design System</span>
-        </span>
-      </h1>
+    <!-- CASE STUDY HERO HEADER (Template with 10% opacity card background image) -->
+    <section class="pt-24 sm:pt-28 pb-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div id="cs-hero-card" class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-7 sm:p-12 md:p-16 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
+        
+        <!-- 10% Opacity Background Image of Case Study Card -->
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <img 
+            id="cs-hero-bg-img" 
+            src="warman-mcr-400-opt.webp" 
+            alt="Case Study Background" 
+            class="w-full h-full object-cover opacity-10 filter grayscale contrast-125 scale-105 transition-all duration-700"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0C231D] via-transparent to-[#0C231D]/40"></div>
+        </div>
 
-      <!-- Dynamic Subtitle -->
-      <p id="cs-hero-desc" class="mt-5 sm:mt-7 text-sm sm:text-base md:text-lg text-[#3C5E54] max-w-3xl mx-auto font-normal leading-relaxed">
-        Comprehensive UX leadership across 4 core industrial initiatives: Customer Asset Intelligence Platform, Warman® slurry pump telemetry, Daily Layered Accountability Tracker, Resource Centre, and the unified Weir Multi-Brand Design System.
-      </p>
+        <!-- Ambient glow overlay -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-mint-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      <!-- Context Badges -->
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-semibold">
-        <span class="px-3.5 py-1.5 rounded-full bg-[#E3EFE9] text-[#133C32] border border-[#C6E2D6] flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-mint-500 animate-pulse"></span>
-          <span id="cs-badge-company">The Weir Group</span>
-        </span>
-        <span id="cs-badge-role" class="px-3.5 py-1.5 rounded-full bg-white text-[#3C5E54] border border-[#DAE7E1]">
-          Role: Senior UX/UI Designer & Primary Accessibility Consultant
-        </span>
-        <span class="px-3.5 py-1.5 rounded-full bg-white text-[#3C5E54] border border-[#DAE7E1]">
-          Standard: WCAG 2.2 AAA & EAA
-        </span>
-      </div>
+        <div class="relative z-10 max-w-4xl">
+          <!-- Role & Company Eyebrow -->
+          <div class="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-mint-400 uppercase mb-5">
+            <span id="cs-hero-eyebrow">SENIOR PRODUCT DESIGNER · WEIR</span>
+          </div>
 
-      <!-- Hero Cover Image -->
-      <div id="cs-hero-cover-container" class="w-full mt-8 max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-emerald-900/20 max-h-[460px] relative">
-        <img id="cs-hero-cover-img" src="warman-mcr-400-opt.webp" alt="Case Study Cover Preview" class="w-full h-full object-cover max-h-[460px]">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#0C231D]/85 via-transparent to-transparent flex items-end p-6 sm:p-8">
-          <div class="text-left text-white">
-            <span id="cs-cover-tag" class="text-[11px] font-mono uppercase tracking-widest text-mint-400">MISSION CRITICAL OPERATIONAL SUITE</span>
-            <h3 id="cs-cover-heading" class="text-xl sm:text-2xl md:text-3xl font-bold">Customer Asset Intelligence & Industrial IoT</h3>
+          <!-- Main Hero Headline -->
+          <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
+            <span id="cs-hero-title">Designing digital products for complex industrial environments.</span>
+          </h1>
+
+          <!-- Hero Subtitle / Summary -->
+          <p id="cs-hero-desc" class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-[#A0C5B7] max-w-3xl font-normal leading-relaxed">
+            I connect research, product strategy, UX, design systems and engineering to turn complex operational problems into scalable digital experiences.
+          </p>
+
+          <!-- Core Capability Pill Tags -->
+          <div id="cs-hero-tags" class="mt-8 sm:mt-10 flex flex-wrap items-center gap-2 sm:gap-2.5">
+            <span class="px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Product Strategy</span>
+            <span class="px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">UX & Product Design</span>
+            <span class="px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Research</span>
+            <span class="px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Design Systems</span>
+            <span class="px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Design-to-Code</span>
           </div>
         </div>
       </div>
-
     </section>
 
-    <!-- 1. THE CHALLENGE -->
-    <section id="cs-challenge-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
+    <!-- SECTION 01: WHAT I DO -->
+    <section id="cs-what-i-do-section" class="py-5 sm:py-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-white rounded-3xl sm:rounded-4xl p-5 sm:p-8 md:p-10 border border-[#E1EDE7] shadow-sm">
         
-        <div class="max-w-3xl mb-10">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase mb-3">
-            <span>01 • The Challenge</span>
+        <div class="max-w-3xl mb-6">
+          <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-[#EAF4F0] text-spruce-800 text-[10px] font-mono font-bold tracking-wider uppercase mb-2">
+            <span id="cs-s1-num">01 · WHAT I DO</span>
           </div>
-          <h2 id="cs-challenge-title" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
-            High stakes, extreme environments, zero margin for error
+          <h2 id="cs-s1-title" class="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0C231D] tracking-tight">
+            From complex problems to product direction.
           </h2>
-          <p id="cs-challenge-p" class="mt-3 text-sm sm:text-base text-[#466B60] leading-relaxed">
-            Mining operators and asset managers lacked a unified digital interface to monitor heavy equipment telemetry (such as the Warman® MCR slurry pump), conduct shift handovers, and access technical runbooks. Legacy workflows caused safety blindspots and high downtime risks.
+          <p id="cs-s1-desc" class="mt-2 text-xs sm:text-sm text-[#466B60] leading-relaxed">
+            My work often starts before an interface exists. I collaborate with stakeholders, engineers and subject-matter experts to understand operational challenges, uncover user needs and turn ambiguity into clear, actionable direction.
           </p>
         </div>
 
-        <div id="cs-challenge-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10"></div>
-        <div id="cs-challenge-metrics" class="bg-[#0C231D] rounded-3xl p-6 sm:p-8 text-white border-spruce-subtle grid grid-cols-1 sm:grid-cols-3 gap-6 text-center"></div>
-
-      </div>
-    </section>
-
-    <!-- 2. MY APPROACH -->
-    <section id="cs-approach-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
-          <div>
-            <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
-              Core Capabilities
+        <!-- Condensed 4-Pillar Informational Layout (Non-Interactive, Streamlined) -->
+        <div id="cs-s1-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
+          <!-- Pillar 1: Strategy -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
+              <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Strategy</span>
             </div>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-              My <span class="text-mint-400">Approach</span>
-            </h2>
-          </div>
-          <p class="text-[#9DBFB3] text-sm sm:text-base max-w-md font-normal leading-relaxed">
-            Specialized UX architecture built for mission-critical software, industrial IoT operations, and enterprise design system governance.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          <div class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-cubes-stacked"></i>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Design Systems & Tokens</h3>
-              <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
-                Building multi-brand token frameworks in Figma & code that scale across complex suites, accelerating engineering delivery and cutting tech debt.
-              </p>
-            </div>
-            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
-              <span>Figma & Tokens Studio</span>
-              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
-            </div>
+            <h3 class="text-sm font-bold text-[#0C231D] mb-1.5 leading-snug">Understand the whole problem</h3>
+            <p class="text-xs text-[#4E7368] leading-relaxed">
+              Research planning, stakeholder workshops, discovery, journey mapping and systems thinking establish what to build and why.
+            </p>
           </div>
 
-          <div class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-industry"></i>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Industrial & Field UX</h3>
-              <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
-                End-to-end tooling for harsh onsite environments, machine telemetry, offline workflows, and critical Daily Layered Accountability trackers.
-              </p>
+          <!-- Pillar 2: Design -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
+              <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Design</span>
             </div>
-            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
-              <span>Telemetry & Dashboards</span>
-              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
-            </div>
+            <h3 class="text-sm font-bold text-[#0C231D] mb-1.5 leading-snug">Turn complexity into experiences</h3>
+            <p class="text-xs text-[#4E7368] leading-relaxed">
+              Guiding products through workflows, concepts, rapid prototyping and validation into detailed, production-ready interactions.
+            </p>
           </div>
 
-          <div class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-universal-access"></i>
-              </div>
-              <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Accessibility & Governance</h3>
-              <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
-                Translating EAA and WCAG 2.2 AA/AAA legislation into enterprise policy, hands-on designer/engineer workshops, and automated testing gates.
-              </p>
+          <!-- Pillar 3: Systems -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
+              <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Systems</span>
             </div>
-            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
-              <span>WCAG 2.2 AA/AAA & EAA</span>
-              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </div>
-            </div>
+            <h3 class="text-sm font-bold text-[#0C231D] mb-1.5 leading-snug">Design for reuse</h3>
+            <p class="text-xs text-[#4E7368] leading-relaxed">
+              Looking beyond individual features to establish modular patterns and shared capabilities that scale across squads and products.
+            </p>
           </div>
 
+          <!-- Pillar 4: Delivery -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
+              <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Delivery</span>
+            </div>
+            <h3 class="text-sm font-bold text-[#0C231D] mb-1.5 leading-snug">Connect design to engineering</h3>
+            <p class="text-xs text-[#4E7368] leading-relaxed">
+              Partnering with engineering to maximize component reuse, evaluate technical feasibility, and accelerate the path to code.
+            </p>
+          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 3. IMPLEMENTATION & CODE / TOKEN PIPELINE -->
-    <section id="cs-implementation-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+    <!-- SECTION 02: HOW I WORK -->
+    <section id="cs-how-i-work-section" class="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-          <div>
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-bold tracking-wider uppercase mb-3">
-              <span>03 • Implementation</span>
-            </div>
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
-              Bridging tokens from Figma into production code
-            </h2>
+        <div class="max-w-3xl mb-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAF4F0] text-spruce-800 text-[11px] font-mono font-bold tracking-wider uppercase mb-3">
+            <span>02 · HOW I WORK</span>
           </div>
-          <p class="text-sm sm:text-base text-[#466B60] max-w-md leading-relaxed">
-            How systemic UX specifications were transformed into hardened React components with automated accessibility verification.
-          </p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0C231D] tracking-tight">
+            Bringing strategy, craft and technology together.
+          </h2>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- 4-Column Methodology Pipeline with Emerald Top Accent Borders -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
           
-          <div class="lg:col-span-6 space-y-4">
-            <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">1</span>
-                <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">Figma Variables to Style Dictionary Pipeline</h3>
-              </div>
-              <p class="text-xs sm:text-sm text-[#4E7368] pl-10 leading-relaxed">
-                Exported multi-tier semantic tokens (colors, radii, spacing, elevations) into automated JSON definitions, outputting type-safe TypeScript tokens directly to the monorepo.
-              </p>
-            </div>
-
-            <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">2</span>
-                <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">High-Contrast Anti-Glare Safety Interlocks</h3>
-              </div>
-              <p class="text-xs sm:text-sm text-[#4E7368] pl-10 leading-relaxed">
-                Replaced ambiguous dialogs with deliberate 120px physical drag gestures with 450ms hold-thresholds to guarantee zero accidental shutdowns caused by water drops or gloves.
-              </p>
-            </div>
-
-            <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
-              <div class="flex items-center gap-3 mb-2">
-                <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">3</span>
-                <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">Automated Axe Core CI/CD Gates</h3>
-              </div>
-              <p class="text-xs sm:text-sm text-[#4E7368] pl-10 leading-relaxed">
-                Implemented automated color-contrast and accessibility linting in GitHub Actions. Any pull request with token combinations under WCAG 2.2 AAA is automatically failed before staging.
-              </p>
-            </div>
+          <div class="pt-5 border-t-2 border-brand-emerald">
+            <h3 class="text-sm sm:text-base font-extrabold text-[#0C231D] mb-2">Product Strategy</h3>
+            <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+              Turning operational challenges into opportunities, priorities and product direction.
+            </p>
           </div>
 
-          <div class="lg:col-span-6 bg-[#0C231D] text-white rounded-3xl p-6 sm:p-7 border-spruce-subtle shadow-card-dark font-mono text-xs">
-            <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-mint-400"></span>
-                <span id="cs-token-filename" class="text-[#96B8AC] text-[11px] ml-2">WeirIndustrialTelemetry.tokens.ts</span>
-              </div>
-              <span class="text-[10px] text-mint-400 bg-spruce-800 px-2 py-0.5 rounded-md font-bold">FIGMA SYNCED</span>
-            </div>
+          <div class="pt-5 border-t-2 border-brand-emerald">
+            <h3 class="text-sm sm:text-base font-extrabold text-[#0C231D] mb-2">Research & Discovery</h3>
+            <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+              Understanding users and environments, then using evidence to influence decisions.
+            </p>
+          </div>
 
-            <pre class="overflow-x-auto text-[#D2EAE1] leading-relaxed p-3 bg-[#061612] rounded-xl border border-white/5"><code id="cs-token-snippet"><span class="text-slate-500">// Token Spec for Industrial Field Operations</span>
-<span class="text-mint-400">export const</span> IndustrialControlsTokenSpec = {
-  ppeTargetMinSize: <span class="text-amber-300">"56px"</span>,
-  interlockGesture: {
-    minSwipeThresholdPx: <span class="text-amber-300">120</span>,
-    holdDurationMs: <span class="text-amber-300">450</span>,
-    hapticFeedbackPattern: [<span class="text-amber-300">50, 100, 50</span>]
-  },
-  contrastTokens: {
-    glareBackground: "#0C231D",
-    activeSalience: "#34D399",
-    measuredRatio: "14.8:1" // WCAG AAA compliant
-  }
-};</code></pre>
+          <div class="pt-5 border-t-2 border-brand-emerald">
+            <h3 class="text-sm sm:text-base font-extrabold text-[#0C231D] mb-2">Product Design</h3>
+            <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+              Moving from journeys and concepts through prototypes, validation and interaction design.
+            </p>
+          </div>
 
-            <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-[#86A89C]">
-              <span>120+ Components Synchronized</span>
-              <span class="text-mint-400 font-bold">&check; 100% Type-Safe</span>
-            </div>
+          <div class="pt-5 border-t-2 border-brand-emerald">
+            <h3 class="text-sm sm:text-base font-extrabold text-[#0C231D] mb-2">Design + Engineering</h3>
+            <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">
+              Connecting Figma, reusable systems and implementation to reduce the gap between design and delivery.
+            </p>
           </div>
 
         </div>
@@ -1329,11 +1108,34 @@
       </div>
     </section>
 
-    <!-- 4. DELIVERABLES (3D ROTATING INTERACTIVE CAROUSEL) -->
+    <!-- SECTION 03: SYSTEMS THINKING HIGHLIGHT BANNER (Aligned to Deep Forest / Mint Glow) -->
+    <section id="cs-systems-thinking-section" class="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="bg-gradient-to-br from-[#102E27] via-[#0C231D] to-[#061310] rounded-4xl sm:rounded-5xl p-7 sm:p-12 md:p-16 text-white shadow-card-dark border border-mint-400/20 relative overflow-hidden">
+        
+        <div class="absolute -top-10 -right-10 w-72 h-72 bg-mint-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-400/15 border border-mint-400/25 text-[11px] font-mono font-bold tracking-widest uppercase text-brand-mint mb-5">
+            <span class="w-2 h-2 rounded-full bg-brand-mint"></span>
+            03 · SYSTEMS THINKING
+          </div>
+
+          <blockquote class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-snug mb-5 text-white">
+            “What capability could we create once and reuse across Weir?”
+          </blockquote>
+
+          <p class="text-sm sm:text-base md:text-lg font-normal text-[#A0C5B7] max-w-3xl leading-relaxed">
+            Working across multiple programmes lets me spot connections between teams and products. Instead of repeatedly solving the same interface problem, I look for shared patterns, components and capabilities that can become part of the wider digital ecosystem.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- DELIVERABLES (PRESERVED 3D ROTATING INTERACTIVE CAROUSEL) -->
     <section id="cs-deliverables-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div id="showcase-card-frame" class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-12 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
         
-        <!-- Ambient radial glow overlay -->
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(52,211,153,0.12)_0%,transparent_70%)] pointer-events-none"></div>
 
         <!-- Header Bar -->
@@ -1366,15 +1168,12 @@
           
           <!-- Left: Rotating Visual Stage with Concentric Orbital Rings -->
           <div class="lg:col-span-7 relative flex flex-col items-center justify-center min-h-[340px] sm:min-h-[400px]">
-            
-            <!-- Concentric Orbital Track -->
             <div class="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] rounded-full orbit-ring-spruce pointer-events-none flex items-center justify-center">
               <div class="w-[82%] h-[82%] rounded-full border border-dashed border-mint-400/20"></div>
             </div>
 
             <!-- 3D Rotating Media Container with Drag/Swipe support -->
             <div id="showcase-drag-zone" class="relative z-20 w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center cursor-grab active:cursor-grabbing select-none">
-              <!-- Focal Disc with 180deg cumulative rotation -->
               <div id="showcase-rotating-disc" class="rotating-showcase-disc w-full h-full relative rounded-3xl overflow-hidden border border-mint-400/30 bg-[#061612] shadow-2xl flex items-center justify-center p-3">
                 <img id="showcase-image" src="" alt="Deliverable visual" class="w-full h-full object-cover rounded-2xl hidden transition-all duration-300 pointer-events-none drop-shadow-md">
                 
@@ -1395,7 +1194,6 @@
 
             <!-- Orbital Navigation Labels -->
             <div id="showcase-orbital-labels" class="relative z-20 w-full max-w-[340px] flex justify-between items-center px-4 mt-4 text-[11px] font-semibold text-white/70"></div>
-
           </div>
 
           <!-- Right: Descriptive Copy & Structured Outcomes -->
@@ -1416,48 +1214,11 @@
 
         </div>
 
-        <!-- Dot Indicators below showcase -->
         <div id="showcase-dots" class="flex items-center justify-center gap-2 mt-8"></div>
-
       </div>
     </section>
 
-    <!-- 5. VALUE & BUSINESS IMPACT -->
-    <section id="cs-value-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
-        
-        <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-          <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
-            05 • Realized Outcomes
-          </div>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-            Measurable Value Delivered
-          </h2>
-          <p class="mt-3 text-sm sm:text-base text-[#9DBFB3] leading-relaxed">
-            Quantitative ROI and safety improvements verified across industrial teams and product squads.
-          </p>
-        </div>
-
-        <div id="cs-value-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-
-        <div class="mt-10 sm:mt-12 bg-[#102E27] rounded-3xl p-6 sm:p-8 border-spruce-inner flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto">
-          <div class="w-14 h-14 rounded-full bg-mint-400 text-[#061310] font-black text-lg flex items-center justify-center shrink-0">
-            VP
-          </div>
-          <div class="text-center md:text-left">
-            <p id="cs-quote-text" class="text-sm sm:text-base text-white italic font-normal leading-relaxed">
-              "David's systematic approach brought clarity to an environment where a single mistaken tap could trigger millions in downtime. Our field engineers finally have tools built for the physical reality of their jobs."
-            </p>
-            <div id="cs-quote-author" class="mt-2.5 text-xs text-mint-400 font-bold">
-              Engineering Director • Industrial IoT & Heavy Machinery
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 6. OTHER CASE STUDIES SELECTOR -->
+    <!-- OTHER CASE STUDIES SELECTOR -->
     <section id="cs-other-studies-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div class="bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden">
         
@@ -1491,7 +1252,7 @@
             </div>
             <div>
               <div class="text-sm font-bold text-white">David Lorimer</div>
-              <div class="text-xs text-[#86A89C]">Senior UX/UI & Accessibility Leader</div>
+              <div class="text-xs text-[#86A89C]">Senior Product Designer & Accessibility Leader</div>
             </div>
           </div>
 
@@ -1523,41 +1284,12 @@
       weir: {
         id: "weir",
         company: "The Weir Group",
-        title: "The Weir Group",
-        subtitle: "Industrial Digital Ecosystem & Weir Design System",
-        description: "Comprehensive UX leadership across 4 core industrial initiatives: Customer Asset Intelligence Platform (Warman® slurry pump telemetry), Daily Layered Accountability (DLA) Tracker, Resource Centre, and the unified Weir Multi-Brand Design System.",
-        role: "Senior UX/UI Designer & Primary Accessibility Consultant",
-        standard: "WCAG 2.2 AAA & EAA",
+        eyebrow: "SENIOR PRODUCT DESIGNER · WEIR",
+        title: "Designing digital products for complex industrial environments.",
+        description: "I connect research, product strategy, UX, design systems and engineering to turn complex operational problems into scalable digital experiences.",
+        role: "Senior Product Designer & Accessibility Leader",
         coverImage: "warman-mcr-400-opt.webp",
-        coverTag: "INDUSTRIAL HEAVY EQUIPMENT SUITE",
-        coverHeading: "Warman® MCR-400 Telemetry & Operations Suite",
-        tokenFile: "WeirIndustrialTelemetry.tokens.ts",
-        tokenCode: `// Token Spec for Industrial Mining Environments
-export const IndustrialControlsTokenSpec = {
-  ppeTargetMinSize: "56px",
-  interlockGesture: {
-    minSwipeThresholdPx: 120,
-    holdDurationMs: 450,
-    hapticFeedbackPattern: [50, 100, 50]
-  },
-  contrastTokens: {
-    glareBackground: "#0C231D",
-    activeSalience: "#34D399",
-    measuredRatio: "14.8:1" // WCAG AAA compliant
-  }
-};`,
-        challengeTitle: "Extreme mining conditions, machinery telemetry, zero tolerance for delays",
-        challengeDesc: "Mining operators and asset managers lacked a unified digital interface to monitor heavy equipment telemetry (such as the Warman® MCR slurry pump), conduct shift handovers, and access technical runbooks. Fragile desktop ports resulted in equipment downtime and safety risks.",
-        challengeCards: [
-          { icon: "fa-sun", color: "red", title: "Heavy Glare Onsite", text: "Screens washed out in direct open-pit sunlight (100,000+ lux). Standard low-contrast interfaces became unreadable." },
-          { icon: "fa-mitten", color: "amber", title: "PPE Safety Gloves", text: "Operators wear thick gloves and face high vibration. Standard 24px touch targets caused frequent missed inputs." },
-          { icon: "fa-triangle-exclamation", color: "emerald", title: "Unstructured Shift Handovers", text: "Paper logs and disjointed spreadsheets delayed Daily Layered Accountability huddles by over 25 minutes per shift." }
-        ],
-        challengeMetrics: [
-          { val: "25 min", label: "Shift Handover Lag", sub: "Pre-digital DLA ritual delays" },
-          { val: "34%", label: "Glove Missed Taps", sub: "Vibration & harsh site mis-inputs" },
-          { val: "0 / 64", label: "WCAG Checks Passed", sub: "Legacy internal tools baseline" }
-        ],
+        tags: ["Product Strategy", "UX & Product Design", "Research", "Design Systems", "Design-to-Code"],
         deliverables: [
           {
             num: "01",
@@ -1615,59 +1347,23 @@ export const IndustrialControlsTokenSpec = {
               { label: "PARTS CATALOG MATCHING", val: "99.8% Accuracy", tag: "ERP LINKED" }
             ]
           }
-        ],
-        values: [
-          { stat: "-40%", title: "Shift Handover Time", desc: "DLA Tracker cut plant meeting friction from 25 minutes to under 15 minutes." },
-          { stat: "100%", title: "WCAG 2.2 AA / AAA", desc: "Enterprise design system achieved complete legal compliance under the EAA." },
-          { stat: "+40%", title: "Dev Delivery Velocity", desc: "Engineering squads shipped telemetry features 40% faster using pre-built tokens." },
-          { stat: "0", title: "PPE Mis-Hits", desc: "56px touch target boundaries eliminated accidental machine stops." }
-        ],
-        quoteText: "David's UX leadership brought cohesion to our digital tooling. Bridging heavy industrial machinery with modern, accessible software transformed both operator safety and executive visibility.",
-        quoteAuthor: "Engineering Director • Industrial IoT & Heavy Machinery, The Weir Group"
+        ]
       },
 
       totalenergies: {
         id: "totalenergies",
         company: "TotalEnergies",
-        title: "TotalEnergies",
-        subtitle: "Offshore Rig Field Operations & Low-Bandwidth Telemetry",
+        eyebrow: "SENIOR UX/UI DESIGNER · TOTALENERGIES",
+        title: "Offshore Rig Field Operations & Low-Bandwidth Telemetry.",
         description: "Designed mission-critical digital interfaces for offshore platform engineers in the North Sea. Overcame extreme satellite bandwidth constraints, high glare, and harsh touch conditions.",
         role: "Senior UX/UI Designer (via AND Digital)",
-        standard: "WCAG 2.2 AAA & Low-Bandwidth",
         coverImage: "Resultats_troisieme_trimestre_2023_TotalEnergies_1305x713px.png",
-        coverTag: "OFFSHORE ENERGY & CRITICAL INFRASTRUCTURE",
-        coverHeading: "North Sea Rig Telemetry & Incident Containment",
-        tokenFile: "TotalEnergiesOffshore.tokens.ts",
-        tokenCode: `// Token Spec for Low-Bandwidth Satellite Telemetry
-export const OffshoreTelemetrySpec = {
-  satelliteSyncThresholdMs: 3000,
-  emergencyInterlock: {
-    gestureSwipeDistance: "120px",
-    autoCommitBuffer: true
-  },
-  contrastRatios: {
-    antiGlareMode: "#0C231D",
-    alarmHighSalience: "#EF4444",
-    measuredAAA: "16.2:1"
-  }
-};`,
-        challengeTitle: "High-stress offshore drilling rigs with intermittent satellite links",
-        challengeDesc: "Offshore platform engineers in the North Sea relied on legacy terminal interfaces. Intermittent satellite connectivity and confusing alarm cascades compromised safety and delayed emergency valve isolations.",
-        challengeCards: [
-          { icon: "fa-satellite-dish", color: "red", title: "Satellite Latency Drops", text: "Uplink packet drops occurred during North Sea storm squalls, interrupting active inspection checklists." },
-          { icon: "fa-bell", color: "amber", title: "Alarm Cascade Fatigue", text: "Over 120 simultaneous sensor alerts flooded screens during pressure fluctuations, obscuring root causes." },
-          { icon: "fa-water", color: "emerald", title: "Hostile Salt-Spray Conditions", text: "Outdoor decks exposed tablets to saltwater mist, extreme cold, and greasy gloves." }
-        ],
-        challengeMetrics: [
-          { val: "4m 12s", label: "Hazard Isolation Lag", sub: "Old legacy triage response time" },
-          { val: "42%", label: "Satellite Timeout Errors", sub: "Daily dropped cloud synchronizations" },
-          { val: "0 / 50", label: "Accessibility Gates", sub: "Legacy terminal compliance" }
-        ],
+        tags: ["Offline-First UX", "Field Workflows", "High-Glare UI", "ATEX Tablets", "Telemetry Systems"],
         deliverables: [
           {
             num: "01",
             title: "Early warning notification system",
-            image: "Gemini_Generated_Image_nxcgonxcgonxcgon.jpeg",
+            image: null,
             desc: "Designed an offshore hazard detection and early warning alert system that cuts through high-stress operational noise with instant, clear priority visual cues and audio cues.",
             points: ["Multi-stage alert escalation with zero false-alarm fatigue", "Sunlight-readable high-contrast telemetry indicators tailored for ATEX-certified tablets"],
             mockupBadge: "Telemetry Alerts • Early Warning System",
@@ -1681,7 +1377,7 @@ export const OffshoreTelemetrySpec = {
           {
             num: "02",
             title: "Plant heat map tool",
-            image: "Gemini_Generated_Image_9r280d9r280d9r28.jpeg",
+            image: null,
             desc: "Architected a live 2D/3D platform telemetry heat map visualizing thermal loads, piping stress, and equipment operating temperatures across multi-deck rig modules.",
             points: ["Real-time sensor overlays mapping thermal hot-spots directly onto deck schematics", "Low-bandwidth vector rendering guaranteeing instant responsiveness over satellite connections"],
             mockupBadge: "Thermal Telemetry • Plant Heat Map",
@@ -1691,68 +1387,19 @@ export const OffshoreTelemetrySpec = {
               { label: "THERMAL REFRESH RATE", val: "1.2s Real-Time Sync", tag: "LIVE" },
               { label: "DATA OVERHEAD", val: "Under 25KB/sec", tag: "LOW-BANDWIDTH" }
             ]
-          },
-          {
-            num: "03",
-            title: "MUI Hybrid Design System",
-            image: null,
-            desc: "Created a hardened enterprise component system bridging Material UI (MUI) React foundations with customized high-contrast industrial tokens for touchscreens, gloves, and harsh weather.",
-            points: ["Custom 56px+ touch target primitives complying with gloved operational standards", "Dark and ultra-high-lux contrast modes tested for full WCAG 2.2 AAA accessibility"],
-            mockupBadge: "Design Tokens • MUI Industrial Hybrid",
-            status: "Design Tokens: SYNCED",
-            items: [
-              { label: "CORE REACT COMPONENTS", val: "48 Hardened Units", tag: "MUI BASED" },
-              { label: "GLOVED TOUCH ACCURACY", val: "99.4% Pass Rate", tag: "FIELD TESTED" },
-              { label: "ACCESSIBILITY GATES", val: "100% WCAG AAA Compliant", tag: "CERTIFIED" }
-            ]
           }
-        ],
-        values: [
-          { stat: "5", title: "Core Tools Delivered", desc: "Served as primary design lead across 5 digital products, driving end-to-end UX from research to final release." },
-          { stat: "-30%", title: "Coding & Build Time", desc: "Championed design system adoption across squads, slashing production time through modular, reusable patterns." },
-          { stat: "100%", title: "Field-Tested Rigor", desc: "Conducted contextual user research with frontline engineers and staff across demanding environments, including offshore rigs." },
-          { stat: "4+", title: "Squads Upskilled", desc: "Embedded UX practices and systematic design governance across multi-disciplinary teams to eliminate design debt." }
-        ],
-        quoteText: "David's ability to grasp the brutal conditions of North Sea operations and design an interface that just works—gloves, glare, satellite drops and all—was monumental.",
-        quoteAuthor: "VP of Field Operations • TotalEnergies Exploration & Production"
+        ]
       },
 
       diageo: {
         id: "diageo",
         company: "Diageo",
-        title: "Diageo",
-        subtitle: "Global Brand Asset Platform & Commercial Portal",
+        eyebrow: "SENIOR UX/UI DESIGNER · DIAGEO",
+        title: "Global Brand Asset Platform & Commercial Portal.",
         description: "Architected a centralized digital asset management experience and partner commercial workflow across Diageo’s global portfolio of iconic drinks brands (Guinness, Johnnie Walker, Tanqueray).",
         role: "Senior UX/UI Designer (via AND Digital)",
-        standard: "WCAG 2.2 AA & Global Localization",
         coverImage: "Category_Spirits_Header-Bottles_TWS.jpg",
-        coverTag: "GLOBAL COMMERCIAL PLATFORM",
-        coverHeading: "Enterprise Brand Asset Vault (180+ Markets)",
-        tokenFile: "DiageoBrandTokens.tokens.ts",
-        tokenCode: `// Multi-Brand Token Architecture
-export const DiageoBrandTokens = {
-  brandThemes: ["Guinness", "JohnnieWalker", "Tanqueray", "Smirnoff"],
-  assetTaxonomy: {
-    maxFileSizeBytes: 10737418240, // 10GB
-    rightsTracking: true
-  },
-  accessibilityBaseline: {
-    minContrast: "4.5:1",
-    keyboardNavFocusRing: "#10B981"
-  }
-};`,
-        challengeTitle: "Decentralized assets, regional rights chaos, fragmented brand compliance",
-        challengeDesc: "Diageo’s global marketing teams and third-party distributors across 180+ countries struggled with decentralized brand asset storage, resulting in brand compliance breaches, expired copyright lawsuits, and delayed campaign rollouts.",
-        challengeCards: [
-          { icon: "fa-globe", color: "red", title: "180+ Fragmented Markets", text: "Regional teams stored assets across Dropbox, SharePoint, and hard drives, creating massive duplication." },
-          { icon: "fa-scale-unbalanced", color: "amber", title: "Expiring Talent Rights", text: "Ambiguous talent rights management exposed the business to copyright infringements on expired advertising assets." },
-          { icon: "fa-hourglass-half", color: "emerald", title: "Multi-Week Approval Delays", text: "Distributors waited up to 3 weeks for approved print-ready vector artwork, missing seasonal promotional windows." }
-        ],
-        challengeMetrics: [
-          { val: "3 Weeks", label: "Asset Approval Lag", sub: "Old manual approval timeline" },
-          { val: "22%", label: "Rights Violations", sub: "Assets used past talent expiry dates" },
-          { val: "45,000+", label: "Uncatalogued Files", sub: "Dispersed global file debt" }
-        ],
+        tags: ["Enterprise DAM", "Global Governance", "Figma Design System", "Localization", "Multi-Brand"],
         deliverables: [
           {
             num: "01",
@@ -1767,97 +1414,19 @@ export const DiageoBrandTokens = {
               { label: "SEARCH SPEED", val: "320ms Global Latency", tag: "ELASTICSEARCH" },
               { label: "DOWNLOAD VELOCITY", val: "+85% Faster Retrieval", tag: "GLOBAL CDN" }
             ]
-          },
-          {
-            num: "02",
-            title: "Automated Rights & Talent Expiry UX",
-            image: null,
-            desc: "Engineered transparent visual rights tagging that prevents users from downloading assets whose commercial usage rights or territory permissions have lapsed.",
-            points: ["Clear warning badges and alternative asset recommendations", "Automated email alerts sent 30 days prior to license expiration"],
-            mockupBadge: "Licensing & Legal Compliance Engine",
-            status: "Rights Engine: ENFORCED",
-            items: [
-              { label: "LEGAL VIOLATIONS", val: "0 Breaches Post-Launch", tag: "RISK ELIMINATED" },
-              { label: "AUTOMATED PERMISSIONS", val: "180 Countries Automated", tag: "RULE ENGINE" },
-              { label: "AUDIT LOG TRACKING", val: "100% Download Traceability", tag: "COMPLIANT" }
-            ]
-          },
-          {
-            num: "03",
-            title: "Global Multi-Brand Token Architecture",
-            image: null,
-            desc: "Established a unified design system that allows partner commercial portals to reskin dynamically based on the current brand context while keeping accessibility consistent.",
-            points: ["Pre-validated typography and color contrast for every brand theme", "Zero designer-to-developer translation disconnect"],
-            mockupBadge: "Multi-Brand Design Tokens",
-            status: "Tokens: SYNCED",
-            items: [
-              { label: "BRAND THEMES", val: "12 Primary Brands", tag: "FIGMA VARIABLES" },
-              { label: "ACCESSIBILITY RATING", val: "WCAG 2.2 AA", tag: "AUDITED" },
-              { label: "FRONTEND DEPLOYMENT", val: "React & Next.js", tag: "STORYBOOK" }
-            ]
-          },
-          {
-            num: "04",
-            title: "Self-Service Campaign Bundler",
-            image: null,
-            desc: "Built a bulk-export cart feature allowing global distributors to package campaign materials, point-of-sale print kits, and social media cuts in one click.",
-            points: ["Dynamic ZIP generation tailored to destination specs", "Estimated 300+ engineering and marketing hours saved per quarter"],
-            mockupBadge: "Commercial Campaign Bundler",
-            status: "Campaign Kits: READY",
-            items: [
-              { label: "BULK DOWNLOAD TIME", val: "Under 60 seconds", tag: "AUTOMATED ZIP" },
-              { label: "DISTRIBUTOR ADOPTION", val: "94% Active Engagement", tag: "+28% INCREASE" },
-              { label: "REGIONAL SATISFACTION", val: "4.8 / 5.0 Rating", tag: "SURVEYED" }
-            ]
           }
-        ],
-        values: [
-          { stat: "+28%", title: "Distributor Adoption", desc: "Global third-party distributors adopted the portal as their primary sales kit channel." },
-          { stat: "0", title: "Talent Rights Breaches", desc: "Automated governance prevented accidental misuse of expired copyrighted imagery." },
-          { stat: "-70%", title: "Turnaround Time", desc: "Campaign asset turnaround dropped from 3 weeks to less than 24 hours." },
-          { stat: "180+", title: "Global Markets", desc: "Unified global brand compliance across every operating territory." }
-        ],
-        quoteText: "David gave our global brand team peace of mind. Consolidating thousands of assets across Johnnie Walker, Guinness and beyond into an accessible, beautiful tool was a huge win.",
-        quoteAuthor: "Global Head of Brand Experience • Diageo"
+        ]
       },
 
       royallondon: {
         id: "royallondon",
         company: "Royal London",
-        title: "Royal London",
-        subtitle: "Accessible Customer Pension & Wealth Dashboard",
+        eyebrow: "UX ARCHITECTURE & ACCESSIBILITY LEAD",
+        title: "Accessible Customer Pension & Wealth Dashboard.",
         description: "Redesigned end-to-end customer pension management under FCA Consumer Duty regulations, meeting WCAG 2.2 AAA standards for high legibility, screen reader flow, and mental model clarity.",
         role: "UX Architecture & Accessibility Lead",
-        standard: "WCAG 2.2 AAA & FCA Consumer Duty",
         coverImage: "desktop-1400x700-ladies-eating-ice-cream.webp",
-        coverTag: "WEALTH & REGULATED FINTECH",
-        coverHeading: "Accessible Personal Pension & Investment Management",
-        tokenFile: "RoyalLondonPensions.tokens.ts",
-        tokenCode: `// Pension Wealth Accessible Token Spec
-export const PensionDashboardTokens = {
-  fcaComplianceMode: true,
-  accessibilityProfile: {
-    wcagStandard: "AAA",
-    targetTypeScale: "Major Third (1.25)",
-    highContrastRatio: "7.1:1 Min Text"
-  },
-  financialVisualization: {
-    colorBlindSafePalettes: true,
-    tabularDataFallback: true
-  }
-};`,
-        challengeTitle: "Opaque financial language, high cognitive anxiety, new FCA Consumer Duty rules",
-        challengeDesc: "Customers managing personal pensions encountered opaque investment terminology, inaccessible data visualizations, and high customer support call volumes following new FCA Consumer Duty rules.",
-        challengeCards: [
-          { icon: "fa-gavel", color: "red", title: "FCA Consumer Duty Mandate", text: "New UK regulations required pension providers to prove customers understand fee structures and fund risk profiles." },
-          { icon: "fa-chart-pie", color: "amber", title: "Inaccessible Financial Charts", text: "Color-only pie charts and dense tables locked out visually impaired users and screen reader software." },
-          { icon: "fa-phone-volume", color: "emerald", title: "Overloaded Support Centers", text: "Simple tasks like fund switching and beneficiary updates accounted for over 40% of telephone inquiries." }
-        ],
-        challengeMetrics: [
-          { val: "40%", label: "Call Centre Inquiries", sub: "Routine allocation questions" },
-          { val: "18%", label: "Abandonment Rate", sub: "During multi-step fund switching" },
-          { val: "3.2 / 5", label: "Customer Comprehension", sub: "Measured in FCA baseline audit" }
-        ],
+        tags: ["FCA Consumer Duty", "WCAG 2.2 AAA", "Fintech Journeys", "Inclusive Forms", "Wealth Mgmt"],
         deliverables: [
           {
             num: "01",
@@ -1872,58 +1441,8 @@ export const PensionDashboardTokens = {
               { label: "MONTHLY ESTIMATED INCOME", val: "£1,420 / Month", tag: "INFLATION ADJUSTED" },
               { label: "ACCESSIBILITY COMPLIANCE", val: "WCAG 2.2 AAA Verified", tag: "AXE PASSED" }
             ]
-          },
-          {
-            num: "02",
-            title: "Guided 3-Step Fund Rebalancing Flow",
-            image: null,
-            desc: "Transformed an intimidating investment switching process into a reassuring step-by-step wizard with clear fee transparency and risk indicators.",
-            points: ["Side-by-side comparison of old vs new fund charges", "Confirmation summaries vetted for screen readers and high readability"],
-            mockupBadge: "Guided Fund Reallocation Stepper",
-            status: "Fund Flow: SECURE",
-            items: [
-              { label: "COMPLETION TIME", val: "3.2 mins (Down from 18m)", tag: "STREAMLINED" },
-              { label: "FEE TRANSPARENCY", val: "FCA Consumer Duty Approved", tag: "AUDITED" },
-              { label: "FLOW ABANDONMENT", val: "Dropped from 18% to 2.1%", tag: "SUCCESS" }
-            ]
-          },
-          {
-            num: "03",
-            title: "Accessible Financial Design System",
-            image: null,
-            desc: "Architected component standards ensuring all data tables, key metrics, and form controls have high-salience focus rings and proper ARIA semantics.",
-            points: ["Zero focus trap errors across all tested screen readers (NVDA, JAWS, VoiceOver)", "Adaptive font scaling up to 200% without horizontal scroll"],
-            mockupBadge: "Design Tokens & Inclusive Components",
-            status: "Tokens: VERIFIED",
-            items: [
-              { label: "FOCUS RING SALIENCE", val: "3px Solid Emerald (#10B981)", tag: "AAA SPEC" },
-              { label: "SCREEN READER AUDIT", val: "100% Pass Rate", tag: "INDEPENDENT TEST" },
-              { label: "COLORBLIND AUDIT", val: "Protanopia & Deuteranopia Safe", tag: "VERIFIED" }
-            ]
-          },
-          {
-            num: "04",
-            title: "Beneficiary & Life-Event Management",
-            image: null,
-            desc: "Streamlined emotionally sensitive life events such as adding expression-of-wish beneficiaries and bereavement notices into an empathetic, clear interface.",
-            points: ["Reduced validation rejections caused by address and identity mismatches", "Clear human guidance with direct option to connect with UK specialists"],
-            mockupBadge: "Beneficiary Expression of Wish",
-            status: "Records: ENCRYPTED",
-            items: [
-              { label: "FORM SUCCESS RATE", val: "97.8% First-Time Pass", tag: "+35% IMPROVEMENT" },
-              { label: "CUSTOMER CONFIDENCE", val: "4.9 / 5.0 Rating", tag: "SURVEYED" },
-              { label: "SUPPORT CALLS SAVED", val: "4,200 Calls / Quarter", tag: "REDUCED" }
-            ]
           }
-        ],
-        values: [
-          { stat: "-40%", title: "Support Call Volume", desc: "Fewer routine reallocation queries directed to phone lines." },
-          { stat: "100%", title: "FCA Compliance", desc: "Zero red flags during formal FCA Consumer Duty regulatory review." },
-          { stat: "AAA", title: "WCAG Accessibility", desc: "Highest tier digital accessibility achieved for elderly and impaired users." },
-          { stat: "+82%", title: "Customer Confidence", desc: "Customers scored their understanding of investment risk significantly higher." }
-        ],
-        quoteText: "David transformed how we approach regulated pension experiences. He proved that meeting rigorous accessibility standards actually makes the product better and clearer for everyone.",
-        quoteAuthor: "Head of Digital Experience • Royal London"
+        ]
       }
     };
 
@@ -1931,6 +1450,29 @@ export const PensionDashboardTokens = {
     let currentDeliverableSlide = 0;
     let isTransitioning = false;
     let showcaseRotationAngle = 0;
+    let isDarkMode = false;
+
+    function toggleTheme() {
+      isDarkMode = !isDarkMode;
+      applyTheme(isDarkMode);
+    }
+
+    function applyTheme(dark) {
+      isDarkMode = dark;
+      const htmlEl = document.documentElement;
+      const btnHome = document.getElementById('theme-toggle-home');
+      const btnCs = document.getElementById('theme-toggle-cs');
+
+      if (dark) {
+        htmlEl.classList.add('dark');
+        if (btnHome) btnHome.innerHTML = '<i class="fa-solid fa-sun text-amber-300"></i>';
+        if (btnCs) btnCs.innerHTML = '<i class="fa-solid fa-sun text-amber-300"></i>';
+      } else {
+        htmlEl.classList.remove('dark');
+        if (btnHome) btnHome.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        if (btnCs) btnCs.innerHTML = '<i class="fa-solid fa-moon"></i>';
+      }
+    }
 
     function openCaseStudy(studyKey) {
       if (isTransitioning) return;
@@ -1963,7 +1505,7 @@ export const PensionDashboardTokens = {
         csView.classList.remove('hidden');
         csView.classList.remove('view-enter-active');
         csView.classList.add('view-enter');
-        
+
         csBreadcrumb.classList.remove('hidden');
         csBreadcrumb.style.opacity = '0';
         csBreadcrumb.style.transition = 'opacity 0.3s ease';
@@ -2044,100 +1586,71 @@ export const PensionDashboardTokens = {
     function renderCaseStudyView(data) {
       document.getElementById('breadcrumb-current-study').textContent = data.company;
 
-      document.getElementById('cs-hero-title').textContent = data.title;
-      document.getElementById('cs-hero-subtitle').textContent = data.subtitle;
-      document.getElementById('cs-hero-desc').textContent = data.description;
-      document.getElementById('cs-badge-company').textContent = data.company;
-      document.getElementById('cs-badge-role').textContent = "Role: " + data.role;
+      const eyebrowEl = document.getElementById('cs-hero-eyebrow');
+      if (eyebrowEl) eyebrowEl.textContent = data.eyebrow || `${data.role?.toUpperCase() || ''} · ${data.company.toUpperCase()}`;
+      
+      const titleEl = document.getElementById('cs-hero-title');
+      if (titleEl) titleEl.textContent = data.title;
+      
+      const descEl = document.getElementById('cs-hero-desc');
+      if (descEl) descEl.textContent = data.description;
 
-      // Re-trigger the on-appear underline animation cleanly on open
-      const csUnderline = document.getElementById('cs-underline-bar');
-      if (csUnderline) {
-        csUnderline.classList.remove('hero-underline-anim');
-        void csUnderline.offsetWidth;
-        csUnderline.classList.add('hero-underline-anim');
+      // Update background card image with 10% opacity
+      const bgImgEl = document.getElementById('cs-hero-bg-img');
+      if (bgImgEl && data.coverImage) {
+        bgImgEl.src = data.coverImage;
+        bgImgEl.alt = `${data.company} Preview`;
       }
 
-      document.getElementById('cs-hero-cover-img').src = data.coverImage;
-      document.getElementById('cs-cover-tag').textContent = data.coverTag;
-      document.getElementById('cs-cover-heading').textContent = data.coverHeading;
-
-      document.getElementById('cs-challenge-title').textContent = data.challengeTitle;
-      document.getElementById('cs-challenge-p').textContent = data.challengeDesc;
-
-      const challengeGrid = document.getElementById('cs-challenge-grid');
-      challengeGrid.innerHTML = data.challengeCards.map(card => `
-        <div class="p-6 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
-          <div class="w-10 h-10 rounded-2xl bg-${card.color}-100 text-${card.color}-700 flex items-center justify-center text-sm font-bold mb-4">
-            <i class="fa-solid ${card.icon}"></i>
-          </div>
-          <h3 class="text-base font-bold text-[#0C231D] mb-1.5">${card.title}</h3>
-          <p class="text-xs sm:text-sm text-[#4E7368] leading-relaxed">${card.text}</p>
-        </div>
-      `).join('');
-
-      const challengeMetrics = document.getElementById('cs-challenge-metrics');
-      challengeMetrics.innerHTML = data.challengeMetrics.map((m, idx) => `
-        <div class="${idx > 0 ? 'border-t sm:border-t-0 sm:border-l border-white/10 pt-4 sm:pt-0 sm:pl-6' : ''}">
-          <div class="text-3xl sm:text-4xl font-extrabold text-mint-400 font-mono">${m.val}</div>
-          <div class="text-xs uppercase tracking-wider text-[#A5C9BD] font-bold mt-1">${m.label}</div>
-          <div class="text-[11px] text-[#7A9F93] mt-0.5">${m.sub}</div>
-        </div>
-      `).join('');
-
-      document.getElementById('cs-token-filename').textContent = data.tokenFile;
-      document.getElementById('cs-token-snippet').textContent = data.tokenCode;
+      // Dynamically render case study tags
+      const tagsContainer = document.getElementById('cs-hero-tags');
+      if (tagsContainer && data.tags) {
+        tagsContainer.innerHTML = data.tags.map(tag => `
+          <span class="px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">
+            ${tag}
+          </span>
+        `).join('');
+      }
 
       renderDeliverablesSlides(data.deliverables);
 
-      const valueCards = document.getElementById('cs-value-cards');
-      valueCards.innerHTML = data.values.map(v => `
-        <div class="bg-[#102E27] p-6 rounded-3xl border-spruce-inner text-center">
-          <div class="text-4xl sm:text-5xl font-extrabold text-mint-400 font-mono tracking-tight">${v.stat}</div>
-          <div class="text-sm font-bold text-white mt-2">${v.title}</div>
-          <p class="text-xs text-[#8EADA2] mt-2 leading-relaxed">${v.desc}</p>
-        </div>
-      `).join('');
-
-      document.getElementById('cs-quote-text').textContent = `"${data.quoteText}"`;
-      document.getElementById('cs-quote-author').textContent = data.quoteAuthor;
-
       const otherGrid = document.getElementById('cs-other-grid');
-      const otherKeys = Object.keys(caseStudies).filter(k => k !== data.id);
-      otherGrid.innerHTML = otherKeys.map(k => {
-        const item = caseStudies[k];
-        return `
-          <div onclick="openCaseStudy('${item.id}')" class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group cursor-pointer">
-            <div>
-              <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-folder-open"></i>
+      if (otherGrid) {
+        const otherKeys = Object.keys(caseStudies).filter(k => k !== data.id);
+        otherGrid.innerHTML = otherKeys.map(k => {
+          const item = caseStudies[k];
+          return `
+            <div onclick="openCaseStudy('${item.id}')" class="bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group cursor-pointer">
+              <div>
+                <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                  <i class="fa-solid fa-folder-open"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2 tracking-tight">${item.company}</h3>
+                <p class="text-[#8EADA2] text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">${item.title}</p>
               </div>
-              <h3 class="text-xl font-bold text-white mb-2 tracking-tight">${item.company}</h3>
-              <p class="text-[#8EADA2] text-xs sm:text-sm leading-relaxed mb-6 line-clamp-3">${item.subtitle}</p>
-            </div>
-            <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC] group-hover:text-white transition-colors">
-              <span>View Case Study</span>
-              <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <div class="inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC] group-hover:text-white transition-colors">
+                <span>View Case Study</span>
+                <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
               </div>
             </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      }
     }
 
-    // -----------------------------------------------------------------
-    // 3D Rotating Showcase Slider Architecture
-    // -----------------------------------------------------------------
     function renderDeliverablesSlides(deliverables) {
-      document.getElementById('cs-carousel-total').textContent = deliverables.length;
+      if (!deliverables || !deliverables.length) return;
+      const totalEl = document.getElementById('cs-carousel-total');
+      if (totalEl) totalEl.textContent = deliverables.length;
       showcaseRotationAngle = 0;
       setDeliverableSlide(0, 0);
     }
 
     function changeDeliverableSlide(delta) {
       const study = caseStudies[currentStudyKey];
-      if (!study || !study.deliverables.length) return;
+      if (!study || !study.deliverables || !study.deliverables.length) return;
       const count = study.deliverables.length;
       let newIdx = currentDeliverableSlide + delta;
       if (newIdx < 0) newIdx = count - 1;
@@ -2147,12 +1660,11 @@ export const PensionDashboardTokens = {
 
     function setDeliverableSlide(index, spinDirection = 1) {
       const study = caseStudies[currentStudyKey];
-      if (!study || !study.deliverables.length) return;
+      if (!study || !study.deliverables || !study.deliverables.length) return;
       const deliverables = study.deliverables;
       currentDeliverableSlide = index;
       const d = deliverables[index];
 
-      // 1. Accumulate 180deg 3D rotation with inertia scale
       const disc = document.getElementById('showcase-rotating-disc');
       if (disc) {
         showcaseRotationAngle += spinDirection * 180;
@@ -2162,79 +1674,93 @@ export const PensionDashboardTokens = {
         }, 300);
       }
 
-      // 2. Image vs Interactive Mockup Card handling
       const imgEl = document.getElementById('showcase-image');
       const fallbackCard = document.getElementById('showcase-fallback-card');
-      
-      if (d.image) {
-        imgEl.src = d.image;
-        imgEl.alt = d.title;
-        imgEl.classList.remove('hidden');
-        fallbackCard.classList.add('hidden');
-      } else {
-        imgEl.classList.add('hidden');
-        fallbackCard.classList.remove('hidden');
 
-        document.getElementById('showcase-badge-text').textContent = d.mockupBadge;
-        document.getElementById('showcase-status-text').textContent = d.status;
+      if (d.image) {
+        if (imgEl) {
+          imgEl.src = d.image;
+          imgEl.alt = d.title;
+          imgEl.classList.remove('hidden');
+        }
+        if (fallbackCard) fallbackCard.classList.add('hidden');
+      } else {
+        if (imgEl) imgEl.classList.add('hidden');
+        if (fallbackCard) fallbackCard.classList.remove('hidden');
+
+        const badgeText = document.getElementById('showcase-badge-text');
+        if (badgeText) badgeText.textContent = d.mockupBadge || '';
+        
+        const statusText = document.getElementById('showcase-status-text');
+        if (statusText) statusText.textContent = d.status || '';
 
         const itemsContainer = document.getElementById('showcase-items-list');
-        itemsContainer.innerHTML = d.items.map(it => `
-          <div class="flex items-center justify-between p-2 rounded-lg bg-[#0C231D] border border-white/5">
-            <div class="flex items-center gap-2">
-              <div class="w-2 h-2 rounded-full bg-mint-400"></div>
-              <div>
-                <div class="text-white font-bold text-[11px]">${it.label}</div>
-                <div class="text-[9px] text-[#86A89C]">${it.val}</div>
+        if (itemsContainer) {
+          itemsContainer.innerHTML = (d.items || []).map(it => `
+            <div class="flex items-center justify-between p-2 rounded-lg bg-[#0C231D] border border-white/5">
+              <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-mint-400"></div>
+                <div>
+                  <div class="text-white font-bold text-[11px]">${it.label}</div>
+                  <div class="text-[9px] text-[#86A89C]">${it.val}</div>
+                </div>
               </div>
+              <span class="px-2 py-0.5 rounded bg-mint-400/20 text-mint-400 text-[9px] font-bold">${it.tag}</span>
             </div>
-            <span class="px-2 py-0.5 rounded bg-mint-400/20 text-mint-400 text-[9px] font-bold">${it.tag}</span>
-          </div>
+          `).join('');
+        }
+      }
+
+      const badgeEl = document.getElementById('showcase-badge');
+      if (badgeEl) badgeEl.textContent = `Deliverable ${d.num}`;
+
+      const titleEl = document.getElementById('showcase-title');
+      if (titleEl) titleEl.textContent = d.title;
+
+      const descEl = document.getElementById('showcase-desc');
+      if (descEl) descEl.textContent = d.desc;
+
+      const pointsList = document.getElementById('showcase-points');
+      if (pointsList) {
+        pointsList.innerHTML = (d.points || []).map(pt => `
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check text-mint-400 mt-0.5"></i>
+            <span>${pt}</span>
+          </li>
         `).join('');
       }
 
-      // 3. Text copy updates
-      document.getElementById('showcase-badge').textContent = `Deliverable ${d.num}`;
-      document.getElementById('showcase-title').textContent = d.title;
-      document.getElementById('showcase-desc').textContent = d.desc;
-      
-      const pointsList = document.getElementById('showcase-points');
-      pointsList.innerHTML = d.points.map(pt => `
-        <li class="flex items-start gap-2">
-          <i class="fa-solid fa-check text-mint-400 mt-0.5"></i>
-          <span>${pt}</span>
-        </li>
-      `).join('');
-
-      // 4. Counter & Orbital Navigation Labels
-      document.getElementById('cs-carousel-curr').textContent = index + 1;
+      const currEl = document.getElementById('cs-carousel-curr');
+      if (currEl) currEl.textContent = index + 1;
 
       const prevIdx = (index - 1 + deliverables.length) % deliverables.length;
       const nextIdx = (index + 1) % deliverables.length;
       const orbitalBox = document.getElementById('showcase-orbital-labels');
-      
-      orbitalBox.innerHTML = `
-        <button onclick="changeDeliverableSlide(-1)" class="hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-70 hover:opacity-100">
-          <i class="fa-solid fa-arrow-left text-[10px]"></i>
-          <span>${deliverables[prevIdx].title.split(' ').slice(0, 2).join(' ')}</span>
-        </button>
-        <span class="px-2.5 py-0.5 rounded-full bg-mint-400/20 text-mint-300 border border-mint-400/30 text-[10px] font-mono">
-          ${d.num} / 0${deliverables.length}
-        </span>
-        <button onclick="changeDeliverableSlide(1)" class="hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-70 hover:opacity-100">
-          <span>${deliverables[nextIdx].title.split(' ').slice(0, 2).join(' ')}</span>
-          <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </button>
-      `;
 
-      // 5. Dots
+      if (orbitalBox) {
+        orbitalBox.innerHTML = `
+          <button onclick="changeDeliverableSlide(-1)" class="hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-70 hover:opacity-100">
+            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            <span>${deliverables[prevIdx].title.split(' ').slice(0, 2).join(' ')}</span>
+          </button>
+          <span class="px-2.5 py-0.5 rounded-full bg-mint-400/20 text-mint-300 border border-mint-400/30 text-[10px] font-mono">
+            ${d.num} / 0${deliverables.length}
+          </span>
+          <button onclick="changeDeliverableSlide(1)" class="hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-70 hover:opacity-100">
+            <span>${deliverables[nextIdx].title.split(' ').slice(0, 2).join(' ')}</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        `;
+      }
+
       const dotsBox = document.getElementById('showcase-dots');
-      dotsBox.innerHTML = deliverables.map((_, i) => `
-        <button onclick="setDeliverableSlide(${i}, ${i > index ? 1 : -1})" class="${i === index ? 'w-8 h-2 rounded-full bg-mint-400' : 'w-2 h-2 rounded-full bg-spruce-700 hover:bg-spruce-600'} transition-all focus:outline-none" aria-label="Slide ${i + 1}"></button>
-      `).join('');
+      if (dotsBox) {
+        dotsBox.innerHTML = deliverables.map((_, i) => `
+          <button onclick="setDeliverableSlide(${i}, ${i > index ? 1 : -1})" class="${i === index ? 'w-8 h-2 rounded-full bg-mint-400' : 'w-2 h-2 rounded-full bg-spruce-700 hover:bg-spruce-600'} transition-all focus:outline-none" aria-label="Slide ${i + 1}"></button>
+        `).join('');
+      }
     }
 
-    // Swipe / Drag Gestures for the 3D rotating disc
     let isShowcaseDragging = false;
     let showcaseStartX = 0;
 
@@ -2269,7 +1795,6 @@ export const PensionDashboardTokens = {
       }, { passive: true });
     }
 
-    // Keyboard Arrow Controls
     document.addEventListener('keydown', (e) => {
       const csView = document.getElementById('view-casestudy');
       if (csView && !csView.classList.contains('hidden')) {
@@ -2277,14 +1802,7 @@ export const PensionDashboardTokens = {
           changeDeliverableSlide(1);
         } else if (e.key === 'ArrowLeft') {
           changeDeliverableSlide(-1);
-        }
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const csView = document.getElementById('view-casestudy');
-        if (!csView.classList.contains('hidden')) {
+        } else if (e.key === 'Escape') {
           showHomepage('portfolio');
         }
       }
@@ -2304,7 +1822,7 @@ export const PensionDashboardTokens = {
 
       cards.forEach(card => {
         const cardCategories = card.getAttribute('data-category');
-        if (category === 'all' || cardCategories.includes(category)) {
+        if (category === 'all' || (cardCategories && cardCategories.includes(category))) {
           card.classList.remove('hidden');
         } else {
           card.classList.add('hidden');
@@ -2312,61 +1830,14 @@ export const PensionDashboardTokens = {
       });
     }
 
-    window.addEventListener('load', () => {
-      const img = document.getElementById('hero-profile-img');
-      const canvas = document.getElementById('hero-cutout-canvas');
-      if (!img || !canvas) return;
-
-      const processCutout = () => {
-        try {
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return;
-          canvas.width = img.naturalWidth || 600;
-          canvas.height = img.naturalHeight || 600;
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          const data = imgData.data;
-
-          for (let i = 0; i < data.length; i += 4) {
-            const r = data[i];
-            const g = data[i + 1];
-            const b = data[i + 2];
-            
-            const brightness = (r + g + b) / 3;
-            const diffRG = Math.abs(r - g);
-            const diffGB = Math.abs(g - b);
-            const diffRB = Math.abs(r - b);
-            const isDesaturated = diffRG < 24 && diffGB < 28 && diffRB < 28;
-
-            if (brightness > 235 || (brightness > 165 && isDesaturated)) {
-              const alphaRatio = Math.max(0, 1 - (brightness - 165) / 55);
-              data[i + 3] = Math.min(data[i + 3], Math.floor(alphaRatio * 255));
-            }
-          }
-
-          ctx.putImageData(imgData, 0, 0);
-          canvas.classList.remove('hidden');
-          img.classList.add('hidden');
-        } catch (e) {
-          console.warn("Using multiply blend fallback:", e);
-        }
-      };
-
-      if (img.complete) {
-        processCutout();
-      } else {
-        img.onload = processCutout;
-      }
-    });
-
     function handleContactSubmit(e) {
       e.preventDefault();
       const successMsg = document.getElementById('contact-success');
-      successMsg.classList.remove('hidden');
-      document.getElementById('contact-email').value = '';
+      if (successMsg) successMsg.classList.remove('hidden');
+      const input = document.getElementById('contact-email');
+      if (input) input.value = '';
       setTimeout(() => {
-        successMsg.classList.add('hidden');
+        if (successMsg) successMsg.classList.add('hidden');
       }, 5000);
     }
   </script>
