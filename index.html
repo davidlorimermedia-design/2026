@@ -103,10 +103,10 @@
 
     /* Light mode navigation styling */
     html:not(.dark) .theme-nav-bar {
-      background-color: rgba(255, 255, 255, 0.94) !important;
+      background-color: #FFFFFF !important;
       color: #0C231D !important;
       border-color: rgba(16, 185, 129, 0.25) !important;
-      box-shadow: 0 10px 30px -4px rgba(12, 35, 29, 0.12) !important;
+      box-shadow: 0 10px 30px -4px rgba(12, 35, 29, 0.1) !important;
     }
     html:not(.dark) .theme-nav-bar nav a {
       color: #163B32 !important;
@@ -126,7 +126,7 @@
       background-color: #D2E4DA !important;
     }
 
-    /* Light mode Breadcrumb Bar contrast fixes */
+    /* Light mode Breadcrumb Bar */
     html:not(.dark) #casestudy-breadcrumb-bar nav button {
       color: #144237 !important;
     }
@@ -134,10 +134,10 @@
       color: #064E3B !important;
     }
     html:not(.dark) #casestudy-breadcrumb-bar #breadcrumb-current-study {
-      color: #044E39 !important; /* Deep Forest Emerald - exceeds 8.5:1 against light bar */
+      color: #044E39 !important;
     }
     html:not(.dark) #casestudy-breadcrumb-bar .text-slate-400 {
-      color: #4D7268 !important; /* High-contrast separator */
+      color: #4D7268 !important;
     }
 
     /* ESC key badge adaptive styling */
@@ -170,121 +170,119 @@
       border-color: rgba(52, 211, 153, 0.25) !important;
     }
 
-    /* In dark mode, adapt light surface cards to deep elevated spruce */
+    /* STRICT LIGHT MODE WHITE CONTAINERS */
+    html:not(.dark) .theme-adaptive-dark-card,
+    html:not(.dark) .services-container-ref,
+    html:not(.dark) .service-grid-card,
+    html:not(.dark) #showcase-card-frame,
+    html:not(.dark) .stage-inner-box,
+    html:not(.dark) #showcase-fallback-card,
+    html:not(.dark) #showcase-rotating-disc,
+    html:not(.dark) .theme-adaptive-inner-card,
+    html:not(.dark) #cs-hero-card,
+    html:not(.dark) #contact .contact-card-container,
+    html:not(.dark) .white-container-light {
+      background-color: #FFFFFF !important;
+      background-image: none !important;
+      border-color: #E1EDE7 !important;
+      box-shadow: 0 10px 30px -5px rgba(29, 63, 55, 0.08) !important;
+    }
+
+    /* Dark mode container overrides */
+    html.dark .services-container-ref {
+      background: radial-gradient(circle at 10% 20%, rgba(16, 46, 39, 0.5) 0%, #0C231D 70%, #061310 100%) !important;
+      border-color: rgba(52, 211, 153, 0.22) !important;
+    }
+    html.dark .service-grid-card {
+      background: rgba(12, 35, 29, 0.75) !important;
+      border-color: rgba(52, 211, 153, 0.2) !important;
+    }
+    html.dark .service-grid-card:hover {
+      background: #102E27 !important;
+      border-color: rgba(52, 211, 153, 0.4) !important;
+      box-shadow: 0 16px 32px -8px rgba(6, 19, 16, 0.6) !important;
+    }
     html.dark .bg-white {
       background-color: #0C231D !important;
       color: #E2ECE8 !important;
     }
-    html.dark .border-\[\#E1EDE7\],
-    html.dark .border-\[\#E1ECE6\],
-    html.dark .border-emerald-100,
-    html.dark .border-emerald-100\/80,
-    html.dark .border-slate-200 {
-      border-color: rgba(52, 211, 153, 0.22) !important;
+    html.dark .theme-adaptive-inner-card {
+      background-color: #102E27 !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
     }
-    html.dark .text-\[\#0C231D\],
-    html.dark .text-brand-dark {
+    html.dark .theme-adaptive-dark-card {
+      background-color: #0C231D !important;
+      border-color: rgba(52, 211, 153, 0.22) !important;
+      box-shadow: 0 24px 48px -12px rgba(6, 19, 16, 0.5) !important;
+    }
+    html.dark #showcase-card-frame {
+      background-color: #0C231D !important;
+    }
+    html.dark .stage-inner-box {
+      background-color: #102E27 !important;
+    }
+    html.dark #cs-hero-card {
+      background-color: #0C231D !important;
+    }
+
+    /* Typography & Contrast */
+    html.dark .text-brand-dark,
+    html.dark .text-[#0C231D] {
       color: #FFFFFF !important;
     }
-    /* Brand forest text (e.g. 'START THE CONVERSATION', 'Let's Discuss', and section titles) must brighten to high-contrast mint in dark mode */
     html.dark .text-brand-forest {
       color: #34D399 !important;
     }
-    html.dark .text-\[\#466B60\],
-    html.dark .text-\[\#4E7368\],
+    html.dark .text-[#466B60],
+    html.dark .text-[#4E7368],
     html.dark .text-slate-600,
     html.dark .text-slate-700 {
       color: #C6E2D6 !important;
-    }
-    html.dark .bg-\[\#F7FAF8\],
-    html.dark .bg-brand-cream,
-    html.dark .bg-slate-100 {
-      background-color: #102E27 !important;
-      color: #E2ECE8 !important;
-    }
-    html.dark .bg-\[\#EAF4F0\],
-    html.dark .bg-emerald-100,
-    html.dark .bg-emerald-50 {
-      background-color: rgba(52, 211, 153, 0.15) !important;
-      color: #6EE7B7 !important;
     }
     html.dark .bg-brand-light {
       background-color: #163B32 !important;
       color: #A0C5B7 !important;
     }
-    html.dark .text-slate-500,
-    html.dark .text-slate-400 {
-      color: #9DBFB3 !important;
-    }
-    html.dark .border-brand-emerald {
-      border-color: #34D399 !important;
-    }
-
-    /* Improved high-contrast green shades for Light Mode (WCAG AA Compliant) */
     html:not(.dark) .text-brand-forest {
-      color: #0E382E !important; /* Deep Pine Green (passes 9.2:1 contrast against light background) */
+      color: #0E382E !important;
     }
     html:not(.dark) .text-slate-600 {
-      color: #24443B !important; /* Dark Forest Sage (passes 7.1:1 contrast) */
+      color: #24443B !important;
     }
-    html:not(.dark) .text-\[\#466B60\],
-    html:not(.dark) .text-\[\#4E7368\] {
-      color: #1F453B !important; /* WCAG AAA compliant text */
+    html:not(.dark) .text-[#466B60],
+    /* Deliverables stage & showcase cards */
+    html:not(.dark) #showcase-card-frame {
+      background-color: #FFFFFF !important;
+      color: #102922 !important;
+      border-color: #E1EDE7 !important;
+      box-shadow: 0 10px 30px -5px rgba(29, 63, 55, 0.08) !important;
     }
-    html:not(.dark) .bg-brand-light {
-      background-color: #E3EDE7 !important;
-      color: #0A2B23 !important;
+    html:not(.dark) #showcase-card-frame .radial-ambient-overlay {
+      display: none !important;
     }
-    html:not(.dark) .bg-emerald-100 {
-      background-color: #DCF2E7 !important;
-      color: #083329 !important;
-      border-color: #B2E2CE !important;
+    html:not(.dark) #showcase-card-frame h2,
+    html:not(.dark) #showcase-card-frame h3 {
+      color: #0C231D !important;
     }
-
-    /* WCAG AA/AAA compliant greens for headings, badges, and accents in light mode */
-    html:not(.dark) .theme-adaptive-dark-card .text-brand-mint {
-      color: #094E3B !important; /* Deep lustrous emerald (contrast ratio > 7:1 against white/light surfaces) */
+    html:not(.dark) #showcase-desc {
+      color: #24443B !important;
+    }
+    html:not(.dark) #showcase-points {
+      color: #1F453B !important;
+    }
+    html:not(.dark) #showcase-points i {
+      color: #059669 !important;
     }
     html:not(.dark) .badge-core-capabilities {
       background-color: #E6F4ED !important;
       color: #0A3C2F !important;
       border-color: #BBE3D1 !important;
     }
-    html:not(.dark) .theme-adaptive-tag .text-emerald-300 {
-      color: #064E3B !important;
+    html:not(.dark) .badge-core-capabilities span.w-2 {
+      background-color: #059669 !important;
     }
 
-    /* Measurable Value Delivered metrics & cards contrast fixes (WCAG AAA) */
-    html:not(.dark) .stat-highlight-number {
-      color: #064E3B !important; /* Deep Pine Emerald: > 9:1 contrast ratio against light cards */
-    }
-    html.dark .stat-highlight-number {
-      color: #34D399 !important; /* Bright Mint in dark mode */
-    }
-    html:not(.dark) .stat-card-title {
-      color: #061310 !important; /* Pitch Dark Spruce */
-    }
-    html:not(.dark) .stat-card-desc {
-      color: #1F453B !important; /* Deep Spruce Sage */
-    }
-    html:not(.dark) .quote-highlight-vp {
-      background-color: #064E3B !important;
-      color: #FFFFFF !important;
-    }
-
-    /* Contact form card adaptive styling */
-    html:not(.dark) #contact .contact-card-container {
-      background-color: #FFFFFF !important;
-      border-color: #E1EDE7 !important;
-      box-shadow: 0 10px 30px -5px rgba(29, 63, 55, 0.08) !important;
-    }
-    html.dark #contact .contact-card-container {
-      background-color: #0C231D !important;
-      border-color: rgba(52, 211, 153, 0.22) !important;
-      box-shadow: 0 24px 48px -12px rgba(6, 19, 16, 0.5) !important;
-    }
-
-    /* Contact form elements & inputs in dark mode */
+    /* Contact inputs */
     html.dark input.contact-input,
     html.dark textarea.contact-input,
     html.dark select.contact-input {
@@ -299,7 +297,7 @@
     html:not(.dark) input.contact-input,
     html:not(.dark) textarea.contact-input,
     html:not(.dark) select.contact-input {
-      background-color: #F5F8F6 !important;
+      background-color: #FFFFFF !important;
       color: #0C231D !important;
       border-color: #C6E2D6 !important;
     }
@@ -307,217 +305,17 @@
     html:not(.dark) textarea.contact-input:focus,
     html:not(.dark) select.contact-input:focus {
       border-color: #10B981 !important;
-      background-color: #FFFFFF !important;
     }
     html.dark .btn-contact-submit {
       background-color: #34D399 !important;
       color: #061310 !important;
       font-weight: 800 !important;
     }
-    html.dark .btn-contact-submit:hover {
-      background-color: #10B981 !important;
-    }
     html:not(.dark) .btn-contact-submit {
       background-color: #0C2B23 !important;
       color: #FFFFFF !important;
     }
-    html:not(.dark) .btn-contact-submit:hover {
-      background-color: #051A14 !important;
-    }
 
-    /* Light mode enforcement: Ensure elements hard-coded to dark backgrounds adapt when dark mode is off */
-    html:not(.dark) .theme-adaptive-dark-card {
-      background-color: #FFFFFF !important;
-      color: #102922 !important;
-      border-color: #E1EDE7 !important;
-      box-shadow: 0 10px 30px -5px rgba(29, 63, 55, 0.08) !important;
-    }
-    html:not(.dark) .theme-adaptive-dark-card h2,
-    html:not(.dark) .theme-adaptive-dark-card h3,
-    html:not(.dark) .theme-adaptive-dark-card h4 {
-      color: #0C231D !important;
-    }
-    html:not(.dark) .theme-adaptive-dark-card p {
-      color: #466B60 !important;
-    }
-    html:not(.dark) .theme-adaptive-inner-card {
-      background-color: #F7FAF8 !important;
-      color: #102922 !important;
-      border-color: #E1ECE6 !important;
-    }
-    html:not(.dark) .theme-adaptive-inner-card h3 {
-      color: #0C231D !important;
-    }
-    html:not(.dark) .theme-adaptive-inner-card p {
-      color: #4E7368 !important;
-    }
-    /* Case study deliverables stage & interactive cards in light mode */
-    html:not(.dark) #showcase-card-frame {
-      background-color: #FFFFFF !important;
-      color: #102922 !important;
-      border-color: #E1EDE7 !important;
-      box-shadow: 0 10px 30px -5px rgba(29, 63, 55, 0.08) !important;
-    }
-    html:not(.dark) #showcase-card-frame h2,
-    html:not(.dark) #showcase-card-frame h3 {
-      color: #0C231D !important;
-    }
-    html:not(.dark) #showcase-card-frame .stage-inner-box {
-      background-color: #F7FAF8 !important;
-      border-color: #E1ECE6 !important;
-    }
-    html:not(.dark) #showcase-card-frame .glass-showcase-btn {
-      background-color: #E8EFEA !important;
-      color: #0A3C2F !important;
-      border-color: #BBE3D1 !important;
-    }
-    html:not(.dark) #showcase-card-frame .glass-showcase-btn:hover {
-      background-color: #D2E4DA !important;
-    }
-    html:not(.dark) #showcase-fallback-card {
-      background-color: #FFFFFF !important;
-      color: #0C231D !important;
-    }
-    html:not(.dark) #showcase-fallback-card .bg-\[\#0C231D\] {
-      background-color: #F0F6F3 !important;
-      border-color: #E1ECE6 !important;
-    }
-    html:not(.dark) #showcase-fallback-card .text-white {
-      color: #0C231D !important;
-    }
-    html:not(.dark) #showcase-fallback-card .text-\[\#86A89C\] {
-      color: #386B5D !important;
-    }
-    html:not(.dark) #showcase-rotating-disc {
-      background-color: #F7FAF8 !important;
-      border-color: #BBE3D1 !important;
-    }
-    html:not(.dark) #showcase-desc {
-      color: #24443B !important;
-    }
-    html:not(.dark) #showcase-points {
-      color: #1F453B !important;
-    }
-    html:not(.dark) #showcase-points i {
-      color: #059669 !important;
-    }
-    html:not(.dark) #showcase-orbital-labels {
-      color: #1F453B !important;
-    }
-    html:not(.dark) #showcase-orbital-labels button {
-      color: #0E382E !important;
-    }
-    html:not(.dark) #showcase-orbital-labels span.font-mono {
-      background-color: #E6F4ED !important;
-      color: #0A3C2F !important;
-      border-color: #BBE3D1 !important;
-    }
-    html:not(.dark) #cs-hero-card {
-      background-color: #FFFFFF !important;
-      color: #102922 !important;
-      border-color: #E1EDE7 !important;
-      box-shadow: 0 10px 30px -5px rgba(29, 63, 55, 0.08) !important;
-    }
-    html:not(.dark) #cs-hero-card h1,
-    html:not(.dark) #cs-hero-card #cs-hero-title {
-      color: #0C231D !important;
-    }
-    html:not(.dark) #cs-hero-card #cs-hero-desc {
-      color: #24443B !important;
-    }
-    html:not(.dark) #cs-hero-card #cs-hero-eyebrow {
-      color: #056B4E !important;
-    }
-    html:not(.dark) #cs-hero-bg-overlay {
-      background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent, rgba(255, 255, 255, 0.8)) !important;
-    }
-    html:not(.dark) #cs-hero-tags span {
-      background-color: #EAF4F0 !important;
-      color: #0A3C2F !important;
-      border-color: #C6E2D6 !important;
-    }
-    html:not(.dark) #cs-systems-thinking-section .theme-adaptive-dark-card {
-      background: #FFFFFF !important;
-      border-color: #D2E4DA !important;
-      box-shadow: 0 10px 30px -5px rgba(29, 63, 55, 0.08) !important;
-    }
-    html:not(.dark) #cs-systems-thinking-section blockquote {
-      color: #061310 !important; /* Pitch Dark Spruce for maximum contrast */
-    }
-    html:not(.dark) #cs-systems-thinking-section p {
-      color: #163B32 !important; /* Deep accessible pine (exceeds 8:1 contrast) */
-    }
-    html:not(.dark) #cs-systems-thinking-section .theme-adaptive-tag {
-      background-color: #E6F4ED !important;
-      color: #044E39 !important;
-      border-color: #BBE3D1 !important;
-    }
-    html:not(.dark) #cs-systems-thinking-section .theme-adaptive-tag span.w-2 {
-      background-color: #059669 !important;
-    }
-
-    /* Deliverables Carousel Header & Disclaimer Light Mode Contrast */
-    html:not(.dark) #cs-deliverables-section .badge-core-capabilities {
-      background-color: #E6F4ED !important;
-      color: #044E39 !important;
-      border-color: #BBE3D1 !important;
-    }
-    html:not(.dark) #cs-deliverables-section .badge-core-capabilities span.w-2 {
-      background-color: #059669 !important;
-    }
-    html:not(.dark) #cs-deliverables-section h2 {
-      color: #061310 !important;
-    }
-    html:not(.dark) #cs-deliverables-section h2 .text-brand-mint {
-      color: #04523C !important; /* Replaces washed-out mint with rich high-contrast pine emerald */
-    }
-    html:not(.dark) #cs-deliverables-section p.disclaimer-text {
-      color: #1D493E !important; /* Clear, readable dark green (passes > 7:1) */
-    }
-    html:not(.dark) #cs-deliverables-section p.disclaimer-text i {
-      color: #059669 !important;
-    }
-    html:not(.dark) #cs-deliverables-section .carousel-counter {
-      color: #1D493E !important;
-      font-weight: 700 !important;
-    }
-    html:not(.dark) #cs-deliverables-section .carousel-counter #cs-carousel-curr {
-      color: #061310 !important;
-    }
-    html:not(.dark) #cs-deliverables-section #showcase-title {
-      color: #061310 !important;
-    }
-
-    /* Accessible testimonial text & attributes in light mode */
-    html:not(.dark) .theme-adaptive-inner-card .testimonial-quote {
-      color: #163B32 !important; /* Deep Spruce Green (passes >7:1 WCAG AAA against light card) */
-    }
-    html:not(.dark) .theme-adaptive-inner-card .testimonial-author {
-      color: #061310 !important; /* Pitch Dark Spruce (passes >14:1 contrast) */
-    }
-    html:not(.dark) .theme-adaptive-inner-card .testimonial-role {
-      color: #144237 !important; /* High-contrast Forest Slate (passes >6:1 contrast) */
-    }
-    html:not(.dark) .theme-adaptive-inner-card .testimonial-stars {
-      color: #059669 !important; /* Vibrant Emerald star icons */
-    }
-    html:not(.dark) .theme-adaptive-inner-card .testimonial-avatar {
-      background-color: #E2EFE8 !important;
-      color: #0C231D !important;
-      border-color: #BBE3D1 !important;
-    }
-    html:not(.dark) .theme-adaptive-inner-card .testimonial-divider {
-      border-color: rgba(29, 73, 62, 0.15) !important;
-    }
-
-    html.dark .theme-adaptive-inner-card .testimonial-author {
-      color: #FFFFFF !important;
-    }
-    html.dark .theme-adaptive-inner-card .testimonial-role {
-      color: #A0C5B7 !important;
-    }
-
-    /* Case study card category chip styling for both themes */
     .project-card-chip {
       background-color: #E2EFE8;
       color: #0A3C2F;
@@ -530,54 +328,7 @@
       border-color: rgba(52, 211, 153, 0.28) !important;
     }
 
-    html:not(.dark) .theme-adaptive-tag {
-      background-color: #EAF4F0 !important;
-      color: #1D493E !important;
-      border-color: #C6E2D6 !important;
-    }
-    html:not(.dark) .theme-adaptive-btn-subtle {
-      background-color: #E2EFE8 !important;
-      color: #0C231D !important;
-      border-color: #BBE3D1 !important;
-    }
-    html:not(.dark) .theme-adaptive-btn-subtle:hover {
-      background-color: #D2E4DA !important;
-      color: #061310 !important;
-    }
-    html:not(.dark) .theme-adaptive-btn-subtle span {
-      color: #0C231D !important;
-      font-weight: 700 !important;
-    }
-    html:not(.dark) .theme-adaptive-btn-subtle .arrow-circle {
-      background-color: #044E39 !important;
-      color: #FFFFFF !important;
-    }
-
-    /* Explore Other Case Studies cards in light mode */
-    html:not(.dark) #cs-other-studies-section h2 .text-brand-mint {
-      color: #04523C !important;
-    }
-    html:not(.dark) #cs-other-studies-section .folder-icon-box {
-      background-color: #E2EFE8 !important;
-      color: #04523C !important;
-      border-color: #BBE3D1 !important;
-    }
-
-    ::-webkit-scrollbar {
-      width: 9px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #F5F8F6;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1D493E;
-      border-radius: 9999px;
-      border: 2px solid #F5F8F6;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #34D399;
-    }
-
+    /* Marquee */
     @keyframes marquee {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -637,7 +388,7 @@
       box-shadow: 0 6px 20px -2px rgba(52, 211, 153, 0.45);
     }
 
-    /* Staggered on-appear animation for Services Section */
+    /* Staggered on-appear animation */
     @keyframes serviceFadeUp {
       0% {
         opacity: 0;
@@ -648,35 +399,23 @@
         transform: translateY(0);
       }
     }
-
     .service-card-anim {
       animation: serviceFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
-    .service-card-anim:nth-child(1) { animation-delay: 0.12s; }
-    .service-card-anim:nth-child(2) { animation-delay: 0.24s; }
-    .service-card-anim:nth-child(3) { animation-delay: 0.36s; }
+    .service-card-anim:nth-child(1) { animation-delay: 0.08s; }
+    .service-card-anim:nth-child(2) { animation-delay: 0.16s; }
+    .service-card-anim:nth-child(3) { animation-delay: 0.24s; }
+    .service-card-anim:nth-child(4) { animation-delay: 0.32s; }
+    .service-card-anim:nth-child(5) { animation-delay: 0.40s; }
+    .service-card-anim:nth-child(6) { animation-delay: 0.48s; }
 
-    /* Services Section Architecture (Matching Design Reference) */
-    .services-container-ref {
-      background: radial-gradient(circle at 10% 20%, rgba(220, 242, 231, 0.45) 0%, rgba(245, 248, 246, 0.9) 60%, #F5F8F6 100%);
-      border: 1px solid rgba(16, 185, 129, 0.18);
+    .service-grid-card {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    html.dark .services-container-ref {
-      background: radial-gradient(circle at 10% 20%, rgba(16, 46, 39, 0.5) 0%, #0C231D 70%, #061310 100%) !important;
-      border: 1px solid rgba(52, 211, 153, 0.22) !important;
-    }
-    .service-col-divider {
-      border-right: 1px solid rgba(16, 185, 129, 0.16);
-    }
-    html.dark .service-col-divider {
-      border-right-color: rgba(52, 211, 153, 0.18);
-    }
-
-    .border-spruce-subtle {
-      border: 1px solid rgba(52, 211, 153, 0.15);
-    }
-    .border-spruce-inner {
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .service-grid-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px -6px rgba(29, 63, 55, 0.12);
+      border-color: rgba(16, 185, 129, 0.35);
     }
 
     .view-container {
@@ -685,26 +424,22 @@
                   filter 0.38s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
-
     .view-enter {
       opacity: 0;
       transform: translateY(14px) scale(0.995);
       filter: blur(2px);
     }
-
     .view-enter-active {
       opacity: 1;
       transform: translateY(0) scale(1);
       filter: blur(0);
     }
-
     .view-exit {
       opacity: 0;
       transform: translateY(-10px) scale(0.99);
       filter: blur(2px);
       pointer-events: none;
     }
-
     #transition-curtain {
       pointer-events: none;
       opacity: 0;
@@ -715,7 +450,6 @@
       opacity: 0.18;
     }
 
-    /* 3D Rotating Showcase Disc */
     .rotating-showcase-disc {
       transition: transform 0.85s cubic-bezier(0.25, 1, 0.35, 1);
       transform-origin: center center;
@@ -728,12 +462,19 @@
     .glass-showcase-btn {
       background: rgba(16, 46, 39, 0.65);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(52, 211, 153, 0.25);
     }
     .glass-showcase-btn:hover {
       background: rgba(22, 59, 50, 0.85);
       border-color: rgba(52, 211, 153, 0.5);
+    }
+    html:not(.dark) .glass-showcase-btn {
+      background-color: #E8EFEA !important;
+      color: #0A3C2F !important;
+      border-color: #BBE3D1 !important;
+    }
+    html:not(.dark) .glass-showcase-btn:hover {
+      background-color: #D2E4DA !important;
     }
   </style>
 </head>
@@ -767,7 +508,6 @@
 
       <!-- Action Button & Theme Toggle -->
       <div class="flex items-center gap-2.5 sm:gap-3">
-        <!-- Theme Toggle Button -->
         <button 
           onclick="toggleTheme()" 
           id="theme-toggle-home" 
@@ -808,7 +548,6 @@
       </nav>
 
       <div class="flex items-center gap-2">
-        <!-- Theme Toggle Button in Breadcrumb Nav -->
         <button 
           onclick="toggleTheme()" 
           id="theme-toggle-cs" 
@@ -830,7 +569,7 @@
   </header>
 
   <!-- ================================================================= -->
-  <!-- VIEW 1: PORTFOLIO HOMEPAGE CONTAINER                             -->
+  <!-- VIEW 1: PORTFOLIO HOMEPAGE CONTAINER                              -->
   <!-- ================================================================= -->
   <main id="view-homepage" class="w-full view-container view-enter-active">
     
@@ -884,16 +623,11 @@
               Strategic UX leader with <strong>8+ years</strong> driving digital transformation in complex, regulated industries. I balance engineering constraints and human needs to design intuitive, accessible, high-impact enterprise products.
             </p>
 
+            <!-- Location only: chips next to location removed as requested -->
             <div class="mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs font-semibold">
-              <span class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-brand-forest border border-emerald-200 flex items-center gap-1.5">
+              <span class="px-3.5 py-1.5 rounded-full bg-emerald-100 text-brand-forest border border-emerald-200 flex items-center gap-1.5 shadow-xs">
                 <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
                 Glasgow & Edinburgh, UK
-              </span>
-              <span class="px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200 shadow-sm">
-                Enterprise Design Systems
-              </span>
-              <span class="px-3 py-1 rounded-full bg-white text-slate-700 border border-slate-200 shadow-sm">
-                WCAG 2.2 AAA & EAA Certified
               </span>
             </div>
           </div>
@@ -902,9 +636,9 @@
       </div>
     </section>
 
-    <!-- 2. MY SERVICES -->
+    <!-- 2. MY SERVICES (6 SERVICES: 3x2 BALANCED GRID) -->
     <section id="services" class="max-w-6xl mx-auto px-4 sm:px-6 my-10 sm:my-14">
-      <div class="services-container-ref rounded-4xl sm:rounded-5xl p-7 sm:p-10 md:p-12 shadow-card transition-colors duration-300 relative overflow-hidden">
+      <div class="services-container-ref rounded-4xl sm:rounded-5xl p-7 sm:p-10 md:p-12 shadow-card transition-colors duration-300 relative overflow-hidden border border-[#E1EDE7] bg-white">
         
         <!-- Header Bar -->
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 relative z-10 gap-6">
@@ -925,133 +659,197 @@
           </p>
         </div>
 
-        <!-- 3 Columns with Visual Blueprint Line Art Backgrounds and Vertical Separators -->
-        <div class="grid grid-cols-1 md:grid-cols-3 relative z-10">
+        <!-- 6 Capability Cards Grid (3 cols on desktop) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 relative z-10">
           
-          <!-- Column 01: Design Systems & Tokens -->
-          <div class="service-card-anim service-col-divider relative flex flex-col justify-between p-4 sm:p-6 md:pr-8 min-h-[360px] overflow-hidden">
-            <!-- Background Vector Architectural Art -->
-            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-center opacity-10 dark:opacity-[0.08] translate-x-4">
-              <svg class="w-full h-full text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 280 280" fill="none" stroke-width="1.2">
-                <!-- Wireframe box & tree nodes -->
-                <rect x="50" y="25" width="105" height="65" rx="5" stroke-dasharray="3 3"/>
-                <line x1="50" y1="45" x2="155" y2="45" />
-                <line x1="50" y1="25" x2="155" y2="90" stroke-width="0.7"/>
-                <line x1="155" y1="25" x2="50" y2="90" stroke-width="0.7"/>
-                <circle cx="102" cy="115" r="8" />
-                <circle cx="160" cy="150" r="10" />
-                <circle cx="205" cy="180" r="9" />
-                <path d="M102 90 L102 107 M110 115 L150 150 M170 150 L196 180" stroke-width="1.2"/>
-                <!-- Bottom token block and wireframe component -->
-                <rect x="110" y="215" width="55" height="55" rx="10"/>
-                <circle cx="128" cy="233" r="6"/>
-                <circle cx="147" cy="233" r="6"/>
-                <circle cx="128" cy="252" r="6"/>
-                <rect x="175" y="215" width="60" height="55" rx="5"/>
-                <line x1="175" y1="215" x2="235" y2="270" stroke-width="0.8"/>
-                <line x1="235" y1="215" x2="175" y2="270" stroke-width="0.8"/>
-                <line x1="165" y1="242" x2="175" y2="242" stroke-width="1.2"/>
+          <!-- Service 01: Understand the problem -->
+          <div class="service-card-anim service-grid-card rounded-3xl p-6 sm:p-7 relative flex flex-col justify-between min-h-[300px] overflow-hidden bg-white border border-[#E1EDE7]">
+            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-end opacity-10 dark:opacity-[0.08] translate-x-4">
+              <svg class="w-56 h-56 text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+                <circle cx="100" cy="100" r="70" stroke-dasharray="3 3"/>
+                <circle cx="100" cy="100" r="45"/>
+                <circle cx="100" cy="100" r="18" fill="rgba(16, 185, 129, 0.12)"/>
+                <line x1="100" y1="20" x2="100" y2="180" stroke-dasharray="2 3"/>
+                <line x1="20" y1="100" x2="180" y2="100" stroke-dasharray="2 3"/>
               </svg>
             </div>
 
             <div class="relative z-10">
-              <div class="flex items-center justify-between mb-6">
-                <!-- Rounded Square Icon Badge -->
+              <div class="flex items-center justify-between mb-5">
                 <div class="w-12 h-12 rounded-2xl bg-[#D6EAE0] dark:bg-spruce-800 flex items-center justify-center text-[#044E39] dark:text-brand-mint text-lg border border-[#BBE3D1] dark:border-mint-400/25 shadow-xs">
-                  <i class="fa-solid fa-cubes"></i>
+                  <i class="fa-solid fa-magnifying-glass-chart"></i>
                 </div>
                 <span class="text-xs font-mono font-bold text-[#1F453B] dark:text-[#86A89C]">01</span>
               </div>
-              <h3 class="text-xl font-extrabold text-[#0C231D] dark:text-white mb-3 tracking-tight">
-                Design Systems &amp; Tokens
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#0C231D] dark:text-white mb-2.5 tracking-tight">
+                Understand the problem
               </h3>
               <p class="text-xs sm:text-sm text-[#1F453B] dark:text-[#C6E2D6] leading-relaxed font-normal">
-                Building multi-brand token frameworks in Figma &amp; code that scale across complex suites, accelerating engineering delivery and cutting tech debt.
+                Researching users, processes and systems to uncover where digital products can make a meaningful difference.
               </p>
+            </div>
+            
+            <div class="relative z-10 pt-4 mt-2 border-t border-emerald-950/10 dark:border-emerald-500/15 flex items-center gap-2 text-[11px] font-mono font-semibold text-[#1F453B] dark:text-mint-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-emerald"></span>
+              Research &amp; Discovery
             </div>
           </div>
 
-          <!-- Column 02: Industrial & Field UX -->
-          <div class="service-card-anim service-col-divider relative flex flex-col justify-between p-4 sm:p-6 md:px-8 min-h-[360px] overflow-hidden">
-            <!-- Background Vector Architectural Art -->
-            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-center opacity-10 dark:opacity-[0.08] translate-x-2">
-              <svg class="w-full h-full text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 280 280" fill="none" stroke-width="1.2">
-                <!-- Factory/pipes outline -->
-                <rect x="30" y="55" width="220" height="150" rx="3" stroke-dasharray="2 4" stroke-width="0.8"/>
-                <path d="M80 50 L80 25 L105 25 L105 50" stroke-width="1"/>
-                <path d="M125 45 L125 15 L145 15 L145 45" stroke-width="1"/>
-                <!-- Telemetry chart window -->
-                <rect x="110" y="38" width="125" height="85" rx="6" fill="rgba(16, 185, 129, 0.05)"/>
-                <path d="M120 95 C 135 60, 150 110, 175 65 C 195 90, 210 65, 225 80" stroke-width="1.8" fill="rgba(16, 185, 129, 0.12)"/>
-                <!-- Dial / machine gear -->
-                <circle cx="85" cy="115" r="22" stroke-width="1"/>
-                <circle cx="85" cy="115" r="14" stroke-dasharray="2 2"/>
-                <!-- Industrial plant floor conveyor / pump base -->
-                <path d="M110 205 L230 205 M120 225 L220 225 M135 245 L205 245" stroke-width="1.2"/>
-                <rect x="135" y="195" width="25" height="30" rx="2"/>
-                <rect x="175" y="185" width="35" height="40" rx="2"/>
+          <!-- Service 02: Shape the product -->
+          <div class="service-card-anim service-grid-card rounded-3xl p-6 sm:p-7 relative flex flex-col justify-between min-h-[300px] overflow-hidden bg-white border border-[#E1EDE7]">
+            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-end opacity-10 dark:opacity-[0.08] translate-x-4">
+              <svg class="w-56 h-56 text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+                <rect x="35" y="40" width="130" height="120" rx="6" stroke-dasharray="3 3"/>
+                <path d="M45 80 L95 50 L145 80 L95 110 Z" fill="rgba(16, 185, 129, 0.08)"/>
+                <path d="M45 110 L95 140 L145 110" stroke-width="1.5"/>
               </svg>
             </div>
 
             <div class="relative z-10">
-              <div class="flex items-center justify-between mb-6">
-                <!-- Rounded Square Icon Badge -->
+              <div class="flex items-center justify-between mb-5">
                 <div class="w-12 h-12 rounded-2xl bg-[#D6EAE0] dark:bg-spruce-800 flex items-center justify-center text-[#044E39] dark:text-brand-mint text-lg border border-[#BBE3D1] dark:border-mint-400/25 shadow-xs">
-                  <i class="fa-solid fa-industry"></i>
+                  <i class="fa-solid fa-compass-drafting"></i>
                 </div>
                 <span class="text-xs font-mono font-bold text-[#1F453B] dark:text-[#86A89C]">02</span>
               </div>
-              <h3 class="text-xl font-extrabold text-[#0C231D] dark:text-white mb-3 tracking-tight">
-                Industrial &amp; Field UX
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#0C231D] dark:text-white mb-2.5 tracking-tight">
+                Shape the product
               </h3>
               <p class="text-xs sm:text-sm text-[#1F453B] dark:text-[#C6E2D6] leading-relaxed font-normal">
-                End-to-end tooling for harsh onsite environments, machine telemetry, offline workflows, and critical Daily Layered Accountability trackers.
+                Turning complex requirements into clear strategies, workflows and product experiences.
               </p>
+            </div>
+
+            <div class="relative z-10 pt-4 mt-2 border-t border-emerald-950/10 dark:border-emerald-500/15 flex items-center gap-2 text-[11px] font-mono font-semibold text-[#1F453B] dark:text-mint-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-emerald"></span>
+              Strategy &amp; Workflows
             </div>
           </div>
 
-          <!-- Column 03: Accessibility & Governance -->
-          <div class="service-card-anim relative flex flex-col justify-between p-4 sm:p-6 md:pl-8 min-h-[360px] overflow-hidden">
-            <!-- Background Vector Architectural Art -->
-            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-center opacity-10 dark:opacity-[0.08] translate-x-2">
-              <svg class="w-full h-full text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 280 280" fill="none" stroke-width="1.2">
-                <!-- Accessibility shield -->
-                <path d="M165 25 L215 45 C 215 95, 190 125, 165 140 C 140 125, 115 95, 115 45 Z" fill="rgba(16, 185, 129, 0.05)" stroke-width="1.4"/>
-                <circle cx="165" cy="58" r="6"/>
-                <path d="M152 75 L178 75 M165 75 L165 105 M155 120 L165 105 L175 120" stroke-width="1.4"/>
-                <!-- Globe / audit stamp -->
-                <circle cx="75" cy="90" r="22" stroke-width="1"/>
-                <ellipse cx="75" cy="90" rx="9" ry="22" stroke-width="0.8"/>
-                <line x1="53" y1="90" x2="97" y2="90" stroke-width="0.8"/>
-                <rect x="70" y="102" width="46" height="18" rx="9" fill="rgba(16, 185, 129, 0.15)" stroke-width="0.8"/>
-                <text x="76" y="114" font-size="8" font-family="sans-serif" font-weight="bold" fill="currentColor">audit</text>
-                <!-- Form checklists & soundwave -->
-                <rect x="95" y="145" width="135" height="110" rx="6" fill="rgba(16, 185, 129, 0.04)"/>
-                <rect x="108" y="160" width="14" height="12" rx="2"/>
-                <polyline points="111,166 114,169 119,163" stroke-width="1.2"/>
-                <line x1="130" y1="166" x2="215" y2="166" stroke-width="1.5"/>
-                <rect x="108" y="180" width="14" height="12" rx="2"/>
-                <polyline points="111,186 114,189 119,183" stroke-width="1.2"/>
-                <line x1="130" y1="186" x2="215" y2="186" stroke-width="1.5"/>
-                <line x1="130" y1="210" x2="210" y2="210" stroke-dasharray="2 3"/>
-                <line x1="130" y1="225" x2="190" y2="225" stroke-dasharray="2 3"/>
+          <!-- Service 03: Design the experience -->
+          <div class="service-card-anim service-grid-card rounded-3xl p-6 sm:p-7 relative flex flex-col justify-between min-h-[300px] overflow-hidden bg-white border border-[#E1EDE7]">
+            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-end opacity-10 dark:opacity-[0.08] translate-x-4">
+              <svg class="w-56 h-56 text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+                <rect x="30" y="35" width="140" height="130" rx="8"/>
+                <line x1="30" y1="65" x2="170" y2="65"/>
+                <circle cx="50" cy="50" r="4" fill="currentColor"/>
+                <circle cx="65" cy="50" r="4" fill="currentColor"/>
+                <path d="M110 110 C 120 90, 140 130, 155 100" stroke-width="2"/>
               </svg>
             </div>
 
             <div class="relative z-10">
-              <div class="flex items-center justify-between mb-6">
-                <!-- Rounded Square Icon Badge -->
+              <div class="flex items-center justify-between mb-5">
                 <div class="w-12 h-12 rounded-2xl bg-[#D6EAE0] dark:bg-spruce-800 flex items-center justify-center text-[#044E39] dark:text-brand-mint text-lg border border-[#BBE3D1] dark:border-mint-400/25 shadow-xs">
-                  <i class="fa-solid fa-universal-access"></i>
+                  <i class="fa-solid fa-layer-group"></i>
                 </div>
                 <span class="text-xs font-mono font-bold text-[#1F453B] dark:text-[#86A89C]">03</span>
               </div>
-              <h3 class="text-xl font-extrabold text-[#0C231D] dark:text-white mb-3 tracking-tight">
-                Accessibility &amp; Governance
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#0C231D] dark:text-white mb-2.5 tracking-tight">
+                Design the experience
               </h3>
               <p class="text-xs sm:text-sm text-[#1F453B] dark:text-[#C6E2D6] leading-relaxed font-normal">
-                Translating EAA and WCAG 2.2 AA/AAA legislation into enterprise policy, hands-on designer/engineer workshops, and automated testing gates.
+                Creating intuitive digital products for complex, specialist and industrial environments.
               </p>
+            </div>
+
+            <div class="relative z-10 pt-4 mt-2 border-t border-emerald-950/10 dark:border-emerald-500/15 flex items-center gap-2 text-[11px] font-mono font-semibold text-[#1F453B] dark:text-mint-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-emerald"></span>
+              Specialist &amp; Industrial UX
+            </div>
+          </div>
+
+          <!-- Service 04: Build for scale -->
+          <div class="service-card-anim service-grid-card rounded-3xl p-6 sm:p-7 relative flex flex-col justify-between min-h-[300px] overflow-hidden bg-white border border-[#E1EDE7]">
+            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-end opacity-10 dark:opacity-[0.08] translate-x-4">
+              <svg class="w-56 h-56 text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+                <rect x="40" y="40" width="45" height="45" rx="5"/>
+                <rect x="110" y="40" width="45" height="45" rx="5"/>
+                <rect x="40" y="110" width="45" height="45" rx="5"/>
+                <rect x="110" y="110" width="45" height="45" rx="5" fill="rgba(16, 185, 129, 0.12)"/>
+              </svg>
+            </div>
+
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-[#D6EAE0] dark:bg-spruce-800 flex items-center justify-center text-[#044E39] dark:text-brand-mint text-lg border border-[#BBE3D1] dark:border-mint-400/25 shadow-xs">
+                  <i class="fa-solid fa-cubes"></i>
+                </div>
+                <span class="text-xs font-mono font-bold text-[#1F453B] dark:text-[#86A89C]">04</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#0C231D] dark:text-white mb-2.5 tracking-tight">
+                Build for scale
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1F453B] dark:text-[#C6E2D6] leading-relaxed font-normal">
+                Developing design systems, reusable patterns and shared capabilities rather than solving the same problem repeatedly.
+              </p>
+            </div>
+
+            <div class="relative z-10 pt-4 mt-2 border-t border-emerald-950/10 dark:border-emerald-500/15 flex items-center gap-2 text-[11px] font-mono font-semibold text-[#1F453B] dark:text-mint-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-emerald"></span>
+              Design Systems &amp; Tokens
+            </div>
+          </div>
+
+          <!-- Service 05: Connect design & engineering -->
+          <div class="service-card-anim service-grid-card rounded-3xl p-6 sm:p-7 relative flex flex-col justify-between min-h-[300px] overflow-hidden bg-white border border-[#E1EDE7]">
+            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-end opacity-10 dark:opacity-[0.08] translate-x-4">
+              <svg class="w-56 h-56 text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+                <path d="M40 60 L80 30 L120 60 L80 90 Z" fill="rgba(16, 185, 129, 0.08)"/>
+                <path d="M100 110 L140 80 L180 110 L140 140 Z"/>
+                <path d="M80 90 L80 125 M140 140 L140 170" stroke-dasharray="2 3"/>
+              </svg>
+            </div>
+
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-[#D6EAE0] dark:bg-spruce-800 flex items-center justify-center text-[#044E39] dark:text-brand-mint text-lg border border-[#BBE3D1] dark:border-mint-400/25 shadow-xs">
+                  <i class="fa-solid fa-code-merge"></i>
+                </div>
+                <span class="text-xs font-mono font-bold text-[#1F453B] dark:text-[#86A89C]">05</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#0C231D] dark:text-white mb-2.5 tracking-tight">
+                Connect design &amp; engineering
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1F453B] dark:text-[#C6E2D6] leading-relaxed font-normal">
+                Bringing design and technology closer together so ideas move more effectively from Figma into production.
+              </p>
+            </div>
+
+            <div class="relative z-10 pt-4 mt-2 border-t border-emerald-950/10 dark:border-emerald-500/15 flex items-center gap-2 text-[11px] font-mono font-semibold text-[#1F453B] dark:text-mint-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-emerald"></span>
+              Figma-to-Code Pipelines
+            </div>
+          </div>
+
+          <!-- Service 06: Accessibility compliance -->
+          <div class="service-card-anim service-grid-card rounded-3xl p-6 sm:p-7 relative flex flex-col justify-between min-h-[300px] overflow-hidden bg-white border border-[#E1EDE7]">
+            <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-end opacity-10 dark:opacity-[0.08] translate-x-4">
+              <svg class="w-56 h-56 text-emerald-600 dark:text-mint-400 stroke-current" viewBox="0 0 200 200" fill="none" stroke-width="1.2">
+                <path d="M100 25 L145 45 C 145 95, 120 125, 100 140 C 80 125, 55 95, 55 45 Z" fill="rgba(16, 185, 129, 0.05)" stroke-width="1.4"/>
+                <circle cx="100" cy="55" r="5"/>
+                <path d="M90 70 L110 70 M100 70 L100 95 M92 110 L100 95 L108 110" stroke-width="1.4"/>
+              </svg>
+            </div>
+
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-[#D6EAE0] dark:bg-spruce-800 flex items-center justify-center text-[#044E39] dark:text-brand-mint text-lg border border-[#BBE3D1] dark:border-mint-400/25 shadow-xs">
+                  <i class="fa-solid fa-universal-access"></i>
+                </div>
+                <span class="text-xs font-mono font-bold text-[#1F453B] dark:text-[#86A89C]">06</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#0C231D] dark:text-white mb-2.5 tracking-tight">
+                Accessibility compliance
+              </h3>
+              <p class="text-xs sm:text-sm text-[#1F453B] dark:text-[#C6E2D6] leading-relaxed font-normal">
+                Applying in-depth expertise in global legislation like the EAA and WCAG standards to ensure products are usable and businesses are protected.
+              </p>
+            </div>
+
+            <div class="relative z-10 pt-4 mt-2 border-t border-emerald-950/10 dark:border-emerald-500/15 flex items-center gap-2 text-[11px] font-mono font-semibold text-[#1F453B] dark:text-mint-300">
+              <span class="w-1.5 h-1.5 rounded-full bg-brand-emerald"></span>
+              EAA &amp; WCAG 2.2 AAA
             </div>
           </div>
 
@@ -1086,7 +884,7 @@
             <div class="absolute w-8 sm:w-11 h-8 sm:h-11 rounded-full bg-brand-emerald/20 animate-ping pointer-events-none"></div>
           </div>
 
-          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
+          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-[#E1EDE7] transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
             <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
               <div>
                 <span class="text-xs font-bold text-brand-emerald uppercase tracking-wider">Present Role</span>
@@ -1121,7 +919,7 @@
             </div>
           </div>
 
-          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
+          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-[#E1EDE7] transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
             <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
               <div>
                 <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Client Consultancy</span>
@@ -1155,7 +953,7 @@
             </div>
           </div>
 
-          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-emerald-100/80 transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
+          <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-card border border-[#E1EDE7] transition-all duration-300 hover:shadow-xl hover:border-brand-emerald/40 hover:-translate-y-0.5 ml-2 sm:ml-4">
             <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
               <div>
                 <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cloud Scale-Up</span>
@@ -1208,7 +1006,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
         
         <!-- Case 1: The Weir Group -->
-        <div onclick="openCaseStudy('weir')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems industrial accessibility">
+        <div onclick="openCaseStudy('weir')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-[#E1EDE7] flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems industrial accessibility">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
             <img 
               src="warman-mcr-400-opt.webp" 
@@ -1250,7 +1048,7 @@
         </div>
 
         <!-- Case 2: TotalEnergies -->
-        <div onclick="openCaseStudy('totalenergies')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="industrial systems">
+        <div onclick="openCaseStudy('totalenergies')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-[#E1EDE7] flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="industrial systems">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
             <img 
               src="Resultats_troisieme_trimestre_2023_TotalEnergies_1305x713px.png" 
@@ -1291,7 +1089,7 @@
         </div>
 
         <!-- Case 3: Diageo -->
-        <div onclick="openCaseStudy('diageo')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems">
+        <div onclick="openCaseStudy('diageo')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-[#E1EDE7] flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="systems">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
             <img 
               src="Category_Spirits_Header-Bottles_TWS.jpg" 
@@ -1331,7 +1129,7 @@
         </div>
 
         <!-- Case 4: Royal London -->
-        <div onclick="openCaseStudy('royallondon')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="accessibility systems">
+        <div onclick="openCaseStudy('royallondon')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-[#E1EDE7] flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer" data-category="accessibility systems">
           <div class="relative h-60 sm:h-64 overflow-hidden bg-brand-deepest">
             <img 
               src="desktop-1400x700-ladies-eating-ice-cream.webp" 
@@ -1399,19 +1197,19 @@
 
     <!-- 5. TESTIMONIALS -->
     <section id="testimonials" class="max-w-6xl mx-auto px-4 sm:px-6 my-14 sm:my-20">
-      <div class="theme-adaptive-dark-card bg-brand-dark rounded-4xl p-6 sm:p-10 md:p-12 text-white border-spruce-subtle shadow-card-dark relative overflow-hidden">
+      <div class="theme-adaptive-dark-card rounded-4xl p-6 sm:p-10 md:p-12 text-white border border-[#E1EDE7] shadow-card-dark relative overflow-hidden bg-white">
         <div class="text-center max-w-2xl mx-auto mb-10">
           <span class="badge-core-capabilities inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-mint dark:text-brand-mint dark:bg-mint-400/15 dark:border-mint-400/25 border mb-2">Stakeholder Feedback</span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-1 text-white">
+          <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mt-1 text-[#0C231D] dark:text-white">
             Results & <span class="text-brand-mint">Testimonials</span>
           </h2>
-          <p class="text-xs sm:text-sm text-[#A0C5B7] mt-2">
+          <p class="text-xs sm:text-sm text-[#466B60] dark:text-[#A0C5B7] mt-2">
             What engineering leaders, product principals, and design executives say about working alongside David Lorimer.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-          <div class="theme-adaptive-inner-card bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
+          <div class="theme-adaptive-inner-card bg-white p-6 rounded-3xl border border-[#E1EDE7] flex flex-col justify-between">
             <div>
               <div class="testimonial-stars flex items-center gap-1.5 text-[#059669] dark:text-mint-400 text-xs mb-3">
                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -1429,7 +1227,7 @@
             </div>
           </div>
 
-          <div class="theme-adaptive-inner-card bg-[#102E27] p-6 rounded-3xl border-spruce-inner flex flex-col justify-between">
+          <div class="theme-adaptive-inner-card bg-white p-6 rounded-3xl border border-[#E1EDE7] flex flex-col justify-between">
             <div>
               <div class="testimonial-stars flex items-center gap-1.5 text-[#059669] dark:text-mint-400 text-xs mb-3">
                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
@@ -1450,22 +1248,20 @@
       </div>
     </section>
 
-    <!-- 6. CONTACT SECTION (Direct Email Dispatch to David) -->
+    <!-- 6. CONTACT SECTION (UPDATED TO "Contact me") -->
     <section id="contact" class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="contact-card-container rounded-4xl p-6 sm:p-10 md:p-12 text-center transition-colors duration-300">
+      <div class="contact-card-container rounded-4xl p-6 sm:p-10 md:p-12 text-center transition-colors duration-300 bg-white border border-[#E1EDE7] shadow-card">
         <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 dark:bg-mint-400/15 text-brand-forest dark:text-mint-300 text-xs font-bold uppercase tracking-wider mb-2 border border-emerald-200 dark:border-mint-400/25">
           Start The Conversation
         </span>
         <h2 class="text-2xl sm:text-4xl font-extrabold text-[#0C231D] dark:text-white mt-1">
-          Have an Industrial or Enterprise UX Challenge? <br>
-          <span class="text-brand-forest dark:text-mint-400 underline decoration-brand-emerald decoration-2">Let's Discuss</span>
+          <span class="text-brand-forest dark:text-mint-400 underline decoration-brand-emerald decoration-2">Contact me</span>
         </h2>
         
         <p class="text-xs sm:text-sm text-slate-600 dark:text-[#C6E2D6] max-w-xl mx-auto mt-3 leading-relaxed">
           Whether you are scaling an enterprise design system, tackling European Accessibility Act (EAA) compliance, or architecting complex industrial telemetry, send a direct message below.
         </p>
 
-        <!-- Direct Email Contact Form -->
         <form 
           id="direct-contact-form"
           action="https://formsubmit.co/davidlorimermedia@gmail.com" 
@@ -1473,13 +1269,11 @@
           onsubmit="handleContactSubmit(event)" 
           class="mt-8 max-w-2xl mx-auto text-left"
         >
-          <!-- FormSubmit Configuration Fields -->
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_subject" value="New Portfolio Inquiry - David Lorimer UX">
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <!-- Full Name -->
             <div>
               <label for="contact-name" class="block text-xs font-bold text-[#0C231D] dark:text-[#C6E2D6] mb-1.5">
                 Your Name <span class="text-brand-emerald">*</span>
@@ -1490,11 +1284,10 @@
                 name="name" 
                 required 
                 placeholder="e.g. Sarah Jenkins" 
-                class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner"
+                class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner border"
               />
             </div>
 
-            <!-- Email Address -->
             <div>
               <label for="contact-email" class="block text-xs font-bold text-[#0C231D] dark:text-[#C6E2D6] mb-1.5">
                 Work Email <span class="text-brand-emerald">*</span>
@@ -1505,12 +1298,11 @@
                 name="email" 
                 required 
                 placeholder="sarah@company.com" 
-                class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner"
+                class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner border"
               />
             </div>
           </div>
 
-          <!-- Project / Challenge Area -->
           <div class="mb-4">
             <label for="contact-subject" class="block text-xs font-bold text-[#0C231D] dark:text-[#C6E2D6] mb-1.5">
               Primary Area of Focus
@@ -1518,7 +1310,7 @@
             <select 
               id="contact-subject" 
               name="focus_area" 
-              class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner cursor-pointer"
+              class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner cursor-pointer border"
             >
               <option value="Enterprise Design Systems">Enterprise Multi-Brand Design System</option>
               <option value="Accessibility Audit & Governance">WCAG 2.2 AAA / EAA Accessibility Governance</option>
@@ -1528,7 +1320,6 @@
             </select>
           </div>
 
-          <!-- Message Body -->
           <div class="mb-5">
             <label for="contact-message" class="block text-xs font-bold text-[#0C231D] dark:text-[#C6E2D6] mb-1.5">
               Project Overview or Question <span class="text-brand-emerald">*</span>
@@ -1539,11 +1330,10 @@
               rows="4" 
               required 
               placeholder="Tell me a bit about your operational challenges, timeline, or current tooling goals..." 
-              class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner resize-y"
+              class="contact-input w-full px-4 py-3 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-brand-emerald transition-all shadow-inner resize-y border"
             ></textarea>
           </div>
 
-          <!-- Submit Button & Direct Email Link -->
           <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
             <div class="text-[11px] text-slate-500 dark:text-slate-400">
               Direct inbox: <a href="mailto:davidlorimermedia@gmail.com" class="text-brand-emerald font-semibold hover:underline">davidlorimermedia@gmail.com</a>
@@ -1560,7 +1350,6 @@
           </div>
         </form>
 
-        <!-- Feedback Alert -->
         <div id="contact-success" class="hidden mt-6 text-xs font-bold text-emerald-800 dark:text-mint-300 bg-emerald-50 dark:bg-mint-400/15 py-3 px-5 rounded-2xl border border-emerald-200 dark:border-mint-400/30 inline-flex items-center gap-2">
           <i class="fa-solid fa-circle-check text-brand-emerald text-sm"></i>
           <span>Thank you! Your message has been sent directly to David's inbox (<span class="font-mono">davidlorimermedia@gmail.com</span>).</span>
@@ -1591,55 +1380,49 @@
   <!-- ================================================================= -->
   <article id="view-casestudy" class="hidden w-full view-container view-enter">
     
-    <!-- CASE STUDY HERO HEADER (Template with 10% opacity card background image) -->
+    <!-- CASE STUDY HERO HEADER (15% OPACITY IMAGE) -->
     <section class="pt-24 sm:pt-28 pb-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div id="cs-hero-card" class="theme-adaptive-dark-card bg-[#0C231D] rounded-4xl sm:rounded-5xl p-7 sm:p-12 md:p-16 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden transition-colors duration-300">
+      <div id="cs-hero-card" class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-7 sm:p-12 md:p-16 text-white shadow-card-dark border border-[#E1EDE7] relative overflow-hidden transition-colors duration-300 bg-white">
         
-        <!-- 10% Opacity Background Image of Case Study Card -->
+        <!-- 15% Opacity Background Image -->
         <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img 
             id="cs-hero-bg-img" 
             src="warman-mcr-400-opt.webp" 
             alt="Case Study Background" 
-            class="w-full h-full object-cover opacity-10 filter grayscale contrast-125 scale-105 transition-all duration-700"
+            class="w-full h-full object-cover opacity-15 filter grayscale contrast-125 scale-105 transition-all duration-700"
           />
-          <div id="cs-hero-bg-overlay" class="absolute inset-0 bg-gradient-to-t from-[#0C231D] via-transparent to-[#0C231D]/40"></div>
+          <div id="cs-hero-bg-overlay" class="absolute inset-0 bg-gradient-to-t from-white/95 via-transparent to-white/40 dark:from-[#0C231D] dark:to-[#0C231D]/40"></div>
         </div>
 
-        <!-- Ambient glow overlay -->
         <div class="absolute -top-24 -right-24 w-96 h-96 bg-mint-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="relative z-10 max-w-4xl">
-          <!-- Role & Company Eyebrow -->
-          <div class="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-mint-400 uppercase mb-5">
+          <div class="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-emerald-700 dark:text-mint-400 uppercase mb-5">
             <span id="cs-hero-eyebrow">SENIOR PRODUCT DESIGNER · WEIR</span>
           </div>
 
-          <!-- Main Hero Headline -->
-          <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.12]">
+          <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#0C231D] dark:text-white tracking-tight leading-[1.12]">
             <span id="cs-hero-title">Designing digital products for complex industrial environments.</span>
           </h1>
 
-          <!-- Hero Subtitle / Summary -->
-          <p id="cs-hero-desc" class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-[#A0C5B7] max-w-3xl font-normal leading-relaxed">
+          <p id="cs-hero-desc" class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-[#24443B] dark:text-[#A0C5B7] max-w-3xl font-normal leading-relaxed">
             I connect research, product strategy, UX, design systems and engineering to turn complex operational problems into scalable digital experiences.
           </p>
 
-          <!-- Core Capability Pill Tags -->
           <div id="cs-hero-tags" class="mt-8 sm:mt-10 flex flex-wrap items-center gap-2 sm:gap-2.5">
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Product Strategy</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">UX & Product Design</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Research</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Design Systems</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">Design-to-Code</span>
+            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Product Strategy</span>
+            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">UX & Product Design</span>
+            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Research</span>
+            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Design Systems</span>
+            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Design-to-Code</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTAINER A: WEIR CUSTOM LAYOUT (What I do / How I work / Systems Thinking) -->
+    <!-- CONTAINER A: WEIR CUSTOM LAYOUT -->
     <div id="cs-layout-weir">
-      <!-- SECTION 01: WHAT I DO -->
       <section id="cs-what-i-do-section" class="py-5 sm:py-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <div class="bg-white rounded-3xl sm:rounded-4xl p-5 sm:p-8 md:p-10 border border-[#E1EDE7] shadow-sm">
           <div class="max-w-3xl mb-6">
@@ -1655,7 +1438,7 @@
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-[#E1ECE6] flex flex-col justify-start">
               <div class="flex items-center gap-2 mb-2">
                 <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
                 <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Strategy</span>
@@ -1666,7 +1449,7 @@
               </p>
             </div>
 
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-[#E1ECE6] flex flex-col justify-start">
               <div class="flex items-center gap-2 mb-2">
                 <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
                 <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Design</span>
@@ -1677,7 +1460,7 @@
               </p>
             </div>
 
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-[#E1ECE6] flex flex-col justify-start">
               <div class="flex items-center gap-2 mb-2">
                 <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
                 <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Systems</span>
@@ -1688,7 +1471,7 @@
               </p>
             </div>
 
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#F7FAF8] border border-[#E1ECE6] flex flex-col justify-start">
+            <div class="p-4 sm:p-5 rounded-2xl bg-white border border-[#E1ECE6] flex flex-col justify-start">
               <div class="flex items-center gap-2 mb-2">
                 <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
                 <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-slate-500 dark:text-mint-300">Delivery</span>
@@ -1702,7 +1485,6 @@
         </div>
       </section>
 
-      <!-- SECTION 02: HOW I WORK -->
       <section id="cs-how-i-work-section" class="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
           <div class="max-w-3xl mb-8">
@@ -1743,19 +1525,18 @@
         </div>
       </section>
 
-      <!-- SECTION 03: SYSTEMS THINKING HIGHLIGHT BANNER -->
       <section id="cs-systems-thinking-section" class="py-6 sm:py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div class="theme-adaptive-dark-card bg-gradient-to-br from-[#102E27] via-[#0C231D] to-[#061310] rounded-4xl sm:rounded-5xl p-7 sm:p-12 md:p-16 text-white shadow-card-dark border border-mint-400/20 relative overflow-hidden transition-colors duration-300">
+        <div class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-7 sm:p-12 md:p-16 text-white shadow-card-dark border border-[#E1EDE7] relative overflow-hidden transition-colors duration-300 bg-white">
           <div class="absolute -top-10 -right-10 w-72 h-72 bg-mint-400/10 rounded-full blur-3xl pointer-events-none"></div>
           <div class="max-w-4xl relative z-10">
-            <div class="theme-adaptive-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-400/15 border border-mint-400/25 text-[11px] font-mono font-bold tracking-widest uppercase text-brand-mint mb-5">
-              <span class="w-2 h-2 rounded-full bg-brand-mint"></span>
+            <div class="theme-adaptive-tag inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-mint-400/15 border border-emerald-200 dark:border-mint-400/25 text-[11px] font-mono font-bold tracking-widest uppercase text-emerald-800 dark:text-brand-mint mb-5">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
               03 · SYSTEMS THINKING
             </div>
-            <blockquote class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-snug mb-5 text-white">
+            <blockquote class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-snug mb-5 text-[#0C231D] dark:text-white">
               “What capability could we create once and reuse across Weir?”
             </blockquote>
-            <p class="text-sm sm:text-base md:text-lg font-normal text-[#A0C5B7] max-w-3xl leading-relaxed">
+            <p class="text-sm sm:text-base md:text-lg font-normal text-[#24443B] dark:text-[#A0C5B7] max-w-3xl leading-relaxed">
               Working across multiple programmes lets me spot connections between teams and products. Instead of repeatedly solving the same interface problem, I look for shared patterns, components and capabilities that can become part of the wider digital ecosystem.
             </p>
           </div>
@@ -1763,84 +1544,77 @@
       </section>
     </div>
 
-    <!-- CONTAINER B: ORIGINAL DETAILED RETROSPECTIVE LAYOUT (For TotalEnergies, Diageo, Royal London) -->
+    <!-- CONTAINER B: ORIGINAL RETROSPECTIVE LAYOUT -->
     <div id="cs-layout-standard" class="hidden">
-      <!-- 2. MY APPROACH -->
       <section id="cs-approach-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div class="theme-adaptive-dark-card bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden transition-colors duration-300">
+        <div class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border border-[#E1EDE7] relative overflow-hidden transition-colors duration-300 bg-white">
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
             <div>
-              <div class="text-xs font-bold uppercase tracking-widest text-mint-400 mb-1">
+              <div class="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-mint-400 mb-1">
                 Core Capabilities
               </div>
-              <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-                My <span class="text-brand-mint">Approach</span>
+              <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0C231D] dark:text-white">
+                My <span class="text-brand-forest dark:text-brand-mint">Approach</span>
               </h2>
             </div>
-            <p class="text-[#9DBFB3] text-sm sm:text-base max-w-md font-normal leading-relaxed">
+            <p class="text-[#24443B] dark:text-[#9DBFB3] text-sm sm:text-base max-w-md font-normal leading-relaxed">
               Specialized UX architecture built for mission-critical software, industrial IoT operations, and enterprise design system governance.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
+            <div class="theme-adaptive-inner-card bg-white rounded-3xl p-6 sm:p-7 border border-[#E1EDE7] flex flex-col justify-between">
               <div>
-                <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-spruce-800 border border-emerald-200 dark:border-mint-400/25 flex items-center justify-center text-emerald-700 dark:text-mint-400 text-lg mb-6">
                   <i class="fa-solid fa-cubes-stacked"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Design Systems & Tokens</h3>
-                <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
+                <h3 class="text-xl font-bold text-[#0C231D] dark:text-white mb-3 tracking-tight">Design Systems & Tokens</h3>
+                <p class="text-[#24443B] dark:text-[#8EADA2] text-sm leading-relaxed mb-8">
                   Building multi-brand token frameworks in Figma & code that scale across complex suites, accelerating engineering delivery and cutting tech debt.
                 </p>
               </div>
-              <div class="theme-adaptive-tag inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
+              <div class="theme-adaptive-tag inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-emerald-50 dark:bg-[#0C231D] border border-emerald-200 dark:border-white/10 text-xs font-semibold text-brand-forest dark:text-[#A8C7BC]">
                 <span>Figma & Tokens Studio</span>
-                <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
               </div>
             </div>
 
-            <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
+            <div class="theme-adaptive-inner-card bg-white rounded-3xl p-6 sm:p-7 border border-[#E1EDE7] flex flex-col justify-between">
               <div>
-                <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-spruce-800 border border-emerald-200 dark:border-mint-400/25 flex items-center justify-center text-emerald-700 dark:text-mint-400 text-lg mb-6">
                   <i class="fa-solid fa-industry"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Industrial & Field UX</h3>
-                <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
+                <h3 class="text-xl font-bold text-[#0C231D] dark:text-white mb-3 tracking-tight">Industrial & Field UX</h3>
+                <p class="text-[#24443B] dark:text-[#8EADA2] text-sm leading-relaxed mb-8">
                   End-to-end tooling for harsh onsite environments, machine telemetry, offline workflows, and critical field operation trackers.
                 </p>
               </div>
-              <div class="theme-adaptive-tag inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
+              <div class="theme-adaptive-tag inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-emerald-50 dark:bg-[#0C231D] border border-emerald-200 dark:border-white/10 text-xs font-semibold text-brand-forest dark:text-[#A8C7BC]">
                 <span>Telemetry & Dashboards</span>
-                <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
               </div>
             </div>
 
-            <div class="theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 sm:p-7 border-spruce-inner flex flex-col justify-between hover:bg-[#143930] transition-colors group">
+            <div class="theme-adaptive-inner-card bg-white rounded-3xl p-6 sm:p-7 border border-[#E1EDE7] flex flex-col justify-between">
               <div>
-                <div class="w-12 h-12 rounded-2xl bg-spruce-800 border border-mint-400/25 flex items-center justify-center text-mint-400 text-lg mb-6 group-hover:scale-105 transition-transform">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-spruce-800 border border-emerald-200 dark:border-mint-400/25 flex items-center justify-center text-emerald-700 dark:text-mint-400 text-lg mb-6">
                   <i class="fa-solid fa-universal-access"></i>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3 tracking-tight">Accessibility & Governance</h3>
-                <p class="text-[#8EADA2] text-sm leading-relaxed mb-8">
+                <h3 class="text-xl font-bold text-[#0C231D] dark:text-white mb-3 tracking-tight">Accessibility & Governance</h3>
+                <p class="text-[#24443B] dark:text-[#8EADA2] text-sm leading-relaxed mb-8">
                   Translating EAA and WCAG 2.2 AA/AAA legislation into enterprise policy, hands-on designer/engineer workshops, and automated testing gates.
                 </p>
               </div>
-              <div class="theme-adaptive-tag inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-xs font-semibold text-[#A8C7BC]">
+              <div class="theme-adaptive-tag inline-flex items-center justify-between w-full px-4 py-2.5 rounded-full bg-emerald-50 dark:bg-[#0C231D] border border-emerald-200 dark:border-white/10 text-xs font-semibold text-brand-forest dark:text-[#A8C7BC]">
                 <span>WCAG 2.2 AA/AAA & EAA</span>
-                <div class="w-6 h-6 rounded-full bg-spruce-800 flex items-center justify-center text-mint-400 text-[10px]">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 3. IMPLEMENTATION & CODE / TOKEN PIPELINE -->
+      <!-- 3. IMPLEMENTATION & CODE -->
       <section id="cs-implementation-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <div class="bg-white rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 border border-[#E1EDE7] shadow-sm">
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
@@ -1859,7 +1633,7 @@
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div class="lg:col-span-6 space-y-4">
-              <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+              <div class="p-5 rounded-3xl bg-white border border-[#E1ECE6]">
                 <div class="flex items-center gap-3 mb-2">
                   <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">1</span>
                   <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">Figma Variables to Style Dictionary Pipeline</h3>
@@ -1869,7 +1643,7 @@
                 </p>
               </div>
 
-              <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+              <div class="p-5 rounded-3xl bg-white border border-[#E1ECE6]">
                 <div class="flex items-center gap-3 mb-2">
                   <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">2</span>
                   <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">High-Contrast Anti-Glare Safety Interlocks</h3>
@@ -1879,7 +1653,7 @@
                 </p>
               </div>
 
-              <div class="p-5 rounded-3xl bg-[#F7FAF8] border border-[#E1ECE6]">
+              <div class="p-5 rounded-3xl bg-white border border-[#E1ECE6]">
                 <div class="flex items-center gap-3 mb-2">
                   <span class="w-7 h-7 rounded-full bg-mint-400 text-[#061310] font-black text-xs flex items-center justify-center">3</span>
                   <h3 class="text-sm sm:text-base font-bold text-[#0C231D]">Automated Axe Core CI/CD Gates</h3>
@@ -1890,7 +1664,7 @@
               </div>
             </div>
 
-            <div class="lg:col-span-6 theme-adaptive-dark-card bg-[#0C231D] text-white rounded-3xl p-6 sm:p-7 border-spruce-subtle shadow-card-dark font-mono text-xs">
+            <div class="lg:col-span-6 theme-adaptive-dark-card bg-[#0C231D] text-white rounded-3xl p-6 sm:p-7 border border-[#E1EDE7] shadow-card-dark font-mono text-xs">
               <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
                 <div class="flex items-center gap-2">
                   <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
@@ -1914,13 +1688,13 @@
 
       <!-- 5. VALUE & BUSINESS IMPACT -->
       <section id="cs-value-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div class="theme-adaptive-dark-card bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden transition-colors duration-300">
+        <div class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border border-[#E1EDE7] relative overflow-hidden transition-colors duration-300 bg-white">
           <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-            <div class="badge-core-capabilities inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-mint-400 dark:text-mint-400 mb-1 border border-mint-400/20">
+            <div class="badge-core-capabilities inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-emerald-800 dark:text-mint-400 mb-1 border border-emerald-200 dark:border-mint-400/20">
               05 • Realized Outcomes
             </div>
             <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0C231D] dark:text-white mt-1">
-              Measurable <span class="text-brand-mint">Value Delivered</span>
+              Measurable <span class="text-brand-forest dark:text-brand-mint">Value Delivered</span>
             </h2>
             <p class="mt-3 text-sm sm:text-base text-[#466B60] dark:text-[#9DBFB3] leading-relaxed">
               Quantitative ROI and safety improvements verified across industrial teams and product squads.
@@ -1929,8 +1703,8 @@
 
           <div id="cs-value-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
 
-          <div class="mt-10 sm:mt-12 theme-adaptive-inner-card bg-[#102E27] rounded-3xl p-6 sm:p-8 border-spruce-inner flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto">
-            <div class="quote-highlight-vp w-14 h-14 rounded-full bg-mint-400 text-[#061310] dark:bg-mint-400 dark:text-[#061310] font-black text-lg flex items-center justify-center shrink-0 shadow-sm">
+          <div class="mt-10 sm:mt-12 theme-adaptive-inner-card bg-white rounded-3xl p-6 sm:p-8 border border-[#E1EDE7] flex flex-col md:flex-row items-center gap-6 max-w-4xl mx-auto">
+            <div class="quote-highlight-vp w-14 h-14 rounded-full bg-brand-forest text-white dark:bg-mint-400 dark:text-[#061310] font-black text-lg flex items-center justify-center shrink-0 shadow-sm">
               VP
             </div>
             <div class="text-center md:text-left">
@@ -1942,21 +1716,20 @@
       </section>
     </div>
 
-    <!-- DELIVERABLES (PRESERVED 3D ROTATING INTERACTIVE CAROUSEL) -->
+    <!-- DELIVERABLES (3D ROTATING INTERACTIVE CAROUSEL) -->
     <section id="cs-deliverables-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div id="showcase-card-frame" class="theme-adaptive-dark-card bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-12 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden transition-colors duration-300">
+      <div id="showcase-card-frame" class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-12 text-white shadow-card-dark border border-[#E1EDE7] dark:border-spruce-subtle relative overflow-hidden transition-colors duration-300 bg-white dark:bg-[#0C231D]">
         
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(52,211,153,0.12)_0%,transparent_70%)] pointer-events-none"></div>
+        <div class="radial-ambient-overlay absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(52,211,153,0.12)_0%,transparent_70%)] pointer-events-none"></div>
 
-        <!-- Header Bar -->
         <div class="relative z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div class="badge-core-capabilities inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 text-xs font-semibold text-mint-400 dark:text-mint-400 mb-2">
-              <span class="w-2 h-2 rounded-full bg-mint-400 animate-ping"></span>
+            <div class="badge-core-capabilities inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-white/10 border border-emerald-200 dark:border-white/20 text-xs font-semibold text-emerald-800 dark:text-mint-400 mb-2">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald animate-ping"></span>
               <span>04 • Core Artifacts</span>
             </div>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-              Examples of <span class="text-brand-mint">My Deliverables</span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0C231D] dark:text-white">
+              Examples of <span class="text-brand-forest dark:text-brand-mint">My Deliverables</span>
             </h2>
             <p class="disclaimer-text text-[11px] sm:text-xs text-[#24443B] dark:text-[#86A89C] flex items-center gap-1.5 mt-2 font-medium">
               <i class="fa-solid fa-shield-halved text-brand-emerald dark:text-mint-400 text-[11px]"></i>
@@ -1965,40 +1738,36 @@
           </div>
 
           <div class="flex items-center gap-3">
-            <span class="carousel-counter text-xs font-mono text-[#86A89C]">
-              <span id="cs-carousel-curr" class="text-white dark:text-white font-bold text-sm">1</span> / <span id="cs-carousel-total">4</span>
+            <span class="carousel-counter text-xs font-mono text-[#1F453B] dark:text-[#86A89C]">
+              <span id="cs-carousel-curr" class="text-[#0C231D] dark:text-white font-bold text-sm">1</span> / <span id="cs-carousel-total">4</span>
             </span>
-            <button onclick="changeDeliverableSlide(-1)" aria-label="Previous Deliverable" class="w-10 h-10 rounded-full glass-showcase-btn text-mint-400 flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none">
+            <button onclick="changeDeliverableSlide(-1)" aria-label="Previous Deliverable" class="w-10 h-10 rounded-full glass-showcase-btn text-emerald-800 dark:text-mint-400 flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none">
               <i class="fa-solid fa-chevron-left text-xs"></i>
             </button>
-            <button onclick="changeDeliverableSlide(1)" aria-label="Next Deliverable" class="w-10 h-10 rounded-full glass-showcase-btn text-mint-400 flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none">
+            <button onclick="changeDeliverableSlide(1)" aria-label="Next Deliverable" class="w-10 h-10 rounded-full glass-showcase-btn text-emerald-800 dark:text-mint-400 flex items-center justify-center transition-all hover:scale-105 active:scale-95 focus:outline-none">
               <i class="fa-solid fa-chevron-right text-xs"></i>
             </button>
           </div>
         </div>
 
-        <!-- Main Showcase Stage -->
-        <div class="stage-inner-box relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#102E27] p-6 sm:p-8 md:p-10 rounded-3xl border-spruce-inner overflow-hidden transition-colors duration-300">
+        <div class="stage-inner-box relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-8 md:p-10 rounded-3xl border border-[#E1EDE7] overflow-hidden transition-colors duration-300">
           
-          <!-- Left: Rotating Visual Stage with Concentric Orbital Rings -->
           <div class="lg:col-span-8 relative flex flex-col items-center justify-center min-h-[420px] sm:min-h-[520px] w-full">
             <div class="absolute w-[360px] h-[360px] sm:w-[480px] sm:h-[480px] md:w-[540px] md:h-[540px] rounded-full orbit-ring-spruce pointer-events-none flex items-center justify-center">
               <div class="w-[85%] h-[85%] rounded-full border border-dashed border-mint-400/20"></div>
             </div>
 
-            <!-- 3D Rotating Media Container with Drag/Swipe support - Expanded dimensions for high visibility -->
             <div id="showcase-drag-zone" class="relative z-20 w-full max-w-[580px] h-[320px] sm:h-[420px] md:h-[460px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none px-2 sm:px-4">
-              <div id="showcase-rotating-disc" class="rotating-showcase-disc w-full h-full relative rounded-3xl overflow-hidden border-2 border-mint-400/30 bg-[#061612] shadow-2xl flex items-center justify-center p-2 sm:p-3">
+              <div id="showcase-rotating-disc" class="rotating-showcase-disc w-full h-full relative rounded-3xl overflow-hidden border-2 border-mint-400/30 bg-white dark:bg-[#061612] shadow-2xl flex items-center justify-center p-2 sm:p-3">
                 <img id="showcase-image" src="" alt="Deliverable visual" class="w-full h-full object-contain rounded-2xl hidden transition-all duration-300 pointer-events-none drop-shadow-lg">
                 
-                <!-- Fallback live telemetry card for code/data items -->
-                <div id="showcase-fallback-card" class="w-full h-full flex flex-col justify-between p-4 sm:p-6 font-mono text-xs">
-                  <div class="flex items-center justify-between pb-3 border-b border-white/10 text-[#86A89C]">
-                    <span id="showcase-badge-text" class="text-xs sm:text-sm text-mint-400 font-bold"></span>
-                    <span id="showcase-status-text" class="text-[11px] sm:text-xs text-slate-300 font-semibold"></span>
+                <div id="showcase-fallback-card" class="w-full h-full flex flex-col justify-between p-4 sm:p-6 font-mono text-xs bg-white text-[#0C231D] dark:text-white">
+                  <div class="flex items-center justify-between pb-3 border-b border-emerald-950/10 dark:border-white/10 text-[#466B60] dark:text-[#86A89C]">
+                    <span id="showcase-badge-text" class="text-xs sm:text-sm text-brand-forest dark:text-mint-400 font-bold"></span>
+                    <span id="showcase-status-text" class="text-[11px] sm:text-xs text-slate-700 dark:text-slate-300 font-semibold"></span>
                   </div>
                   <div id="showcase-items-list" class="space-y-2.5 sm:space-y-3 my-auto py-2"></div>
-                  <div class="pt-3 border-t border-white/10 text-[11px] sm:text-xs text-mint-400 flex items-center justify-between font-bold">
+                  <div class="pt-3 border-t border-emerald-950/10 dark:border-white/10 text-[11px] sm:text-xs text-emerald-800 dark:text-mint-400 flex items-center justify-between font-bold">
                     <span>WCAG 2.2 AAA Verified</span>
                     <i class="fa-solid fa-check"></i>
                   </div>
@@ -2006,23 +1775,18 @@
               </div>
             </div>
 
-            <!-- Orbital Navigation Labels -->
-            <div id="showcase-orbital-labels" class="relative z-20 w-full max-w-[480px] flex justify-between items-center px-4 mt-5 text-[11px] sm:text-xs font-semibold text-white/70"></div>
+            <div id="showcase-orbital-labels" class="relative z-20 w-full max-w-[480px] flex justify-between items-center px-4 mt-5 text-[11px] sm:text-xs font-semibold text-[#1F453B] dark:text-white/70"></div>
           </div>
 
-          <!-- Right: Descriptive Copy & Structured Outcomes -->
           <div class="lg:col-span-4 space-y-4">
-            <div id="showcase-badge" class="badge-core-capabilities inline-block px-3 py-1 rounded-full bg-mint-400/20 text-mint-300 text-xs font-bold uppercase tracking-wider">
+            <div id="showcase-badge" class="badge-core-capabilities inline-block px-3 py-1 rounded-full bg-emerald-100 dark:bg-mint-400/20 text-emerald-900 dark:text-mint-300 text-xs font-bold uppercase tracking-wider">
               Deliverable 01
             </div>
-            <h3 id="showcase-title" class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-snug">
-              <!-- Populated by JS -->
+            <h3 id="showcase-title" class="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0C231D] dark:text-white tracking-tight leading-snug">
             </h3>
-            <p id="showcase-desc" class="text-xs sm:text-sm text-[#A0C5B7] leading-relaxed">
-              <!-- Populated by JS -->
+            <p id="showcase-desc" class="text-xs sm:text-sm text-[#24443B] dark:text-[#A0C5B7] leading-relaxed">
             </p>
-            <ul id="showcase-points" class="text-xs text-[#86A89C] space-y-2.5 pt-2">
-              <!-- Populated by JS -->
+            <ul id="showcase-points" class="text-xs text-[#1F453B] dark:text-[#86A89C] space-y-2.5 pt-2">
             </ul>
           </div>
 
@@ -2034,18 +1798,18 @@
 
     <!-- OTHER CASE STUDIES SELECTOR -->
     <section id="cs-other-studies-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-      <div class="theme-adaptive-dark-card bg-[#0C231D] rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border-spruce-subtle relative overflow-hidden transition-colors duration-300">
+      <div class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border border-[#E1EDE7] relative overflow-hidden transition-colors duration-300 bg-white">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div>
-            <div class="badge-core-capabilities inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-mint-400 mb-1 border border-mint-400/20">
+            <div class="badge-core-capabilities inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-emerald-800 dark:text-mint-400 mb-1 border border-emerald-200 dark:border-mint-400/20">
               Portfolio
             </div>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
-              Explore Other <span class="text-brand-mint">Case Studies</span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0C231D] dark:text-white">
+              Explore Other <span class="text-brand-forest dark:text-brand-mint">Case Studies</span>
             </h2>
           </div>
-          <p class="text-[#9DBFB3] text-sm sm:text-base max-w-md font-normal leading-relaxed">
+          <p class="text-[#24443B] dark:text-[#9DBFB3] text-sm sm:text-base max-w-md font-normal leading-relaxed">
             Jump directly into another systemic UX retrospective across energy, finance, and global commerce.
           </p>
         </div>
@@ -2075,7 +1839,7 @@
               <i class="fa-solid fa-envelope"></i>
               <span>Let's Talk</span>
             </a>
-            <button onclick="showHomepage('portfolio')" class="theme-adaptive-btn-subtle px-4 py-2.5 rounded-full bg-[#0C231D] border border-white/10 text-[#A8C7BC] hover:text-white hover:border-mint-400 transition-colors whitespace-nowrap">
+            <button onclick="showHomepage('portfolio')" class="theme-adaptive-btn-subtle px-4 py-2.5 rounded-full bg-emerald-50 dark:bg-[#0C231D] border border-emerald-200 dark:border-white/10 text-brand-forest dark:text-[#A8C7BC] hover:text-[#0C231D] hover:border-mint-400 transition-colors whitespace-nowrap">
               ← Return to Portfolio
             </button>
           </div>
@@ -2189,16 +1953,6 @@ export const OffshoreTelemetrySpec = {
 };`,
         challengeTitle: "High-stress offshore drilling rigs with intermittent satellite links",
         challengeDesc: "Offshore platform engineers in the North Sea relied on legacy terminal interfaces. Intermittent satellite connectivity and confusing alarm cascades compromised safety and delayed emergency valve isolations.",
-        challengeCards: [
-          { icon: "fa-satellite-dish", color: "red", title: "Satellite Latency Drops", text: "Uplink packet drops occurred during North Sea storm squalls, interrupting active inspection checklists." },
-          { icon: "fa-bell", color: "amber", title: "Alarm Cascade Fatigue", text: "Over 120 simultaneous sensor alerts flooded screens during pressure fluctuations, obscuring root causes." },
-          { icon: "fa-water", color: "emerald", title: "Hostile Salt-Spray Conditions", text: "Outdoor decks exposed tablets to saltwater mist, extreme cold, and greasy gloves." }
-        ],
-        challengeMetrics: [
-          { val: "4m 12s", label: "Hazard Isolation Lag", sub: "Old legacy triage response time" },
-          { val: "42%", label: "Satellite Timeout Errors", sub: "Daily dropped cloud synchronizations" },
-          { val: "0 / 50", label: "Accessibility Gates", sub: "Legacy terminal compliance" }
-        ],
         values: [
           { stat: "5", title: "Core Tools Delivered", desc: "Served as primary design lead across 5 digital products, driving end-to-end UX from research to final release." },
           { stat: "-30%", title: "Coding & Build Time", desc: "Championed design system adoption across squads, slashing production time through modular, reusable patterns." },
@@ -2275,18 +2029,6 @@ export const DiageoBrandTokens = {
     keyboardNavFocusRing: "#10B981"
   }
 };`,
-        challengeTitle: "Decentralized assets, regional rights chaos, fragmented brand compliance",
-        challengeDesc: "Diageo’s global marketing teams and third-party distributors across 180+ countries struggled with decentralized brand asset storage, resulting in brand compliance breaches, expired copyright lawsuits, and delayed campaign rollouts.",
-        challengeCards: [
-          { icon: "fa-globe", color: "red", title: "180+ Fragmented Markets", text: "Regional teams stored assets across Dropbox, SharePoint, and hard drives, creating massive duplication." },
-          { icon: "fa-scale-unbalanced", color: "amber", title: "Expiring Talent Rights", text: "Ambiguous talent rights management exposed the business to copyright infringements on expired advertising assets." },
-          { icon: "fa-hourglass-half", color: "emerald", title: "Multi-Week Approval Delays", text: "Distributors waited up to 3 weeks for approved print-ready vector artwork, missing seasonal promotional windows." }
-        ],
-        challengeMetrics: [
-          { val: "3 Weeks", label: "Asset Approval Lag", sub: "Old manual approval timeline" },
-          { val: "22%", label: "Rights Violations", sub: "Assets used past talent expiry dates" },
-          { val: "45,000+", label: "Uncatalogued Files", sub: "Dispersed global file debt" }
-        ],
         values: [
           { stat: "+28%", title: "Distributor Adoption", desc: "Global third-party distributors adopted the portal as their primary sales kit channel." },
           { stat: "0", title: "Talent Rights Breaches", desc: "Automated governance prevented accidental misuse of expired copyrighted imagery." },
@@ -2378,18 +2120,6 @@ export const PensionDashboardTokens = {
     tabularDataFallback: true
   }
 };`,
-        challengeTitle: "Opaque financial language, high cognitive anxiety, new FCA Consumer Duty rules",
-        challengeDesc: "Customers managing personal pensions encountered opaque investment terminology, inaccessible data visualizations, and high customer support call volumes following new FCA Consumer Duty rules.",
-        challengeCards: [
-          { icon: "fa-gavel", color: "red", title: "FCA Consumer Duty Mandate", text: "New UK regulations required pension providers to prove customers understand fee structures and fund risk profiles." },
-          { icon: "fa-chart-pie", color: "amber", title: "Inaccessible Financial Charts", text: "Color-only pie charts and dense tables locked out visually impaired users and screen reader software." },
-          { icon: "fa-phone-volume", color: "emerald", title: "Overloaded Support Centers", text: "Simple tasks like fund switching and beneficiary updates accounted for over 40% of telephone inquiries." }
-        ],
-        challengeMetrics: [
-          { val: "40%", label: "Call Centre Inquiries", sub: "Routine allocation questions" },
-          { val: "18%", label: "Abandonment Rate", sub: "During multi-step fund switching" },
-          { val: "3.2 / 5", label: "Customer Comprehension", sub: "Measured in FCA baseline audit" }
-        ],
         values: [
           { stat: "-40%", title: "Support Call Volume", desc: "Fewer routine reallocation queries directed to phone lines." },
           { stat: "100%", title: "FCA Compliance", desc: "Zero red flags during formal FCA Consumer Duty regulatory review." },
@@ -2608,24 +2338,21 @@ export const PensionDashboardTokens = {
       const descEl = document.getElementById('cs-hero-desc');
       if (descEl) descEl.textContent = data.description;
 
-      // Update background card image with 10% opacity
       const bgImgEl = document.getElementById('cs-hero-bg-img');
       if (bgImgEl && data.coverImage) {
         bgImgEl.src = data.coverImage;
         bgImgEl.alt = `${data.company} Preview`;
       }
 
-      // Dynamically render case study tags
       const tagsContainer = document.getElementById('cs-hero-tags');
       if (tagsContainer && data.tags) {
         tagsContainer.innerHTML = data.tags.map(tag => `
-          <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-[#102E27]/90 backdrop-blur-sm text-[#C6E2D6] border border-mint-400/20 text-xs font-semibold">
+          <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">
             ${tag}
           </span>
         `).join('');
       }
 
-      // Toggle between custom Weir layout and standard retrospective layout (TotalEnergies, Diageo, Royal London)
       const weirLayout = document.getElementById('cs-layout-weir');
       const standardLayout = document.getElementById('cs-layout-standard');
 
@@ -2636,25 +2363,22 @@ export const PensionDashboardTokens = {
         if (weirLayout) weirLayout.classList.add('hidden');
         if (standardLayout) standardLayout.classList.remove('hidden');
 
-        // Implementation Code Token Block
         const tokenFileEl = document.getElementById('cs-token-filename');
         if (tokenFileEl && data.tokenFile) tokenFileEl.textContent = data.tokenFile;
         const tokenSnippetEl = document.getElementById('cs-token-snippet');
         if (tokenSnippetEl && data.tokenCode) tokenSnippetEl.textContent = data.tokenCode;
 
-        // Measurable Values
         const valCards = document.getElementById('cs-value-cards');
         if (valCards && data.values) {
           valCards.innerHTML = data.values.map(v => `
-            <div class="theme-adaptive-inner-card bg-[#102E27] p-6 rounded-3xl border-spruce-inner text-center shadow-sm">
-              <div class="stat-highlight-number text-4xl sm:text-5xl font-extrabold font-mono tracking-tight">${v.stat}</div>
-              <div class="stat-card-title text-sm font-bold text-white mt-2">${v.title}</div>
-              <p class="stat-card-desc text-xs text-[#8EADA2] mt-2 leading-relaxed">${v.desc}</p>
+            <div class="theme-adaptive-inner-card bg-white dark:bg-[#102E27] p-6 rounded-3xl border border-[#E1EDE7] dark:border-white/10 text-center shadow-sm">
+              <div class="stat-highlight-number text-4xl sm:text-5xl font-extrabold font-mono tracking-tight text-[#064E3B] dark:text-[#34D399]">${v.stat}</div>
+              <div class="stat-card-title text-sm font-bold text-[#0C231D] dark:text-white mt-2">${v.title}</div>
+              <p class="stat-card-desc text-xs text-[#24443B] dark:text-[#8EADA2] mt-2 leading-relaxed">${v.desc}</p>
             </div>
           `).join('');
         }
 
-        // Quote
         const quoteTextEl = document.getElementById('cs-quote-text');
         if (quoteTextEl && data.quoteText) quoteTextEl.textContent = `"${data.quoteText}"`;
         const quoteAuthorEl = document.getElementById('cs-quote-author');
@@ -2670,10 +2394,9 @@ export const PensionDashboardTokens = {
           const item = caseStudies[k];
           const badgeYear = item.id === 'weir' ? '2024 — Present' : (item.id === 'totalenergies' ? '2023' : (item.id === 'diageo' ? '2022 — 2023' : 'Wealth & Pensions'));
           const companyBadge = item.id === 'weir' ? 'The Weir Group' : (item.id === 'totalenergies' ? 'TotalEnergies (via AND Digital)' : (item.id === 'diageo' ? 'Diageo (via AND Digital)' : 'Royal London'));
-          const tagsList = (item.tags || []).slice(0, 4).map(t => `<span class="text-[10px] font-semibold px-2.5 py-1 bg-brand-light text-brand-forest rounded-md">${t}</span>`).join('');
           
           return `
-            <div onclick="openCaseStudy('${item.id}')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-emerald-100 flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer">
+            <div onclick="openCaseStudy('${item.id}')" class="project-card group bg-white rounded-3xl overflow-hidden shadow-card border border-[#E1EDE7] flex flex-col justify-between transition-all hover:-translate-y-1.5 cursor-pointer">
               <div class="relative h-56 sm:h-60 overflow-hidden bg-brand-deepest">
                 <img 
                   src="${item.coverImage}" 
@@ -2742,7 +2465,6 @@ export const PensionDashboardTokens = {
       currentDeliverableSlide = index;
       const d = deliverables[index];
 
-      // Perform a full 360-degree forward/backward rotation spin transition so the item always settles at 0deg (upright)
       const disc = document.getElementById('showcase-rotating-disc');
       if (disc) {
         if (spinDirection !== 0) {
@@ -2781,15 +2503,15 @@ export const PensionDashboardTokens = {
         const itemsContainer = document.getElementById('showcase-items-list');
         if (itemsContainer) {
           itemsContainer.innerHTML = (d.items || []).map(it => `
-            <div class="flex items-center justify-between p-2 rounded-lg bg-[#0C231D] border border-white/5">
+            <div class="flex items-center justify-between p-2 rounded-lg bg-emerald-50 dark:bg-[#0C231D] border border-emerald-100 dark:border-white/5">
               <div class="flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-mint-400"></div>
+                <div class="w-2 h-2 rounded-full bg-brand-emerald dark:bg-mint-400"></div>
                 <div>
-                  <div class="text-white font-bold text-[11px]">${it.label}</div>
-                  <div class="text-[9px] text-[#86A89C]">${it.val}</div>
+                  <div class="text-[#0C231D] dark:text-white font-bold text-[11px]">${it.label}</div>
+                  <div class="text-[9px] text-[#4E7368] dark:text-[#86A89C]">${it.val}</div>
                 </div>
               </div>
-              <span class="px-2 py-0.5 rounded bg-mint-400/20 text-mint-400 text-[9px] font-bold">${it.tag}</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-mint-400/20 text-emerald-800 dark:text-mint-400 text-[9px] font-bold">${it.tag}</span>
             </div>
           `).join('');
         }
@@ -2808,7 +2530,7 @@ export const PensionDashboardTokens = {
       if (pointsList) {
         pointsList.innerHTML = (d.points || []).map(pt => `
           <li class="flex items-start gap-2">
-            <i class="fa-solid fa-check text-mint-400 mt-0.5"></i>
+            <i class="fa-solid fa-check text-brand-emerald dark:text-mint-400 mt-0.5"></i>
             <span>${pt}</span>
           </li>
         `).join('');
@@ -2823,14 +2545,14 @@ export const PensionDashboardTokens = {
 
       if (orbitalBox) {
         orbitalBox.innerHTML = `
-          <button onclick="changeDeliverableSlide(-1)" class="hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-70 hover:opacity-100">
+          <button onclick="changeDeliverableSlide(-1)" class="hover:text-emerald-700 dark:hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-80 hover:opacity-100">
             <i class="fa-solid fa-arrow-left text-[10px]"></i>
             <span>${deliverables[prevIdx].title.split(' ').slice(0, 2).join(' ')}</span>
           </button>
-          <span class="px-2.5 py-0.5 rounded-full bg-mint-400/20 text-mint-300 border border-mint-400/30 text-[10px] font-mono">
+          <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-mint-400/20 text-emerald-800 dark:text-mint-300 border border-emerald-200 dark:border-mint-400/30 text-[10px] font-mono">
             ${d.num} / 0${deliverables.length}
           </span>
-          <button onclick="changeDeliverableSlide(1)" class="hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-70 hover:opacity-100">
+          <button onclick="changeDeliverableSlide(1)" class="hover:text-emerald-700 dark:hover:text-mint-400 transition-colors focus:outline-none flex items-center gap-1.5 opacity-80 hover:opacity-100">
             <span>${deliverables[nextIdx].title.split(' ').slice(0, 2).join(' ')}</span>
             <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </button>
@@ -2840,7 +2562,7 @@ export const PensionDashboardTokens = {
       const dotsBox = document.getElementById('showcase-dots');
       if (dotsBox) {
         dotsBox.innerHTML = deliverables.map((_, i) => `
-          <button onclick="setDeliverableSlide(${i}, ${i > index ? 1 : -1})" class="${i === index ? 'w-8 h-2 rounded-full bg-mint-400' : 'w-2 h-2 rounded-full bg-spruce-700 hover:bg-spruce-600'} transition-all focus:outline-none" aria-label="Slide ${i + 1}"></button>
+          <button onclick="setDeliverableSlide(${i}, ${i > index ? 1 : -1})" class="${i === index ? 'w-8 h-2 rounded-full bg-brand-emerald dark:bg-mint-400' : 'w-2 h-2 rounded-full bg-slate-300 dark:bg-spruce-700 hover:bg-slate-400'} transition-all focus:outline-none" aria-label="Slide ${i + 1}"></button>
         `).join('');
       }
     }
@@ -2876,7 +2598,7 @@ export const PensionDashboardTokens = {
           if (diff > 0) changeDeliverableSlide(-1);
           else changeDeliverableSlide(1);
         }
-      }, { passive: true });
+      });
     }
 
     document.addEventListener('keydown', (e) => {
@@ -2947,7 +2669,6 @@ export const PensionDashboardTokens = {
           if (successMsg) successMsg.classList.remove('hidden');
           form.reset();
         } else {
-          // If network / endpoint blocker triggered, invoke mailto client fallback
           window.location.href = `mailto:davidlorimermedia@gmail.com?subject=${encodeURIComponent(subjectVal + ' - ' + nameVal)}&body=${encodeURIComponent(messageVal + '\n\nFrom: ' + nameVal + ' (' + emailVal + ')')}`;
           if (successMsg) {
             successMsg.classList.remove('hidden');
@@ -2955,7 +2676,6 @@ export const PensionDashboardTokens = {
           }
         }
       } catch (err) {
-        // Fallback for sandboxed offline or blocked iframes: standard mailto launch
         window.location.href = `mailto:davidlorimermedia@gmail.com?subject=${encodeURIComponent(subjectVal + ' - ' + nameVal)}&body=${encodeURIComponent(messageVal + '\n\nFrom: ' + nameVal + ' (' + emailVal + ')')}`;
         if (successMsg) {
           successMsg.classList.remove('hidden');
