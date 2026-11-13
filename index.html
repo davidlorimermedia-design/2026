@@ -13,6 +13,12 @@
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
+  <!-- Synchronous Three.js r128 with fast onerror CDN fallback for Case Study 3D Morph -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+    onerror="this.onerror=null;this.src='https://unpkg.com/three@0.128.0/build/three.min.js';"
+  ></script>
+
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -395,7 +401,7 @@
     html:not(.dark) .text-slate-600 {
       color: #24443B !important;
     }
-    html:not(.dark) .text-[#466B60],
+    html:not(.dark) .text-#466B60,
     /* Deliverables stage & showcase cards */
     html:not(.dark) #showcase-card-frame {
       background-color: #FFFFFF !important;
@@ -621,6 +627,24 @@
     }
     html:not(.dark) .glass-showcase-btn:hover {
       background-color: #D2E4DA !important;
+    }
+
+    /* Case Study 3D On-Load Hero Morph Styles */
+    #cs-hero-card {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #cs-gl-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+      cursor: grab;
+    }
+    #cs-gl-canvas:active {
+      cursor: grabbing;
     }
   </style>
 </head>
@@ -1526,42 +1550,98 @@
   <!-- ================================================================= -->
   <article id="view-casestudy" class="hidden w-full view-container view-enter">
     
-    <!-- CASE STUDY HERO HEADER (15% OPACITY IMAGE) -->
+    <!-- FULL-SCREEN CASE STUDY 3D LOADING OVERLAY -->
+    <div
+      id="cs-fullscreen-loader"
+      class="hidden fixed inset-0 z-[70] flex flex-col items-center justify-center p-6 sm:p-10 transition-colors duration-300"
+      style="background-color: #F5F8F6;"
+    >
+      <!-- Ambient Radial Glow -->
+      <div
+        id="cs-studio-glow"
+        class="absolute inset-0 pointer-events-none"
+        style="background: radial-gradient(circle at 50% 45%, rgba(16, 185, 129, 0.16), transparent 65%);"
+      ></div>
+
+      <!-- Centered 3D Model Framing Box -->
+      <div
+        id="cs-webgl-wrapper"
+        class="relative z-10 w-full max-w-[640px] h-[340px] sm:h-[420px] flex items-center justify-center"
+      >
+        <canvas id="cs-gl-canvas"></canvas>
+      </div>
+
+      <!-- Loading Bar & Stylized Study Phrase (Only text shown during load) -->
+      <div id="cs-3d-loading-hud" class="relative z-10 w-full max-w-md flex flex-col items-center text-center mt-2">
+        <div class="w-full h-1.5 rounded-full bg-emerald-950/10 dark:bg-white/10 overflow-hidden mb-5">
+          <div
+            id="cs-3d-loading-bar"
+            class="h-full rounded-full bg-gradient-to-r from-brand-emerald to-mint-400"
+            style="width: 0%;"
+          ></div>
+        </div>
+
+        <p
+          id="cs-3d-stylized-text"
+          class="text-lg sm:text-2xl font-extrabold tracking-tight text-[#0C231D] dark:text-white"
+        >
+          Digital mining technology incoming...
+        </p>
+      </div>
+    </div>
+
+    <!-- CASE STUDY HERO HEADER -->
     <section class="pt-24 sm:pt-28 pb-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
       <div id="cs-hero-card" class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-7 sm:p-12 md:p-16 text-white shadow-card-dark border border-[#E1EDE7] relative overflow-hidden transition-colors duration-300 bg-white">
         
-        <!-- 15% Opacity Background Image -->
-        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <img 
-            id="cs-hero-bg-img" 
-            src="warman-mcr-400-opt.webp" 
-            alt="Case Study Background" 
-            class="w-full h-full object-cover opacity-15 filter grayscale contrast-125 scale-105 transition-all duration-700"
-          />
-          <div id="cs-hero-bg-overlay" class="absolute inset-0 bg-gradient-to-t from-white/95 via-transparent to-white/40 dark:from-[#0C231D] dark:to-[#0C231D]/40"></div>
-        </div>
-
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-mint-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="relative z-10 max-w-4xl">
-          <div class="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-emerald-700 dark:text-mint-400 uppercase mb-5">
-            <span id="cs-hero-eyebrow">SENIOR PRODUCT DESIGNER · WEIR</span>
+        <!-- Established Banner Layer -->
+        <div id="cs-banner-established-layer" class="relative z-10">
+          <!-- 15% Opacity Background Image -->
+          <div class="absolute -inset-7 sm:-inset-12 md:-inset-16 z-0 pointer-events-none overflow-hidden">
+            <img 
+              id="cs-hero-bg-img" 
+              src="warman-mcr-400-opt.webp" 
+              alt="Case Study Background" 
+              class="w-full h-full object-cover opacity-15 filter grayscale contrast-125 scale-105 transition-all duration-700"
+            />
+            <div id="cs-hero-bg-overlay" class="absolute inset-0 bg-gradient-to-t from-white/95 via-transparent to-white/40 dark:from-[#0C231D] dark:to-[#0C231D]/40"></div>
           </div>
 
-          <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#0C231D] dark:text-white tracking-tight leading-[1.12]">
-            <span id="cs-hero-title">Designing digital products for complex industrial environments.</span>
-          </h1>
+          <div class="absolute -top-24 -right-24 w-96 h-96 bg-mint-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-          <p id="cs-hero-desc" class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-[#24443B] dark:text-[#A0C5B7] max-w-3xl font-normal leading-relaxed">
-            I connect research, product strategy, UX, design systems and engineering to turn complex operational problems into scalable digital experiences.
-          </p>
+          <div class="relative z-10 max-w-4xl">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-5">
+              <div class="flex items-center gap-2 text-xs font-mono font-bold tracking-wider text-emerald-700 dark:text-mint-400 uppercase">
+                <span id="cs-hero-eyebrow">SENIOR PRODUCT DESIGNER · WEIR</span>
+              </div>
 
-          <div id="cs-hero-tags" class="mt-8 sm:mt-10 flex flex-wrap items-center gap-2 sm:gap-2.5">
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Product Strategy</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">UX & Product Design</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Research</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Design Systems</span>
-            <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Design-to-Code</span>
+              <button
+                type="button"
+                id="cs-replay-3d-btn"
+                onclick="replayCaseStudy3DIntro()"
+                class="hidden px-3 py-1 rounded-full text-[11px] font-mono font-semibold bg-emerald-50 dark:bg-spruce-850 text-brand-forest dark:text-mint-300 border border-emerald-200 dark:border-mint-400/25 hover:border-brand-emerald transition-all items-center gap-1.5 cursor-pointer"
+                title="Replay 3D artifact intro"
+              >
+                <i class="fa-solid fa-rotate-left text-[10px] text-brand-emerald"></i>
+                <span>Replay 3D Artifact</span>
+              </button>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#0C231D] dark:text-white tracking-tight leading-[1.12]">
+              <span id="cs-hero-title">Designing digital products for complex industrial environments.</span>
+            </h1>
+
+            <p id="cs-hero-desc" class="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-[#24443B] dark:text-[#A0C5B7] max-w-3xl font-normal leading-relaxed">
+              I connect research, product strategy, UX, design systems and engineering to turn complex operational problems into scalable digital experiences.
+            </p>
+
+            <div id="cs-hero-tags" class="mt-8 sm:mt-10 flex flex-wrap items-center gap-2 sm:gap-2.5">
+              <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Product Strategy</span>
+              <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">UX & Product Design</span>
+              <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Research</span>
+              <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Design Systems</span>
+              <span class="theme-adaptive-tag px-4 py-2 rounded-full bg-emerald-50 dark:bg-[#102E27]/90 text-brand-forest dark:text-[#C6E2D6] border border-emerald-200 dark:border-mint-400/20 text-xs font-semibold">Design-to-Code</span>
+            </div>
           </div>
         </div>
       </div>
@@ -2335,6 +2415,1228 @@ export const PensionDashboardTokens = {
       }
     };
 
+    /**
+     * =========================================================================
+     * CASE STUDY 3D X-RAY ARTIFACT ENGINE (FULL-SCREEN 3s LOADER -> BANNER)
+     * =========================================================================
+     */
+    const CS_3D_MODELS = {
+      weir: {
+        modelType: 'bucket',
+        loadingPhrase: 'Digital mining technology incoming...',
+        heroPose: { yaw: -0.60, pitch: 0.14 },
+      },
+      royallondon: {
+        modelType: 'coin',
+        loadingPhrase: 'Accessible wealth & pension futures loading...',
+        heroPose: { yaw: -0.35, pitch: 0.08 },
+      },
+      totalenergies: {
+        modelType: 'rig',
+        loadingPhrase: 'Offshore platform telemetry initializing...',
+        heroPose: { yaw: -0.62, pitch: 0.14 },
+      },
+      diageo: {
+        modelType: 'cocktail',
+        loadingPhrase: 'Global brand experience pouring...',
+        heroPose: { yaw: -0.45, pitch: 0.12 },
+      },
+    };
+
+    const cs3D = {
+      initialized: false,
+      ready: false,
+      activeStudy: 'weir',
+      progress: 0.0,
+      targetProgress: 0.0,
+      isAnimating: false,
+      holdElapsed: 0,
+      holdDuration: 3.0,
+      autoTriggered: false,
+      isDragging: false,
+      prevX: 0,
+      prevY: 0,
+      userYaw: 0,
+      userPitch: 0,
+      scene: null,
+      camera: null,
+      renderer: null,
+      envTex: null,
+      morphGroup: null,
+      modelPivot: null,
+      currentRoot: null,
+      ringInner: null,
+      ringInnerMat: null,
+      ringOuter: null,
+      ringOuterMat: null,
+      diamond: null,
+      diamondMat: null,
+      diamondEdgeMat: null,
+      prism: null,
+      prismMat: null,
+      prismEdgeMat: null,
+      trackedMaterials: [],
+      clock: null,
+      rafId: null,
+    };
+
+    const csClamp01 = (v) => Math.max(0, Math.min(1, v));
+    const csLerp = (a, b, t) => a + (b - a) * t;
+    const csSmoothRange = (p, s, e) => csClamp01((p - s) / (e - s));
+    const csEaseInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const csEaseOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+    const csEaseInOutQuart = (t) => (t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2);
+
+    function getBrandXRayPalette() {
+      if (isDarkMode) {
+        return {
+          shellColor: 0x10b981,
+          shellEmissive: 0x059669,
+          accentColor: 0x34d399,
+          accentEmissive: 0x10b981,
+          detailColor: 0x6ee7b7,
+          detailEmissive: 0x059669,
+          edgeColor: 0x6ee7b7,
+          edgeBrightColor: 0xa7f3d0,
+          coreColor: 0x34d399,
+          shellOpacity: 0.44,
+          accentOpacity: 0.50,
+          detailOpacity: 0.48,
+          roughness: 0.14,
+          clearcoat: 1.0,
+          reflectivity: 1.0,
+        };
+      }
+      return {
+        shellColor: 0xd4e8de,
+        shellEmissive: 0x10b981,
+        accentColor: 0xa7d7c5,
+        accentEmissive: 0x059669,
+        detailColor: 0xbfe0d0,
+        detailEmissive: 0x1d3f37,
+        edgeColor: 0x1d3f37,
+        edgeBrightColor: 0x059669,
+        coreColor: 0x10b981,
+        shellOpacity: 0.56,
+        accentOpacity: 0.62,
+        detailOpacity: 0.58,
+        roughness: 0.34,
+        clearcoat: 0.80,
+        reflectivity: 0.92,
+      };
+    }
+
+    function createSpruceStudioTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 512;
+      canvas.height = 256;
+      const ctx = canvas.getContext('2d');
+
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, 256);
+      bgGrad.addColorStop(0.0, '#163B32');
+      bgGrad.addColorStop(0.45, '#0C231D');
+      bgGrad.addColorStop(0.55, '#061310');
+      bgGrad.addColorStop(1.0, '#1D493E');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, 512, 256);
+
+      function drawSoftbox(x, y, rx, ry, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(rx, ry);
+        const rad = ctx.createRadialGradient(0, 0, 0.05, 0, 0, 1);
+        rad.addColorStop(0, color);
+        rad.addColorStop(0.55, 'rgba(232,239,234,0.24)');
+        rad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = rad;
+        ctx.beginPath();
+        ctx.arc(0, 0, 1, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      drawSoftbox(256, 36, 175, 28, 'rgba(255,255,255,0.96)');
+      drawSoftbox(112, 112, 54, 78, 'rgba(232,239,234,0.88)');
+      drawSoftbox(400, 112, 54, 78, 'rgba(232,239,234,0.88)');
+      drawSoftbox(256, 224, 150, 22, 'rgba(110,231,183,0.45)');
+
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.mapping = THREE.EquirectangularReflectionMapping;
+      return tex;
+    }
+
+    function createBrandXRayPart(geometry, options = {}) {
+      const tier = options.tier || 'shell';
+      const edgeAngle = options.edgeAngle !== undefined ? options.edgeAngle : 24;
+      const includeInnerCore = options.innerCore !== false;
+      const pal = getBrandXRayPalette();
+
+      let col = pal.shellColor;
+      let emi = pal.shellEmissive;
+      let baseOp = pal.shellOpacity;
+
+      if (tier === 'accent') {
+        col = pal.accentColor;
+        emi = pal.accentEmissive;
+        baseOp = pal.accentOpacity;
+      } else if (tier === 'detail') {
+        col = pal.detailColor;
+        emi = pal.detailEmissive;
+        baseOp = pal.detailOpacity;
+      }
+
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: col,
+        emissive: emi,
+        emissiveIntensity: isDarkMode ? 0.24 : 0.10,
+        metalness: 0.08,
+        roughness: pal.roughness,
+        clearcoat: pal.clearcoat,
+        clearcoatRoughness: pal.roughness * 0.6,
+        reflectivity: pal.reflectivity,
+        transparent: true,
+        opacity: baseOp,
+        depthWrite: true,
+        side: THREE.DoubleSide,
+        envMap: cs3D.envTex,
+        envMapIntensity: 1.45,
+      });
+
+      const mesh = new THREE.Mesh(geometry, mat);
+      cs3D.trackedMaterials.push({ mat, tier, isEdge: false, isCore: false });
+
+      if (includeInnerCore) {
+        const coreMat = new THREE.MeshBasicMaterial({
+          color: pal.coreColor,
+          transparent: true,
+          opacity: 0.14,
+          depthWrite: false,
+          side: THREE.DoubleSide,
+        });
+        const coreMesh = new THREE.Mesh(geometry, coreMat);
+        coreMesh.scale.setScalar(0.94);
+        mesh.add(coreMesh);
+        cs3D.trackedMaterials.push({ mat: coreMat, tier, isEdge: false, isCore: true });
+      }
+
+      if (edgeAngle > 0) {
+        const edgesGeo = new THREE.EdgesGeometry(geometry, edgeAngle);
+        const edgeMat = new THREE.LineBasicMaterial({
+          color: tier === 'accent' ? pal.edgeBrightColor : pal.edgeColor,
+          transparent: true,
+          opacity: 0.86,
+        });
+        mesh.add(new THREE.LineSegments(edgesGeo, edgeMat));
+        cs3D.trackedMaterials.push({ mat: edgeMat, tier, isEdge: true, isCore: false });
+      }
+
+      return mesh;
+    }
+
+    function syncCs3DMaterialsToTheme() {
+      const pal = getBrandXRayPalette();
+      cs3D.trackedMaterials.forEach((entry) => {
+        if (entry.isEdge) {
+          entry.mat.color.setHex(entry.tier === 'accent' ? pal.edgeBrightColor : pal.edgeColor);
+        } else if (entry.isCore) {
+          entry.mat.color.setHex(pal.coreColor);
+        } else {
+          if (entry.tier === 'accent') {
+            entry.mat.color.setHex(pal.accentColor);
+            entry.mat.emissive.setHex(pal.accentEmissive);
+          } else if (entry.tier === 'detail') {
+            entry.mat.color.setHex(pal.detailColor);
+            entry.mat.emissive.setHex(pal.detailEmissive);
+          } else {
+            entry.mat.color.setHex(pal.shellColor);
+            entry.mat.emissive.setHex(pal.shellEmissive);
+          }
+          entry.mat.roughness = pal.roughness;
+          entry.mat.clearcoat = pal.clearcoat;
+          entry.mat.clearcoatRoughness = pal.roughness * 0.6;
+          entry.mat.reflectivity = pal.reflectivity;
+          entry.mat.emissiveIntensity = isDarkMode ? 0.24 : 0.10;
+        }
+      });
+
+      if (cs3D.prismMat && cs3D.prismEdgeMat) {
+        cs3D.prismMat.color.setHex(pal.shellColor);
+        cs3D.prismMat.emissive.setHex(pal.shellEmissive);
+        cs3D.prismMat.roughness = pal.roughness;
+        cs3D.prismMat.clearcoat = pal.clearcoat;
+        cs3D.prismMat.reflectivity = pal.reflectivity;
+        cs3D.prismEdgeMat.color.setHex(pal.edgeBrightColor);
+      }
+      if (cs3D.ringInnerMat) cs3D.ringInnerMat.color.setHex(pal.edgeBrightColor);
+      if (cs3D.ringOuterMat) cs3D.ringOuterMat.color.setHex(pal.edgeColor);
+      if (cs3D.diamondMat && cs3D.diamondEdgeMat) {
+        cs3D.diamondMat.color.setHex(pal.accentColor);
+        cs3D.diamondMat.emissive.setHex(pal.accentEmissive);
+        cs3D.diamondEdgeMat.color.setHex(pal.edgeBrightColor);
+      }
+    }
+
+    // --- 4 Branded 3D Models ---
+    function buildCsNemisysTooth() {
+      const toothGrp = new THREE.Group();
+      const hoodShape = new THREE.Shape();
+      hoodShape.moveTo(-0.18, -0.07);
+      hoodShape.lineTo(0.24, -0.055);
+      hoodShape.lineTo(0.26, 0.045);
+      hoodShape.lineTo(0.05, 0.115);
+      hoodShape.lineTo(-0.18, 0.105);
+      hoodShape.closePath();
+
+      const hoodGeo = new THREE.ExtrudeGeometry(hoodShape, {
+        depth: 0.22,
+        bevelEnabled: true,
+        bevelSegments: 2,
+        steps: 1,
+        bevelSize: 0.014,
+        bevelThickness: 0.014,
+      });
+      hoodGeo.center();
+      toothGrp.add(createBrandXRayPart(hoodGeo, { tier: 'accent', edgeAngle: 22 }));
+
+      const pinGeo = new THREE.CylinderGeometry(0.042, 0.042, 0.03, 18);
+      const pinMesh = createBrandXRayPart(pinGeo, { tier: 'detail', edgeAngle: 26, innerCore: false });
+      pinMesh.position.set(0.06, 0.105, 0);
+      toothGrp.add(pinMesh);
+
+      const pointShape = new THREE.Shape();
+      pointShape.moveTo(0.0, -0.05);
+      pointShape.lineTo(0.46, -0.025);
+      pointShape.lineTo(0.49, 0.008);
+      pointShape.lineTo(0.32, 0.048);
+      pointShape.lineTo(0.0, 0.072);
+      pointShape.closePath();
+
+      const pointGeo = new THREE.ExtrudeGeometry(pointShape, {
+        depth: 0.135,
+        bevelEnabled: true,
+        bevelSegments: 2,
+        steps: 1,
+        bevelSize: 0.012,
+        bevelThickness: 0.018,
+      });
+      pointGeo.translate(0, 0, -0.0675);
+      const pointMesh = createBrandXRayPart(pointGeo, { tier: 'accent', edgeAngle: 20 });
+      pointMesh.position.set(0.21, -0.01, 0);
+      toothGrp.add(pointMesh);
+
+      return toothGrp;
+    }
+
+    function buildCsBucketModel() {
+      const root = new THREE.Group();
+      const width = 2.45;
+      const halfW = width * 0.5;
+      const bowlRadius = 1.18;
+      const bowlCenter = new THREE.Vector3(-0.08, 0.25, 0);
+      const startAng = Math.PI * 0.55;
+      const endAng = Math.PI * 1.48;
+      const segs = 11;
+
+      for (let i = 0; i < segs; i++) {
+        const a0 = csLerp(startAng, endAng, i / segs);
+        const a1 = csLerp(startAng, endAng, (i + 1) / segs);
+        const midA = (a0 + a1) * 0.5;
+        const arcLen = (a1 - a0) * bowlRadius + 0.02;
+        const plateGeo = new THREE.BoxGeometry(0.085, arcLen, width);
+        const plate = createBrandXRayPart(plateGeo, { tier: 'shell', edgeAngle: 26 });
+        plate.position.set(bowlCenter.x + Math.cos(midA) * bowlRadius, bowlCenter.y + Math.sin(midA) * bowlRadius, 0);
+        plate.rotation.z = midA;
+        root.add(plate);
+      }
+
+      const lip = createBrandXRayPart(new THREE.BoxGeometry(0.46, 0.11, width + 0.04), { tier: 'shell', edgeAngle: 22 });
+      lip.position.set(0.32, -0.92, 0);
+      lip.rotation.z = -0.06;
+      root.add(lip);
+
+      const canopy = createBrandXRayPart(new THREE.BoxGeometry(0.68, 0.10, width), { tier: 'shell', edgeAngle: 24 });
+      canopy.position.set(-0.22, 1.38, 0);
+      canopy.rotation.z = 0.12;
+      root.add(canopy);
+
+      const cheekShape = new THREE.Shape();
+      cheekShape.moveTo(0.48, -0.94);
+      cheekShape.lineTo(0.18, 1.36);
+      cheekShape.lineTo(-0.34, 1.46);
+      cheekShape.lineTo(-0.98, 1.18);
+      cheekShape.absarc(-0.08, 0.25, 1.21, Math.PI * 0.72, Math.PI * 1.48, false);
+      cheekShape.closePath();
+      const cheekGeo = new THREE.ExtrudeGeometry(cheekShape, {
+        depth: 0.08, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.012, bevelThickness: 0.012,
+      });
+
+      const liftLugShape = new THREE.Shape();
+      liftLugShape.moveTo(-0.15, -0.07);
+      liftLugShape.lineTo(0.15, -0.07);
+      liftLugShape.lineTo(0.15, 0.07);
+      liftLugShape.lineTo(-0.15, 0.07);
+      liftLugShape.closePath();
+      const liftHole1 = new THREE.Path();
+      liftHole1.absarc(-0.07, 0, 0.032, 0, Math.PI * 2, true);
+      liftLugShape.holes.push(liftHole1);
+      const liftHole2 = new THREE.Path();
+      liftHole2.absarc(0.07, 0, 0.032, 0, Math.PI * 2, true);
+      liftLugShape.holes.push(liftHole2);
+      const liftLugGeo = new THREE.ExtrudeGeometry(liftLugShape, {
+        depth: 0.09, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: 0.008, bevelThickness: 0.008,
+      });
+
+      [-1, 1].forEach((side) => {
+        const cheek = createBrandXRayPart(cheekGeo, { tier: 'shell', edgeAngle: 24 });
+        cheek.position.set(0, 0, side * (halfW - 0.04));
+        root.add(cheek);
+
+        const liftLug = createBrandXRayPart(liftLugGeo, { tier: 'detail', edgeAngle: 26, innerCore: false });
+        liftLug.position.set(0.04, 0.88, side * (halfW + 0.035));
+        liftLug.rotation.y = side > 0 ? 0 : Math.PI;
+        root.add(liftLug);
+
+        const badge = createBrandXRayPart(new THREE.BoxGeometry(0.36, 0.12, 0.025), { tier: 'detail', edgeAngle: 20, innerCore: false });
+        badge.position.set(0.06, 1.14, side * (halfW + 0.055));
+        badge.rotation.z = -0.35;
+        root.add(badge);
+      });
+
+      const torqueGeo = new THREE.CylinderGeometry(0.24, 0.24, width + 0.06, 24);
+      torqueGeo.rotateX(Math.PI * 0.5);
+      const torqueTube = createBrandXRayPart(torqueGeo, { tier: 'shell', edgeAngle: 28 });
+      torqueTube.position.set(-0.46, 1.38, 0);
+      root.add(torqueTube);
+
+      const lugShape = new THREE.Shape();
+      lugShape.moveTo(-0.48, 0.0);
+      lugShape.lineTo(0.44, 0.0);
+      lugShape.lineTo(0.38, 0.44);
+      lugShape.absarc(0.14, 0.48, 0.24, 0, Math.PI, false);
+      lugShape.lineTo(-0.22, 0.46);
+      lugShape.absarc(-0.34, 0.46, 0.14, 0, Math.PI, false);
+      lugShape.closePath();
+      const pinHole = new THREE.Path();
+      pinHole.absarc(0.14, 0.48, 0.095, 0, Math.PI * 2, true);
+      lugShape.holes.push(pinHole);
+      const rearHole = new THREE.Path();
+      rearHole.absarc(-0.34, 0.46, 0.075, 0, Math.PI * 2, true);
+      lugShape.holes.push(rearHole);
+      const lugGeo = new THREE.ExtrudeGeometry(lugShape, {
+        depth: 0.13, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.012, bevelThickness: 0.012,
+      });
+      lugGeo.translate(0, 0, -0.065);
+
+      [-0.48, 0.48].forEach((zPos) => {
+        const lug = createBrandXRayPart(lugGeo, { tier: 'shell', edgeAngle: 22 });
+        lug.position.set(-0.28, 1.34, zPos);
+        root.add(lug);
+
+        const collar = createBrandXRayPart(new THREE.TorusGeometry(0.115, 0.022, 12, 24), { tier: 'detail', edgeAngle: 26, innerCore: false });
+        collar.position.set(-0.14, 1.82, zPos);
+        root.add(collar);
+      });
+
+      for (let i = 0; i < 14; i++) {
+        const ang = csLerp(Math.PI * 0.68, Math.PI * 1.44, i / 13);
+        const ribR = bowlRadius - 0.055;
+        const rib = createBrandXRayPart(new THREE.BoxGeometry(0.032, 0.08, width - 0.22), { tier: 'detail', edgeAngle: 24, innerCore: false });
+        rib.position.set(bowlCenter.x + Math.cos(ang) * ribR, bowlCenter.y + Math.sin(ang) * ribR, 0);
+        rib.rotation.z = ang;
+        root.add(rib);
+      }
+
+      [-0.95, -0.57, -0.19, 0.19, 0.57, 0.95].forEach((z) => {
+        const tooth = buildCsNemisysTooth();
+        tooth.position.set(0.56, -0.94, z);
+        tooth.rotation.z = -0.16;
+        root.add(tooth);
+      });
+
+      [-1, 1].forEach((side) => {
+        const wingLower = createBrandXRayPart(new THREE.BoxGeometry(0.28, 0.54, 0.11), { tier: 'accent', edgeAngle: 22 });
+        wingLower.position.set(0.45, -0.62, side * (halfW + 0.02));
+        wingLower.rotation.z = -0.13;
+        root.add(wingLower);
+
+        const wingUpper = createBrandXRayPart(new THREE.BoxGeometry(0.22, 0.52, 0.095), { tier: 'accent', edgeAngle: 22 });
+        wingUpper.position.set(0.37, -0.10, side * (halfW + 0.02));
+        wingUpper.rotation.z = -0.13;
+        root.add(wingUpper);
+
+        [-0.72, -0.48, -0.22, 0.04].forEach((by, bIdx) => {
+          const boltGeo = new THREE.CylinderGeometry(0.024, 0.024, 0.045, 6);
+          boltGeo.rotateX(Math.PI * 0.5);
+          const bolt = createBrandXRayPart(boltGeo, { tier: 'detail', edgeAngle: 24, innerCore: false });
+          bolt.position.set(0.46 - bIdx * 0.032, by, side * (halfW + 0.078));
+          root.add(bolt);
+        });
+      });
+
+      for (let i = 0; i < 6; i++) {
+        const ang = csLerp(Math.PI * 1.06, Math.PI * 1.44, i / 5);
+        const heelR = bowlRadius + 0.045;
+        [-1, 1].forEach((side) => {
+          const heel = createBrandXRayPart(new THREE.BoxGeometry(0.13, 0.17, 0.16), { tier: 'accent', edgeAngle: 22 });
+          heel.position.set(bowlCenter.x + Math.cos(ang) * heelR, bowlCenter.y + Math.sin(ang) * heelR, side * (halfW - 0.08));
+          heel.rotation.z = ang;
+          root.add(heel);
+        });
+      }
+
+      return root;
+    }
+
+    function buildCsCoinModel() {
+      const root = new THREE.Group();
+
+      // 1. Thick Outer Bullion Coin Rim (Torus + Chamfered Outer Band)
+      const outerBandGeo = new THREE.CylinderGeometry(1.06, 1.06, 0.16, 48, 1, true);
+      outerBandGeo.rotateX(Math.PI * 0.5);
+      root.add(createBrandXRayPart(outerBandGeo, { tier: 'shell', edgeAngle: 28, innerCore: false }));
+
+      const frontRimGeo = new THREE.TorusGeometry(1.02, 0.045, 14, 48);
+      const frontRim = createBrandXRayPart(frontRimGeo, { tier: 'accent', edgeAngle: 24, innerCore: false });
+      frontRim.position.set(0, 0, 0.068);
+      root.add(frontRim);
+
+      const backRim = createBrandXRayPart(frontRimGeo, { tier: 'accent', edgeAngle: 24, innerCore: false });
+      backRim.position.set(0, 0, -0.068);
+      root.add(backRim);
+
+      // 2. Recessed Translucent Inner Coin Disc
+      const innerDiscGeo = new THREE.CylinderGeometry(0.98, 0.98, 0.11, 48);
+      innerDiscGeo.rotateX(Math.PI * 0.5);
+      root.add(createBrandXRayPart(innerDiscGeo, { tier: 'shell', edgeAngle: 32 }));
+
+      // 3. Milled Edge Reeding Notches (36 Architectural Grooves)
+      const reedGeo = new THREE.BoxGeometry(0.022, 0.045, 0.14);
+      for (let i = 0; i < 36; i++) {
+        const ang = (i / 36) * Math.PI * 2;
+        const reed = createBrandXRayPart(reedGeo, { tier: 'detail', edgeAngle: 22, innerCore: false });
+        reed.position.set(Math.cos(ang) * 1.055, Math.sin(ang) * 1.055, 0);
+        reed.rotation.z = ang;
+        root.add(reed);
+      }
+
+      // 4. Inner Engraved Concentric Ring & Dual-Sided Emblem Relief
+      const innerRingGeo = new THREE.TorusGeometry(0.74, 0.015, 10, 48);
+      const crestGeo = new THREE.TorusGeometry(0.24, 0.018, 10, 32);
+      const pillarGeo = new THREE.BoxGeometry(0.06, 0.28, 0.024);
+      const barGeo = new THREE.BoxGeometry(0.22, 0.045, 0.024);
+
+      [-1, 1].forEach((side) => {
+        const zFace = side * 0.064;
+        const innerRing = createBrandXRayPart(innerRingGeo, { tier: 'detail', edgeAngle: 24, innerCore: false });
+        innerRing.position.set(0, 0, zFace);
+        root.add(innerRing);
+
+        const crestMesh = createBrandXRayPart(crestGeo, { tier: 'accent', edgeAngle: 22, innerCore: false });
+        crestMesh.position.set(0, 0, zFace + side * 0.008);
+        root.add(crestMesh);
+
+        const pillarMesh = createBrandXRayPart(pillarGeo, { tier: 'detail', edgeAngle: 20, innerCore: false });
+        pillarMesh.position.set(0, 0, zFace + side * 0.012);
+        root.add(pillarMesh);
+
+        const topBar = createBrandXRayPart(barGeo, { tier: 'detail', edgeAngle: 20, innerCore: false });
+        topBar.position.set(0, 0.14, zFace + side * 0.012);
+        root.add(topBar);
+
+        const botBar = createBrandXRayPart(barGeo, { tier: 'detail', edgeAngle: 20, innerCore: false });
+        botBar.position.set(0, -0.14, zFace + side * 0.012);
+        root.add(botBar);
+      });
+
+      return root;
+    }
+
+    function buildCsOilRigModel() {
+      const root = new THREE.Group();
+      const pontoonGeo = new THREE.BoxGeometry(2.70, 0.24, 0.36);
+      [-0.78, 0.78].forEach((z) => {
+        const pontoon = createBrandXRayPart(pontoonGeo, { tier: 'shell', edgeAngle: 22 });
+        pontoon.position.set(0, -1.05, z);
+        root.add(pontoon);
+
+        [-1, 1].forEach((endDir) => {
+          const cap = createBrandXRayPart(new THREE.CylinderGeometry(0.16, 0.16, 0.22, 16), { tier: 'accent', edgeAngle: 26, innerCore: false });
+          cap.position.set(endDir * 1.36, -1.05, z);
+          root.add(cap);
+        });
+      });
+
+      [-0.84, 0.84].forEach((x) => {
+        const crossBraceGeo = new THREE.CylinderGeometry(0.045, 0.045, 1.56, 12);
+        crossBraceGeo.rotateX(Math.PI * 0.5);
+        const brace = createBrandXRayPart(crossBraceGeo, { tier: 'detail', edgeAngle: 26, innerCore: false });
+        brace.position.set(x, -1.02, 0);
+        root.add(brace);
+      });
+
+      const colGeo = new THREE.CylinderGeometry(0.21, 0.23, 1.08, 20);
+      [[-0.84, -0.78], [0.84, -0.78], [-0.84, 0.78], [0.84, 0.78]].forEach(([cx, cz]) => {
+        const col = createBrandXRayPart(colGeo, { tier: 'shell', edgeAngle: 26 });
+        col.position.set(cx, -0.44, cz);
+        root.add(col);
+      });
+
+      const lowerDeck = createBrandXRayPart(new THREE.BoxGeometry(2.26, 0.14, 1.96), { tier: 'shell', edgeAngle: 20 });
+      lowerDeck.position.set(0, 0.14, 0);
+      root.add(lowerDeck);
+
+      const upperDeck = createBrandXRayPart(new THREE.BoxGeometry(2.12, 0.10, 1.82), { tier: 'accent', edgeAngle: 20 });
+      upperDeck.position.set(0, 0.28, 0);
+      root.add(upperDeck);
+
+      const quarters = createBrandXRayPart(new THREE.BoxGeometry(0.68, 0.42, 1.34), { tier: 'shell', edgeAngle: 20 });
+      quarters.position.set(-0.68, 0.54, 0);
+      root.add(quarters);
+
+      const derrickBaseY = 0.34;
+      const derrickH = 1.68;
+      const baseHalf = 0.30;
+      const topHalf = 0.12;
+      const dxOffset = 0.18;
+
+      [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(([sx, sz]) => {
+        const p0 = new THREE.Vector3(dxOffset + sx * baseHalf, derrickBaseY, sz * baseHalf);
+        const p1 = new THREE.Vector3(dxOffset + sx * topHalf, derrickBaseY + derrickH, sz * topHalf);
+        const leg = createBrandXRayPart(new THREE.CylinderGeometry(0.022, 0.028, p0.distanceTo(p1), 10), { tier: 'accent', edgeAngle: 24, innerCore: false });
+        leg.position.copy(p0.clone().add(p1).multiplyScalar(0.5));
+        leg.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), p1.clone().sub(p0).normalize());
+        root.add(leg);
+      });
+
+      for (let t = 0; t < 6; t++) {
+        const f0 = t / 6;
+        const f1 = (t + 1) / 6;
+        const y0 = derrickBaseY + f0 * derrickH;
+        const y1 = derrickBaseY + f1 * derrickH;
+        const h0 = csLerp(baseHalf, topHalf, f0);
+        const h1 = csLerp(baseHalf, topHalf, f1);
+
+        const girt = createBrandXRayPart(new THREE.BoxGeometry(h1 * 2, 0.018, h1 * 2), { tier: 'detail', edgeAngle: 20, innerCore: false });
+        girt.position.set(dxOffset, y1, 0);
+        root.add(girt);
+
+        [-1, 1].forEach((fz) => {
+          const a = new THREE.Vector3(dxOffset - h0, y0, fz * h0);
+          const b = new THREE.Vector3(dxOffset + h1, y1, fz * h1);
+          const diag = createBrandXRayPart(new THREE.CylinderGeometry(0.01, 0.01, a.distanceTo(b), 6), { tier: 'detail', edgeAngle: 24, innerCore: false });
+          diag.position.copy(a.clone().add(b).multiplyScalar(0.5));
+          diag.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize());
+          root.add(diag);
+        });
+      }
+
+      const crown = createBrandXRayPart(new THREE.BoxGeometry(0.32, 0.12, 0.32), { tier: 'accent', edgeAngle: 20 });
+      crown.position.set(dxOffset, derrickBaseY + derrickH + 0.06, 0);
+      root.add(crown);
+
+      const rotaryTable = createBrandXRayPart(new THREE.CylinderGeometry(0.18, 0.21, 0.08, 24), { tier: 'accent', edgeAngle: 22 });
+      rotaryTable.position.set(dxOffset, derrickBaseY + 0.04, 0);
+      root.add(rotaryTable);
+
+      const drillString = createBrandXRayPart(new THREE.CylinderGeometry(0.026, 0.026, 2.65, 12), { tier: 'detail', edgeAngle: 24, innerCore: false });
+      drillString.position.set(dxOffset, 0.52, 0);
+      root.add(drillString);
+
+      const heliPad = createBrandXRayPart(new THREE.CylinderGeometry(0.46, 0.44, 0.055, 28), { tier: 'accent', edgeAngle: 24 });
+      heliPad.position.set(-1.38, 0.64, 0.48);
+      root.add(heliPad);
+
+      const heliRimGeo = new THREE.TorusGeometry(0.46, 0.016, 10, 32);
+      heliRimGeo.rotateX(Math.PI * 0.5);
+      const heliRim = createBrandXRayPart(heliRimGeo, { tier: 'detail', edgeAngle: 24, innerCore: false });
+      heliRim.position.set(-1.38, 0.67, 0.48);
+      root.add(heliRim);
+
+      const hBarGeo = new THREE.BoxGeometry(0.04, 0.015, 0.26);
+      [-0.08, 0.08].forEach((hx) => {
+        const bar = createBrandXRayPart(hBarGeo, { tier: 'detail', edgeAngle: 20, innerCore: false });
+        bar.position.set(-1.38 + hx, 0.675, 0.48);
+        root.add(bar);
+      });
+      const hCross = createBrandXRayPart(new THREE.BoxGeometry(0.16, 0.015, 0.04), { tier: 'detail', edgeAngle: 20, innerCore: false });
+      hCross.position.set(-1.38, 0.675, 0.48);
+      root.add(hCross);
+
+      [-0.74, 0.74].forEach((cz, idx) => {
+        const ped = createBrandXRayPart(new THREE.CylinderGeometry(0.08, 0.10, 0.34, 14), { tier: 'shell', edgeAngle: 24, innerCore: false });
+        ped.position.set(0.76, 0.48, cz);
+        root.add(ped);
+
+        const boom = createBrandXRayPart(new THREE.BoxGeometry(1.05, 0.06, 0.06), { tier: 'accent', edgeAngle: 20 });
+        boom.position.set(1.16, 0.86, cz);
+        boom.rotation.z = 0.44;
+        boom.rotation.y = idx === 0 ? -0.18 : 0.18;
+        root.add(boom);
+      });
+
+      const flareBoom = createBrandXRayPart(new THREE.CylinderGeometry(0.022, 0.036, 1.24, 10), { tier: 'detail', edgeAngle: 24, innerCore: false });
+      flareBoom.position.set(-1.26, 0.78, -0.78);
+      flareBoom.rotation.z = 0.64;
+      root.add(flareBoom);
+
+      const flareTip = createBrandXRayPart(new THREE.OctahedronGeometry(0.085, 1), { tier: 'accent', edgeAngle: 22 });
+      flareTip.position.set(-1.64, 1.26, -0.78);
+      root.add(flareTip);
+
+      return root;
+    }
+
+    function buildCsCocktailModel() {
+      const root = new THREE.Group();
+      const profile = [
+        new THREE.Vector2(0.0, -1.25),
+        new THREE.Vector2(0.68, -1.25),
+        new THREE.Vector2(0.66, -1.19),
+        new THREE.Vector2(0.14, -1.13),
+        new THREE.Vector2(0.055, -0.95),
+        new THREE.Vector2(0.052, -0.05),
+        new THREE.Vector2(0.12, 0.10),
+        new THREE.Vector2(0.64, 0.28),
+        new THREE.Vector2(1.06, 0.66),
+        new THREE.Vector2(1.14, 0.94),
+        new THREE.Vector2(1.09, 0.94),
+        new THREE.Vector2(1.00, 0.68),
+        new THREE.Vector2(0.58, 0.34),
+        new THREE.Vector2(0.0, 0.22),
+      ];
+      root.add(createBrandXRayPart(new THREE.LatheGeometry(profile, 48), { tier: 'shell', edgeAngle: 34 }));
+
+      const footRingGeo = new THREE.TorusGeometry(0.67, 0.016, 12, 48);
+      footRingGeo.rotateX(Math.PI * 0.5);
+      const footRing = createBrandXRayPart(footRingGeo, { tier: 'detail', edgeAngle: 26, innerCore: false });
+      footRing.position.set(0, -1.22, 0);
+      root.add(footRing);
+
+      const liquidMesh = createBrandXRayPart(new THREE.CylinderGeometry(0.96, 0.24, 0.42, 40), { tier: 'accent', edgeAngle: 28 });
+      liquidMesh.position.set(0, 0.50, 0);
+      root.add(liquidMesh);
+
+      const meniscusGeo = new THREE.TorusGeometry(0.95, 0.014, 10, 44);
+      meniscusGeo.rotateX(Math.PI * 0.5);
+      const meniscus = createBrandXRayPart(meniscusGeo, { tier: 'detail', edgeAngle: 26, innerCore: false });
+      meniscus.position.set(0, 0.71, 0);
+      root.add(meniscus);
+
+      const iceShape = new THREE.Shape();
+      const s = 0.11;
+      iceShape.moveTo(-s, -s);
+      iceShape.lineTo(s, -s);
+      iceShape.lineTo(s, s);
+      iceShape.lineTo(-s, s);
+      iceShape.closePath();
+      const iceGeo = new THREE.ExtrudeGeometry(iceShape, {
+        depth: 0.20, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.02, bevelThickness: 0.02,
+      });
+      iceGeo.center();
+
+      [
+        { pos: [-0.25, 0.63, 0.16], rot: [0.32, 0.52, 0.24] },
+        { pos: [0.22, 0.60, -0.18], rot: [-0.24, 0.88, -0.36] },
+        { pos: [0.06, 0.65, 0.26], rot: [0.44, -0.35, 0.18] },
+      ].forEach(({ pos, rot }) => {
+        const cube = createBrandXRayPart(iceGeo, { tier: 'detail', edgeAngle: 20 });
+        cube.position.set(pos[0], pos[1], pos[2]);
+        cube.rotation.set(rot[0], rot[1], rot[2]);
+        root.add(cube);
+      });
+
+      const citrusGroup = new THREE.Group();
+      citrusGroup.add(createBrandXRayPart(new THREE.TorusGeometry(0.34, 0.032, 12, 32), { tier: 'accent', edgeAngle: 24 }));
+      const pulpGeo = new THREE.CylinderGeometry(0.31, 0.31, 0.024, 28);
+      pulpGeo.rotateX(Math.PI * 0.5);
+      citrusGroup.add(createBrandXRayPart(pulpGeo, { tier: 'detail', edgeAngle: 24, innerCore: false }));
+      for (let i = 0; i < 8; i++) {
+        const spoke = createBrandXRayPart(new THREE.BoxGeometry(0.60, 0.012, 0.032), { tier: 'accent', edgeAngle: 20, innerCore: false });
+        spoke.rotation.z = (i * Math.PI) / 4;
+        citrusGroup.add(spoke);
+      }
+      citrusGroup.position.set(1.04, 0.94, 0.14);
+      citrusGroup.rotation.set(0.24, -0.35, -0.46);
+      root.add(citrusGroup);
+
+      const pickGroup = new THREE.Group();
+      pickGroup.add(createBrandXRayPart(new THREE.CylinderGeometry(0.012, 0.008, 1.62, 10), { tier: 'detail', edgeAngle: 24, innerCore: false }));
+      const finial = createBrandXRayPart(new THREE.TorusGeometry(0.055, 0.014, 10, 20), { tier: 'accent', edgeAngle: 24, innerCore: false });
+      finial.position.set(0, 0.81, 0);
+      pickGroup.add(finial);
+      const oliveGeo = new THREE.SphereGeometry(0.115, 22, 18);
+      oliveGeo.scale(0.88, 1.18, 0.88);
+      [-0.12, 0.18].forEach((oy) => {
+        const olive = createBrandXRayPart(oliveGeo, { tier: 'accent', edgeAngle: 28 });
+        olive.position.set(0, oy, 0);
+        pickGroup.add(olive);
+      });
+      pickGroup.position.set(-0.24, 0.84, -0.10);
+      pickGroup.rotation.set(0.16, 0.18, 0.56);
+      root.add(pickGroup);
+
+      return root;
+    }
+
+    function disposeCs3DObject(obj) {
+      if (!obj) return;
+      obj.traverse((child) => {
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+          if (Array.isArray(child.material)) child.material.forEach((m) => m.dispose());
+          else child.material.dispose();
+        }
+      });
+    }
+
+    function normalizeCs3DModel(rootObj) {
+      if (!rootObj) return;
+      rootObj.position.set(0, 0, 0);
+      rootObj.scale.set(1, 1, 1);
+      rootObj.updateMatrixWorld(true);
+
+      const box = new THREE.Box3().setFromObject(rootObj);
+      const center = new THREE.Vector3();
+      const size = new THREE.Vector3();
+      box.getCenter(center);
+      box.getSize(size);
+
+      const diameter = Math.max(0.001, size.length());
+      const uniformScale = 2.20 / diameter;
+      rootObj.scale.setScalar(uniformScale);
+      rootObj.position.copy(center).multiplyScalar(-uniformScale);
+      rootObj.updateMatrixWorld(true);
+    }
+
+    function updateCs3DCameraDistance() {
+      if (!cs3D.camera) return;
+      const vFovRad = THREE.MathUtils.degToRad(36);
+      const hFovRad = 2 * Math.atan(Math.tan(vFovRad * 0.5) * Math.max(0.5, cs3D.camera.aspect));
+      const radius = 1.10;
+      const dist = Math.max(radius / Math.sin(vFovRad * 0.5), radius / Math.sin(hFovRad * 0.5)) * 1.65;
+      cs3D.camera.position.set(0, dist * 0.14, dist);
+      cs3D.camera.lookAt(0, 0, 0);
+    }
+
+    function syncCs3DCanvasDimensions() {
+      const stageEl = document.getElementById('cs-webgl-wrapper');
+      if (!cs3D.renderer || !cs3D.camera || !stageEl) return;
+      const w = Math.max(1, Math.floor(stageEl.clientWidth || 640));
+      const h = Math.max(1, Math.floor(stageEl.clientHeight || 400));
+      const cur = cs3D.renderer.getSize(new THREE.Vector2());
+      if (cur.x !== w || cur.y !== h) {
+        cs3D.renderer.setSize(w, h, false);
+        cs3D.camera.aspect = w / h;
+        cs3D.camera.updateProjectionMatrix();
+      }
+      updateCs3DCameraDistance();
+    }
+
+    function initCaseStudy3DEngine() {
+      if (cs3D.initialized) return;
+      cs3D.initialized = true;
+
+      try {
+        if (typeof window.THREE === 'undefined') return;
+        const stageEl = document.getElementById('cs-webgl-wrapper');
+        const canvasEl = document.getElementById('cs-gl-canvas');
+        if (!stageEl || !canvasEl) return;
+
+        cs3D.clock = new THREE.Clock();
+        cs3D.scene = new THREE.Scene();
+        cs3D.camera = new THREE.PerspectiveCamera(36, 1.5, 0.1, 140);
+
+        cs3D.renderer = new THREE.WebGLRenderer({
+          canvas: canvasEl,
+          antialias: true,
+          alpha: true,
+          powerPreference: 'high-performance',
+        });
+        cs3D.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        cs3D.renderer.setClearColor(0x000000, 0);
+        cs3D.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        cs3D.renderer.toneMappingExposure = 1.25;
+
+        cs3D.envTex = createSpruceStudioTexture();
+        cs3D.scene.environment = cs3D.envTex;
+
+        cs3D.scene.add(new THREE.HemisphereLight(0xffffff, 0x0c231d, 1.1));
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.55);
+        keyLight.position.set(5, 8, 7);
+        cs3D.scene.add(keyLight);
+
+        const rimLight = new THREE.DirectionalLight(0x6ee7b7, 1.15);
+        rimLight.position.set(-6, 5, -5);
+        cs3D.scene.add(rimLight);
+
+        const fillLight = new THREE.DirectionalLight(0xe8efea, 0.85);
+        fillLight.position.set(0, -5, 6);
+        cs3D.scene.add(fillLight);
+
+        const pal = getBrandXRayPalette();
+        cs3D.morphGroup = new THREE.Group();
+        cs3D.modelPivot = new THREE.Group();
+
+        cs3D.ringInnerMat = new THREE.MeshBasicMaterial({ color: pal.edgeBrightColor, transparent: true, opacity: 0, depthWrite: false });
+        cs3D.ringInner = new THREE.Mesh(new THREE.TorusGeometry(0.44, 0.013, 16, 64), cs3D.ringInnerMat);
+
+        cs3D.ringOuterMat = new THREE.MeshBasicMaterial({ color: pal.edgeColor, transparent: true, opacity: 0, depthWrite: false });
+        cs3D.ringOuter = new THREE.Mesh(new THREE.TorusGeometry(0.68, 0.009, 12, 72), cs3D.ringOuterMat);
+
+        const dGeo = new THREE.OctahedronGeometry(0.32, 0);
+        cs3D.diamondMat = new THREE.MeshPhysicalMaterial({
+          color: pal.accentColor, emissive: pal.accentEmissive, emissiveIntensity: 0.65,
+          roughness: 0.12, clearcoat: 1.0, transparent: true, opacity: 0, depthWrite: false,
+        });
+        cs3D.diamond = new THREE.Mesh(dGeo, cs3D.diamondMat);
+        cs3D.diamondEdgeMat = new THREE.LineBasicMaterial({ color: pal.edgeBrightColor, transparent: true, opacity: 0 });
+        cs3D.diamond.add(new THREE.LineSegments(new THREE.EdgesGeometry(dGeo, 12), cs3D.diamondEdgeMat));
+
+        const w = 6.20, h = 2.25, r = 0.24;
+        const pShape = new THREE.Shape();
+        pShape.moveTo(-w * 0.5 + r, -h * 0.5);
+        pShape.lineTo(w * 0.5 - r, -h * 0.5);
+        pShape.quadraticCurveTo(w * 0.5, -h * 0.5, w * 0.5, -h * 0.5 + r);
+        pShape.lineTo(w * 0.5, h * 0.5 - r);
+        pShape.quadraticCurveTo(w * 0.5, h * 0.5, w * 0.5 - r, h * 0.5);
+        pShape.lineTo(-w * 0.5 + r, h * 0.5);
+        pShape.quadraticCurveTo(-w * 0.5, h * 0.5, -w * 0.5, h * 0.5 - r);
+        pShape.lineTo(-w * 0.5, -h * 0.5 + r);
+        pShape.quadraticCurveTo(-w * 0.5, -h * 0.5, -w * 0.5 + r, -h * 0.5);
+        const prismGeo = new THREE.ExtrudeGeometry(pShape, {
+          depth: 0.08, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 0.016, bevelThickness: 0.016,
+        });
+        prismGeo.center();
+        cs3D.prismMat = new THREE.MeshPhysicalMaterial({
+          color: pal.shellColor, emissive: pal.shellEmissive, emissiveIntensity: 0.30,
+          metalness: 0.08, roughness: pal.roughness, clearcoat: pal.clearcoat,
+          transparent: true, opacity: 0, depthWrite: true, side: THREE.DoubleSide,
+          envMap: cs3D.envTex, envMapIntensity: 1.4,
+        });
+        cs3D.prism = new THREE.Mesh(prismGeo, cs3D.prismMat);
+        cs3D.prismEdgeMat = new THREE.LineBasicMaterial({ color: pal.edgeBrightColor, transparent: true, opacity: 0 });
+        cs3D.prism.add(new THREE.LineSegments(new THREE.EdgesGeometry(prismGeo, 24), cs3D.prismEdgeMat));
+
+        cs3D.morphGroup.add(cs3D.prism);
+        cs3D.morphGroup.add(cs3D.ringOuter);
+        cs3D.morphGroup.add(cs3D.ringInner);
+        cs3D.morphGroup.add(cs3D.diamond);
+        cs3D.morphGroup.add(cs3D.modelPivot);
+        cs3D.scene.add(cs3D.morphGroup);
+
+        canvasEl.addEventListener('pointerdown', (e) => {
+          cs3D.isDragging = true;
+          cs3D.prevX = e.clientX;
+          cs3D.prevY = e.clientY;
+        });
+        window.addEventListener('pointermove', (e) => {
+          if (!cs3D.isDragging) return;
+          const dx = e.clientX - cs3D.prevX;
+          const dy = e.clientY - cs3D.prevY;
+          cs3D.prevX = e.clientX;
+          cs3D.prevY = e.clientY;
+          cs3D.userYaw += dx * 0.0085;
+          cs3D.userPitch = Math.max(-0.85, Math.min(0.85, cs3D.userPitch + dy * 0.0065));
+        });
+        window.addEventListener('pointerup', () => {
+          cs3D.isDragging = false;
+        });
+
+        if (typeof ResizeObserver !== 'undefined') {
+          const ro = new ResizeObserver(() => syncCs3DCanvasDimensions());
+          ro.observe(stageEl);
+        }
+
+        cs3D.ready = true;
+      } catch (e) {
+        cs3D.ready = false;
+      }
+    }
+
+    function loadCaseStudy3DModel(studyKey) {
+      initCaseStudy3DEngine();
+      cs3D.activeStudy = CS_3D_MODELS[studyKey] ? studyKey : 'weir';
+      const cfg = CS_3D_MODELS[cs3D.activeStudy];
+
+      const phraseEl = document.getElementById('cs-3d-stylized-text');
+      if (phraseEl) phraseEl.textContent = cfg.loadingPhrase;
+
+      if (!cs3D.ready || !cs3D.modelPivot) return;
+      if (cs3D.currentRoot) {
+        cs3D.modelPivot.remove(cs3D.currentRoot);
+        disposeCs3DObject(cs3D.currentRoot);
+      }
+      cs3D.trackedMaterials = [];
+
+      if (cfg.modelType === 'coin') cs3D.currentRoot = buildCsCoinModel();
+      else if (cfg.modelType === 'rig') cs3D.currentRoot = buildCsOilRigModel();
+      else if (cfg.modelType === 'cocktail') cs3D.currentRoot = buildCsCocktailModel();
+      else cs3D.currentRoot = buildCsBucketModel();
+
+      normalizeCs3DModel(cs3D.currentRoot);
+      cs3D.modelPivot.add(cs3D.currentRoot);
+      syncCs3DMaterialsToTheme();
+    }
+
+    function renderCaseStudy3DMorphFrame(p, elapsed) {
+      const loaderOverlay = document.getElementById('cs-fullscreen-loader');
+      const heroCard = document.getElementById('cs-hero-card');
+      const webglWrapper = document.getElementById('cs-webgl-wrapper');
+      const studioGlow = document.getElementById('cs-studio-glow');
+      const loadingHud = document.getElementById('cs-3d-loading-hud');
+      const bannerLayer = document.getElementById('cs-banner-established-layer');
+      const replayBtn = document.getElementById('cs-replay-3d-btn');
+      if (!loaderOverlay || !heroCard || !bannerLayer) return;
+
+      const cfg = CS_3D_MODELS[cs3D.activeStudy] || CS_3D_MODELS.weir;
+      const pal = getBrandXRayPalette();
+
+      // Full-screen loader morphs smoothly into the established hero banner rect
+      if (p >= 0.99 || !cs3D.ready) {
+        loaderOverlay.classList.add('hidden');
+        loaderOverlay.style.opacity = '0';
+        loaderOverlay.style.pointerEvents = 'none';
+        loaderOverlay.style.clipPath = '';
+        loaderOverlay.style.borderRadius = '';
+      } else {
+        loaderOverlay.classList.remove('hidden');
+        loaderOverlay.style.backgroundColor = isDarkMode ? '#061310' : '#F5F8F6';
+        loaderOverlay.style.pointerEvents = p < 0.35 ? 'auto' : 'none';
+
+        const morphBoxT = csEaseInOutQuart(csSmoothRange(p, 0.38, 0.88));
+        const overlayFadeOut = 1 - csEaseInOutCubic(csSmoothRange(p, 0.72, 0.98));
+        loaderOverlay.style.opacity = overlayFadeOut.toFixed(3);
+
+        const rect = heroCard.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0 && morphBoxT > 0.001) {
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const insetTop = csLerp(0, Math.max(0, rect.top), morphBoxT);
+          const insetRight = csLerp(0, Math.max(0, vw - rect.right), morphBoxT);
+          const insetBottom = csLerp(0, Math.max(0, vh - rect.bottom), morphBoxT);
+          const insetLeft = csLerp(0, Math.max(0, rect.left), morphBoxT);
+          const radiusPx = csLerp(0, vw < 640 ? 32 : 40, morphBoxT);
+          loaderOverlay.style.clipPath = `inset(${insetTop.toFixed(1)}px ${insetRight.toFixed(1)}px ${insetBottom.toFixed(1)}px ${insetLeft.toFixed(1)}px round ${radiusPx.toFixed(1)}px)`;
+        } else {
+          loaderOverlay.style.clipPath = '';
+        }
+      }
+
+      if (studioGlow) {
+        studioGlow.style.opacity = (1 - csSmoothRange(p, 0.45, 0.85)).toFixed(3);
+      }
+
+      const hideWebGL = p >= 0.90 || !cs3D.ready;
+      if (webglWrapper) {
+        if (hideWebGL) {
+          webglWrapper.style.opacity = '0';
+          webglWrapper.style.pointerEvents = 'none';
+          if (cs3D.scene) cs3D.scene.visible = false;
+        } else {
+          webglWrapper.style.opacity = (1 - csEaseInOutCubic(csSmoothRange(p, 0.70, 0.88))).toFixed(3);
+          webglWrapper.style.pointerEvents = p < 0.25 ? 'auto' : 'none';
+          if (cs3D.scene) cs3D.scene.visible = true;
+        }
+      }
+
+      if (cs3D.ready && cs3D.morphGroup && cs3D.modelPivot && !hideWebGL) {
+        const contractT = csEaseInOutCubic(csSmoothRange(p, 0.0, 0.42));
+        const modelScale = csLerp(1.0, 0.10, contractT);
+        const helicalTwist = contractT * 0.75;
+
+        const isCoin = cfg.modelType === 'coin';
+        const idleYaw = isCoin
+          ? cfg.heroPose.yaw + elapsed * 1.45
+          : cfg.heroPose.yaw + Math.sin(elapsed * 0.65) * 0.42;
+        const idlePitch = cfg.heroPose.pitch + Math.cos(elapsed * 0.85) * 0.04;
+        const floatBobY = Math.sin(elapsed * 1.45) * 0.03 * (1 - contractT);
+
+        if (p > 0.03 && !cs3D.isDragging) {
+          cs3D.userYaw *= 0.86;
+          cs3D.userPitch *= 0.86;
+        }
+
+        cs3D.morphGroup.position.set(0, floatBobY, 0);
+        cs3D.modelPivot.scale.setScalar(modelScale);
+        cs3D.modelPivot.rotation.y = csLerp(idleYaw + cs3D.userYaw, cfg.heroPose.yaw + helicalTwist, contractT);
+        cs3D.modelPivot.rotation.x = csLerp(idlePitch + cs3D.userPitch, 0.0, contractT);
+
+        const pulseT = csSmoothRange(p, 0.16, 0.62);
+        if (cs3D.ringInner && cs3D.ringInnerMat) {
+          cs3D.ringInner.scale.setScalar(csLerp(0.28, 2.75, csEaseOutExpo(pulseT)));
+          cs3D.ringInner.rotation.x = csLerp(0.35, 0.0, pulseT);
+          cs3D.ringInnerMat.opacity = Math.sin(pulseT * Math.PI) * 0.82;
+        }
+        if (cs3D.ringOuter && cs3D.ringOuterMat) {
+          cs3D.ringOuter.scale.setScalar(csLerp(0.20, 3.25, csEaseOutExpo(pulseT)));
+          cs3D.ringOuter.rotation.y = csLerp(-0.28, 0.0, pulseT);
+          cs3D.ringOuterMat.opacity = Math.sin(pulseT * Math.PI) * 0.56;
+        }
+
+        const diamondIn = csEaseInOutCubic(csSmoothRange(p, 0.36, 0.46));
+        const diamondOut = 1 - csEaseInOutCubic(csSmoothRange(p, 0.50, 0.62));
+        const diamondOp = diamondIn * diamondOut;
+        if (cs3D.diamond && cs3D.diamondMat && cs3D.diamondEdgeMat) {
+          cs3D.diamond.scale.setScalar(csLerp(0.35, 1.40, csSmoothRange(p, 0.38, 0.58)));
+          cs3D.diamond.rotation.y = elapsed * 2.2 + p * 6.0;
+          cs3D.diamond.rotation.z = p * 3.0;
+          cs3D.diamondMat.opacity = csClamp01(0.78 * diamondOp);
+          cs3D.diamondEdgeMat.opacity = csClamp01(0.95 * diamondOp);
+        }
+
+        const modelFadeOut = 1 - csEaseInOutCubic(csSmoothRange(p, 0.38, 0.54));
+        const edgeGlowBoost = csLerp(1.0, 1.15, contractT);
+        cs3D.trackedMaterials.forEach((entry) => {
+          let baseOp = pal.shellOpacity;
+          if (entry.isEdge) baseOp = 0.86;
+          else if (entry.isCore) baseOp = 0.14;
+          else if (entry.tier === 'accent') baseOp = pal.accentOpacity;
+          else if (entry.tier === 'detail') baseOp = pal.detailOpacity;
+          entry.mat.opacity = csClamp01(baseOp * (entry.isEdge ? edgeGlowBoost : 1.0) * modelFadeOut);
+        });
+
+        const prismAppear = csEaseInOutCubic(csSmoothRange(p, 0.48, 0.56));
+        const prismExpand = csEaseOutExpo(csSmoothRange(p, 0.52, 0.86));
+        const prismDissolve = 1 - csEaseInOutCubic(csSmoothRange(p, 0.70, 0.88));
+        if (cs3D.prism && cs3D.prismMat && cs3D.prismEdgeMat) {
+          cs3D.prism.scale.set(
+            csLerp(0.08, 1.06, prismExpand),
+            csLerp(0.10, 1.04, prismExpand),
+            csLerp(1.4, 0.12, prismExpand)
+          );
+          cs3D.prism.rotation.y = csLerp(0.16, 0.0, prismExpand);
+          cs3D.prism.rotation.x = csLerp(-0.08, 0.0, prismExpand);
+          cs3D.prismMat.opacity = csClamp01(0.34 * prismAppear * prismDissolve);
+          cs3D.prismEdgeMat.opacity = csClamp01(0.90 * prismAppear * prismDissolve);
+        }
+      }
+
+      if (loadingHud) {
+        const hudFade = 1 - csSmoothRange(p, 0.05, 0.28);
+        loadingHud.style.opacity = hudFade.toFixed(3);
+        loadingHud.style.transform = `translateY(${csLerp(0, 10, 1 - hudFade)}px)`;
+      }
+
+      // Established Banner Content Reveal (52% -> 100%)
+      const uiFade = csEaseInOutCubic(csSmoothRange(p, 0.52, 0.94));
+      if (p >= 0.99) {
+        bannerLayer.style.opacity = '1';
+        bannerLayer.style.transform = '';
+        bannerLayer.style.pointerEvents = 'auto';
+        if (replayBtn) {
+          replayBtn.classList.remove('hidden');
+          replayBtn.classList.add('inline-flex');
+        }
+      } else {
+        bannerLayer.style.opacity = uiFade.toFixed(3);
+        bannerLayer.style.transform = `translateY(${csLerp(16, 0, uiFade)}px) scale(${csLerp(0.985, 1.0, uiFade)})`;
+        bannerLayer.style.pointerEvents = uiFade > 0.5 ? 'auto' : 'none';
+        if (replayBtn) {
+          replayBtn.classList.add('hidden');
+          replayBtn.classList.remove('inline-flex');
+        }
+      }
+    }
+
+    function triggerCaseStudyBannerMorph() {
+      cs3D.autoTriggered = true;
+      cs3D.targetProgress = 1.0;
+      cs3D.isAnimating = true;
+    }
+
+    function startCaseStudy3DOnLoad(studyKey) {
+      stopCaseStudy3DLoop();
+      loadCaseStudy3DModel(studyKey);
+
+      cs3D.progress = 0.0;
+      cs3D.targetProgress = 0.0;
+      cs3D.isAnimating = false;
+      cs3D.holdElapsed = 0;
+      cs3D.autoTriggered = false;
+      cs3D.userYaw = 0;
+      cs3D.userPitch = 0;
+
+      const barEl = document.getElementById('cs-3d-loading-bar');
+      if (barEl) barEl.style.width = '0%';
+
+      if (cs3D.clock) cs3D.clock.getDelta();
+      renderCaseStudy3DMorphFrame(0, 0);
+      requestAnimationFrame(() => syncCs3DCanvasDimensions());
+
+      if (!cs3D.ready) {
+        renderCaseStudy3DMorphFrame(1.0, 0);
+        return;
+      }
+
+      function tick() {
+        const csView = document.getElementById('view-casestudy');
+        if (!csView || csView.classList.contains('hidden')) {
+          cs3D.rafId = null;
+          return;
+        }
+
+        const dt = cs3D.clock ? Math.min(0.05, cs3D.clock.getDelta()) : 0.016;
+        const elapsed = cs3D.clock ? cs3D.clock.getElapsedTime() : 0;
+
+        // 3.0-second full-screen loading bar progression
+        if (!cs3D.autoTriggered && cs3D.progress < 0.02) {
+          if (!cs3D.isDragging) {
+            cs3D.holdElapsed += dt;
+          }
+          const loadRatio = csClamp01(cs3D.holdElapsed / cs3D.holdDuration);
+          if (barEl) barEl.style.width = `${(loadRatio * 100).toFixed(1)}%`;
+          if (loadRatio >= 1.0) {
+            triggerCaseStudyBannerMorph();
+          }
+        } else if (barEl) {
+          barEl.style.width = '100%';
+        }
+
+        if (cs3D.isAnimating) {
+          const diff = cs3D.targetProgress - cs3D.progress;
+          const speed = 0.85;
+          if (Math.abs(diff) < 0.002) {
+            cs3D.progress = cs3D.targetProgress;
+            cs3D.isAnimating = false;
+          } else {
+            cs3D.progress = csClamp01(cs3D.progress + Math.sign(diff) * Math.min(Math.abs(diff), dt * speed));
+          }
+        }
+
+        syncCs3DCanvasDimensions();
+        renderCaseStudy3DMorphFrame(cs3D.progress, elapsed);
+
+        if (cs3D.ready && cs3D.renderer && cs3D.scene && cs3D.camera && cs3D.progress < 0.90) {
+          cs3D.renderer.render(cs3D.scene, cs3D.camera);
+        }
+
+        if (cs3D.progress >= 1.0 && !cs3D.isAnimating) {
+          cs3D.rafId = null;
+          return;
+        }
+
+        cs3D.rafId = requestAnimationFrame(tick);
+      }
+
+      cs3D.rafId = requestAnimationFrame(tick);
+    }
+
+    function replayCaseStudy3DIntro() {
+      startCaseStudy3DOnLoad(currentStudyKey);
+    }
+
+    function stopCaseStudy3DLoop() {
+      if (cs3D.rafId) {
+        cancelAnimationFrame(cs3D.rafId);
+        cs3D.rafId = null;
+      }
+      const loaderOverlay = document.getElementById('cs-fullscreen-loader');
+      if (loaderOverlay) {
+        loaderOverlay.classList.add('hidden');
+        loaderOverlay.style.clipPath = '';
+      }
+    }
+
     let currentStudyKey = 'weir';
     let currentDeliverableSlide = 0;
     let isTransitioning = false;
@@ -2360,6 +3662,18 @@ export const PensionDashboardTokens = {
         htmlEl.classList.remove('dark');
         if (btnHome) btnHome.innerHTML = '<i class="fa-solid fa-moon"></i>';
         if (btnCs) btnCs.innerHTML = '<i class="fa-solid fa-moon"></i>';
+      }
+
+      const loaderOverlay = document.getElementById('cs-fullscreen-loader');
+      if (loaderOverlay && !loaderOverlay.classList.contains('hidden')) {
+        loaderOverlay.style.backgroundColor = dark ? '#061310' : '#F5F8F6';
+      }
+
+      if (cs3D.ready) {
+        syncCs3DMaterialsToTheme();
+        if (cs3D.renderer && cs3D.scene && cs3D.camera && cs3D.progress < 0.90) {
+          cs3D.renderer.render(cs3D.scene, cs3D.camera);
+        }
       }
     }
 
@@ -2401,6 +3715,9 @@ export const PensionDashboardTokens = {
 
         window.scrollTo({ top: 0, behavior: 'instant' });
 
+        // Initialize and run the full-screen 3s 3D X-Ray artifact loader -> banner morph
+        startCaseStudy3DOnLoad(studyKey);
+
         requestAnimationFrame(() => {
           setTimeout(() => {
             csView.classList.remove('view-enter');
@@ -2421,6 +3738,7 @@ export const PensionDashboardTokens = {
     function showHomepage(targetSection = null) {
       if (isTransitioning) return;
       isTransitioning = true;
+      stopCaseStudy3DLoop();
 
       const homeView = document.getElementById('view-homepage');
       const csView = document.getElementById('view-casestudy');
