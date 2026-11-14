@@ -646,6 +646,44 @@
     #cs-gl-canvas:active {
       cursor: grabbing;
     }
+
+    /* 3D Interactive Parallax Flip Cards ("My current focus") */
+    .focus-card-scene {
+      perspective: 1200px;
+    }
+    .focus-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 390px;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+    .focus-card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform-style: preserve-3d;
+    }
+    .focus-card-back {
+      transform: rotateY(180deg);
+    }
+    .focus-parallax-layer-1 {
+      transform: translateZ(18px);
+    }
+    .focus-parallax-layer-2 {
+      transform: translateZ(34px);
+    }
+    .focus-card-glare {
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .focus-card-scene:hover .focus-card-glare {
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-mint-400 selection:text-spruce-950">
@@ -1882,6 +1920,28 @@
         </div>
 
         <div id="cs-value-added-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+      </div>
+    </section>
+
+    <!-- MY CURRENT FOCUS (3D PARALLAX FLIP CARDS — WEIR GROUP CASE STUDY ONLY) -->
+    <section id="cs-current-focus-section" class="py-10 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <div class="theme-adaptive-dark-card rounded-4xl sm:rounded-5xl p-6 sm:p-10 md:p-14 text-white shadow-card-dark border border-[#E1EDE7] relative overflow-hidden transition-colors duration-300 bg-white">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
+          <div>
+            <div class="badge-core-capabilities inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-emerald-800 dark:text-mint-400 mb-2 border border-emerald-200 dark:border-mint-400/20">
+              <span class="w-2 h-2 rounded-full bg-brand-emerald"></span>
+              <span>STRATEGIC PRIORITIES</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#0C231D] dark:text-white">
+              My <span class="text-brand-forest dark:text-brand-mint">current focus</span>
+            </h2>
+          </div>
+          <p class="text-[#24443B] dark:text-[#9DBFB3] text-xs sm:text-sm max-w-md font-normal leading-relaxed">
+            Move across each card to inspect 3D depth, or click any card to flip and explore active initiatives and outcomes.
+          </p>
+        </div>
+
+        <div id="cs-current-focus-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7"></div>
       </div>
     </section>
 
@@ -4183,6 +4243,7 @@ export const PensionDashboardTokens = {
       const weirLayout = document.getElementById('cs-layout-weir');
       const standardLayout = document.getElementById('cs-layout-standard');
       const valueAddedSection = document.getElementById('cs-value-added-section');
+      const currentFocusSection = document.getElementById('cs-current-focus-section');
 
       if (data.id === 'weir') {
         if (weirLayout) weirLayout.classList.remove('hidden');
@@ -4191,10 +4252,15 @@ export const PensionDashboardTokens = {
           valueAddedSection.classList.remove('hidden');
           renderValueAddedSection(data.valueAdded || []);
         }
+        if (currentFocusSection) {
+          currentFocusSection.classList.remove('hidden');
+          renderCurrentFocusCards(data.currentFocus || []);
+        }
       } else {
         if (weirLayout) weirLayout.classList.add('hidden');
         if (standardLayout) standardLayout.classList.remove('hidden');
         if (valueAddedSection) valueAddedSection.classList.add('hidden');
+        if (currentFocusSection) currentFocusSection.classList.add('hidden');
 
         const tokenFileEl = document.getElementById('cs-token-filename');
         if (tokenFileEl && data.tokenFile) tokenFileEl.textContent = data.tokenFile;
@@ -4293,6 +4359,148 @@ export const PensionDashboardTokens = {
           </p>
         </div>
       `).join('');
+    }
+
+    function renderCurrentFocusCards(items) {
+      const grid = document.getElementById('cs-current-focus-grid');
+      if (!grid) return;
+
+      grid.innerHTML = (items || []).map((card, idx) => `
+        <div
+          class="focus-card-scene cursor-pointer select-none"
+          data-flipped="false"
+          data-tilt-x="0"
+          data-tilt-y="0"
+          tabindex="0"
+          role="button"
+          aria-pressed="false"
+          aria-label="${card.title} — click to flip for details"
+          onclick="toggleFocusCardFlip(this)"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFocusCardFlip(this);}"
+        >
+          <div class="focus-card-inner">
+            <!-- FRONT FACE -->
+            <div class="focus-card-face theme-adaptive-inner-card rounded-3xl border border-[#E1EDE7] dark:border-mint-400/25 bg-white dark:bg-[#102E27] shadow-card overflow-hidden flex flex-col justify-between">
+              <div class="focus-card-glare absolute inset-0 z-30 rounded-3xl"></div>
+
+              <div class="relative h-44 overflow-hidden bg-[#061310]">
+                <img
+                  src="${card.image}"
+                  alt="${card.title}"
+                  class="w-full h-full object-cover opacity-85 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://placehold.co/600x360/0C231D/34D399?text=Focus+0${idx + 1}';"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#061310] via-[#061310]/40 to-transparent"></div>
+                <div class="focus-parallax-layer-1 absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
+                  <span class="px-2.5 py-1 rounded-full bg-[#061310]/85 backdrop-blur-md text-[10px] font-mono font-bold tracking-wider uppercase text-mint-300 border border-mint-400/30">
+                    ${card.tag}
+                  </span>
+                  <span class="w-8 h-8 rounded-xl bg-[#0C231D]/90 border border-mint-400/30 text-mint-300 flex items-center justify-center text-xs shadow-md">
+                    <i class="fa-solid ${card.accentIcon || 'fa-layer-group'}"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                <div class="focus-parallax-layer-2">
+                  <h3 class="text-base sm:text-lg font-extrabold text-[#0C231D] dark:text-white tracking-tight leading-snug mb-2">
+                    ${card.title}
+                  </h3>
+                  <p class="text-xs text-[#24443B] dark:text-[#C6E2D6] leading-relaxed">
+                    ${card.brief}
+                  </p>
+                </div>
+
+                <div class="focus-parallax-layer-1 pt-4 mt-4 border-t border-emerald-950/10 dark:border-mint-400/15 flex items-center justify-between text-[11px] font-mono font-bold text-emerald-800 dark:text-mint-300">
+                  <span>Click to flip</span>
+                  <i class="fa-solid fa-rotate text-brand-emerald dark:text-mint-400"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- BACK FACE -->
+            <div class="focus-card-face focus-card-back rounded-3xl border border-brand-emerald/40 bg-[#0C231D] text-white shadow-card-dark p-5 sm:p-6 flex flex-col justify-between">
+              <div class="focus-parallax-layer-2">
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="px-2.5 py-0.5 rounded-full bg-mint-400/15 border border-mint-400/30 text-[10px] font-mono font-bold uppercase tracking-wider text-mint-300">
+                    ${card.statusMetric || 'ACTIVE FOCUS'}
+                  </span>
+                  <span class="w-7 h-7 rounded-full bg-spruce-800 border border-mint-400/25 text-mint-300 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-rotate-left"></i>
+                  </span>
+                </div>
+
+                <h4 class="text-base sm:text-lg font-extrabold text-white tracking-tight leading-snug mb-2">
+                  ${card.backTitle}
+                </h4>
+                <p class="text-xs text-[#C6E2D6] leading-relaxed mb-4">
+                  ${card.backSummary}
+                </p>
+
+                <ul class="space-y-2 text-xs text-[#A0C5B7]">
+                  ${(card.highlights || []).map((pt) => `
+                    <li class="flex items-start gap-2">
+                      <i class="fa-solid fa-check text-mint-400 mt-0.5 text-[10px]"></i>
+                      <span>${pt}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+
+              <div class="focus-parallax-layer-1 pt-3 mt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono font-semibold text-mint-300">
+                <span>Click to flip back</span>
+                <i class="fa-solid fa-arrow-rotate-left text-[10px]"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      initCurrentFocusParallax();
+    }
+
+    function applyFocusCardTransform(sceneEl) {
+      const inner = sceneEl.querySelector('.focus-card-inner');
+      if (!inner) return;
+      const flipped = sceneEl.dataset.flipped === 'true';
+      const rx = parseFloat(sceneEl.dataset.tiltX || '0');
+      const ry = parseFloat(sceneEl.dataset.tiltY || '0');
+      const baseRotY = flipped ? 180 : 0;
+      inner.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${(baseRotY + ry).toFixed(2)}deg)`;
+    }
+
+    function toggleFocusCardFlip(sceneEl) {
+      const nextState = sceneEl.dataset.flipped !== 'true';
+      sceneEl.dataset.flipped = nextState ? 'true' : 'false';
+      sceneEl.setAttribute('aria-pressed', nextState ? 'true' : 'false');
+      applyFocusCardTransform(sceneEl);
+    }
+
+    function initCurrentFocusParallax() {
+      document.querySelectorAll('.focus-card-scene').forEach((sceneEl) => {
+        const glare = sceneEl.querySelector('.focus-card-glare');
+
+        sceneEl.addEventListener('pointermove', (e) => {
+          const rect = sceneEl.getBoundingClientRect();
+          const nx = (e.clientX - rect.left) / Math.max(1, rect.width) - 0.5;
+          const ny = (e.clientY - rect.top) / Math.max(1, rect.height) - 0.5;
+          sceneEl.dataset.tiltX = (-ny * 12).toFixed(2);
+          sceneEl.dataset.tiltY = (nx * 14).toFixed(2);
+          applyFocusCardTransform(sceneEl);
+
+          if (glare) {
+            const gx = ((nx + 0.5) * 100).toFixed(1);
+            const gy = ((ny + 0.5) * 100).toFixed(1);
+            glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(52, 211, 153, 0.18), transparent 62%)`;
+          }
+        });
+
+        sceneEl.addEventListener('pointerleave', () => {
+          sceneEl.dataset.tiltX = '0';
+          sceneEl.dataset.tiltY = '0';
+          applyFocusCardTransform(sceneEl);
+        });
+      });
     }
 
     function renderDeliverablesSlides(deliverables) {
